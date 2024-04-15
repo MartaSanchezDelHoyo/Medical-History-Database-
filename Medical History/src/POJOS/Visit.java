@@ -1,5 +1,6 @@
 package POJOS;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Visit {
 	private int visit_id; 
@@ -77,6 +78,25 @@ public class Visit {
 		this.doctor_id = doctor_id;
 		this.test_id = test_id;
 		this.hospital_id = hospital_id;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(doctor_id, duration_medication, hospital_id, patien_id, test_id, visit_date, visit_id,
+				visit_observation);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Visit other = (Visit) obj;
+		return doctor_id == other.doctor_id && Objects.equals(duration_medication, other.duration_medication)
+				&& hospital_id == other.hospital_id && patien_id == other.patien_id && test_id == other.test_id
+				&& Objects.equals(visit_date, other.visit_date) && visit_id == other.visit_id
+				&& Objects.equals(visit_observation, other.visit_observation);
 	}
 	
 

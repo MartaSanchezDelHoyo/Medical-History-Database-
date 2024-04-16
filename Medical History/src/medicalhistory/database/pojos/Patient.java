@@ -1,4 +1,4 @@
-package POJOS;
+package medicalhistory.database.pojos;
 
 import java.io.Serializable;
 import java.time.LocalDate;

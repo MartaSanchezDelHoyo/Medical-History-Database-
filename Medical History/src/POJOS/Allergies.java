@@ -1,7 +1,12 @@
 package POJOS;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Allergies {
+public class Allergies implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 309157577865656134L;
 	private Integer allergiesID;
 	private String allergiesName;
 	

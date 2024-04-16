@@ -1,6 +1,12 @@
 package POJOS;
 
-public class Test {
+import java.io.Serializable;
+
+public class Test implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 888971237847553913L;
 	private int test_id;
 	private String type;
 	

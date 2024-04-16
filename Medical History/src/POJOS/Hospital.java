@@ -1,8 +1,13 @@
 package POJOS;
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Hospital {
-    private Integer hospitalID;
+public class Hospital implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1457717917835220464L;
+	private Integer hospitalID;
     private String hospitalName;
     private String hospitalAddress;
 

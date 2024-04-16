@@ -1,9 +1,14 @@
 package POJOS;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Treatment {
-    private Integer treatmentID;
+public class Treatment implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5230755319444165612L;
+	private Integer treatmentID;
     private String treatmentType;
 
     public Treatment() {

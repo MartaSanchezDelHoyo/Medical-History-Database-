@@ -1,18 +1,34 @@
 package POJOS;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Visit {
-	private int visit_id; 
+public class Visit implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4922111399657589755L;
+	private Integer visit_id; 
 	private LocalDate visit_date;
 	private String visit_observation;
 	private String duration_medication;
-	private int patien_id;
-	private int doctor_id;
-	private int test_id;
-	private int hospital_id;
+	private Integer patien_id;
+	private Integer doctor_id;
+	private Integer test_id;
+	private Integer hospital_id;
 	
-	
+	public Visit(int visit_id, LocalDate visit_date, String visit_observation, String duration_medication,
+			int patien_id, int doctor_id, int test_id, int hospital_id) {
+		super();
+		this.visit_id = visit_id;
+		this.visit_date = visit_date;
+		this.visit_observation = visit_observation;
+		this.duration_medication = duration_medication;
+		this.patien_id = patien_id;
+		this.doctor_id = doctor_id;
+		this.test_id = test_id;
+		this.hospital_id = hospital_id;
+	}
 	public int getVisit_id() {
 		return visit_id;
 	}
@@ -67,18 +83,7 @@ public class Visit {
 				+ visit_observation + ", duration_medication=" + duration_medication + ", patien_id=" + patien_id
 				+ ", doctor_id=" + doctor_id + ", test_id=" + test_id + ", hospital_id=" + hospital_id + "]";
 	}
-	public Visit(int visit_id, LocalDate visit_date, String visit_observation, String duration_medication,
-			int patien_id, int doctor_id, int test_id, int hospital_id) {
-		super();
-		this.visit_id = visit_id;
-		this.visit_date = visit_date;
-		this.visit_observation = visit_observation;
-		this.duration_medication = duration_medication;
-		this.patien_id = patien_id;
-		this.doctor_id = doctor_id;
-		this.test_id = test_id;
-		this.hospital_id = hospital_id;
-	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(doctor_id, duration_medication, hospital_id, patien_id, test_id, visit_date, visit_id,

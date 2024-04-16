@@ -2,14 +2,14 @@ package POJOS;
 
 import java.util.Objects;
 
-public class TreatmentPOJO {
+public class Treatment {
     private Integer treatmentID;
     private String treatmentType;
 
-    public TreatmentPOJO() {
+    public Treatment() {
     }
 
-    public TreatmentPOJO(Integer treatmentID, String treatmentType) {
+    public Treatment(Integer treatmentID, String treatmentType) {
         this.treatmentID = treatmentID;
         this.treatmentType = treatmentType;
     }
@@ -22,7 +22,7 @@ public class TreatmentPOJO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TreatmentPOJO other = (TreatmentPOJO) obj;
+		Treatment other = (Treatment) obj;
 		if (treatmentID == null) {
 			if (other.treatmentID != null)
 				return false;

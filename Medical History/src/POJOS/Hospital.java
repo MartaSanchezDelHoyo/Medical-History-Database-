@@ -1,15 +1,15 @@
 package POJOS;
 import java.util.Objects;
 
-public class HospitalPOJO {
+public class Hospital {
     private Integer hospitalID;
     private String hospitalName;
     private String hospitalAddress;
 
-    public HospitalPOJO() {
+    public Hospital() {
     }
 
-    public HospitalPOJO(Integer hospitalID, String hospitalName, String hospitalAddress) {
+    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
         this.hospitalID = hospitalID;
         this.hospitalName = hospitalName;
         this.hospitalAddress = hospitalAddress;
@@ -37,7 +37,7 @@ public class HospitalPOJO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HospitalPOJO other = (HospitalPOJO) obj;
+		Hospital other = (Hospital) obj;
 		if (hospitalID == null) {
 			if (other.hospitalID != null)
 				return false;

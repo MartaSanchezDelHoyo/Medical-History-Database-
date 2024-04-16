@@ -1,15 +1,15 @@
 package POJOS;
 import java.util.Objects;
 
-public class AllergiesPOJO {
+public class Allergies {
 	private Integer allergiesID;
 	private String allergiesName;
 	
-	public AllergiesPOJO() {
+	public Allergies() {
 		
 	}
 	
-	public AllergiesPOJO(Integer allergiesID, String allergiesName) {
+	public Allergies(Integer allergiesID, String allergiesName) {
 		this.allergiesID= allergiesID;
 		this.allergiesName= allergiesName;
 	}
@@ -43,7 +43,7 @@ public class AllergiesPOJO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AllergiesPOJO other = (AllergiesPOJO) obj;
+		Allergies other = (Allergies) obj;
 		if (allergiesID == null) {
 			if (other.allergiesID != null)
 				return false;

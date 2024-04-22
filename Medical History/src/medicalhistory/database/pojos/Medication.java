@@ -1,4 +1,4 @@
-package POJOS;
+package medicalhistory.database.pojos;
 
 public class Medication {
 

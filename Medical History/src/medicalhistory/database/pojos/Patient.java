@@ -124,11 +124,11 @@ public class Patient implements Serializable{
 	}
 
 	public List <Allergies> getAlergies() {
-		return alergies;
+		return allergies;
 	}
 
-	public void setAlergies(List <Allergies> alergies) {
-		this.alergies = alergies;
+	public void setAlergies(List <Allergies> allergies) {
+		this.allergies = allergies;
 	}
 
 

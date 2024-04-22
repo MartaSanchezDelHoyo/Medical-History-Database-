@@ -50,9 +50,5 @@ public class Medication {
 	public void setType(String type) {
 		this.type=type;
 	}
-<<<<<<< HEAD
-}
-=======
 }
 
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git

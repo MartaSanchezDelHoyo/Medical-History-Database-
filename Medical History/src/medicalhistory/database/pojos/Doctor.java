@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Doctor implements Serializable{
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4748700239185078330L;
 	private int doctor_id;
 	private String name;
 	private String speciality;
@@ -83,6 +86,18 @@ public class Doctor implements Serializable{
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+
+
+	public ArrayList <Patient> getPatients() {
+		return patients;
+	}
+
+
+
+	public void setPatients(ArrayList <Patient> patients) {
+		this.patients = patients;
 	}
 	
 	

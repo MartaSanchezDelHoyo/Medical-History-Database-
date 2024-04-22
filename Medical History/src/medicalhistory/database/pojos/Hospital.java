@@ -1,4 +1,5 @@
 package medicalhistory.database.pojos;
+import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
 
@@ -10,17 +11,28 @@ public class Hospital implements Serializable{
 	private Integer hospitalID;
     private String hospitalName;
     private String hospitalAddress;
+    private List <Doctor> Hospital_doctors;
+    private List <Visit> Hospital_visits;
+    private List <String> Hospital_specialties;
+    
 
     public Hospital() {
     }
 
-    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
-        this.hospitalID = hospitalID;
-        this.hospitalName = hospitalName;
-        this.hospitalAddress = hospitalAddress;
-    }
-    
-    @Override
+        
+    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors,
+			List<Visit> hospital_visits, List<String> hospital_specialties) {
+		super();
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
+		Hospital_doctors = hospital_doctors;
+		Hospital_visits = hospital_visits;
+		Hospital_specialties = hospital_specialties;
+	}
+
+
+	@Override
     public int hashCode() {
         return Objects.hash(hospitalID, hospitalName, hospitalAddress);
     }
@@ -74,4 +86,28 @@ public class Hospital implements Serializable{
     public void setHospitalAddress(String hospitalAddress) {
         this.hospitalAddress = hospitalAddress;
     }
+
+	public List <Doctor> getHospital_doctors() {
+		return Hospital_doctors;
+	}
+
+	public void setHospital_doctors(List <Doctor> hospital_doctors) {
+		Hospital_doctors = hospital_doctors;
+	}
+
+	public List <Visit> getHospital_visits() {
+		return Hospital_visits;
+	}
+
+	public void setHospital_visits(List <Visit> hospital_visits) {
+		Hospital_visits = hospital_visits;
+	}
+
+	public List <String> getHospital_specialties() {
+		return Hospital_specialties;
+	}
+
+	public void setHospital_specialties(List <String> hospital_specialties) {
+		Hospital_specialties = hospital_specialties;
+	}
 }

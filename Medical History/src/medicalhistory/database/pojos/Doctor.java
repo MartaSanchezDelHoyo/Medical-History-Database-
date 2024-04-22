@@ -1,17 +1,13 @@
 package medicalhistory.database.pojos;
 
-public class Doctor {
+import java.util.Objects;
 
+public class Doctor {
+	
 	private int doctor_id;
 	private String name;
 	private String speciality;
 	private String contact;
-
-	
-	public static void main(String[] args) {
-      Doctor Doctor1= new Doctor(1,"Alfonso", "Caca","caca01@gmail.com");
-      System.out.println(Doctor1.contact);
-    } 
 	
 	public Doctor(int doctor_id, String name, String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
@@ -20,6 +16,38 @@ public class Doctor {
 		this.contact= contact;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", speciality=" + speciality + ", contact="
+				+ contact + "]";
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(contact, doctor_id, name, speciality);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Doctor other = (Doctor) obj;
+		return Objects.equals(contact, other.contact) && doctor_id == other.doctor_id
+				&& Objects.equals(name, other.name) && Objects.equals(speciality, other.speciality);
+	}
+
+
+
 	public int getDoctor_id() {
 		return doctor_id;
 	}

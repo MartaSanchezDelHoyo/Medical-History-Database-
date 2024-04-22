@@ -1,3 +1,4 @@
+
 package medicalhistory.database.pojos;
 
 import java.util.Objects;
@@ -50,4 +51,7 @@ public class Medication {
 		this.type=type;
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git

@@ -1,4 +1,4 @@
-package POJOS;
+package medicalhistory.database.pojos;
 import java.util.Objects;
 import java.io.Serializable;
 

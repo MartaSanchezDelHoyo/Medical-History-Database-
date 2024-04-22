@@ -15,11 +15,11 @@ public class Manufacturer implements Serializable{
 	private String manufacturerName;
 	private List <Medication> medications;
 	
-	public Manufacturer(Integer manufacturerID, String manufacturerName, ArrayList medications) {
+	public Manufacturer(Integer manufacturerID, String manufacturerName, ArrayList<?> medications) {
 		super();
 		this.manufacturerID = manufacturerID;
 		this.manufacturerName = manufacturerName;
-		this.medications= new ArrayList<>();
+		this.setMedications(new ArrayList<>());
 	}
 
 
@@ -60,6 +60,16 @@ public class Manufacturer implements Serializable{
 	}
 	public void setManufacturerName(String manufacturerName) {
 		this.manufacturerName = manufacturerName;
+	}
+
+
+	public List <Medication> getMedications() {
+		return medications;
+	}
+
+
+	public void setMedications(List <Medication> medications) {
+		this.medications = medications;
 	}
 
 	

@@ -20,7 +20,7 @@ public class Patient implements Serializable{
 	private String email;
 	private List <Allergies> allergies;
 	
-	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email, List allergies) {
+	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email, List<Allergies> allergies) {
 		super();
 		this.patientID = patientID;
 		this.patientName = patientName;

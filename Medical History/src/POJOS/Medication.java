@@ -8,6 +8,7 @@ public class Medication {
 	public static void main(String[] args) {
 	    }
 	
+	
 	public Medication(int medication_id, String type) {
 		this.setMedication_id(medication_id);
 				this.type=type;

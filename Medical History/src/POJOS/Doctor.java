@@ -11,7 +11,7 @@ public class Doctor {
 	public static void main(String[] args) {
       Doctor Doctor1= new Doctor(1,"Alfonso", "Caca","caca01@gmail.com");
       System.out.println(Doctor1.contact);
-    }
+    } 
 	
 	public Doctor(int doctor_id, String name, String speciality, String contact) {
 		this.setDoctor_id(doctor_id);

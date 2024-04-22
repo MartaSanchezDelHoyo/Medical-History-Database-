@@ -14,21 +14,29 @@ public class Patient implements Serializable{
 	private LocalDate dateofbirth;
 	private String bloodtype;
 	private Integer allergy_id;
+	public String email;
 	
-	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id) {
+	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email) {
 		super();
 		this.patientID = patientID;
 		this.patientName = patientName;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.allergy_id = allergy_id;
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth=" + dateofbirth
+				+ ", bloodtype=" + bloodtype + ", allergy_id=" + allergy_id + ", email=" + email + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(allergy_id, bloodtype, patientID, patientName);
+		return Objects.hash(allergy_id, bloodtype, dateofbirth, email, patientID, patientName);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -39,13 +47,16 @@ public class Patient implements Serializable{
 			return false;
 		Patient other = (Patient) obj;
 		return Objects.equals(allergy_id, other.allergy_id) && Objects.equals(bloodtype, other.bloodtype)
+				&& Objects.equals(dateofbirth, other.dateofbirth) && Objects.equals(email, other.email)
 				&& Objects.equals(patientID, other.patientID) && Objects.equals(patientName, other.patientName);
 	}
-	
-	@Override
-	public String toString() {
-		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", bloodtype=" + bloodtype
-				+ ", allergy_id=" + allergy_id + "]";
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Integer getPatientID() {

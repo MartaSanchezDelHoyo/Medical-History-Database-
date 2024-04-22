@@ -51,7 +51,4 @@ public class Medication {
 		this.type=type;
 	}
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git

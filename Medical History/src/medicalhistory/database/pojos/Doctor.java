@@ -1,14 +1,18 @@
 
 package medicalhistory.database.pojos;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Doctor {
+public class Doctor implements Serializable{
 	
 	private int doctor_id;
 	private String name;
 	private String speciality;
 	private String contact;
+	private ArrayList <Patient> patients;
+	
 	
 	public Doctor(int doctor_id, String name, String speciality, String contact) {
 		this.setDoctor_id(doctor_id);

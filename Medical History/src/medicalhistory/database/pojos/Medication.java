@@ -1,6 +1,4 @@
-
 package medicalhistory.database.pojos;
-
 import java.util.Objects;
 
 public class Medication {

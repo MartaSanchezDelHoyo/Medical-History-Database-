@@ -1,6 +1,8 @@
 package medicalhistory.database.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Manufacturer implements Serializable{
@@ -11,15 +13,28 @@ public class Manufacturer implements Serializable{
 	private static final long serialVersionUID = -7087629004863498680L;
 	private Integer manufacturerID;
 	private String manufacturerName;
-	public Manufacturer(Integer manufacturerID, String manufacturerName) {
+	private List <Medication> medications;
+	
+	public Manufacturer(Integer manufacturerID, String manufacturerName, ArrayList<?> medications) {
 		super();
 		this.manufacturerID = manufacturerID;
 		this.manufacturerName = manufacturerName;
+		this.setMedications(new ArrayList<>());
 	}
+
+
+	@Override
+	public String toString() {
+		return "Manufacturer [manufacturerID=" + manufacturerID + ", manufacturerName=" + manufacturerName + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(manufacturerID, manufacturerName);
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -32,10 +47,8 @@ public class Manufacturer implements Serializable{
 		return Objects.equals(manufacturerID, other.manufacturerID)
 				&& Objects.equals(manufacturerName, other.manufacturerName);
 	}
-	@Override
-	public String toString() {
-		return "Manufacturer [manufacturerID=" + manufacturerID + ", manufacturerName=" + manufacturerName + "]";
-	}
+
+
 	public Integer getManufacturerID() {
 		return manufacturerID;
 	}
@@ -47,6 +60,16 @@ public class Manufacturer implements Serializable{
 	}
 	public void setManufacturerName(String manufacturerName) {
 		this.manufacturerName = manufacturerName;
+	}
+
+
+	public List <Medication> getMedications() {
+		return medications;
+	}
+
+
+	public void setMedications(List <Medication> medications) {
+		this.medications = medications;
 	}
 
 	

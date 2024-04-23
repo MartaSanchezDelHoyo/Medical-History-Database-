@@ -1,13 +1,21 @@
+
 package medicalhistory.database.pojos;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Doctor {
-	
+public class Doctor implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4748700239185078330L;
 	private int doctor_id;
 	private String name;
 	private String speciality;
 	private String contact;
+	private ArrayList <Patient> patients;
+	
 	
 	public Doctor(int doctor_id, String name, String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
@@ -78,6 +86,18 @@ public class Doctor {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+
+
+	public ArrayList <Patient> getPatients() {
+		return patients;
+	}
+
+
+
+	public void setPatients(ArrayList <Patient> patients) {
+		this.patients = patients;
 	}
 	
 	

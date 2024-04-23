@@ -16,6 +16,12 @@ public class Visit implements Serializable {
 	private Integer doctor_id;
 	private Integer test_id;
 	private Integer hospital_id;
+	private Patient visit_patient;
+	private Doctor visit_doctor;
+	private Test visit_test;
+	private Treatment visit_treatment;
+	
+	
 	
 	public Visit(int visit_id, LocalDate visit_date, String visit_observation, String duration_medication,
 			int patien_id, int doctor_id, int test_id, int hospital_id) {
@@ -102,6 +108,30 @@ public class Visit implements Serializable {
 				&& hospital_id == other.hospital_id && patien_id == other.patien_id && test_id == other.test_id
 				&& Objects.equals(visit_date, other.visit_date) && visit_id == other.visit_id
 				&& Objects.equals(visit_observation, other.visit_observation);
+	}
+	public Patient getVisit_patient() {
+		return visit_patient;
+	}
+	public void setVisit_patient(Patient visit_patient) {
+		this.visit_patient = visit_patient;
+	}
+	public Test getVisit_test() {
+		return visit_test;
+	}
+	public void setVisit_test(Test visit_test) {
+		this.visit_test = visit_test;
+	}
+	public Doctor getVisit_doctor() {
+		return visit_doctor;
+	}
+	public void setVisit_doctor(Doctor visit_doctor) {
+		this.visit_doctor = visit_doctor;
+	}
+	public Treatment getVisit_treatment() {
+		return visit_treatment;
+	}
+	public void setVisit_treatment(Treatment visit_treatment) {
+		this.visit_treatment = visit_treatment;
 	}
 	
 

@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import medicalhistory.database.interfaces.HospitalManager;
+import medicalhistory.database.pojos.Doctor;
+import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Manufacturer;
 import medicalhistory.database.pojos.Medication;
+import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Test;
 import medicalhistory.database.pojos.Treatment;
 import medicalhistory.database.pojos.Visit;
@@ -59,7 +62,88 @@ public class JDBCHospitalManager implements HospitalManager {
 		// TODO Auto-generated method stub
 		
 	}
-
 	
+	
+	@Override
+	public void AddHospital (Hospital temporal) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void ChangeHospital (Hospital temporal) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public Hospital showHospitalBy (String specialization) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Hospital showHospitalBy (Doctor toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Hospital showHospitalBy (Patient toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Hospital showHospitalBy (Visit toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Hospital showHospitalBy (Treatment toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Hospital showHospitalBy (Test toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void addVisit (Hospital temporally, Visit temporal) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+    public void changeVisit (Hospital temporal, int visit_id) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal, Doctor toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal, Patient toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal, Treatment toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal, Medication toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Visit showVisitBy (Hospital temporal, Test toSearch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public Test showTest (Hospital temporal, Visit temp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

@@ -38,7 +38,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public void addTest(ArrayList<Test> list_test) {
 		// TODO Auto-generated method stub

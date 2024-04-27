@@ -75,14 +75,15 @@ public class ConnectionManager {
 			createTables2.close();
 			Statement createTables3 = c.createStatement();
 			String create3 = "CREATE TABLE Visits ( "
-					+ " visitr_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ " visit_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " date DATE NOT NULL,"
 					+ " observations TEXT,"
 					+ " duration_medication TEXT,"
 					+ " patient_id INTEGER NOT NULL,"
 					+ " doctor_id INTEGER NOT NULL ,"
-					+ " test_id INTEGER ,"
-					+ " hospital_id INTEGER NOT NULL;"
+					+ " test_id INTEGER NOT NULL,"
+					+ " hospital_id INTEGER NOT NULL,"
+					+ " JOIN patients AS p ON v.patient_id=p.patient_id INTEGER NOT NULL;"
 					+ " FORGEIN_KEY (patient_id) references patients (patient_id),"
 					+ " FORGEIN_KEY (doctor_id) references doctors(doctor_id),"
 					+ " FORGEIN_KEY (test_id) references tests (test_id),"

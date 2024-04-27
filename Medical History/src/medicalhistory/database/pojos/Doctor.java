@@ -12,23 +12,25 @@ public class Doctor implements Serializable{
 	private static final long serialVersionUID = -4748700239185078330L;
 	private int doctor_id;
 	private String name;
+	private String surname;
 	private String speciality;
 	private String contact;
 	private ArrayList <Patient> patients;
 	
 	
-	public Doctor(int doctor_id, String name, String speciality, String contact) {
+	public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
+		this.setSurname(surname);
 		this.setSpeciality(speciality);
-		this.contact= contact;
+		this.setContact(contact);
 	}
 	
 	
 	
 	@Override
 	public String toString() {
-		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", speciality=" + speciality + ", contact="
+		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname +", speciality=" + speciality + ", contact="
 				+ contact + "]";
 	}
 
@@ -36,7 +38,7 @@ public class Doctor implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(contact, doctor_id, name, speciality);
+		return Objects.hash(contact, doctor_id, name, surname ,speciality);
 	}
 
 
@@ -72,7 +74,7 @@ public class Doctor implements Serializable{
 		this.name = name;
 	}
 
-	public String getSpeciality() {
+	public String getSpecialty() {
 		return speciality;
 	}
 
@@ -98,6 +100,18 @@ public class Doctor implements Serializable{
 
 	public void setPatients(ArrayList <Patient> patients) {
 		this.patients = patients;
+	}
+
+
+
+	public String getSurname() {
+		return surname;
+	}
+
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 	
 	

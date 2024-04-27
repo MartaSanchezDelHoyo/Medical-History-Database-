@@ -1,5 +1,6 @@
 package medicalhistory.database.jdbc;
 
-public interface JDBCVisitManager {
+import medicalhistory.database.interfaces.VisitManager;
+public class JDBCVisitManager implements VisitManager {
 
 }

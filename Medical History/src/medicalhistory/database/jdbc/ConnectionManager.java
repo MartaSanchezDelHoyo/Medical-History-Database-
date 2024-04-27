@@ -55,6 +55,7 @@ public class ConnectionManager {
 			String create1 = "CREATE TABLE doctors ("
 					+ "doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT NOT NULL,"
+					+ "surname TEXT NOT NULL,"
 					+ "speciality TEXT NOT NULL,"
 					+ "contact TEXT,"
 					+ ")";

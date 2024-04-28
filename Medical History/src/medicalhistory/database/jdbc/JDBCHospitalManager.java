@@ -1,6 +1,10 @@
 package medicalhistory.database.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import medicalhistory.database.interfaces.HospitalManager;
@@ -66,84 +70,174 @@ public class JDBCHospitalManager implements HospitalManager {
 	
 	@Override
 	public void AddHospital (Hospital temporal) {
-		// TODO Auto-generated method stub
+		try {
+			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, temporal.getHospitalName());
+			pstmt.setString(2, temporal.getHospitalAddress());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
 	}
 	@Override
-	public void ChangeHospital (Hospital temporal) {
-		// TODO Auto-generated method stub
-	}
+	public void ChangeHospital (int hospitalToChange,Hospital temporal) {
+		try {
+			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, temporal.getHospitalName());
+			pstmt.setString(2, temporal.getHospitalAddress());
+			pstmt.setInt(3, hospitalToChange);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+	}	
 	@Override
 	public Hospital showHospitalBy (String specialization) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	@Override
 	public Hospital showHospitalBy (Doctor toSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM hospital-doctor AS hd JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE hd.doctor_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getDoctor_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	@Override
 	public Hospital showHospitalBy (Patient toSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.patient_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getPatientID());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	@Override
 	public Hospital showHospitalBy (Visit toSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
+	
+	//Habria que hacer una lista de treatment en hospital ++REVISAR++
 	@Override
 	public Hospital showHospitalBy (Treatment toSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN treatments AS t ON v.treatment_id=t.treatment_id JOIN hospitals AS h ON v.hospital_id=h.hospital_id GROUP BY t.treatment_id WHERE t.treatment_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getTreatmentID());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
+	//LO mismo que el de antes ++REVISAR++
 	@Override
 	public Hospital showHospitalBy (Test toSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id GROUP BY t.test_id WHERE v.test_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getTest_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	@Override
-	public void addVisit (Hospital temporally, Visit temporal) {
-		// TODO Auto-generated method stub
+    public Test showTest (Visit toSearch) {
+		Test obtained = null;
+		try {
+			String sql = "SELECT t.test_id, t.test_type FROM Visits AS v JOIN test AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer test_id = rs.getInt("test_id");
+				String test_type = rs.getString("test_type");
+				
+				obtained = new Test(test_id, test_type);
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
-	@Override
-    public void changeVisit (Hospital temporal, int visit_id) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal, Doctor toSearch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal, Patient toSearch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal, Treatment toSearch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal, Medication toSearch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Visit showVisitBy (Hospital temporal, Test toSearch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-    public Test showTest (Hospital temporal, Visit temp) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
 

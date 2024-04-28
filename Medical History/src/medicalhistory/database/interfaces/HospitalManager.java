@@ -14,21 +14,15 @@ public interface HospitalManager {
 	public void addManufacturer (ArrayList<Manufacturer> list_manufacturer);
 	public void modifyMedication (ArrayList<Medication> list_medication, Integer manufacturerID); 
 	public void AddHospital (Hospital temporal);
-	public void ChangeHospital (Hospital temporal);
+	//To change the hospital, the attribute that the user wants to change would be
+	//declared in the method where the user introduce the new data, returning the hospital changed to introduce it in the following method
+	public void ChangeHospital (int hospitalToChange,Hospital temporal);
 	public Hospital showHospitalBy (String specialization);
 	public Hospital showHospitalBy (Doctor toSearch);
 	public Hospital showHospitalBy (Patient toSearch);
 	public Hospital showHospitalBy (Visit toSearch);
 	public Hospital showHospitalBy (Treatment toSearch);
 	public Hospital showHospitalBy (Test toSearch);
-	public void addVisit (Hospital temporally, Visit temporal);
-    public void changeVisit (Hospital temporal, int visit_id);
-    public Visit showVisitBy (Hospital temporal);
-    public Visit showVisitBy (Hospital temporal, Doctor toSearch);
-    public Visit showVisitBy (Hospital temporal, Patient toSearch);
-    public Visit showVisitBy (Hospital temporal, Treatment toSearch);
-    public Visit showVisitBy (Hospital temporal, Medication toSearch);
-    public Visit showVisitBy (Hospital temporal, Test toSearch);
-    public Test showTest (Hospital temporal, Visit temp);
+	public Test showTest (Visit temp);
 
 }

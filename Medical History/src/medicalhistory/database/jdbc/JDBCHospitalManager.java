@@ -171,7 +171,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	
-	//Habria que hacer una lista de treatment en hospital  ++REVISAR++
+	//Habria que hacer una lista de treatment en hospital ++REVISAR++
 	@Override
 	public Hospital showHospitalBy (Treatment toSearch) {
 		Hospital obtained = null;

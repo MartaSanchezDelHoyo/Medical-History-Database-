@@ -39,6 +39,7 @@ public class JDBCVisitManager implements VisitManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
+		
 	}
 	@Override
     public void changeVisit (int visitIdToChange, Visit temporal) {

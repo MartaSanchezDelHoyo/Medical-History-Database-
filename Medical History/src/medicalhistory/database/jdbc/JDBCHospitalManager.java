@@ -44,27 +44,67 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	@Override
-	public void addTest(ArrayList<Test> list_test) {
-		// TODO Auto-generated method stub
-		
+	public void addTest(Test entry) {
+		try {
+			String template = "INSERT INTO test (test_id, type) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getTest_id());
+			pstmt.setString(2, entry.getType());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
 	}
 
 	@Override
-	public void addMedication(ArrayList<Medication> list_medication) {
-		// TODO Auto-generated method stub
-		
+	public void addMedication(Medication entry) {
+		try {
+			String template = "INSERT INTO medication (medication_id, type) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getMedication_id());
+			pstmt.setString(2, entry.getType());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
 	}
 
 	@Override
-	public void addManufacturer(ArrayList<Manufacturer> list_manufacturer) {
-		// TODO Auto-generated method stub
-		
+	public void addManufacturer( Manufacturer entry ) {
+		try {
+			String template = "INSERT INTO manufacturer (manufacturerID, manufacturerName) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getManufacturerID());
+			pstmt.setString(2, entry.getManufacturerName());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}		
 	}
 
 	@Override
-	public void modifyMedication(ArrayList<Medication> list_medication, Integer manufacturerID) {
-		// TODO Auto-generated method stub
-		
+	public void modifyMedication(Medication entry, Integer medicationID) {
+		try {
+			String template = "UPDATE medication SET type= ?, WHERE medicationID= ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, entry.getType());
+			pstmt.setInt(3, medicationID);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}		
 	}
 	
 	

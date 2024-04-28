@@ -25,22 +25,50 @@ public class JDBCHospitalManager implements HospitalManager {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	@Override
-	public Visit showVisit(ArrayList<Visit> list_visits, Integer visit_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Treatment showTreatment(Visit toSearch) {
+		Treatment obtained = null;
+		try {
+			String sql = "SELECT t.treatmentID, t.treatmentType FROM Visits AS v JOIN test AS t ON v.treatmentID=t.treatmentID WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer treatmentID = rs.getInt("treatmentID");
+				String treatmentType = rs.getString("treatmentType");
+				
+				obtained = new Treatment(treatmentID,treatmentType);
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 
 	@Override
-	public Treatment showTreatment(ArrayList<Treatment> list_treatment, Integer treatmentID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Medication showMedication(Visit toSearch) {
+		Medication obtained = null;
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer medication_id = rs.getInt("medication_id");
+				String type = rs.getString("type");
+				
+				obtained = new Medication(medication_id,type);
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	
 	@Override

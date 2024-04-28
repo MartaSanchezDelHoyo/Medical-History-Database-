@@ -13,7 +13,6 @@ public interface HospitalManager {
 	public void addMedication (ArrayList<Medication> list_medication);
 	public void addManufacturer (ArrayList<Manufacturer> list_manufacturer);
 	public void modifyMedication (ArrayList<Medication> list_medication, Integer manufacturerID); 
-	
 	public void AddHospital (Hospital temporal);
 	public void ChangeHospital (Hospital temporal);
 	public Hospital showHospitalBy (String specialization);

@@ -35,7 +35,7 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	@Override
 	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated meta ver hod stub
 		return null;
 	}
 	

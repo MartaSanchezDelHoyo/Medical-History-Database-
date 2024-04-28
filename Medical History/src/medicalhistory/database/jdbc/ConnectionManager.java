@@ -75,7 +75,7 @@ public class ConnectionManager {
 			createTables2.close();
 			Statement createTables3 = c.createStatement();
 			String create3 = "CREATE TABLE Visits ( "
-					+ " visitr_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ " visit_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " date DATE NOT NULL,"
 					+ " observations TEXT,"
 					+ " duration_medication TEXT,"

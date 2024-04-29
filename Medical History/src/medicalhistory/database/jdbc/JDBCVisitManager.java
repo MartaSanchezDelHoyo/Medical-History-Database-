@@ -20,7 +20,6 @@ public class JDBCVisitManager implements VisitManager {
 	public void addVisit (Visit temporal) {
 		try {
 			String template = "INSERT INTO Visit (visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			String template = "INSERT INTO Visit (date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setInt(1, temporal.getVisit_id());
@@ -73,7 +72,7 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
-				Integer patient_id = rs.getInt("patient_id");
+				Patient patient = rs.getgetInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");

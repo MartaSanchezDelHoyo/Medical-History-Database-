@@ -25,6 +25,7 @@ public interface HospitalManager {
 	public Hospital showHospitalBy (Visit toSearch);
 	public Hospital showHospitalBy (Treatment toSearch);
 	public Hospital showHospitalBy (Test toSearch);
-	public Test showTest (Visit temp);
+	
+	
 }
  

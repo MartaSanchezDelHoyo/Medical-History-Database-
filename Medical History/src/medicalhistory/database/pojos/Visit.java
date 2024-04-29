@@ -33,7 +33,6 @@ public class Visit implements Serializable {
 		this.visit_patient = visit_patient;
 		this.visit_doctor = visit_doctor;
 		this.visit_test = visit_test;
-		this.visit_treatment = visit_treatment;
 		this.medications = medications;
 		this.treatments = treatments;
 	}
@@ -106,12 +105,7 @@ public class Visit implements Serializable {
 	public void setVisit_test(Test visit_test) {
 		this.visit_test = visit_test;
 	}
-	public Treatment getVisit_treatment() {
-		return visit_treatment;
-	}
-	public void setVisit_treatment(Treatment visit_treatment) {
-		this.visit_treatment = visit_treatment;
-	}
+	
 	public List<Medication> getMedications() {
 		return medications;
 	}
@@ -131,8 +125,8 @@ public class Visit implements Serializable {
 	public String toString() {
 		return "Visit [visit_id=" + visit_id + ", visit_date=" + visit_date + ", visit_observation=" + visit_observation
 				+ ", duration_medication=" + duration_medication + ", hospital=" + hospital + ", visit_patient=" + visit_patient 
-				+ ", visit_doctor=" + visit_doctor + ", visit_test=" + visit_test + ", visit_treatment=" + visit_treatment
-				+ ", medications=" + medications + ", treatments=" + treatments + "]";
+				+ ", visit_doctor=" + visit_doctor + ", visit_test=" + visit_test +
+				", medications=" + medications + ", treatments=" + treatments + "]";
 	}
 	
 	

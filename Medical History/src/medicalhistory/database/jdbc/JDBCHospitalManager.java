@@ -151,9 +151,26 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 	}	
 	@Override
-	public Hospital showHospitalBy (String specialization) {
-		
-		return null;
+	public Hospital showHospital (int hospitalID) {
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT * FROM hospitals WHERE hospital_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, hospitalID);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_adress");
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	@Override
 	public Hospital showHospitalBy (Doctor toSearch) {

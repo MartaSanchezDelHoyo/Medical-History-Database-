@@ -1,6 +1,6 @@
 package medicalhistory.database.interfaces;
 
-import junit.framework.Test;
+import medicalhistory.database.pojos.Test;
 import medicalhistory.database.pojos.Visit;
 
 public interface TestManager {

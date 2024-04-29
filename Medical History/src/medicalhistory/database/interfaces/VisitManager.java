@@ -17,4 +17,5 @@ public interface VisitManager {
     public Visit showVisitBy ( Treatment toSearch);
     public Visit showVisitBy ( Medication toSearch);
     public Visit showVisitBy ( Test toSearch);
+   
 }

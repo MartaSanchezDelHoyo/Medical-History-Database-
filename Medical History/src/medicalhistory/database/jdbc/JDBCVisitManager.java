@@ -230,7 +230,7 @@ public class JDBCVisitManager implements VisitManager {
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= null;
-				Doctor doctor = null;
+				Doctor doctor= null;
 				Test test= null;
 				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");

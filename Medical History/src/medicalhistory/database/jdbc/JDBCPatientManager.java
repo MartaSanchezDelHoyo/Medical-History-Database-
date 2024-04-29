@@ -82,8 +82,33 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
+	@Override
+	public Patient getPatient(int patientID ) {
+	    Patient patient= null;
+	    try {
+	        String sql = "SELECT * FROM patients WHERE patient_id = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1,patientID);
+	        ResultSet resultSet = statement.executeQuery();
 
-
+	        while (resultSet.next()) {
+	            String patientName = resultSet.getString("name");
+	            String surname = resultSet.getString("surname");
+	            String sex = resultSet.getString("sex");
+	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
+	            String email = resultSet.getString("email"); 
+	            
+	            patient = new Patient (patientName, sex, dateOfBirth, email);
+	            
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving patients by name: " + e.getMessage());
+	    }
+	    return patient;
+	}
 	@Override
 	public void changePatient(Patient a) {
 	    try {

@@ -1,5 +1,4 @@
 package medicalhistory.database.jdbc;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,9 @@ public class JDBCTestManager implements TestManager{
 	public JDBCTestManager(ConnectionManager connectionManager) {
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
+	
+
     public Test showTest (Visit toSearch) {
 		Test obtained = null;
 		try {

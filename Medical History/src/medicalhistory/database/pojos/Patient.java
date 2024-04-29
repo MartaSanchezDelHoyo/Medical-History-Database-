@@ -37,8 +37,7 @@ public class Patient implements Serializable{
 		this.doctors = new ArrayList<>();
 	}
 
-	public Patient(int patientId2, String patientName2, String sex2, Date dateOfBirth2, String email2) {
-		this.patientID = patientID;
+	public Patient(String patientName2, String sex2, Date dateOfBirth2, String email2) {
 		this.patientName = patientName;
 		this.sex = sex;
 		this.dateofbirth = dateofbirth;

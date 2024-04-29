@@ -18,15 +18,13 @@ public class JDBCPatientManager implements PatientManager {
 	public void addPatient(Patient a) {
 	    try {
 	        // Prepare SQL statement
-	        String sql = "INSERT INTO patients (name, surname, age, gender, allergies, email) VALUES (?, ?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO patients (name, surname, age, gender, email) VALUES (?, ?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, a.getPatientName());
 	        statement.setString(2, a.getSex());
 	        statement.setDate(3, a.getDateofbirth());
 	        statement.setString(4, a.getBloodtype());
 	        statement.setString(4, a.getEmail());
-	        statement.setString(4, a.getAllergies().toString());
-	        statement.setString(4, a.getDoctors().toString());
 
 
 	        statement.executeUpdate();
@@ -73,13 +71,12 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            int patientId = resultSet.getInt("patient_id");
 	            String patientName = resultSet.getString("name");
 	            String sex = resultSet.getString("sex");
-	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String email = resultSet.getString("email"); 
 	            
-	            Patient patient = new Patient(patientId, patientName, sex, dateOfBirth, email);
+	            Patient patient = new Patient (patientName, sex, dateOfBirth, email);
 	            patients.add(patient);
 	        }
 	        
@@ -91,15 +88,76 @@ public class JDBCPatientManager implements PatientManager {
 	    return patients;
 	}
 
-   /* @Override
-    public void changePatient(Patient a) {
-    	// Todo
-    	
-    } */
+	@Override
+	public void changePatient(Patient a) {
+	    try {
+	        String sql = "UPDATE patients SET name = ?, sex = ?, dateofbirth = ?, email = ? WHERE patient_id = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setString(1, a.getPatientName());
+	        statement.setString(2, a.getSex());
+	        statement.setDate(3, a.getDateofbirth());
+	        statement.setString(4, a.getEmail());
+	        statement.setInt(5, a.getPatientID());
+	        
+	        int rowsUpdated = statement.executeUpdate();
+	        
+	        if (rowsUpdated > 0) {
+	            System.out.println("Patient information updated successfully.");
+	        } else {
+	            System.out.println("No patient found with the given ID.");
+	        }
+	        
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error updating patient information: " + e.getMessage());
+	    }
+	}
 
- /* @Override
-    public Patient getDoctors(int patientid) {
-        // TODO 
-	  return 0;
-    } */
+
+	@Override
+	public List<int> getDoctors(int patientid) {
+	    List<int> doctorids = new ArrayList<>();
+	    try {
+	        String sql = "SELECT doctor_id FROM Patient_Doctor WHERE patient_id = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, patientid);
+	        ResultSet resultSet = statement.executeQuery();
+	        
+	        while (resultSet.next()) {
+	            int doctorId = resultSet.getInt("doctor_id");
+	            Doctor doctor = getDoctorDetails(doctorId); 
+	            if (doctor != null) {
+	                doctors.add(doctor);
+	            }
+	        }
+
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return doctorids;
+	}
+
+	private Doctor getDoctorsDetails(List <int> doctorids) throws SQLException {
+	    String sql = "SELECT * FROM doctors WHERE doctor_id = ?";
+	    PreparedStatement statement = c.prepareStatement(sql);
+	    statement.setInt(1, doctorId);
+	    ResultSet resultSet = statement.executeQuery();
+
+	    Doctor doctor = null;
+	    if (resultSet.next()) {
+	        String doctorName = resultSet.getString("same");
+	        String doctorSurname = resultSet.getString("surname");
+	        String specialization = resultSet.getString("specialty");
+	        String contacto = resultSet.getString("contact");
+	        doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
+	    }
+
+	    resultSet.close();
+	    statement.close();
+
+	    return doctor;
+	}
+
 }

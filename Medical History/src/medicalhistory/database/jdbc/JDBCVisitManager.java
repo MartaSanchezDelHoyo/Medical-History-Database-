@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import medicalhistory.database.interfaces.TestManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
@@ -72,12 +74,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
-				Patient patient = rs.getgetInt("patient_id");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
+				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -99,12 +105,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -126,12 +136,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -153,12 +167,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -180,12 +198,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -207,12 +229,16 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
+				Patient patient= null;
+				Doctor doctor = null;
+				Test test= null;
+				Hospital hospital= null;
 				Integer patient_id = rs.getInt("patient_id");
 				Integer doctor_id = rs.getInt("doctor_id");
 				Integer test_id = rs.getInt("test_id");
 				Integer hospital_id = rs.getInt("visit_id");
 				
-				obtained = new Visit(visit_id, date, observations, duration_medication, patient_id, doctor_id, test_id, hospital_id);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
 			return obtained;
 		} catch (SQLException e) {

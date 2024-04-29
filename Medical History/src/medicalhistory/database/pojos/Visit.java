@@ -23,7 +23,7 @@ public class Visit implements Serializable {
 	private List <Treatment> treatments;
 	
 	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
-			Treatment visit_treatment, List<Medication> medications, List<Treatment> treatments) {
+			 List<Medication> medications, List<Treatment> treatments) {
 		super();
 		this.visit_id = visit_id;
 		this.visit_date = visit_date;

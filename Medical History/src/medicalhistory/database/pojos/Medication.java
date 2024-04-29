@@ -1,6 +1,4 @@
-
 package medicalhistory.database.pojos;
-
 import java.util.Objects;
 
 public class Medication {
@@ -50,5 +48,4 @@ public class Medication {
 	public void setType(String type) {
 		this.type=type;
 	}
-
-
+}

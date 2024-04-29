@@ -19,8 +19,9 @@ public class Patient implements Serializable{
 	private Integer allergy_id;
 	private String email;
 	private List <Allergies> allergies;
+	private List <Visit> visits ;
 	
-	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email, List allergies) {
+	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email, List<Allergies> allergies) {
 		super();
 		this.patientID = patientID;
 		this.patientName = patientName;
@@ -144,6 +145,24 @@ public class Patient implements Serializable{
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	
+
+
+
+
+	public List <Visit> getVisits() {
+		return visits;
+	}
+
+
+
+
+	public void setVisits(List <Visit> visits) {
+		this.visits = visits;
+	}
+
+
+
+
+
 	
 }

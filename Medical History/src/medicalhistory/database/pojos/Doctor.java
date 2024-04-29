@@ -3,6 +3,7 @@ package medicalhistory.database.pojos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Doctor implements Serializable{
@@ -15,8 +16,9 @@ public class Doctor implements Serializable{
 	private String surname;
 	private String speciality;
 	private String contact;
-	private ArrayList <Patient> patients;
-	
+	private List <Patient> patients;
+	private List <Hospital> hospitals;
+	private List <Visit> visits;
 	
 	public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
@@ -92,13 +94,13 @@ public class Doctor implements Serializable{
 
 
 
-	public ArrayList <Patient> getPatients() {
+	public List <Patient> getPatients() {
 		return patients;
 	}
 
 
 
-	public void setPatients(ArrayList <Patient> patients) {
+	public void setPatients(List <Patient> patients) {
 		this.patients = patients;
 	}
 
@@ -112,6 +114,30 @@ public class Doctor implements Serializable{
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+
+
+	public List <Hospital> getHospitals() {
+		return hospitals;
+	}
+
+
+
+	public void setHospitals(List <Hospital> hospitals) {
+		this.hospitals = hospitals;
+	}
+
+
+
+	public List <Visit> getVisits() {
+		return visits;
+	}
+
+
+
+	public void setVisits(List <Visit> visits) {
+		this.visits = visits;
 	}
 	
 	

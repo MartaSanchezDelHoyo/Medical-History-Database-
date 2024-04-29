@@ -1,12 +1,14 @@
 package medicalhistory.database.pojos;
+import java.util.List;
 import java.util.Objects;
 
 public class Medication {
 
 	private int medication_id;
 	private String type;
-
-	
+    private List <Manufacturer> manufacturers;
+	private List <Visit> visits;
+    
 	@Override
 	public String toString() {
 		return "Medication [medication_id=" + medication_id + ", type=" + type + "]";
@@ -47,5 +49,21 @@ public class Medication {
 	}
 	public void setType(String type) {
 		this.type=type;
+	}
+
+	public List <Manufacturer> getManufacturers() {
+		return manufacturers;
+	}
+
+	public void setManufacturers(List <Manufacturer> manufacturers) {
+		this.manufacturers = manufacturers;
+	}
+
+	public List <Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List <Visit> visits) {
+		this.visits = visits;
 	}
 }

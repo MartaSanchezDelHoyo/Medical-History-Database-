@@ -1,5 +1,6 @@
 package medicalhistory.database.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Allergies implements Serializable{
@@ -9,6 +10,7 @@ public class Allergies implements Serializable{
 	private static final long serialVersionUID = 309157577865656134L;
 	private Integer allergiesID;
 	private String allergiesName;
+	private List <Patient> patients;
 	
 	public Allergies() {
 		
@@ -64,4 +66,12 @@ public class Allergies implements Serializable{
                 ", allergiesName='" + allergiesName + '\'' +
                 '}';
     }
+
+	public List <Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List <Patient> patients) {
+		this.patients = patients;
+	}
 }

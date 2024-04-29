@@ -1,6 +1,7 @@
 package medicalhistory.database.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Treatment implements Serializable{
@@ -10,6 +11,7 @@ public class Treatment implements Serializable{
 	private static final long serialVersionUID = -5230755319444165612L;
 	private Integer treatmentID;
     private String treatmentType;
+    private List <Visit> visits;
 
     public Treatment() {
     }
@@ -64,4 +66,12 @@ public class Treatment implements Serializable{
     public void setTreatmentType(String treatmentType) {
         this.treatmentType = treatmentType;
     }
+
+	public List <Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List <Visit> visits) {
+		this.visits = visits;
+	}
 }

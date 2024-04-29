@@ -28,10 +28,10 @@ public class JDBCVisitManager implements VisitManager {
 			pstmt.setDate(2, temporal.getVisit_date());
 			pstmt.setString(3, temporal.getVisit_observation());
 			pstmt.setString(4, temporal.getDuration_medication());
-			pstmt.setInt(5, temporal.getPatien_id());
-			pstmt.setInt(6, temporal.getDoctor_id());
-			pstmt.setInt(7, temporal.getTest_id());
-			pstmt.setInt(8, temporal.getHospital_id());
+			pstmt.setInt(5, temporal.getVisit_patient().getPatientID());
+			pstmt.setInt(6, temporal.getVisit_doctor().getDoctor_id());
+			pstmt.setInt(7, temporal.getVisit_test().getTest_id());
+			pstmt.setInt(8, temporal.getHospital().getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -50,10 +50,10 @@ public class JDBCVisitManager implements VisitManager {
 			pstmt.setDate(2, temporal.getVisit_date());
 			pstmt.setString(3, temporal.getVisit_observation());
 			pstmt.setString(4, temporal.getDuration_medication());
-			pstmt.setInt(5, temporal.getPatien_id());
-			pstmt.setInt(6, temporal.getDoctor_id());
-			pstmt.setInt(7, temporal.getTest_id());
-			pstmt.setInt(8, temporal.getHospital_id());
+			pstmt.setInt(5, temporal.getVisit_patient().getPatientID());
+			pstmt.setInt(6, temporal.getVisit_doctor().getDoctor_id());
+			pstmt.setInt(7, temporal.getVisit_test().getTest_id());
+			pstmt.setInt(8, temporal.getHospital().getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

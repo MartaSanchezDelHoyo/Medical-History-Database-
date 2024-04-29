@@ -1,12 +1,10 @@
 package medicalhistory.database.jdbc;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
@@ -16,18 +14,24 @@ import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Test;
 import medicalhistory.database.pojos.Treatment;
 import medicalhistory.database.pojos.Visit;
-
 public class JDBCHospitalManager implements HospitalManager {
 	private Connection c;
 	private ConnectionManager conMan;
-
 	public JDBCHospitalManager(ConnectionManager connectionManager) {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public Visit showVisit(ArrayList<Visit> list_visits, Integer visit_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	@Override
+	public Treatment showTreatment(ArrayList<Treatment> list_treatment, Integer treatmentID) {
+		// TODO Auto-generated method stub
+		return null;
 	public Treatment showTreatment(Visit toSearch) {
 		Treatment obtained = null;
 		try {
@@ -38,7 +42,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			while(rs.next()) {
 				Integer treatmentID = rs.getInt("treatmentID");
 				String treatmentType = rs.getString("treatmentType");
-				
+
 				obtained = new Treatment(treatmentID,treatmentType);
 			}
 			return obtained;
@@ -49,27 +53,10 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 
-
 	@Override
-		public Medication showMedication (Visit toSearch) {
-			Medication obtained = null;
-			try {
-				String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
-				PreparedStatement search = c.prepareStatement(sql);
-				search.setInt(1, toSearch.getVisit_id());
-				ResultSet rs = search.executeQuery();
-				while(rs.next()) {
-					Integer medication_id = rs.getInt("medication_id");
-					String type = rs.getString("type");
-					
-					obtained = new Medication(medication_id,type);
-				}
-				return obtained;
-			} catch (SQLException e) {
-				System.out.println("Error looking for a doctor");
-				e.printStackTrace();
-			}
-			return obtained;
+	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id) {
+		// TODO Auto-generated method stub
+		return null;
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
 		try {
@@ -80,7 +67,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			while(rs.next()) {
 				Integer medication_id = rs.getInt("medication_id");
 				String type = rs.getString("type");
-				
+
 				obtained = new Medication(medication_id,type);
 			}
 			return obtained;
@@ -90,7 +77,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
-	
+
 	@Override
 	public void addTest(Test entry) {
 		try {
@@ -106,7 +93,6 @@ public class JDBCHospitalManager implements HospitalManager {
 			e.printStackTrace();
 		}			
 	}
-
 	@Override
 	public void addMedication(Medication entry) {
 		try {
@@ -122,7 +108,6 @@ public class JDBCHospitalManager implements HospitalManager {
 			e.printStackTrace();
 		}			
 	}
-
 	@Override
 	public void addManufacturer( Manufacturer entry ) {
 		try {
@@ -138,7 +123,6 @@ public class JDBCHospitalManager implements HospitalManager {
 			e.printStackTrace();
 		}		
 	}
-
 	@Override
 	public void modifyMedication(Medication entry, Integer medicationID) {
 		try {
@@ -328,4 +312,3 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 }
-

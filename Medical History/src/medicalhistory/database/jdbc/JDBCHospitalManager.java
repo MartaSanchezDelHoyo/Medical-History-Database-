@@ -71,7 +71,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 	@Override
-		public Medication showMedication(Visit toSearch) {
+		public Medication showMedication (Visit toSearch) {
 			Medication obtained = null;
 			try {
 				String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";

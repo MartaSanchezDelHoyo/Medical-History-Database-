@@ -1,6 +1,11 @@
 package medicalhistory.database.pojos;
 import java.io.Serializable;
 import java.sql.Date;
+<<<<<<< HEAD
+=======
+import java.util.*;
+import java.time.LocalDate;
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
 import java.util.Objects;
 
 public class Visit implements Serializable {

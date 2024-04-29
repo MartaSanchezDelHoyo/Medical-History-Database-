@@ -72,7 +72,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");
@@ -99,7 +99,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");
@@ -126,7 +126,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");
@@ -153,7 +153,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");
@@ -180,7 +180,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");
@@ -207,7 +207,7 @@ public class JDBCVisitManager implements VisitManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
-				LocalDate date = rs.getDate("date");
+				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
 				Integer patient_id = rs.getInt("patient_id");

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.interfaces.TestManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.pojos.Doctor;

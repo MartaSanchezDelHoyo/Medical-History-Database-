@@ -10,6 +10,7 @@ public class JDBCPatientManager implements PatientManager {
 
     private Connection c;
     
+    
 	public JDBCPatientManager(ConnectionManager connectionManager) {
 		this.c = connectionManager.getConnection();
 	}
@@ -67,7 +68,7 @@ public class JDBCPatientManager implements PatientManager {
 	    List<Patient> patients = new ArrayList<>();
 	    try {
 	        String sql = "SELECT * FROM patients WHERE name = ?";
-	        PreparedStatement statement = conn.prepareStatement(sql);
+	        PreparedStatement statement = con.prepareStatement(sql);
 	        statement.setString(1, name);
 	        ResultSet resultSet = statement.executeQuery();
 
@@ -89,6 +90,12 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error retrieving patients by name: " + e.getMessage());
 	    }
 	    return patients;
+	}
+
+	@Override
+	public Patient getDoctor(int patientid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
     /* @Override

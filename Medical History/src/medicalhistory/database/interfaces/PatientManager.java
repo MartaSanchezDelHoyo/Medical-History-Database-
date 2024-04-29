@@ -7,5 +7,5 @@ public interface PatientManager {
 	public List<Test> getTestsbyPatient(String name);
 	public List<Patient> getPatientByName(String name);
 	// public void changePatient(Patient a);
-	public Patient getDoctor(int patientid) ;
+	// public Patient getDoctor(int patientid) ;
 }

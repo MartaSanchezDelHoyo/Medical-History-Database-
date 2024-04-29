@@ -15,19 +15,14 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient a) {
 	    try {
-	        // Prepare SQL statement
 	        String sql = "INSERT INTO patients (name, surname, age, gender, email) VALUES (?, ?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
 
 	        statement.setString(1, a.getPatientName());
 	        statement.setString(2, a.getSex());
-	        // statement.setLocalDate(3, a.getDateofbirth());
 	        statement.setDate(3, a.getDateofbirth());
 	        statement.setString(4, a.getBloodtype());
-	        // statement.setString(4, a.getAllergies());
 	        statement.setString(4, a.getEmail());
-
-
 	        statement.executeUpdate();
 	        statement.close();
 	        
@@ -65,7 +60,6 @@ public class JDBCPatientManager implements PatientManager {
 	    List<Patient> patients = new ArrayList<>();
 	    try {
 	        String sql = "SELECT * FROM patients WHERE name = ?";
-	        PreparedStatement statement = conn.prepareStatement(sql);
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, name);
 	        ResultSet resultSet = statement.executeQuery();
@@ -88,7 +82,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
-}
+
 
 	@Override
 	public void changePatient(Patient a) {
@@ -117,56 +111,33 @@ public class JDBCPatientManager implements PatientManager {
 
 
 	@Override
-	public List<int> getDoctors(int patientid) {
-	    List<int> doctorids = new ArrayList<>();
+	public List<Doctor> getDoctors(int patientId) {
+	    List<Doctor> doctors = new ArrayList<>();
 	    try {
-	        String sql = "SELECT doctor_id FROM Patient_Doctor WHERE patient_id = ?";
+	        String sql = "SELECT doctors.* FROM doctors " +
+	                     "INNER JOIN Patient_Doctor ON doctors.doctor_id = Patient_Doctor.doctor_id " +
+	                     "WHERE Patient_Doctor.patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1, patientid);
+	        statement.setInt(1, patientId);
 	        ResultSet resultSet = statement.executeQuery();
-	        
+
 	        while (resultSet.next()) {
 	            int doctorId = resultSet.getInt("doctor_id");
-	            Doctor doctor = getDoctorDetails(doctorId); 
-	            if (doctor != null) {
-	                doctors.add(doctor);
-	            }
+	            String doctorName = resultSet.getString("ame");
+	            String doctorSurname = resultSet.getString("surname");
+	            String specialization = resultSet.getString("specialty");
+	            String contact = resultSet.getString("contact");
+	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
+	            doctors.add(doctor);
 	        }
-
+	        
 	        resultSet.close();
 	        statement.close();
 	    } catch (SQLException e) {
 	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
 	    }
-	    return doctorids;
+	    return doctors;
 	}
 
-	private Doctor getDoctorsDetails(List <int> doctorids) throws SQLException {
-	    String sql = "SELECT * FROM doctors WHERE doctor_id = ?";
-	    PreparedStatement statement = c.prepareStatement(sql);
-	    statement.setInt(1, doctorId);
-	    ResultSet resultSet = statement.executeQuery();
-
-	    Doctor doctor = null;
-	    if (resultSet.next()) {
-	        String doctorName = resultSet.getString("same");
-	        String doctorSurname = resultSet.getString("surname");
-	        String specialization = resultSet.getString("specialty");
-	        String contacto = resultSet.getString("contact");
-	        doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
-	    }
-
-	    resultSet.close();
-	    statement.close();
-
-	    return doctor;
-	}
-   /* @Override
-    public void changePatient(Patient a) {
-        // Implement changePatient method here
-        // You need to update patient details in the database
-    	// Todo
-    	
-    } */
 
 }

@@ -53,33 +53,6 @@ public class Patient implements Serializable{
 		this.allergies = allergies;
 	}
 
-	@Override
-	public String toString() {
-		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth=" + dateofbirth
-				+ ", bloodtype=" + bloodtype + ", allergy_id=" + allergy_id + ", email=" + email + ", allergies="
-				+ allergies + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(allergies, allergy_id, bloodtype, dateofbirth, email, patientID, patientName);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Patient other = (Patient) obj;
-		return Objects.equals(allergies, other.allergies) && Objects.equals(allergy_id, other.allergy_id)
-				&& Objects.equals(bloodtype, other.bloodtype) && Objects.equals(dateofbirth, other.dateofbirth)
-				&& Objects.equals(email, other.email) && Objects.equals(patientID, other.patientID)
-				&& Objects.equals(patientName, other.patientName);
-	}
-
 	public String getEmail() {
 		return email;
 	}

@@ -1,19 +1,11 @@
 package medicalhistory.database.jdbc;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import medicalhistory.database.interfaces.HospitalManager;
-import medicalhistory.database.pojos.Doctor;
-import medicalhistory.database.pojos.Hospital;
-import medicalhistory.database.pojos.Manufacturer;
-import medicalhistory.database.pojos.Medication;
-import medicalhistory.database.pojos.Patient;
-import medicalhistory.database.pojos.Test;
-import medicalhistory.database.pojos.Treatment;
-import medicalhistory.database.pojos.Visit;
+import medicalhistory.database.pojos.*;
+
 public class JDBCHospitalManager implements HospitalManager {
 	private Connection c;
 	private ConnectionManager conMan;
@@ -21,17 +13,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public Visit showVisit(ArrayList<Visit> list_visits, Integer visit_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-	@Override
-	public Treatment showTreatment(ArrayList<Treatment> list_treatment, Integer treatmentID) {
-		// TODO Auto-generated method stub
-		return null;
 	public Treatment showTreatment(Visit toSearch) {
 		Treatment obtained = null;
 		try {
@@ -53,10 +35,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 
-	@Override
-	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
 		try {

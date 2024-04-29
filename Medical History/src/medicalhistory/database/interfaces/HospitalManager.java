@@ -1,11 +1,13 @@
+
 package medicalhistory.database.interfaces;
-
 import java.util.ArrayList;
-
 import medicalhistory.database.pojos.*;
 
 public interface HospitalManager {
 
+	public Visit showVisit (ArrayList<Visit> list_visits, Integer visit_id);
+	public Treatment showTreatment(ArrayList<Treatment> list_treatment, Integer treatmentID);
+	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id);
 	public Treatment showTreatment(Visit toSearch);
 	public Medication showMedication(Visit toSearch);
 	public void addTest (Test entry);
@@ -24,5 +26,5 @@ public interface HospitalManager {
 	public Hospital showHospitalBy (Treatment toSearch);
 	public Hospital showHospitalBy (Test toSearch);
 	public Test showTest (Visit temp);
-
 }
+ 

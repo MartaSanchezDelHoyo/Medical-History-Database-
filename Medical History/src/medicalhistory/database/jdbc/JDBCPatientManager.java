@@ -5,9 +5,7 @@ import medicalhistory.database.interfaces.PatientManager;
 import java.util.ArrayList;
 import java.util.List;
 import medicalhistory.database.pojos.*;
-
 public class JDBCPatientManager implements PatientManager {
-
     private Connection c;
     
 	public JDBCPatientManager(ConnectionManager connectionManager) {
@@ -20,10 +18,13 @@ public class JDBCPatientManager implements PatientManager {
 	        // Prepare SQL statement
 	        String sql = "INSERT INTO patients (name, surname, age, gender, email) VALUES (?, ?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
+
 	        statement.setString(1, a.getPatientName());
 	        statement.setString(2, a.getSex());
+	        // statement.setLocalDate(3, a.getDateofbirth());
 	        statement.setDate(3, a.getDateofbirth());
 	        statement.setString(4, a.getBloodtype());
+	        // statement.setString(4, a.getAllergies());
 	        statement.setString(4, a.getEmail());
 
 
@@ -35,7 +36,6 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error adding patient: " + e.getMessage());
 	    }
 	}
-
 	@Override
 	public List<Test> getTestsbyPatient(String name) {
 	    List<Test> tests = new ArrayList<>();
@@ -60,18 +60,19 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return tests;
 	}
-
 	@Override
 	public List<Patient> getPatientByName(String name) {
 	    List<Patient> patients = new ArrayList<>();
 	    try {
 	        String sql = "SELECT * FROM patients WHERE name = ?";
+	        PreparedStatement statement = conn.prepareStatement(sql);
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, name);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
 	            String patientName = resultSet.getString("name");
+	            String surname = resultSet.getString("surname");
 	            String sex = resultSet.getString("sex");
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String email = resultSet.getString("email"); 
@@ -87,6 +88,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
+}
 
 	@Override
 	public void changePatient(Patient a) {
@@ -159,5 +161,12 @@ public class JDBCPatientManager implements PatientManager {
 
 	    return doctor;
 	}
+   /* @Override
+    public void changePatient(Patient a) {
+        // Implement changePatient method here
+        // You need to update patient details in the database
+    	// Todo
+    	
+    } */
 
 }

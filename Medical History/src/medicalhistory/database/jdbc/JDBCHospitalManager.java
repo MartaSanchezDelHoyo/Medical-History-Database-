@@ -25,46 +25,114 @@ public class JDBCHospitalManager implements HospitalManager {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	@Override
-	public Visit showVisit(ArrayList<Visit> list_visits, Integer visit_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Treatment showTreatment(Visit toSearch) {
+		Treatment obtained = null;
+		try {
+			String sql = "SELECT t.treatmentID, t.treatmentType FROM Visits AS v JOIN test AS t ON v.treatmentID=t.treatmentID WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer treatmentID = rs.getInt("treatmentID");
+				String treatmentType = rs.getString("treatmentType");
+				
+				obtained = new Treatment(treatmentID,treatmentType);
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 
 	@Override
-	public Treatment showTreatment(ArrayList<Treatment> list_treatment, Integer treatmentID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Medication showMedication(ArrayList<Medication> list_medication, int medication_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Medication showMedication(Visit toSearch) {
+		Medication obtained = null;
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, toSearch.getVisit_id());
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer medication_id = rs.getInt("medication_id");
+				String type = rs.getString("type");
+				
+				obtained = new Medication(medication_id,type);
+			}
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	
 	@Override
-	public void addTest(ArrayList<Test> list_test) {
-		// TODO Auto-generated method stub
-		
+	public void addTest(Test entry) {
+		try {
+			String template = "INSERT INTO test (test_id, type) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getTest_id());
+			pstmt.setString(2, entry.getType());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
 	}
 
 	@Override
-	public void addMedication(ArrayList<Medication> list_medication) {
-		// TODO Auto-generated method stub
-		
+	public void addMedication(Medication entry) {
+		try {
+			String template = "INSERT INTO medication (medication_id, type) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getMedication_id());
+			pstmt.setString(2, entry.getType());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
 	}
 
 	@Override
-	public void addManufacturer(ArrayList<Manufacturer> list_manufacturer) {
-		// TODO Auto-generated method stub
-		
+	public void addManufacturer( Manufacturer entry ) {
+		try {
+			String template = "INSERT INTO manufacturer (manufacturerID, manufacturerName) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getManufacturerID());
+			pstmt.setString(2, entry.getManufacturerName());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}		
 	}
 
 	@Override
-	public void modifyMedication(ArrayList<Medication> list_medication, Integer manufacturerID) {
-		// TODO Auto-generated method stub
-		
+	public void modifyMedication(Medication entry, Integer medicationID) {
+		try {
+			String template = "UPDATE medication SET type= ?, WHERE medicationID= ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, entry.getType());
+			pstmt.setInt(3, medicationID);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}		
 	}
 	
 	

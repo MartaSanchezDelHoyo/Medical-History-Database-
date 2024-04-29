@@ -1,5 +1,7 @@
 package medicalhistory.database.pojos;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -9,7 +11,7 @@ public class Visit implements Serializable {
 	 */
 	private static final long serialVersionUID = -4922111399657589755L;
 	private Integer visit_id; 
-	private LocalDate visit_date;
+	private Date visit_date;
 	private String visit_observation;
 	private String duration_medication;
 	private Integer patien_id;
@@ -23,7 +25,7 @@ public class Visit implements Serializable {
 	
 	
 	
-	public Visit(int visit_id, LocalDate visit_date, String visit_observation, String duration_medication,
+	public Visit(int visit_id, Date visit_date, String visit_observation, String duration_medication,
 			int patien_id, int doctor_id, int test_id, int hospital_id) {
 		super();
 		this.visit_id = visit_id;
@@ -41,10 +43,10 @@ public class Visit implements Serializable {
 	public void setVisit_id(int visit_id) {
 		this.visit_id = visit_id;
 	}
-	public LocalDate getVisit_date() {
+	public Date getVisit_date() {
 		return visit_date;
 	}
-	public void setVisit_date(LocalDate visit_date) {
+	public void setVisit_date(Date visit_date) {
 		this.visit_date = visit_date;
 	}
 	public String getVisit_observation() {

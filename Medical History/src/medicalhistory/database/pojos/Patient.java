@@ -159,6 +159,10 @@ public class Patient implements Serializable{
 	public void setVisits(List <Visit> visits) {
 		this.visits = visits;
 	}
-	
+
+
+
+
+
 	
 }

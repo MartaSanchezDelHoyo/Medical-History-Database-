@@ -1,6 +1,7 @@
 package medicalhistory.database.pojos;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.*;
 import java.time.LocalDate;
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package medicalhistory.database.pojos;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,14 +14,14 @@ public class Patient implements Serializable{
 	private Integer patientID;
 	private String sex;
 	private String patientName;
-	private LocalDate dateofbirth;
+	private Date dateofbirth;
 	private String bloodtype;
 	private Integer allergy_id;
 	private String email;
 	private List <Allergies> allergies;
 	private List <Visit> visits ;
 	
-	public Patient(Integer patientID, String patientName, LocalDate dateofbirth, String bloodtype, Integer allergy_id, String email, List<Allergies> allergies) {
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, Integer allergy_id, String email, List<Allergies> allergies) {
 		super();
 		this.patientID = patientID;
 		this.patientName = patientName;
@@ -32,22 +32,13 @@ public class Patient implements Serializable{
 		this.allergies = new ArrayList<>();
 	}
 
-
-
-
 	public List<Allergies> getAllergies() {
 		return allergies;
 	}
 
-
-
-
 	public void setAllergies(List<Allergies> allergies) {
 		this.allergies = allergies;
 	}
-
-
-
 
 	@Override
 	public String toString() {
@@ -56,16 +47,10 @@ public class Patient implements Serializable{
 				+ allergies + "]";
 	}
 
-
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(allergies, allergy_id, bloodtype, dateofbirth, email, patientID, patientName);
 	}
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -81,9 +66,6 @@ public class Patient implements Serializable{
 				&& Objects.equals(email, other.email) && Objects.equals(patientID, other.patientID)
 				&& Objects.equals(patientName, other.patientName);
 	}
-
-
-
 
 	public String getEmail() {
 		return email;
@@ -105,10 +87,10 @@ public class Patient implements Serializable{
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
 	}
-	public LocalDate getDateofbirth() {
+	public Date getDateofbirth() {
 		return dateofbirth;
 	}
-	public void setDateofbirth(LocalDate dateofbirth) {
+	public void setDateofbirth(Date dateofbirth) {
 		this.dateofbirth = dateofbirth;
 	}
 	public String getBloodtype() {
@@ -132,37 +114,21 @@ public class Patient implements Serializable{
 		this.allergies = allergies;
 	}
 
-
-
-
 	public String getSex() {
 		return sex;
 	}
-
-
-
 
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
-
-
-
 	public List <Visit> getVisits() {
 		return visits;
 	}
 
-
-
-
 	public void setVisits(List <Visit> visits) {
 		this.visits = visits;
 	}
-
-
-
-
 
 	
 }

@@ -3,6 +3,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.pojos.*;
 
@@ -252,6 +255,63 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
+	public List<Hospital> getHospitalByDoctor(int doctor_id){
+		List<Hospital> hospitals = new ArrayList<>();
+	    try {
+	        String sql = "SELECT hospitals.* FROM hospitals " +
+	                     "INNER JOIN hospital-doctor ON hospital.hospitalID = hospital-doctor.hospitalID " +
+	                     "WHERE  hospital-doctor.doctor_id= ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, doctor_id);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            int hospitalID = resultSet.getInt("hospitalID");
+	            String hospitalName = resultSet.getString("hospitalName");
+	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            hospitals.add(hospital);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return hospitals;
+	}
+	
+	public List<Hospital> getHospitalByVisit(int visit_id){
+		List<Hospital> hospitals = new ArrayList<>();
+	    try {
+	        String sql = "SELECT hospitals.* FROM hospitals " +
+	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
+	                     "WHERE  Visits.visit_id= ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, visit_id);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            int hospitalID = resultSet.getInt("hospitalID");
+	            String hospitalName = resultSet.getString("hospitalName");
+	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            hospitals.add(hospital);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return hospitals;
+		
+	}
+	
+	
+	
+	
+	
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

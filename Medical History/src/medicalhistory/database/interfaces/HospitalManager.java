@@ -1,5 +1,7 @@
 
 package medicalhistory.database.interfaces;
+import java.util.List;
+
 import medicalhistory.database.pojos.*;
 
 public interface HospitalManager {
@@ -20,6 +22,8 @@ public interface HospitalManager {
 	public Hospital showHospitalBy (Doctor toSearch);
 	public Hospital showHospitalBy (Patient toSearch);
 	public Hospital showHospitalBy (Visit toSearch);
+	public List<Hospital> getHospitalByDoctor(int doctor_id);
+	public List<Hospital> getHospitalByVisit(int visit_id);
 	
 	
 	

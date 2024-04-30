@@ -24,6 +24,7 @@ public interface HospitalManager {
 	public Hospital showHospitalBy (Visit toSearch);
 	public List<Hospital> getHospitalByDoctor(int doctor_id);
 	public List<Hospital> getHospitalByVisit(int visit_id);
+	public List<Hospital> getHospitalByPatient(int patientID);
 	
 	
 	

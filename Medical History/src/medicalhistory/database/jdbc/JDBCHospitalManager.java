@@ -307,6 +307,33 @@ public class JDBCHospitalManager implements HospitalManager {
 	    return hospitals;
 		
 	}
+	public List<Hospital> getHospitalByPatient(int patientID){
+		List<Hospital> hospitals = new ArrayList<>();
+	    try {
+	        String sql = "SELECT hospitals.* FROM hospitals " +
+	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
+	        		     "INNER JOIN patients ON Visits. patient_id =patients.patientID "+
+	                     "WHERE  patients.patientID= ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, patientID);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            int hospitalID = resultSet.getInt("hospitalID");
+	            String hospitalName = resultSet.getString("hospitalName");
+	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            hospitals.add(hospital);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return hospitals;
+		
+	}
 	
 	
 	

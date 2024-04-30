@@ -86,6 +86,7 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");

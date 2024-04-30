@@ -20,30 +20,37 @@ public class Doctor implements Serializable{
 	private List <Hospital> hospitals;
 	private List <Visit> visits;
 	
-	public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
+
+	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
+			List<Hospital> hospitals, List<Visit> visits) {
+		super();
+		this.doctor_id = doctor_id;
+		this.name = name;
+		this.surname = surname;
+		this.speciality = speciality;
+		this.contact = contact;
+		this.patients = patients;
+		this.hospitals = hospitals;
+		this.visits = visits;
+	}
+public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);
 		this.setSpeciality(speciality);
 		this.setContact(contact);
 	}
-	
-	
-	
 	@Override
 	public String toString() {
-		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname +", speciality=" + speciality + ", contact="
-				+ contact + "]";
+		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="
+				+ speciality + ", contact=" + contact + ", patients=" + patients + ", hospitals=" + hospitals
+				+ ", visits=" + visits + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(contact, doctor_id, name, surname ,speciality);
+		return Objects.hash(contact, doctor_id, hospitals, name, patients, speciality, surname, visits);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -55,10 +62,10 @@ public class Doctor implements Serializable{
 			return false;
 		Doctor other = (Doctor) obj;
 		return Objects.equals(contact, other.contact) && doctor_id == other.doctor_id
-				&& Objects.equals(name, other.name) && Objects.equals(speciality, other.speciality);
+				&& Objects.equals(hospitals, other.hospitals) && Objects.equals(name, other.name)
+				&& Objects.equals(patients, other.patients) && Objects.equals(speciality, other.speciality)
+				&& Objects.equals(surname, other.surname) && Objects.equals(visits, other.visits);
 	}
-
-
 
 	public int getDoctor_id() {
 		return doctor_id;

@@ -149,7 +149,6 @@ public class JDBCVisitManager implements VisitManager {
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
-				
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 				listVisit.add(obtained);
 			}

@@ -1,6 +1,5 @@
 
 package medicalhistory.database.interfaces;
-import java.util.ArrayList;
 import medicalhistory.database.pojos.*;
 
 public interface HospitalManager {

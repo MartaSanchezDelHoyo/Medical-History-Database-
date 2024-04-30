@@ -11,6 +11,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	private ConnectionManager conMan;
 	
 	public JDBCHospitalManager(ConnectionManager connectionManager) {
+		this.setConMan(connectionManager);
 		this.c= connectionManager.getConnection();
 	}
 
@@ -28,6 +29,8 @@ public class JDBCHospitalManager implements HospitalManager {
 
 				obtained = new Treatment(treatmentID,treatmentType);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -50,6 +53,8 @@ public class JDBCHospitalManager implements HospitalManager {
 
 				obtained = new Medication(medication_id,type);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -163,9 +168,11 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
 				
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -185,9 +192,11 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
 				
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -207,9 +216,11 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
 				
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -229,9 +240,11 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, null, null, null);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
 				
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -239,5 +252,13 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
+	public ConnectionManager getConMan() {
+		return conMan;
+	}
+
+	public void setConMan(ConnectionManager conMan) {
+		this.conMan = conMan;
+	}
+
 	
 }

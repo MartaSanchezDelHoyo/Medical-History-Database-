@@ -161,6 +161,37 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		return listVisit;
 	}
+	
+	@Override
+    public List<Visit> showVisitByPatient (int patient_id) {
+		List<Visit> listVisit= null;
+		try {
+			String sql = "SELECT * FROM Visits WHERE patient_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, patient_id);
+			ResultSet rs = search.executeQuery();
+			
+			while(rs.next()) {
+				Integer visit_id = rs.getInt("visit_id");
+				Date date = rs.getDate("date");
+				String observations = rs.getString("observations");
+				String duration_medication = rs.getString("duration_medication");
+				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
+				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
+				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
+				listVisit.add(obtained);
+			}
+			rs.close();
+			search.close();
+			return listVisit;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return listVisit;
+	}
 	@Override
     public Visit showVisitBy (Patient toSearch) {
 		Visit obtained= null;

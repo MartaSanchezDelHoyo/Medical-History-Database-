@@ -20,6 +20,7 @@ public interface VisitManager {
     public Visit showVisitBy ( Medication toSearch);
     public Visit showVisitBy ( Test toSearch);
     public List<Visit> showVisitBy (int doctor_id);
+    public List<Visit> showVisitByPatient (int patient_id);
   
    
 }

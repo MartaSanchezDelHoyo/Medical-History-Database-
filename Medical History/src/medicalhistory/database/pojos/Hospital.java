@@ -17,9 +17,6 @@ public class Hospital implements Serializable{
     private List <String> Hospital_specialties;
     
 
-    public Hospital() {
-    }
-
         
     public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> Hospital_doctors,
 			List<Visit> Hospital_visits, List<String> Hospital_specialties) {

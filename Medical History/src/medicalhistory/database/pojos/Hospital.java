@@ -1,4 +1,5 @@
 package medicalhistory.database.pojos;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
@@ -20,15 +21,22 @@ public class Hospital implements Serializable{
     }
 
         
-    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors,
-			List<Visit> hospital_visits, List<String> hospital_specialties) {
+    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> Hospital_doctors,
+			List<Visit> Hospital_visits, List<String> Hospital_specialties) {
 		super();
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
-		Hospital_doctors = hospital_doctors;
-		Hospital_visits = hospital_visits;
-		Hospital_specialties = hospital_specialties;
+		this.Hospital_doctors = new ArrayList<>();
+		this.Hospital_visits = new ArrayList<>();
+		this.Hospital_specialties = new ArrayList<>();
+	}
+
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
+		super();
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
 	}
 
 

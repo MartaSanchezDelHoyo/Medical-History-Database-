@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import medicalhistory.database.pojos.*;
 public class JDBCPatientManager implements PatientManager {
-    private Connection c;
-    
+	private Connection c;
+	private ConnectionManager conMan;
+	
 	public JDBCPatientManager(ConnectionManager connectionManager) {
 		this.c = connectionManager.getConnection();
+		this.setConMan(connectionManager);
 	}
- 
+	
 	@Override
 	public void addPatient(Patient a) {
 	    try {
@@ -163,6 +165,18 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return doctors;
 	}
-
+	
+	public Connection getC() {
+		return c;
+	}
+	public void setC(Connection c) {
+		this.c = c;
+	}
+	public ConnectionManager getConMan() {
+		return conMan;
+	}
+	public void setConMan(ConnectionManager conMan) {
+		this.conMan = conMan;
+	}
 
 }

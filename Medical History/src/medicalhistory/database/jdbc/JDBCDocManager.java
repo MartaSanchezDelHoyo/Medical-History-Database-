@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import medicalhistory.database.pojos.Doctor;
+import medicalhistory.database.pojos.*;
 import medicalhistory.database.interfaces.DoctorManager;
 
 public class JDBCDocManager implements DoctorManager {
@@ -63,6 +63,7 @@ public class JDBCDocManager implements DoctorManager {
 		}
 		return doctors;
 	}
+	
 
 	@Override
 	public List<Doctor> getDoctorsbyHospital(String hospitalName) {
@@ -106,7 +107,6 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
-				
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact);
 				doctors.add(newDoctor);
 			}

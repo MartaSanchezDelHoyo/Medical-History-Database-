@@ -11,8 +11,10 @@ import medicalhistory.database.pojos.Visit;
 public class JDBCTestManager implements TestManager{
 	private Connection c;
 	private ConnectionManager conMan;
+	
 	public JDBCTestManager(ConnectionManager connectionManager) {
-		// TODO Auto-generated constructor stub
+		this.setConMan(connectionManager);
+		this.c = connectionManager.getConnection();
 	}
 	
 	
@@ -58,6 +60,15 @@ public class JDBCTestManager implements TestManager{
 			e.printStackTrace();
 		}
 		return obtained;
+	}
+	
+	
+	public ConnectionManager getConMan() {
+		return conMan;
+	}
+
+	public void setConMan(ConnectionManager conMan) {
+		this.conMan = conMan;
 	}
 	
 }

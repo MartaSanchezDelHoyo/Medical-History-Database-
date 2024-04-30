@@ -19,6 +19,11 @@ public class JDBCVisitManager implements VisitManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	
+	public JDBCVisitManager(ConnectionManager connectionManager) {
+		this.setConMan(connectionManager);
+		this.c = connectionManager.getConnection();
+	}
 	@Override
 	public void addVisit (Visit temporal) {
 		try {
@@ -86,7 +91,8 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
-			
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -107,17 +113,19 @@ public class JDBCVisitManager implements VisitManager {
 				Date date = rs.getDate("date");
 				String observations = rs.getString("observations");
 				String duration_medication = rs.getString("duration_medication");
-				Patient patient= null;
-				Doctor doctor = null;
-				Test test= null;
+				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
+				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
+				Test test= conMan.
 				Hospital hospital= null;
-				Integer patient_id = rs.getInt("patient_id");
-				Integer doctor_id = rs.getInt("doctor_id");
+				hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				
 				Integer test_id = rs.getInt("test_id");
-				Integer hospital_id = rs.getInt("visit_id");
+				
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -149,6 +157,8 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -180,6 +190,8 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -211,6 +223,8 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -242,6 +256,8 @@ public class JDBCVisitManager implements VisitManager {
 				
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, null, null);
 			}
+			rs.close();
+			search.close();
 			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -249,4 +265,14 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		return obtained;
 	}
+	
+	public ConnectionManager getConMan() {
+		return conMan;
+	}
+
+	public void setConMan(ConnectionManager conMan) {
+		this.conMan = conMan;
+	}
+	
+	
 }

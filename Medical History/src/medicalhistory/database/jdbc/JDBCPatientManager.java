@@ -71,9 +71,10 @@ public class JDBCPatientManager implements PatientManager {
 	            String surname = resultSet.getString("surname");
 	            String sex = resultSet.getString("sex");
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
+	            String bloodtype = resultSet.getString("bloodtype");
 	            String email = resultSet.getString("email"); 
 	            
-	            Patient patient = new Patient (patientName, sex, dateOfBirth, email);
+	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
 	            patients.add(patient);
 	        }
 	        
@@ -100,7 +101,7 @@ public class JDBCPatientManager implements PatientManager {
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String email = resultSet.getString("email"); 
 	            
-	            patient = new Patient (patientName, sex, dateOfBirth, email);
+	            patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
 	            
 	        }
 	        

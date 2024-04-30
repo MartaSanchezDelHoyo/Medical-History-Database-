@@ -20,7 +20,6 @@ public class ConnectionManager {
 	public Connection getConnection() {
 		return c;
 	}
-	
 	public ConnectionManager() {
 		this.connect();
 		this.docMan=new JDBCDocManager(this);

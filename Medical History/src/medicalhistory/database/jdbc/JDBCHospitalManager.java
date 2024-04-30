@@ -9,8 +9,9 @@ import medicalhistory.database.pojos.*;
 public class JDBCHospitalManager implements HospitalManager {
 	private Connection c;
 	private ConnectionManager conMan;
+	
 	public JDBCHospitalManager(ConnectionManager connectionManager) {
-		// TODO Auto-generated constructor stub
+		this.c= connectionManager.getConnection();
 	}
 
 

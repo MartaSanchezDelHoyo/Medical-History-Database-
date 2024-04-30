@@ -159,6 +159,35 @@ public class JDBCDocManager implements DoctorManager {
 	
 	}
 
+	@Override
+	public List<Doctor> getDoctors(int patientId){
+	    List<Doctor> doctors = new ArrayList<>();
+	    try {
+	        String sql = "SELECT doctors.* FROM doctors " +
+	                     "INNER JOIN Patient_Doctor ON doctors.doctor_id = Patient_Doctor.doctor_id " +
+	                     "WHERE Patient_Doctor.patient_id = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, patientId);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            int doctorId = resultSet.getInt("doctor_id");
+	            String doctorName = resultSet.getString("name");
+	            String doctorSurname = resultSet.getString("surname");
+	            String specialization = resultSet.getString("specialty");
+	            String contact = resultSet.getString("contact");
+	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
+	            doctors.add(doctor);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return doctors;
+	}
+
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

@@ -1,10 +1,10 @@
 package medicalhistory.database.jdbc;
-import java.sql.Connection;
 import java.sql.*;
 import medicalhistory.database.interfaces.PatientManager;
 import java.util.ArrayList;
 import java.util.List;
 import medicalhistory.database.pojos.*;
+
 public class JDBCPatientManager implements PatientManager {
 	private Connection c;
 	private ConnectionManager conMan;
@@ -33,6 +33,7 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error adding patient: " + e.getMessage());
 	    }
 	}
+	
 	@Override
 	public List<Test> getTestsbyPatient(String name) {
 	    List<Test> tests = new ArrayList<>();
@@ -57,6 +58,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return tests;
 	}
+	
 	@Override
 	public List<Patient> getPatientByName(String name) {
 	    List<Patient> patients = new ArrayList<>();
@@ -68,7 +70,6 @@ public class JDBCPatientManager implements PatientManager {
 
 	        while (resultSet.next()) {
 	            String patientName = resultSet.getString("name");
-	            String surname = resultSet.getString("surname");
 	            String sex = resultSet.getString("sex");
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String bloodtype = resultSet.getString("bloodtype");
@@ -137,26 +138,25 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	}
 
-
 	@Override
-	public List<Doctor> getDoctors(int patientId) {
-	    List<Doctor> doctors = new ArrayList<>();
+	public List<Patient> getPatients(int doctorId){
+	    List<Patient> patients = new ArrayList<>();
 	    try {
-	        String sql = "SELECT doctors.* FROM doctors " +
-	                     "INNER JOIN Patient_Doctor ON doctors.doctor_id = Patient_Doctor.doctor_id " +
-	                     "WHERE Patient_Doctor.patient_id = ?";
+	        String sql = "SELECT patients.* FROM patients " +
+	                     "INNER JOIN Patient_Doctor ON patients.patient_id = Patient_Doctor.patient_id " +
+	                     "WHERE Patient_Doctor.doctor_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1, patientId);
+	        statement.setInt(1, doctorId);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            int doctorId = resultSet.getInt("doctor_id");
-	            String doctorName = resultSet.getString("name");
-	            String doctorSurname = resultSet.getString("surname");
-	            String specialization = resultSet.getString("specialty");
-	            String contact = resultSet.getString("contact");
-	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
-	            doctors.add(doctor);
+	            String patientName = resultSet.getString("name");
+	            String sex = resultSet.getString("sex");
+	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
+	            String bloodtype = resultSet.getString("bloodtype");
+	            String email = resultSet.getString("email");
+	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
+	            patients.add(patient);
 	        }
 	        
 	        resultSet.close();
@@ -164,9 +164,8 @@ public class JDBCPatientManager implements PatientManager {
 	    } catch (SQLException e) {
 	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
 	    }
-	    return doctors;
+	    return patients;
 	}
-	
 	public Connection getC() {
 		return c;
 	}

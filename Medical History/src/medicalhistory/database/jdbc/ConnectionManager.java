@@ -15,6 +15,8 @@ public class ConnectionManager {
 	private HospitalManager hospitalMan;
 	private TestManager testMan;
 	private VisitManager visitMan;
+	private TreatmentManager treatmentMan;
+	private MedicationManager medicationMan;
 	// Design pattern Singleton
 
 	public Connection getConnection() {
@@ -27,6 +29,8 @@ public class ConnectionManager {
 		this.hospitalMan = new JDBCHospitalManager(this);
 		this.visitMan= new JDBCVisitManager(this);
 		this.testMan =new JDBCTestManager(this);
+		this.treatmentMan= new JDBCTreatmentManager(this);
+		this.medicationMan= new JDBCMedicationManager(this);
 		this.createTables();
 	}
 	private void connect() {
@@ -220,5 +224,17 @@ public class ConnectionManager {
 
 	public void setVisitMan(VisitManager visitMan) {
 		this.visitMan = visitMan;
+	}
+	public TreatmentManager getTreatmentMan() {
+		return treatmentMan;
+	}
+	public void setTreatmentMan(TreatmentManager treatmentMan) {
+		this.treatmentMan = treatmentMan;
+	}
+	public MedicationManager getMedicationMan() {
+		return medicationMan;
+	}
+	public void setMedicationMan(MedicationManager medicationMan) {
+		this.medicationMan = medicationMan;
 	}
 }

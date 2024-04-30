@@ -17,8 +17,22 @@ public class JDBCTestManager implements TestManager{
 		this.c = connectionManager.getConnection();
 	}
 	
+	public void addTest(Test entry) {
+		try {
+			String template = "INSERT INTO test (test_id, type) VALUES (?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getTest_id());
+			pstmt.setString(2, entry.getType());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
 	
-
+@Override
     public Test showTest (Visit toSearch) {
 		Test obtained = null;
 		try {

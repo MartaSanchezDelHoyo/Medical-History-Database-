@@ -19,116 +19,6 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 
-	public Treatment showTreatment(Visit toSearch) {
-		Treatment obtained = null;
-		try {
-			String sql = "SELECT t.treatmentID, t.treatmentType FROM Visits AS v JOIN test AS t ON v.treatmentID=t.treatmentID WHERE v.visit_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getVisit_id());
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer treatmentID = rs.getInt("treatmentID");
-				String treatmentType = rs.getString("treatmentType");
-
-				obtained = new Treatment(treatmentID,treatmentType);
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
-
-	
-	public Medication showMedication(Visit toSearch) {
-		Medication obtained = null;
-		try {
-			String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getVisit_id());
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer medication_id = rs.getInt("medication_id");
-				String type = rs.getString("type");
-
-				obtained = new Medication(medication_id,type);
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
-
-	@Override
-	public void addTest(Test entry) {
-		try {
-			String template = "INSERT INTO test (test_id, type) VALUES (?, ?)";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getTest_id());
-			pstmt.setString(2, entry.getType());
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}			
-	}
-	@Override
-	public void addMedication(Medication entry) {
-		try {
-			String template = "INSERT INTO medication (medication_id, type) VALUES (?, ?)";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getMedication_id());
-			pstmt.setString(2, entry.getType());
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}			
-	}
-	@Override
-	public void addManufacturer( Manufacturer entry ) {
-		try {
-			String template = "INSERT INTO manufacturer (manufacturerID, manufacturerName) VALUES (?, ?)";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getManufacturerID());
-			pstmt.setString(2, entry.getManufacturerName());
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}		
-	}
-	@Override
-	public void modifyMedication(Medication entry, Integer medicationID) {
-		try {
-			String template = "UPDATE medication SET type= ?, WHERE medicationID= ?";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
-			pstmt.setString(1, entry.getType());
-			pstmt.setInt(3, medicationID);
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}		
-	}
-	
-	
-	@Override
 	public void AddHospital (Hospital temporal) {
 		try {
 			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
@@ -255,6 +145,8 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
+	
+	@Override
 	public List<Hospital> getHospitalByDoctor(int doctor_id){
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
@@ -281,6 +173,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	    return hospitals;
 	}
 	
+	@Override
 	public List<Hospital> getHospitalByVisit(int visit_id){
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
@@ -307,6 +200,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	    return hospitals;
 		
 	}
+	
+	@Override
 	public List<Hospital> getHospitalByPatient(int patientID){
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
@@ -335,10 +230,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		
 	}
 	
-	
-	
-	
-	
+
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

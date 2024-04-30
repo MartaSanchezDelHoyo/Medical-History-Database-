@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Menu {
 	private static VisitManager visitMan;
 	// private static UserManager userMan;
 	
-	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	
@@ -44,5 +45,33 @@ public class Menu {
 		//userMan.register(u);
 	}
 	
+	 public void addPatient() {
+	        try {
+	            System.out.println("Enter patient name:");
+	            String name = reader.readLine();
+	            System.out.println("Enter patient sex:");
+	            String sex = reader.readLine();
+	            System.out.println("Enter patient birth date (yyyy-MM-dd):");
+	            Date dateOfBirth = null;
+	            while (dateOfBirth == null) {
+	                try {
+	                    String input = reader.readLine();
+	                  dateOfBirth = dateFormat.parse(input);
+	                } catch (ParseException e) {
+	                    System.err.println("Invalid date format. Please enter the date in the format yyyy-MM-dd:");
+	                }
+	            }
+	            System.out.println("Enter patient bloodtype:");
+	            String bloodtype = reader.readLine();
+	            System.out.println("Enter patient email:");
+	            String email = reader.readLine();
+
+	            Patient patient = new Patient(name, sex, dateOfBirth, bloodtype, email);
+	            patientMan.addPatient(patient);
+	        } catch (IOException e) {
+	            System.err.println("Error reading input: " + e.getMessage());
+	        }
+	    }
+
 
 }

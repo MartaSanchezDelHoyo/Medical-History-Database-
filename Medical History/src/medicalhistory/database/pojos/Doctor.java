@@ -33,7 +33,7 @@ public class Doctor implements Serializable{
 		this.hospitals = hospitals;
 		this.visits = visits;
 	}
-public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
+	public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);

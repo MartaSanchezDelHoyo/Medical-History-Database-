@@ -19,12 +19,13 @@ public class JDBCDocManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor a) {
 		try {
-			String template = "INSERT INTO doctors (name, speciality,contact) VALUES (?, ?, ?)";
+			String template = "INSERT INTO doctors (name,surname, speciality,contact) VALUES (?, ?, ?,?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, a.getName());
-			pstmt.setString(2, a.getSpecialty());
-			pstmt.setString(3, a.getContact());
+			pstmt.setString(2, a.getSurname());
+			pstmt.setString(3, a.getSpecialty());
+			pstmt.setString(4, a.getContact());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -50,8 +51,12 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact);
 				doctors.add(newDoctor);
+				search.close();
+				rs.close();
 			}
 			return doctors;
+			
+			
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
 			e.printStackTrace();
@@ -76,6 +81,8 @@ public class JDBCDocManager implements DoctorManager {
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact);
 				doctors.add(newDoctor);
 			}
+			search.close();
+			rs.close();
 			return doctors;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -99,9 +106,12 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact);
 				doctors.add(newDoctor);
 			}
+			search.close();
+			rs.close();
 			return doctors;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
@@ -123,6 +133,7 @@ public class JDBCDocManager implements DoctorManager {
 		    search.setString(4, a.getContact());
 		    search.executeUpdate();
 			search.close();
+			search.close();
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
 			e.printStackTrace();
@@ -139,11 +150,11 @@ public class JDBCDocManager implements DoctorManager {
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
 			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"));
-			return a;
-		} catch (SQLException e) {
+			return a;} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
+		
 		return null;
 	
 	}

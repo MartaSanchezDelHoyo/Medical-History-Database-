@@ -88,13 +88,6 @@ public class Patient implements Serializable{
 	public void setBloodtype(String bloodtype) {
 		this.bloodtype = bloodtype;
 	}
-	public Integer getAllergy_id() {
-		return allergy_id;
-	}
-	public void setAllergy_id(Integer allergy_id) {
-		this.allergy_id = allergy_id;
-	}
-
 
 	public List <Allergies> getAlergies() {
 		return allergies;

@@ -49,7 +49,10 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty_ = rs.getString("specialty");
 				String contact = rs.getString("contact");
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact);
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().showVisitBy(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 				search.close();
 				rs.close();
@@ -79,7 +82,10 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact);
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().showVisitBy(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -107,7 +113,10 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact);
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().showVisitBy(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -149,7 +158,10 @@ public class JDBCDocManager implements DoctorManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"));
+			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
+			List<Patient> patients= conMan.getPatientMan().getPatients(id);
+			List<Visit> visits = conMan.getVisitMan().showVisitBy(id);
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"),patients,hospitals,visits);
 			return a;} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
@@ -176,7 +188,10 @@ public class JDBCDocManager implements DoctorManager {
 	            String doctorSurname = resultSet.getString("surname");
 	            String specialization = resultSet.getString("specialty");
 	            String contact = resultSet.getString("contact");
-	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact);
+	            List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctorId);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctorId);
+				List<Visit> visits = conMan.getVisitMan().showVisitBy(doctorId);
+	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact,patients,hospitals, visits);
 	            doctors.add(doctor);
 	        }
 	        

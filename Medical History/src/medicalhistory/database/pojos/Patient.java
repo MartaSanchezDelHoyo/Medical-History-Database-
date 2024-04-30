@@ -18,7 +18,6 @@ public class Patient implements Serializable{
 	private String patientName;
 	private Date dateofbirth;
 	private String bloodtype;
-	private Integer allergy_id;
 	private String email;
 	private List <Allergies> allergies;
 	private List <Visit> visits ;
@@ -31,14 +30,13 @@ public class Patient implements Serializable{
 		this.sex = sex;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
-		this.allergy_id = allergy_id;
 		this.email = email;
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
 	}
 
-	public Patient(String patientName2, String sex2, Date dateOfBirth2, String email2) {
+	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email) {
 		this.patientName = patientName;
 		this.sex = sex;
 		this.dateofbirth = dateofbirth;

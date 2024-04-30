@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import medicalhistory.database.interfaces.TestManager;
 import medicalhistory.database.pojos.Test;
@@ -74,6 +76,31 @@ public class JDBCTestManager implements TestManager{
 			e.printStackTrace();
 		}
 		return obtained;
+	}
+	
+	@Override
+	public List<Test> getTestsbyPatient(String name) {
+	    List<Test> tests = new ArrayList<>();
+	    try {
+	        String sql = "SELECT * FROM tests WHERE patient_name = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setString(1, name);
+	       
+	        ResultSet resultSet = statement.executeQuery();
+	        
+	        while (resultSet.next()) {
+	            int testId = resultSet.getInt("test_id");
+	            String testName = resultSet.getString("test_name");
+	            Test test = new Test(testId, testName);
+	            tests.add(test);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving tests by patient: " + e.getMessage());
+	    }
+	    return tests;
 	}
 	
 	

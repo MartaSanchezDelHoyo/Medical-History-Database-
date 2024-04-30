@@ -34,30 +34,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	}
 	
-	@Override
-	public List<Test> getTestsbyPatient(String name) {
-	    List<Test> tests = new ArrayList<>();
-	    try {
-	        String sql = "SELECT * FROM tests WHERE patient_name = ?";
-	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setString(1, name);
-	       
-	        ResultSet resultSet = statement.executeQuery();
-	        
-	        while (resultSet.next()) {
-	            int testId = resultSet.getInt("test_id");
-	            String testName = resultSet.getString("test_name");
-	            Test test = new Test(testId, testName);
-	            tests.add(test);
-	        }
-	        
-	        resultSet.close();
-	        statement.close();
-	    } catch (SQLException e) {
-	        System.err.println("Error retrieving tests by patient: " + e.getMessage());
-	    }
-	    return tests;
-	}
+	
 	
 	@Override
 	public List<Patient> getPatientByName(String name) {

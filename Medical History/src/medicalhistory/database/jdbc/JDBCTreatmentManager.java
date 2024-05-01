@@ -30,8 +30,8 @@ public class JDBCTreatmentManager implements TreatmentManager {
 			while(rs.next()) {
 				Integer treatmentID = rs.getInt("treatmentID");
 				String treatmentType = rs.getString("treatmentType");
-
-				obtained = new Treatment(treatmentID,treatmentType);
+				List<Visit> visits= conMan.getVisitMan().showVisitByTreatment(treatmentID);
+				obtained = new Treatment(treatmentID,treatmentType, visits);
 			}
 			rs.close();
 			search.close();
@@ -54,7 +54,8 @@ public class JDBCTreatmentManager implements TreatmentManager {
 			while(rs.next()) {
 				Integer treatmentID = rs.getInt("treatmentID");
 				String treatmentType = rs.getString("treatmentType");
-				Treatment obtained = new Treatment(treatmentID,treatmentType);
+				List<Visit> visits= conMan.getVisitMan().showVisitByTreatment(treatmentID);
+				Treatment obtained = new Treatment(treatmentID,treatmentType, visits);
 				listOfTreatments.add(obtained);
 				
 			}

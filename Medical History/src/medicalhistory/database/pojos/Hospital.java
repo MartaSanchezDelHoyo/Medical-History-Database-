@@ -29,11 +29,14 @@ public class Hospital implements Serializable{
 		this.Hospital_specialties = new ArrayList<>();
 	}
 
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> Hospital_doctors,
+			List<Visit> Hospital_visits) {
 		super();
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
+		this.Hospital_doctors = new ArrayList<>();
+		this.Hospital_visits = new ArrayList<>();
 	}
 
 

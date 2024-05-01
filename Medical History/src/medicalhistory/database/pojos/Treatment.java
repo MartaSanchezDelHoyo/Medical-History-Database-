@@ -1,6 +1,7 @@
 package medicalhistory.database.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,9 +17,10 @@ public class Treatment implements Serializable{
     public Treatment() {
     }
 
-    public Treatment(Integer treatmentID, String treatmentType) {
+    public Treatment(Integer treatmentID, String treatmentType, List <Visit> visits) {
         this.treatmentID = treatmentID;
         this.treatmentType = treatmentType;
+        this.visits= new ArrayList<>();
     }
 
 	@Override

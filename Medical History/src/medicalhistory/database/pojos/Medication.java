@@ -32,10 +32,21 @@ public class Medication {
 	}
 
 	public Medication(int medication_id, String type) {
-		this.setMedication_id(medication_id);
+		this.medication_id= medication_id;
 		this.type=type;
 	}
 
+	
+	public Medication(int medication_id, String type, List <Manufacturer> manufacturers) {
+		super();
+		this.manufacturers= manufacturers;
+	}
+	
+	public Medication(int medication_id, String type, List <Manufacturer> manufacturers, List <Visit> visits) {
+		super();
+		this.visits=visits;
+	}
+	
 	public int getMedication_id() {
 		return medication_id;
 	}

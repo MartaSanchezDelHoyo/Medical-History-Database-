@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import medicalhistory.database.interfaces.MedicationManager;
+import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Manufacturer;
 import medicalhistory.database.pojos.Medication;
 import medicalhistory.database.pojos.Visit;
@@ -78,8 +81,8 @@ public class JDBCMedicationManager implements MedicationManager {
 			while(rs.next()) {
 				Integer medication_id = rs.getInt("medication_id");
 				String type = rs.getString("type");
-
-				obtained = new Medication(medication_id,type);
+				List<Manufacturer> listOfManufacturers = conMan.getMedicationMan().showManufacturers(medication_id);
+				obtained = new Medication(medication_id,type, listOfManufacturers);
 			}
 			rs.close();
 			search.close();
@@ -91,8 +94,103 @@ public class JDBCMedicationManager implements MedicationManager {
 		return obtained;
 	}
 	
+	public List<Medication> showMedications(int visit_id) {
+		List<Medication> listOfMedications= new ArrayList<Medication>();
+
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM visit-medication AS vm JOIN medications AS m ON vm.medication_id=m.medication_id WHERE vm.visit_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, visit_id);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer medication_id = rs.getInt("medication_id");
+				String type = rs.getString("type");
+				List<Manufacturer> listOfManufacturers = conMan.getMedicationMan().showManufacturers(medication_id);
+				Medication obtained = new Medication(medication_id,type, listOfManufacturers);
+				listOfMedications.add(obtained);
+			}
+			rs.close();
+			search.close();
+			return listOfMedications;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return listOfMedications;
+	}
+	
+	public List<Medication> showMedicationsByManufacturer(int manufacturer_id) {
+		List<Medication> listOfMedications= new ArrayList<Medication>();
+
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN medications AS m ON mm.medication_id=m.medication_id WHERE mm.manufacturer_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, manufacturer_id);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer medication_id = rs.getInt("medication_id");
+				String type = rs.getString("type");
+				Medication obtained = new Medication(medication_id,type);
+				listOfMedications.add(obtained);
+			}
+			rs.close();
+			search.close();
+			return listOfMedications;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return listOfMedications;
+	}
+	public List<Manufacturer> showManufacturers(int medication_id) {
+		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
+
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, medication_id);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer manufacturer_id = rs.getInt("manufacturer_id");
+				String manufacturer_name = rs.getString("manufacturer_name");
+				Manufacturer obtained = new Manufacturer(manufacturer_id,manufacturer_name);
+				listOfManufacturers.add(obtained);
+			}
+			rs.close();
+			search.close();
+			return listOfManufacturers;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return listOfManufacturers;
+	}
 	
 	
+	public List<Manufacturer> showManufacturerWithMedications(int manufacturerId) {
+		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
+
+		try {
+			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, manufacturerId);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer manufacturer_id = rs.getInt("manufacturer_id");
+				String manufacturer_name = rs.getString("manufacturer_name");
+				List<Medication> listOfMedications=conMan.getMedicationMan().showMedicationsByManufacturer(manufacturerId);
+				Manufacturer obtained = new Manufacturer(manufacturer_id,manufacturer_name, listOfMedications);
+				listOfManufacturers.add(obtained);
+			}
+			rs.close();
+			search.close();
+			return listOfManufacturers;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return listOfManufacturers;
+	}
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

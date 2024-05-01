@@ -44,18 +44,18 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 	
 	public List<Treatment> showTreatment(int visit_id) {
-		Treatment obtained = null;
 		List<Treatment> listOfTreatments=null;
+		
 		try {
-			String sql = "SELECT t.treatmentID, t.treatmentType FROM Visits AS v JOIN test AS t ON v.treatmentID=t.treatmentID WHERE v.visit_id= ?";
+			String sql = "SELECT t.treatment_id, t.treatment_type FROM visit-treatment AS vt JOIN treatments AS t ON vt.treatment_id=t.treatment_id WHERE vt.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, visit_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer treatmentID = rs.getInt("treatmentID");
 				String treatmentType = rs.getString("treatmentType");
-
-				obtained = new Treatment(treatmentID,treatmentType);
+				Treatment obtained = new Treatment(treatmentID,treatmentType);
+				listOfTreatments.add(obtained);
 				
 			}
 			rs.close();

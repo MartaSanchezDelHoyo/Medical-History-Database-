@@ -153,7 +153,7 @@ public class JDBCMedicationManager implements MedicationManager {
 			while(rs.next()) {
 				Integer manufacturer_id = rs.getInt("manufacturer_id");
 				String manufacturer_name = rs.getString("manufacturer_name");
-				Manufacturer obtained = new Manufacturer(manufacturer_id,manufacturer_name);
+				Manufacturer obtained = new Manufacturer(manufacturer_id, manufacturer_name);
 				listOfManufacturers.add(obtained);
 			}
 			rs.close();

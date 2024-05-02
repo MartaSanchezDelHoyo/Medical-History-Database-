@@ -135,6 +135,8 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
+	
+	//No se si meterle tambien el resto de los otros tratamientos( si tiene, el list<Treatments>)
 	@Override
     public List<Visit> showVisitByTreatment (int treatment_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();

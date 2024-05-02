@@ -22,6 +22,10 @@ public class Treatment implements Serializable{
         this.treatmentType = treatmentType;
         this.visits= new ArrayList<>();
     }
+    public Treatment(Integer treatmentID, String treatmentType) {
+        this.treatmentID = treatmentID;
+        this.treatmentType = treatmentType;
+    }
 
 	@Override
 	public boolean equals(Object obj) {

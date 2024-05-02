@@ -29,8 +29,7 @@ public class Hospital implements Serializable{
 		this.Hospital_specialties = new ArrayList<>();
 	}
 
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> Hospital_doctors,
-			List<Visit> Hospital_visits) {
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
 		super();
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
@@ -39,6 +38,22 @@ public class Hospital implements Serializable{
 		this.Hospital_visits = new ArrayList<>();
 	}
 
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<String> Hospital_specialties) {
+		super();
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
+		this.Hospital_doctors =new ArrayList<>();
+	}
+	
+
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Visit> hospital_visits) {
+		super();
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
+		this.Hospital_visits = new ArrayList<>();
+	}
 
 	@Override
     public int hashCode() {

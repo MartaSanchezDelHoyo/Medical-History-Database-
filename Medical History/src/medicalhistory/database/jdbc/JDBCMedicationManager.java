@@ -22,7 +22,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		this.c = connectionManager.getConnection();
 	}
 	
-	
+	/**
+	 * To add a medication into the database
+	 */
 	public void addMedication(Medication entry) {
 		try {
 			String template = "INSERT INTO medication (medication_id, type) VALUES (?, ?)";
@@ -38,6 +40,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		}			
 	}
 	
+	/**
+	 * To add a manufacturer into the database
+	 */
 	
 	public void addManufacturer( Manufacturer entry ) {
 		try {
@@ -54,6 +59,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		}		
 	}
 	
+	/**
+	 * To modify a medication into the database, selecting the medication we want to change by the id, and introducing the new medication already modified
+	 */
 	
 	public void modifyMedication(Medication entry, Integer medicationID) {
 		try {
@@ -70,6 +78,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		}		
 	}
 	
+	/**
+	 * To add a medication into the database
+	 */
 	
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
@@ -93,7 +104,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		}
 		return obtained;
 	}
-	
+	/**
+	 * To show the medications related with a visit, by introducing the id
+	 */
 	public List<Medication> showMedications(int visit_id) {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
@@ -119,6 +132,10 @@ public class JDBCMedicationManager implements MedicationManager {
 		return listOfMedications;
 	}
 	
+	
+	/**
+	 * To show the medications related with a manufacturer, the ones that produces
+	 */
 	public List<Medication> showMedicationsByManufacturer(int manufacturer_id) {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
@@ -142,6 +159,10 @@ public class JDBCMedicationManager implements MedicationManager {
 		}
 		return listOfMedications;
 	}
+	
+	/**
+	 * to show all the manufacturers that are in the database
+	 */
 	public List<Manufacturer> showManufacturers(int medication_id) {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
@@ -166,7 +187,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		return listOfManufacturers;
 	}
 	
-	
+	/**
+	 * To show the manufcturer we have selected with all the medications that produces
+	 */
 	public List<Manufacturer> showManufacturerWithMedications(int manufacturerId) {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
@@ -191,6 +214,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		}
 		return listOfManufacturers;
 	}
+	
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

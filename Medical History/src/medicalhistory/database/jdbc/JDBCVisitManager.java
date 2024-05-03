@@ -26,6 +26,11 @@ public class JDBCVisitManager implements VisitManager {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
 	}
+	
+	/**
+	 * To add a visit into the program
+	 */
+	
 	@Override
 	public void addVisit (Visit temporal) {
 		try {
@@ -46,8 +51,12 @@ public class JDBCVisitManager implements VisitManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		
 	}
+	
+	/**
+	 * To change the visit selected, introducing the new visit changed
+	 */
+	
 	@Override
     public void changeVisit (int visitIdToChange, Visit temporal) {
 		try {
@@ -69,6 +78,10 @@ public class JDBCVisitManager implements VisitManager {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * To show visits that are in the hospital we have selected
+	 */
 	@Override
     public List<Visit> showVisitByHospital (int hospital_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
@@ -102,6 +115,9 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
+	/**
+	 * To show the visits related on the test we have selected
+	 */
 	@Override
     public List<Visit> showVisitByTest (int test_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
@@ -137,6 +153,9 @@ public class JDBCVisitManager implements VisitManager {
 	
 	
 	//No se si meterle tambien el resto de los otros tratamientos( si tiene, el list<Treatments>)
+	/**
+	 * To show visits related with the treatment we have selected
+	 */
 	@Override
     public List<Visit> showVisitByTreatment (int treatment_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
@@ -169,6 +188,11 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		return listVisit;
 	}
+	
+	/**
+	 * To show the visits related with the doctor we have selected (By the object)
+	 */
+	
 	@Override
     public List<Visit> showVisitBy (Doctor toSearch) {
 		List<Visit> listVisit= new ArrayList<Visit>();
@@ -202,6 +226,9 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
+	/**
+	 * To show the visits related with the doctor we have selected
+	 */
 	@Override
     public List<Visit> showVisitByDoctor (int doctor_id) {
 		List<Visit> listVisit= new ArrayList<Visit>();
@@ -234,6 +261,10 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		return listVisit;
 	}
+	
+	/**
+	 * To show the visits related with the patient we have selected
+	 */
 	
 	@Override
     public List<Visit> showVisitByPatient (int patient_id) {

@@ -7,7 +7,7 @@ import medicalhistory.database.pojos.Visit;
 
 public interface TreatmentManager {
 	
-public Treatment showTreatment(Visit toSearch);
-public List<Treatment> showTreatment(int visit_id);
+public String showTreatmentType(int treatmentID );
+public List<Treatment> showTreatments(int visit_id);
 public void addTreatment(Treatment treatment);
 }

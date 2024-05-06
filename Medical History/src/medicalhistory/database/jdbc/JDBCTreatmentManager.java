@@ -34,30 +34,28 @@ public class JDBCTreatmentManager implements TreatmentManager {
     }
 	
 	// necesito que me expliquen esto
-	public Treatment showTreatment(Visit toSearch) {
-		Treatment obtained = null;
+	public String showTreatmentType(int treatmentID ) {
+		String treatmentType = null;
 		try {
-			String sql = "SELECT t.treatmentID, t.treatmentType FROM Visits AS v JOIN test AS t ON v.treatmentID=t.treatmentID WHERE v.visit_id= ?";
+			String sql = "SELECT treatmentType FROM treatment WHERE treatmentID= ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getVisit_id());
+			search.setInt(1, treatmentID);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				Integer treatmentID = rs.getInt("treatmentID");
-				String treatmentType = rs.getString("treatmentType");
-				obtained = new Treatment(treatmentID,treatmentType);
+				treatmentType = rs.getString("treatmentType");
 			}
 			rs.close();
 			search.close();
-			return obtained;
+			return treatmentType;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
 			e.printStackTrace();
 		}
-		return obtained;
+		return treatmentType;
 	}
 	
 	// necesito que me expliquen esto
-	public List<Treatment> showTreatment(int visit_id) {
+	public List<Treatment> showTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=null;
 		
 		try {

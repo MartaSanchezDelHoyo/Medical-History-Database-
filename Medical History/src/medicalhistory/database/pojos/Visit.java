@@ -49,6 +49,19 @@ public class Visit implements Serializable {
 	}
 	
 	
+	public Visit(int visitId, Date visitDate, String observations, String durationMedication, Patient patientId,
+			Doctor doctorId, Test testId, Hospital hospitalId) {
+		this.visit_id = visitId;
+		this.visit_date = visitDate;
+		this.visit_observation = observations;
+		this.duration_medication = durationMedication;
+		this.hospital = hospitalId;
+		this.visit_patient = patientId;
+		this.visit_doctor = doctorId;
+		this.visit_test=testId;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(visit_id);

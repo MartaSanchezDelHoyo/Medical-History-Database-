@@ -1,5 +1,6 @@
 package medicalhistory.database.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,9 @@ public class Allergies implements Serializable{
 	public Allergies(Integer allergiesID, String allergiesName) {
 		this.allergiesID= allergiesID;
 		this.allergiesName= allergiesName;
+		this.patients= new ArrayList<>();
 	}
+	
 	
     public Integer getAllergiesID() {
         return allergiesID;

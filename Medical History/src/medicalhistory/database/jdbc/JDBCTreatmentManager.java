@@ -54,6 +54,28 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return treatmentType;
 	}
 	
+	public Treatment getTreatment(int treatmentId) {
+	    Treatment treatment = null;
+	    try {
+	        String sql = "SELECT * FROM treatments WHERE treatment_id= ?";
+	        PreparedStatement search = c.prepareStatement(sql);
+	        search.setInt(1, treatmentId);
+	        ResultSet rs = search.executeQuery();
+	        while (rs.next()) {
+	            Integer obtainedTreatmentID = rs.getInt("treatment_id");
+	            String obtainedTreatmentType = rs.getString("type");
+	            treatment = new Treatment(obtainedTreatmentID, obtainedTreatmentType);
+	        }
+	        rs.close();
+	        search.close();
+	    } catch (SQLException e) {
+	        System.out.println("Error looking for a treatment");
+	        e.printStackTrace();
+	    }
+	    return treatment;
+	}
+
+	
 	// necesito que me expliquen esto
 	public List<Treatment> getTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=null;

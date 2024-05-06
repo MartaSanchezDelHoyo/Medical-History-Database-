@@ -36,14 +36,14 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
 	@Override
-	public void changeHospital (int hospitalToChange, Hospital temporal) {
+	public void changeHospital (Hospital temporal) {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, temporal.getHospitalName());
 			pstmt.setString(2, temporal.getHospitalAddress());
-			pstmt.setInt(3, hospitalToChange);
+			pstmt.setInt(3, temporal.getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

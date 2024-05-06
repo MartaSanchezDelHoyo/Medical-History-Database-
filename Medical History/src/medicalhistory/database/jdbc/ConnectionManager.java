@@ -64,7 +64,8 @@ public class ConnectionManager {
 					+ "name TEXT NOT NULL,"
 					+ "surname TEXT NOT NULL,"
 					+ "speciality TEXT NOT NULL,"
-					+ "contact TEXT,"
+					+ "contact TEXT NOT NULL,"
+					+ "photo BLOB NOT NULL,"
 					+ ")";
 			createTables1.executeUpdate(create1);
 			createTables1.close();

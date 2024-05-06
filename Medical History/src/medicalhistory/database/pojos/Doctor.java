@@ -16,13 +16,14 @@ public class Doctor implements Serializable{
 	private String surname;
 	private String speciality;
 	private String contact;
+	private byte[] photo;
 	private List <Patient> patients;
 	private List <Hospital> hospitals;
 	private List <Visit> visits;
 	
 
 	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
-			List<Hospital> hospitals, List<Visit> visits) {
+			List<Hospital> hospitals, List<Visit> visits,byte[] photo) {
 		super();
 		this.doctor_id = doctor_id;
 		this.name = name;
@@ -32,23 +33,26 @@ public class Doctor implements Serializable{
 		this.patients = patients;
 		this.hospitals = hospitals;
 		this.visits = visits;
+		this.photo=photo;
 	}
-	public Doctor(int doctor_id, String name, String surname,String speciality, String contact) {
+	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]phot) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);
 		this.setSpeciality(speciality);
 		this.setContact(contact);
+		this.setPhoto(photo);
 		this.patients=new ArrayList<>();
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();
 	}
 	
-	public Doctor(String name2, String surname2, String specialty, String contact2) {
+	public Doctor(String name, String surname, String specialty, String contact,byte[]photo) {
 		this.setName(name);
 		this.setSurname(surname);
-		this.setSpeciality(speciality);
+		this.setSpeciality(specialty);
 		this.setContact(contact);
+		this.setPhoto(photo);
 		this.patients=new ArrayList<>();
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();
@@ -159,6 +163,12 @@ public class Doctor implements Serializable{
 
 	public void setVisits(List <Visit> visits) {
 		this.visits = visits;
+	}
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 	
 	

@@ -19,13 +19,14 @@ public class JDBCDocManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor a) {
 		try {
-			String template = "INSERT INTO doctors (name,surname, speciality,contact) VALUES (?, ?, ?,?)";
+			String template = "INSERT INTO doctors (name,surname, speciality,contact, photo) VALUES (?, ?, ?,?,?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, a.getName());
 			pstmt.setString(2, a.getSurname());
 			pstmt.setString(3, a.getSpecialty());
 			pstmt.setString(4, a.getContact());
+			pstmt.setBytes(5, a.getPhoto());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -49,10 +50,11 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty_ = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits,photo);
 				doctors.add(newDoctor);
 			}
 			
@@ -68,7 +70,7 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 	
-
+// hace falta get doctror by photo??
 	@Override
 	public List<Doctor> getDoctorsbyHospital(String hospitalName) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -83,10 +85,11 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits,photo);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -114,10 +117,11 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits,photo);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -132,7 +136,7 @@ public class JDBCDocManager implements DoctorManager {
 
 	@Override
 	public void changeDoctor(Doctor a) {
-		String template = "UPDATE authors SET name = ?, surname = ?,specialty = ?,contact = ? WHERE id = ?";
+		String template = "UPDATE authors SET name = ?, surname = ?,specialty = ?,contact = ?,photo=? WHERE id = ?";
 		PreparedStatement search;
 		try {
 			search = c.prepareStatement(template);
@@ -141,6 +145,7 @@ public class JDBCDocManager implements DoctorManager {
 		    search.setString(2, a.getSurname());
 		    search.setString(3, a.getSpecialty());
 		    search.setString(4, a.getContact());
+		    search.setBytes(5, a.getPhoto());
 		    search.executeUpdate();
 			search.close();
 			search.close();
@@ -162,7 +167,8 @@ public class JDBCDocManager implements DoctorManager {
 			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
 			List<Patient> patients= conMan.getPatientMan().getPatients(id);
 			List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(id);
-			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"),patients,hospitals,visits);
+			byte[] photo =rs.getBytes("photo");
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"),patients,hospitals,visits, photo);
 			return a;} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
@@ -189,10 +195,11 @@ public class JDBCDocManager implements DoctorManager {
 	            String doctorSurname = resultSet.getString("surname");
 	            String specialization = resultSet.getString("specialty");
 	            String contact = resultSet.getString("contact");
+	            byte[] photo =resultSet.getBytes("photo");
 	            List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctorId);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctorId);
 				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctorId);
-	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact,patients,hospitals, visits);
+	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact,patients,hospitals, visits,photo);
 	            doctors.add(doctor);
 	        }
 	        

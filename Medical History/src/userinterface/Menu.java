@@ -1,5 +1,7 @@
 package userinterface;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -136,8 +138,18 @@ public class Menu {
 
 	            System.out.println("Enter doctor contact:");
 	            String contact = scanner.nextLine();
+	            
+	            System.out.println("Enter image path :");
+	            String imagePath = scanner.nextLine();
+	            File imageFile = new File(imagePath);
 
-	            Doctor doctor = new Doctor(name, surname, specialty, contact);
+	            // Convertir la imagen a bytes
+	            byte[] image = new byte[(int) imageFile.length()];
+	            FileInputStream fis = new FileInputStream(imageFile);
+	            fis.read(image);
+	            fis.close();
+
+	            Doctor doctor = new Doctor(name, surname, specialty, contact,image);
 	            doctorMan.addDoctor(doctor);
 	            
 	        } catch (Exception e) {
@@ -411,7 +423,7 @@ public class Menu {
 	/* public void getVisit() {
 		System.out.println("Enter visit ID:");
 		int id = scanner.nextInt();
-		Visit visit = visitMan.showVisit(id);
+		Visit visit = visijetMan.showVisit(id);
 		System.out.println(visit);
 	} */
 

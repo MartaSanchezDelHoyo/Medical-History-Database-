@@ -53,7 +53,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}	
 
 	@Override
-	public Hospital showHospital (int hospitalID) {
+	public Hospital getHospital (int hospitalID) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT * FROM hospitals WHERE hospital_id= ?";
@@ -109,8 +109,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	@Override
-	public List<Hospital> getHospitalByVisit(int visit_id){
-		List<Hospital> hospitals = new ArrayList<>();
+	public Hospital getHospitalByVisit(int visit_id){
+		Hospital hospital = null;
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
 	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
@@ -119,22 +119,19 @@ public class JDBCHospitalManager implements HospitalManager {
 	        statement.setInt(1, visit_id);
 	        ResultSet resultSet = statement.executeQuery();
 
-	        while (resultSet.next()) {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
 	            List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
-	            hospitals.add(hospital);
-	        }
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
 	        
 	        resultSet.close();
 	        statement.close();
 	    } catch (SQLException e) {
 	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
 	    }
-	    return hospitals;
+	    return hospital;
 		
 	}
 	

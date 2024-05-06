@@ -224,7 +224,7 @@ public class Menu {
 	public void getHospital() {
 		System.out.println("Enter hospital ID:");
 		int id = scanner.nextInt();
-		Hospital hospital = hospitalMan.showHospital(id);
+		Hospital hospital = hospitalMan.getHospital(id);
 		System.out.println(hospital);
 	}
 
@@ -398,7 +398,7 @@ public class Menu {
 
 			System.out.println("Enter hospital ID:");
 			int hospitalId = scanner.nextInt();
-			Hospital hospital =hospitalMan.showHospital(hospitalId);
+			Hospital hospital =hospitalMan.getHospital(hospitalId);
 			
 			Visit visit = new Visit(visitId, visitDate, observations, durationMedication, patient, doctor, test, hospital);
 		

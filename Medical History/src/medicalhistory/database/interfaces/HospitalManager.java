@@ -10,9 +10,9 @@ public interface HospitalManager {
 	//To change the hospital, the attribute that the user wants to change would be
 	//declared in the method where the user introduce the new data, returning the hospital changed to introduce it in the following method
 	public void changeHospital (int hospitalToChange,Hospital temporal);
-	public Hospital showHospital (int hospital_id);
+	public Hospital getHospital (int hospital_id);
 	public List<Hospital> getHospitalByDoctor(int doctor_id);
-	public List<Hospital> getHospitalByVisit(int visit_id);
+	public Hospital getHospitalByVisit(int visit_id);
 	public List<Hospital> getHospitalByPatient(int patientID);
 	public List<String> getSpecialtybyHospital(int hospitalID);
 	

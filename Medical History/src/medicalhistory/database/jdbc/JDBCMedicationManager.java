@@ -69,7 +69,7 @@ public class JDBCMedicationManager implements MedicationManager {
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, entry.getType());
-			pstmt.setInt(3, entry.getMedication_id());
+			pstmt.setInt(2, entry.getMedication_id());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

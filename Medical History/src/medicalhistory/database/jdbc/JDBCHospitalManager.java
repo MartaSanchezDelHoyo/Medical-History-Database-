@@ -33,8 +33,10 @@ public class JDBCHospitalManager implements HospitalManager {
 			e.printStackTrace();
 		}
 	}
+
+	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
 	@Override
-	public void ChangeHospital (int hospitalToChange,Hospital temporal) {
+	public void ChangeHospital (int hospitalToChange, Hospital temporal) {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
 			PreparedStatement pstmt;
@@ -49,6 +51,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			e.printStackTrace();
 		}
 	}	
+
 	@Override
 	public Hospital showHospital (int hospitalID) {
 		Hospital obtained = null;
@@ -77,7 +80,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	@Override
-	public Hospital showHospitalBy (Doctor toSearch) {
+	public Hospital showHospitalByDoctor (Doctor toSearch) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM hospital-doctor AS hd JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE hd.doctor_id= ?";
@@ -102,7 +105,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	@Override
-	public Hospital showHospitalBy (Patient toSearch) {
+	public Hospital showHospitalByPatient (Patient toSearch) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.patient_id= ?";
@@ -129,7 +132,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	@Override
-	public Hospital showHospitalBy (Visit toSearch) {
+	public Hospital showHospitalByVisit (Visit toSearch) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.visit_id= ?";

@@ -63,6 +63,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
+	
 	@Override
 	public Patient getPatient(int patientID ) {
 	    Patient patient= null;

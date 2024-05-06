@@ -63,13 +63,13 @@ public class JDBCMedicationManager implements MedicationManager {
 	 * To modify a medication into the database, selecting the medication we want to change by the id, and introducing the new medication already modified
 	 */
 	
-	public void modifyMedication(Medication entry, Integer medicationID) {
+	public void modifyMedication(Medication entry) {
 		try {
 			String template = "UPDATE medication SET type= ?, WHERE medicationID= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, entry.getType());
-			pstmt.setInt(3, medicationID);
+			pstmt.setInt(2, entry.getMedication_id());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -78,10 +78,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		}		
 	}
 	
-	/**
-	 * To add a medication into the database
-	 */
-	
+	//metodos (este y el siguiente) no añadidos al menu (pipe tonto no lo capta)
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
 		try {
@@ -222,5 +219,6 @@ public class JDBCMedicationManager implements MedicationManager {
 	public void setConMan(ConnectionManager conMan) {
 		this.conMan = conMan;
 	}
-	
+
+
 }

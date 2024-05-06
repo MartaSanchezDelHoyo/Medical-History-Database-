@@ -11,9 +11,9 @@ public interface HospitalManager {
 	//declared in the method where the user introduce the new data, returning the hospital changed to introduce it in the following method
 	public void ChangeHospital (int hospitalToChange,Hospital temporal);
 	public Hospital showHospital (int hospital_id);
-	public Hospital showHospitalBy (Doctor toSearch);
-	public Hospital showHospitalBy (Patient toSearch);
-	public Hospital showHospitalBy (Visit toSearch);
+	public Hospital showHospitalByDoctor (Doctor toSearch);
+	public Hospital showHospitalByPatient (Patient toSearch);
+	public Hospital showHospitalByVisit (Visit toSearch);
 	public List<Hospital> getHospitalByDoctor(int doctor_id);
 	public List<Hospital> getHospitalByVisit(int visit_id);
 	public List<Hospital> getHospitalByPatient(int patientID);

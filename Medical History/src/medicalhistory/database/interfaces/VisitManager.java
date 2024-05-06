@@ -19,6 +19,7 @@ public interface VisitManager {
     public List<Visit> showVisitBy (Doctor toSearch);
     public List<Visit> showVisitByDoctor (int doctor_id);
     public List<Visit> showVisitByPatient (int patient_id);
+
   
    
 }

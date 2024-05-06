@@ -467,7 +467,7 @@ public class Menu {
 	public void getVisit() {
 		System.out.println("Enter visit ID:");
 		int id = scanner.nextInt();
-		System.out.println(visit);
+		//System.out.println(visit);
 	} 
 
 	public void getVisitsByPatient() {

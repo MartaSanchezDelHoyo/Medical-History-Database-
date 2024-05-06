@@ -13,12 +13,12 @@ import medicalhistory.database.pojos.Visit;
 public interface VisitManager {
 	public void addVisit (Visit temporal);
     public void changeVisit (int visitIdToChange, Visit temporal);
-    public List<Visit> showVisitByHospital (int hospital_id);
-    public List<Visit> showVisitByTest (int test_id);
-    public List<Visit> showVisitByTreatment(int treatment_id);
-    public List<Visit> showVisitBy (Doctor toSearch);
-    public List<Visit> showVisitByDoctor (int doctor_id);
-    public List<Visit> showVisitByPatient (int patient_id);
+    public List<Visit> getVisitByHospital (int hospital_id);
+    public List<Visit> getVisitByTest (int test_id);
+    public List<Visit> getVisitByTreatment(int treatment_id);
+    public Visit getVisit (int visitID);
+    public List<Visit> getVisitByDoctor (int doctor_id);
+    public List<Visit> getVisitByPatient (int patient_id);
 
   
    

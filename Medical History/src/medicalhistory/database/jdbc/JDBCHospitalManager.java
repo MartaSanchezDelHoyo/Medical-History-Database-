@@ -36,14 +36,14 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
 	@Override
-	public void changeHospital (int hospitalToChange, Hospital temporal) {
+	public void changeHospital (Hospital temporal) {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, temporal.getHospitalName());
 			pstmt.setString(2, temporal.getHospitalAddress());
-			pstmt.setInt(3, hospitalToChange);
+			pstmt.setInt(3, temporal.getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -53,7 +53,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}	
 
 	@Override
-	public Hospital showHospital (int hospitalID) {
+	public Hospital getHospital (int hospitalID) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT * FROM hospitals WHERE hospital_id= ?";
@@ -65,7 +65,7 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
 				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors, visits, hospital_specialties );
 				
@@ -95,8 +95,9 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
+	            //No necesitaria la lista de visits
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
 	            hospitals.add(hospital);
 	        }
 	        
@@ -109,8 +110,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	@Override
-	public List<Hospital> getHospitalByVisit(int visit_id){
-		List<Hospital> hospitals = new ArrayList<>();
+	public Hospital getHospitalByVisit(int visit_id){
+		Hospital hospital = null;
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
 	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
@@ -119,22 +120,20 @@ public class JDBCHospitalManager implements HospitalManager {
 	        statement.setInt(1, visit_id);
 	        ResultSet resultSet = statement.executeQuery();
 
-	        while (resultSet.next()) {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
 	            List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
-	            hospitals.add(hospital);
-	        }
-	        
+	            //No haria falta ninguna de las dos listas
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
+	            
 	        resultSet.close();
 	        statement.close();
 	    } catch (SQLException e) {
 	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
 	    }
-	    return hospitals;
+	    return hospital;
 		
 	}
 	
@@ -155,9 +154,10 @@ public class JDBCHospitalManager implements HospitalManager {
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);
+				//No haria falta ninguna de las dos listas
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);
 	            hospitals.add(hospital);
 	        }
 	        

@@ -236,8 +236,31 @@ public class Menu {
 	public void getHospital() {
 		System.out.println("Enter hospital ID:");
 		int id = scanner.nextInt();
-		Hospital hospital = hospitalMan.showHospital(id);
+		Hospital hospital = hospitalMan.getHospital(id);
 		System.out.println(hospital);
+	}
+	
+	public void changeHospital() {
+		System.out.println("Enter hospital ID:");
+		int id = scanner.nextInt();
+		Hospital newHospital = hospitalMan.getHospital(id);
+
+		System.out.println("Enter hospital name:");
+		String name = scanner.nextLine();
+		newHospital.setHospitalName(name);
+
+		System.out.println("Enter hospital address:");
+		String address = scanner.nextLine();
+		newHospital.setHospitalAddress(address);
+
+		hospitalMan.changeHospital(newHospital);
+	}
+
+	public void getHospitalByDoctor () {
+		System.out.println("Enter doctor ID:");
+		int id = scanner.nextInt();
+		List <Hospital> hospitals = hospitalMan.getHospitalByDoctor(id);
+		System.out.println(hospitals);
 	}
 
 
@@ -380,6 +403,27 @@ public class Menu {
 		}
 	}
 
+	public void getTreatment() {
+		System.out.println("Enter treatment ID:");
+		int id = scanner.nextInt();
+		Treatment treatment = treatmentMan.getTreatment(id);
+		System.out.println(treatment);
+	}
+	
+	public void getTreatments () {
+		System.out.println("Enter visit ID:");
+		int id = scanner.nextInt();
+		List<Treatment> treatments = treatmentMan.getTreatments(id);
+		System.out.println(treatments);
+	}
+
+	public void getTreatmentType() {
+		System.out.println("Enter treatment ID:");
+		int id = scanner.nextInt();
+		String type = treatmentMan.getTreatmentType(id);
+		System.out.println(type);
+	}
+
 	public void addVisit() {
 		try {
 			System.out.println("Enter visit ID:");
@@ -410,7 +454,7 @@ public class Menu {
 
 			System.out.println("Enter hospital ID:");
 			int hospitalId = scanner.nextInt();
-			Hospital hospital =hospitalMan.showHospital(hospitalId);
+			Hospital hospital =hospitalMan.getHospital(hospitalId);
 			
 			Visit visit = new Visit(visitId, visitDate, observations, durationMedication, patient, doctor, test, hospital);
 		
@@ -420,17 +464,16 @@ public class Menu {
 		}
 	}
 
-	/* public void getVisit() {
+	public void getVisit() {
 		System.out.println("Enter visit ID:");
 		int id = scanner.nextInt();
-		Visit visit = visijetMan.showVisit(id);
 		System.out.println(visit);
-	} */
+	} 
 
 	public void getVisitsByPatient() {
 		System.out.println("Enter patient id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByPatient(id);
+		List<Visit> visits = visitMan.getVisitByPatient(id);
 		System.out.println(visits);
 
 	}
@@ -438,7 +481,7 @@ public class Menu {
 	public void getVisitsByDoctor() {
 		System.out.println("Enter doctor id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByDoctor(id);
+		List<Visit> visits = visitMan.getVisitByDoctor(id);
 		System.out.println(visits);
 	}
 
@@ -447,7 +490,7 @@ public class Menu {
 	public void getVisitsVisitByTreatment() {
 		System.out.println("Enter treatment id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByTreatment(id);
+		List<Visit> visits = visitMan.getVisitByTreatment(id);
 		System.out.println(visits);
 	}
 

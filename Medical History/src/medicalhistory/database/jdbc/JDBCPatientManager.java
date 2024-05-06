@@ -51,7 +51,7 @@ public class JDBCPatientManager implements PatientManager {
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String bloodtype = resultSet.getString("bloodtype");
 	            String email = resultSet.getString("email"); 
-	            
+	            //Falta lista de alergias y de doctores
 	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
 	            patients.add(patient);
 	        }
@@ -79,7 +79,7 @@ public class JDBCPatientManager implements PatientManager {
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String bloodtype = resultSet.getString("bloodtype");
 	            String email = resultSet.getString("email"); 
-	            
+	          //Falta lista de alergias y de doctores
 	            patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
 	            
 	        }
@@ -133,6 +133,7 @@ public class JDBCPatientManager implements PatientManager {
 	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
 	            String bloodtype = resultSet.getString("bloodtype");
 	            String email = resultSet.getString("email");
+	            //Falta lista de alergias
 	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
 	            patients.add(patient);
 	        }

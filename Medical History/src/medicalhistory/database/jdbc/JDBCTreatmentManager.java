@@ -19,7 +19,21 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		this.c = connectionManager.getConnection();
 	}
 	
+    public void addTreatment(Treatment treatment) {
+        try {
+            String template = "INSERT INTO treatments (treatmentId, type) VALUES (?, ?)";;
+            PreparedStatement pstmt = c.prepareStatement(template);
+            pstmt.setInt(1, treatment.getTreatmentID());
+            pstmt.setString(2, treatment.getTreatmentType());
+            pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error in the database");
+            e.printStackTrace();
+        }
+    }
 	
+	// necesito que me expliquen esto
 	public Treatment showTreatment(Visit toSearch) {
 		Treatment obtained = null;
 		try {

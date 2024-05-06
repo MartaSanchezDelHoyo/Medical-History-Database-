@@ -84,7 +84,7 @@ public class JDBCTestManager implements TestManager{
 	    try {
 	        String sql = "SELECT * FROM tests WHERE patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setString(1, patient_id);
+	        statement.setInt(1, patient_id);
 	       
 	        ResultSet resultSet = statement.executeQuery();
 	        
@@ -111,5 +111,6 @@ public class JDBCTestManager implements TestManager{
 	public void setConMan(ConnectionManager conMan) {
 		this.conMan = conMan;
 	}
+
 	
 }

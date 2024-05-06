@@ -24,7 +24,7 @@ public class Menu {
 	private static VisitManager visitMan;
 	private static MedicationManager medicationMan;
 	private static TreatmentManager treatmentMan;
-	// private static UserManager userMan;
+	// private static UserMan userMan;
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -72,7 +72,7 @@ public class Menu {
 		public void getPatientsByName() {
 			System.out.println("Enter patient name:");
 			String name = scanner.nextLine();
-			List<Patient> patients = patientManager.getPatientByName(name);
+			List<Patient> patients = patientMan.getPatientByName(name);
 			for (Patient patient : patients) {
 				System.out.println(patient);
 			}
@@ -81,18 +81,18 @@ public class Menu {
 		public void getPatient() {
 			System.out.println("Enter patient ID:");
 			int id = scanner.nextInt();
-			Patient patient = patientManager.getPatient(id);
+			Patient patient = patientMan.getPatient(id);
 			System.out.println(patient);
 		}
 
 		public void changePatient() {
 			System.out.println("Enter patient ID:");
 			int id = scanner.nextInt();  
-			Patient newpatient = patientManager.getPatient(id); 
+			Patient newpatient = patientMan.getPatient(id); 
 
 			System.out.println("Enter patient name:");
 			String name = scanner.nextLine();
-			newpatient.setName(name);
+			newpatient.setPatientName(name);
 
 			System.out.println("Enter patient sex: ");
 			String sex = scanner.nextLine();
@@ -101,7 +101,7 @@ public class Menu {
 			System.out.println("Enter patient birth date (yyyy-MM-dd):");
 			String dateStr = scanner.nextLine();
 			Date dateOfBirth = Date.valueOf(dateStr);
-			newpatient.setDateOfBirth(dateOfBirth);
+			newpatient.setDateofbirth(dateOfBirth);
 
 			System.out.println("Enter patient bloodtype:");
 			String bloodtype = scanner.nextLine();
@@ -111,13 +111,13 @@ public class Menu {
 			String email = scanner.nextLine();
 			newpatient.setEmail(email);
 
-			patientManager.changePatient(newpatient);
+			patientMan.changePatient(newpatient);
 		}
 
 		public void getPatients() {
 			System.out.println("Enter the doctor ID:");
 			int id = scanner.nextInt();
-			List <Patient> patients = patientManager.getPatients(id);
+			List <Patient> patients = patientMan.getPatients(id);
 			System.out.println(patients);
 		}
 
@@ -149,52 +149,52 @@ public class Menu {
 	public void getDoctor() {
 		System.out.println("Enter doctor ID:");
 		int id = scanner.nextInt();
-		Doctor doctor = doctorManager.getDoctor(id);
+		Doctor doctor = doctorMan.getDoctor(id);
 		System.out.println(doctor);
 	}
 
 	public void getDoctors() {
 		System.out.println("Enter patient ID:");
 		int id = scanner.nextInt();
-		List <Doctor> doctors = doctorManager.getDoctors(id);
+		List <Doctor> doctors = doctorMan.getDoctors(id);
 		System.out.println(doctors);
 	}
 
 	public void changeDoctor() {
 		System.out.println("Enter doctor ID:");
 		int id = scanner.nextInt();
-		Doctor newDoctor = doctorManager.getDoctor(id);
+		Doctor newDoctor = doctorMan.getDoctor(id);
 
 		System.out.println("Enter doctor name:");
 		String newname = scanner.nextLine();
-		newdoctor.setName(newname);
+		newDoctor.setName(newname);
 
 		System.out.println("Enter doctor surname:");
 		String surname = scanner.nextLine();
-		newdoctor.setSurname(surname);
+		newDoctor.setSurname(surname);
 
 		System.out.println("Enter doctor specialty:");
 		String specialty = scanner.nextLine();
-		newdoctor.setSpecialty(specialty);
+		newDoctor.setSpeciality(specialty);
 
 		System.out.println("Enter doctor contact:");
 		String contact = scanner.nextLine();
-		newdoctor.setContact(contact);
+		newDoctor.setContact(contact);
 
-		doctorManager.changeDoctor(newDoctor);
+		doctorMan.changeDoctor(newDoctor);
 	}
 
 	public void getDoctorsbyHospital () {
 		System.out.println("Enter hospital name:");
 		String name = scanner.nextLine();
-		List <Doctor> doctors = doctorManager.getDoctorsbyHospital(name);
+		List <Doctor> doctors = doctorMan.getDoctorsbyHospital(name);
 		System.out.println(doctors);
 	}
 
 	public void getDoctorsbySpecialties () {
 		System.out.println("Enter doctor specialty:");
 		String specialty = scanner.nextLine();
-		List <Doctor> doctors = doctorManager.getDoctorsbySpecialties(specialty);
+		List <Doctor> doctors = doctorMan.getDoctorsbySpecialties(specialty);
 		System.out.println(doctors);
 	}
 
@@ -203,8 +203,8 @@ public class Menu {
 		String name = scanner.nextLine();
 		System.out.println("Enter doctor surname:");
 		String surname = scanner.nextLine();
-		Doctor doctor = doctorManager.getDoctorByNameSurname(name, surname);
-		System.out.println(doctor);
+		List<Doctor> doctors = doctorMan.getDoctorByNameSurname(name, surname);
+		System.out.println(doctors);
 	}
 
 	public void addHospital() {
@@ -229,7 +229,7 @@ public class Menu {
 	public void getHospital() {
 		System.out.println("Enter hospital ID:");
 		int id = scanner.nextInt();
-		Hospital hospital = hospitalManager.showHospital(id);
+		Hospital hospital = hospitalMan.showHospital(id);
 		System.out.println(hospital);
 	}
 
@@ -262,7 +262,7 @@ public class Menu {
 			String name = scanner.nextLine();
 
 			Manufacturer manufacturer = new Manufacturer(manufacturerId, name);
-			medicationManager.addManufacturer(manufacturer);
+			medicationMan.addManufacturer(manufacturer);
 
 			System.out.println("Manufacturer added successfully.");
 		} catch (Exception e) {
@@ -345,14 +345,14 @@ public class Menu {
 	public void getTest() {
 		System.out.println("Enter test ID:");
 		int id = scanner.nextInt();
-		Test test = testManager.showTest(id);
+		Test test = testMan.showTest(id);
 		System.out.println(test);
 	}
 
 	public void getTestsByPatient() {
 		System.out.println("Enter patient id:");
 		int id = scanner.nextInt();
-		List<Test> tests = testManager.getTestsbyPatient(id);
+		List<Test> tests = testMan.getTestsbyPatient(id);
 		System.out.println(tests);
 	}
 
@@ -411,17 +411,17 @@ public class Menu {
 		}
 	}
 
-	public void getVisit() {
+	/* public void getVisit() {
 		System.out.println("Enter visit ID:");
 		int id = scanner.nextInt();
-		Visit visit = visitManager.showVisit(id);
+		Visit visit = visitMan.showVisit(id);
 		System.out.println(visit);
-	}
+	} */
 
 	public void getVisitsByPatient() {
 		System.out.println("Enter patient id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitManager.getVisitsByPatient(id);
+		List<Visit> visits = visitMan.showVisitByPatient(id);
 		System.out.println(visits);
 
 	}
@@ -429,23 +429,16 @@ public class Menu {
 	public void getVisitsByDoctor() {
 		System.out.println("Enter doctor id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitManager.getVisitsByDoctor(id);
+		List<Visit> visits = visitMan.showVisitByDoctor(id);
 		System.out.println(visits);
 	}
 
-	public void getVisitsByPatientDoctor() {
-		System.out.println("Enter patient id:");
-		int patientId = scanner.nextInt();
-		System.out.println("Enter doctor id:");
-		int doctorId = scanner.nextInt();
-		List<Visit> visits = visitManager.getVisitsByPatientDoctor(patientId, doctorId);
-		System.out.println(visits);
-	}
+
 
 	public void getVisitsVisitByTreatment() {
 		System.out.println("Enter treatment id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitManager.getVisitsByTreatment(id);
+		List<Visit> visits = visitMan.showVisitByTreatment(id);
 		System.out.println(visits);
 	}
 

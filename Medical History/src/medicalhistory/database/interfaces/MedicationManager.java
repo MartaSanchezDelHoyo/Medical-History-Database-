@@ -10,7 +10,7 @@ public interface MedicationManager {
 	
 	public void addMedication (Medication entry);
 	public void addManufacturer (Manufacturer entry);
-	public void modifyMedication (Medication entry, Integer medicationID); 
+	public void modifyMedication (Medication entry); 
     public Medication showMedication(Visit toSearch);
     public List<Medication> showMedications(int visit_id);
     public List<Medication> showMedicationsByManufacturer(int manufacturer_id);

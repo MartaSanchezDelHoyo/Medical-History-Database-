@@ -19,7 +19,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 
-	public void AddHospital (Hospital temporal) {
+	public void addHospital (Hospital temporal) {
 		try {
 			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
 			PreparedStatement pstmt;
@@ -36,7 +36,7 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
 	@Override
-	public void ChangeHospital (int hospitalToChange, Hospital temporal) {
+	public void changeHospital (int hospitalToChange, Hospital temporal) {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
 			PreparedStatement pstmt;

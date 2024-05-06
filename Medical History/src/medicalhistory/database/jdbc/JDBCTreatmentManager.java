@@ -34,7 +34,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
     }
 	
 	// necesito que me expliquen esto
-	public String showTreatmentType(int treatmentID ) {
+	public String getTreatmentType(int treatmentID ) {
 		String treatmentType = null;
 		try {
 			String sql = "SELECT treatmentType FROM treatment WHERE treatmentID= ?";
@@ -55,7 +55,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 	
 	// necesito que me expliquen esto
-	public List<Treatment> showTreatments(int visit_id) {
+	public List<Treatment> getTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=null;
 		
 		try {

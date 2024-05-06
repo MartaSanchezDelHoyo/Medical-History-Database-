@@ -215,7 +215,7 @@ public class Menu {
 		System.out.println("Enter hospital address:");
 		String address = scanner.nextLine();
 		Hospital hospital= new Hospital(name, address);
-		hospitalMan.AddHospital(hospital);
+		hospitalMan.addHospital(hospital);
 	} catch (Exception e) {
 		System.err.println("Error adding hospital: " + e.getMessage());
 	}

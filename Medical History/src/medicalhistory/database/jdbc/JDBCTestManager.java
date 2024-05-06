@@ -79,12 +79,12 @@ public class JDBCTestManager implements TestManager{
 	}
 	
 	@Override
-	public List<Test> getTestsbyPatient(String name) {
+	public List<Test> getTestsbyPatient(int patient_id) {
 	    List<Test> tests = new ArrayList<>();
 	    try {
-	        String sql = "SELECT * FROM tests WHERE patient_name = ?";
+	        String sql = "SELECT * FROM tests WHERE patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setString(1, name);
+	        statement.setString(1, patient_id);
 	       
 	        ResultSet resultSet = statement.executeQuery();
 	        

@@ -56,6 +56,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return obtained;
 	}
 	
+	// necesito que me expliquen esto
 	public List<Treatment> showTreatment(int visit_id) {
 		List<Treatment> listOfTreatments=null;
 		

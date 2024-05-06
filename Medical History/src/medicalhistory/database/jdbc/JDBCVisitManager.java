@@ -79,6 +79,7 @@ public class JDBCVisitManager implements VisitManager {
 		}
 	}
 	
+	//realmente necesitamos un metodo que imprime TODAS la visitas que ha tenido un hospital en su historia??
 	/**
 	 * To show visits that are in the hospital we have selected
 	 */

@@ -101,9 +101,9 @@ public class JDBCVisitManager implements VisitManager {
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
+				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
 			    listVisit.add(obtained);
 			}
@@ -137,9 +137,9 @@ public class JDBCVisitManager implements VisitManager {
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
+				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
 			    listVisit.add(obtained);
 			}
@@ -175,7 +175,7 @@ public class JDBCVisitManager implements VisitManager {
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications);
@@ -215,10 +215,10 @@ public class JDBCVisitManager implements VisitManager {
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+
+				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
-				
 			}
 			rs.close();
 			search.close();
@@ -250,9 +250,9 @@ public class JDBCVisitManager implements VisitManager {
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
+				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
 				listVisit.add(obtained);
 			}
@@ -287,9 +287,9 @@ public class JDBCVisitManager implements VisitManager {
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
+				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
+				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
 				listVisit.add(obtained);
 			}

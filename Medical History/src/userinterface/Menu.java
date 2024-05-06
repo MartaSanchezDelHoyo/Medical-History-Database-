@@ -48,6 +48,7 @@ public class Menu {
 		//userMan.register(u);
 	}
 	
+	
 	 public void addPatient() {
 	        try {
 	            System.out.println("Enter patient name:");
@@ -136,11 +137,9 @@ public class Menu {
 	            System.out.println("Enter doctor contact:");
 	            String contact = scanner.nextLine();
 
-	            // no hay constructor para esto
-	            //Doctor doctor = new Doctor(name, surname, specialty, contact);
-
-	            // comentado para que no haya errores
-	            //doctorMan.addDoctor(doctor);
+	            Doctor doctor = new Doctor(name, surname, specialty, contact);
+	            doctorMan.addDoctor(doctor);
+	            
 	        } catch (Exception e) {
 	            System.err.println("Error adding doctor: " + e.getMessage());
 	        }
@@ -215,12 +214,8 @@ public class Menu {
 
 		System.out.println("Enter hospital address:");
 		String address = scanner.nextLine();
-
-		//  no hay constructor para esto
-		//Hospital hospital = new Hospital(name, address);
-
-		// comentado para que no haya errores
-		//hospitalMan.addHospital(hospital);
+		Hospital hospital= new Hospital(name, address);
+		hospitalMan.addHospital(hospital);
 	} catch (Exception e) {
 		System.err.println("Error adding hospital: " + e.getMessage());
 	}
@@ -229,7 +224,7 @@ public class Menu {
 	public void getHospital() {
 		System.out.println("Enter hospital ID:");
 		int id = scanner.nextInt();
-		Hospital hospital = hospitalMan.showHospital(id);
+		Hospital hospital = hospitalMan.getHospital(id);
 		System.out.println(hospital);
 	}
 
@@ -391,21 +386,23 @@ public class Menu {
 
 			System.out.println("Enter patient ID:");
 			int patientId = scanner.nextInt();
+			Patient patient =patientMan.getPatient(patientId);
 
 			System.out.println("Enter doctor ID:");
 			int doctorId = scanner.nextInt();
+			Doctor doctor =doctorMan.getDoctor(doctorId);
 
 			System.out.println("Enter test ID:");
 			int testId = scanner.nextInt();
+			Test test =testMan.showTest(testId);
 
 			System.out.println("Enter hospital ID:");
 			int hospitalId = scanner.nextInt();
-		
-			//  no hay constructor para esto
-			//Visit visit = new Visit(visitId, visitDate, observations, durationMedication, patientId, doctorId, testId, hospitalId);
+			Hospital hospital =hospitalMan.getHospital(hospitalId);
 			
-			// comentado para que no haya errores
-			//visitMan.addVisit(visit);
+			Visit visit = new Visit(visitId, visitDate, observations, durationMedication, patient, doctor, test, hospital);
+		
+			visitMan.addVisit(visit);
 		} catch (Exception e) {
 			System.err.println("Error adding visit: " + e.getMessage());
 		}

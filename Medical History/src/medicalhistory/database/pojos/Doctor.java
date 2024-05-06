@@ -39,7 +39,21 @@ public class Doctor implements Serializable{
 		this.setSurname(surname);
 		this.setSpeciality(speciality);
 		this.setContact(contact);
+		this.patients=new ArrayList<>();
+		this.hospitals=new ArrayList<>();
+		this.visits=new ArrayList<>();
 	}
+	
+	public Doctor(String name2, String surname2, String specialty, String contact2) {
+		this.setName(name);
+		this.setSurname(surname);
+		this.setSpeciality(speciality);
+		this.setContact(contact);
+		this.patients=new ArrayList<>();
+		this.hospitals=new ArrayList<>();
+		this.visits=new ArrayList<>();
+	}
+	
 	@Override
 	public String toString() {
 		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="

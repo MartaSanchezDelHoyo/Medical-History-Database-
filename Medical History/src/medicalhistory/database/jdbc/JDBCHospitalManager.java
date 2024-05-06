@@ -19,7 +19,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 
-	public void AddHospital (Hospital temporal) {
+	public void addHospital (Hospital temporal) {
 		try {
 			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
 			PreparedStatement pstmt;
@@ -36,7 +36,7 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
 	@Override
-	public void ChangeHospital (int hospitalToChange, Hospital temporal) {
+	public void changeHospital (int hospitalToChange, Hospital temporal) {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
 			PreparedStatement pstmt;
@@ -53,7 +53,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}	
 
 	@Override
-	public Hospital showHospital (int hospitalID) {
+	public Hospital getHospital (int hospitalID) {
 		Hospital obtained = null;
 		try {
 			String sql = "SELECT * FROM hospitals WHERE hospital_id= ?";
@@ -79,86 +79,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
-	@Override
-	public Hospital showHospitalByDoctor (Doctor toSearch) {
-		Hospital obtained = null;
-		try {
-			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM hospital-doctor AS hd JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE hd.doctor_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getDoctor_id());
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer hospital_id = rs.getInt("hospital_id");
-				String hospital_name = rs.getString("hospital_name");
-				String hospital_adress = rs.getString("hospital_adress");
-				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, visits);
-				
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
-	@Override
-	public Hospital showHospitalByPatient (Patient toSearch) {
-		Hospital obtained = null;
-		try {
-			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.patient_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getPatientID());
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer hospital_id = rs.getInt("hospital_id");
-				String hospital_name = rs.getString("hospital_name");
-				String hospital_adress = rs.getString("hospital_adress");
-				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
-				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors, visits,hospital_specialties );
-				
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
-	@Override
-	public Hospital showHospitalByVisit (Visit toSearch) {
-		Hospital obtained = null;
-		try {
-			String sql = "SELECT h.hospital_id, h.hospital_name, h.hospital_adress FROM Visits AS v JOIN hospitals AS h ON v.hospital_id=h.hospital_id WHERE v.visit_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getVisit_id());
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer hospital_id = rs.getInt("hospital_id");
-				String hospital_name = rs.getString("hospital_name");
-				String hospital_adress = rs.getString("hospital_adress");
-				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
-				//No haria falta ninguna de las dos listas
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors,hospital_specialties );
-				
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
-	
+
 	@Override
 	public List<Hospital> getHospitalByDoctor(int doctor_id){
 		List<Hospital> hospitals = new ArrayList<>();
@@ -189,8 +110,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	@Override
-	public List<Hospital> getHospitalByVisit(int visit_id){
-		List<Hospital> hospitals = new ArrayList<>();
+	public Hospital getHospitalByVisit(int visit_id){
+		Hospital hospital = null;
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
 	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
@@ -199,23 +120,20 @@ public class JDBCHospitalManager implements HospitalManager {
 	        statement.setInt(1, visit_id);
 	        ResultSet resultSet = statement.executeQuery();
 
-	        while (resultSet.next()) {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
 	            List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
 	            //No haria falta ninguna de las dos listas
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
-	            hospitals.add(hospital);
-	        }
-	        
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
+	            
 	        resultSet.close();
 	        statement.close();
 	    } catch (SQLException e) {
 	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
 	    }
-	    return hospitals;
+	    return hospital;
 		
 	}
 	

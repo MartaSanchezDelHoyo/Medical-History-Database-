@@ -145,6 +145,7 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_adress = rs.getString("hospital_adress");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
+				//No haria falta ninguna de las dos listas
 				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors,hospital_specialties );
 				
 			}
@@ -174,7 +175,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
+	            //No necesitaria la lista de visits
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
 	            hospitals.add(hospital);
 	        }
 	        
@@ -203,6 +205,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
 	            List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
+	            //No haria falta ninguna de las dos listas
 	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
 	            hospitals.add(hospital);
 	        }
@@ -235,7 +238,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
 				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-	            Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);
+				//No haria falta ninguna de las dos listas
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);
 	            hospitals.add(hospital);
 	        }
 	        

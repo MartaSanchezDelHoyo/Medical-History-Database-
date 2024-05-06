@@ -421,7 +421,7 @@ public class Menu {
 	public void getVisitsByPatient() {
 		System.out.println("Enter patient id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByPatient(id);
+		List<Visit> visits = visitMan.getVisitByPatient(id);
 		System.out.println(visits);
 
 	}
@@ -429,7 +429,7 @@ public class Menu {
 	public void getVisitsByDoctor() {
 		System.out.println("Enter doctor id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByDoctor(id);
+		List<Visit> visits = visitMan.getVisitByDoctor(id);
 		System.out.println(visits);
 	}
 
@@ -438,7 +438,7 @@ public class Menu {
 	public void getVisitsVisitByTreatment() {
 		System.out.println("Enter treatment id:");
 		int id = scanner.nextInt();
-		List<Visit> visits = visitMan.showVisitByTreatment(id);
+		List<Visit> visits = visitMan.getVisitByTreatment(id);
 		System.out.println(visits);
 	}
 

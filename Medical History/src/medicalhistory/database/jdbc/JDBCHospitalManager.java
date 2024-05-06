@@ -65,7 +65,7 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
 				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors, visits, hospital_specialties );
 				
@@ -91,7 +91,7 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospital_id);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
 				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, visits);
 				
 			}
@@ -117,7 +117,7 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospital_id);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
 				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors, visits,hospital_specialties );
 				
@@ -174,7 +174,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
 	            //No necesitaria la lista de visits
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
 	            hospitals.add(hospital);
@@ -236,7 +236,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
-				List<Visit> visits= conMan.getVisitMan().showVisitByHospital(hospitalID);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
 				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
 				//No haria falta ninguna de las dos listas
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);

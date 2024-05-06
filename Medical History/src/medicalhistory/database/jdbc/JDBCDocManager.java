@@ -51,7 +51,7 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
@@ -83,9 +83,10 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				//No haria falta ninguna de las tres listas
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
@@ -114,9 +115,10 @@ public class JDBCDocManager implements DoctorManager {
 				String surname = rs.getString("surname");
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
+				//No haria falta ninguna de las dos listas (La de hospital si)
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
 				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
@@ -161,7 +163,8 @@ public class JDBCDocManager implements DoctorManager {
 			rs.next();
 			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
 			List<Patient> patients= conMan.getPatientMan().getPatients(id);
-			List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(id);
+			//Las visitas no
+			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
 			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"),patients,hospitals,visits);
 			return a;} catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -189,9 +192,10 @@ public class JDBCDocManager implements DoctorManager {
 	            String doctorSurname = resultSet.getString("surname");
 	            String specialization = resultSet.getString("specialty");
 	            String contact = resultSet.getString("contact");
+	            //Ninguna 
 	            List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctorId);
-				List<Patient> patients= conMan.getPatientMan().getPatients(doctorId);
-				List<Visit> visits = conMan.getVisitMan().showVisitByDoctor(doctorId);
+	            List<Patient> patients= conMan.getPatientMan().getPatients(doctorId);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctorId);
 	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact,patients,hospitals, visits);
 	            doctors.add(doctor);
 	        }

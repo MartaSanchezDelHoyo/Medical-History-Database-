@@ -85,7 +85,7 @@ public class JDBCVisitManager implements VisitManager {
 	 * To show visits that are in the hospital we have selected
 	 */
 	@Override
-    public List<Visit> showVisitByHospital (int hospital_id) { 
+    public List<Visit> getVisitByHospital (int hospital_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
 		
 		try {
@@ -121,7 +121,7 @@ public class JDBCVisitManager implements VisitManager {
 	 * To show the visits related on the test we have selected
 	 */
 	@Override
-    public List<Visit> showVisitByTest (int test_id) { 
+    public List<Visit> getVisitByTest (int test_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
 		
 		try {
@@ -159,7 +159,7 @@ public class JDBCVisitManager implements VisitManager {
 	 * To show visits related with the treatment we have selected
 	 */
 	@Override
-    public List<Visit> showVisitByTreatment (int treatment_id) { 
+    public List<Visit> getVisitByTreatment (int treatment_id) { 
 		List<Visit> listVisit= new ArrayList<Visit>();
 		
 		try {
@@ -197,13 +197,14 @@ public class JDBCVisitManager implements VisitManager {
 	 */
 	
 	@Override
-    public List<Visit> showVisitBy (Doctor toSearch) {
-		List<Visit> listVisit= new ArrayList<Visit>();
-	
+    public Visit getVisit (int visitID) {
+		
+		Visit obtained=null;
+		
 		try {
 			String sql = "SELECT * FROM Visits WHERE doctor_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, toSearch.getDoctor_id());
+			search.setInt(1, visitID);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer visit_id = rs.getInt("visit_id");
@@ -216,24 +217,24 @@ public class JDBCVisitManager implements VisitManager {
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().showTreatment(visit_id);
 				Hospital hospital = conMan.getHospitalMan().showHospital(rs.getInt("visit_id"));
-				Visit obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
-				listVisit.add(obtained);
+				obtained = new Visit(visit_id, date, observations, duration_medication, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
+				
 			}
 			rs.close();
 			search.close();
-			return listVisit;
+			return obtained;
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
 			e.printStackTrace();
 		}
-		return listVisit;
+		return obtained;
 	}
 	
 	/**
 	 * To show the visits related with the doctor we have selected
 	 */
 	@Override
-    public List<Visit> showVisitByDoctor (int doctor_id) {
+    public List<Visit> getVisitByDoctor (int doctor_id) {
 		List<Visit> listVisit= new ArrayList<Visit>();
 		try {
 			String sql = "SELECT * FROM Visits WHERE doctor_id= ?";
@@ -270,7 +271,7 @@ public class JDBCVisitManager implements VisitManager {
 	 */
 	
 	@Override
-    public List<Visit> showVisitByPatient (int patient_id) {
+    public List<Visit> getVisitByPatient (int patient_id) {
 		List<Visit> listVisit= new ArrayList<Visit>();
 		try {
 			String sql = "SELECT * FROM Visits WHERE patient_id= ?";

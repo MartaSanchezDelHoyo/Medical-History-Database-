@@ -263,7 +263,7 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	/**
-	 * To show the visits related with the patient we have selected
+	 * To show the visits related with the patient  we have selected
 	 */
 	
 	@Override

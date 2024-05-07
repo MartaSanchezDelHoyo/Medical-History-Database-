@@ -21,10 +21,10 @@ public class Doctor implements Serializable{
 	private List <Hospital> hospitals;
 	private List <Visit> visits;
 	
+	
 
 	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
 			List<Hospital> hospitals, List<Visit> visits,byte[] photo) {
-		super();
 		this.doctor_id = doctor_id;
 		this.name = name;
 		this.surname = surname;
@@ -35,7 +35,7 @@ public class Doctor implements Serializable{
 		this.visits = visits;
 		this.photo=photo;
 	}
-	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]phot) {
+	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]photo) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);

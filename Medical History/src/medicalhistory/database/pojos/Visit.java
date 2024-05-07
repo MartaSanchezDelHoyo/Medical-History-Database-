@@ -22,35 +22,7 @@ public class Visit implements Serializable {
 	private List <Medication> medications;
 	private List <Treatment> treatments;
 	
-	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
-			 List<Medication> medications) {
-		this.visit_id = visit_id;
-		this.visit_date = visit_date;
-		this.visit_observation = visit_observation;
-		this.duration_medication = duration_medication;
-		this.hospital = hospital;
-		this.visit_patient = visit_patient;
-		this.visit_doctor = visit_doctor;
-		this.visit_test = visit_test;
-		this.medications = medications;
-		
-	}
-	
-	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
-			 List<Medication> medications, List<Treatment> treatments) {
-		super();
-		this.treatments = treatments;
-	}
-	
-	public Visit() {
-		super();
-	}
-	
-	
-	public Visit(int visitId, Date visitDate, String observations, String durationMedication, Patient patientId,
-			Doctor doctorId, Test testId, Hospital hospitalId) {
+	public Visit(int visitId, Date visitDate, String observations, String durationMedication, Patient patientId, Doctor doctorId, Test testId, Hospital hospitalId) {
 		this.visit_id = visitId;
 		this.visit_date = visitDate;
 		this.visit_observation = observations;
@@ -60,7 +32,21 @@ public class Visit implements Serializable {
 		this.visit_doctor = doctorId;
 		this.visit_test=testId;
 	}
-
+	
+	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test, List<Medication> medications) {
+		super();
+		this.medications = medications;
+		
+	}
+	
+	
+	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
+			 List<Medication> medications, List<Treatment> treatments) {
+		super();
+		this.medications = medications;
+		this.treatments = treatments;
+	}
+	
 
 	@Override
 	public int hashCode() {

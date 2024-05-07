@@ -14,50 +14,32 @@ public class Hospital implements Serializable{
     private String hospitalAddress;
     private List <Doctor> Hospital_doctors;
     private List <Visit> Hospital_visits;
-    private List <String> Hospital_specialties;
     
-
+    
+    
+    
         
-    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> Hospital_doctors,
-			List<Visit> Hospital_visits, List<String> Hospital_specialties) {
-		super();
+    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
 		this.Hospital_doctors = new ArrayList<>();
 		this.Hospital_visits = new ArrayList<>();
-		this.Hospital_specialties = new ArrayList<>();
 	}
 
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors) {
 		super();
-		this.hospitalID = hospitalID;
-		this.hospitalName = hospitalName;
-		this.hospitalAddress = hospitalAddress;
-		this.Hospital_doctors = new ArrayList<>();
-		this.Hospital_visits = new ArrayList<>();
+		this.Hospital_doctors= hospital_doctors;
 	}
-	public Hospital( String hospitalName, String hospitalAddress) {
+	
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<Visit> hospital_visits) {
 		super();
-		this.hospitalAddress = hospitalAddress;
-		this.hospitalName = hospitalName;
-		}
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<String> Hospital_specialties) {
-		super();
-		this.hospitalID = hospitalID;
-		this.hospitalName = hospitalName;
-		this.hospitalAddress = hospitalAddress;
-		this.Hospital_doctors =new ArrayList<>();
+	this.Hospital_doctors =hospital_doctors;
+	this.Hospital_visits= hospital_visits;
 	}
 	
 
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Visit> hospital_visits) {
-		super();
-		this.hospitalID = hospitalID;
-		this.hospitalName = hospitalName;
-		this.hospitalAddress = hospitalAddress;
-		this.Hospital_visits = new ArrayList<>();
-	}
+	
 
 	@Override
     public int hashCode() {
@@ -128,13 +110,5 @@ public class Hospital implements Serializable{
 
 	public void setHospital_visits(List <Visit> hospital_visits) {
 		Hospital_visits = hospital_visits;
-	}
-
-	public List <String> getHospital_specialties() {
-		return Hospital_specialties;
-	}
-
-	public void setHospital_specialties(List <String> hospital_specialties) {
-		Hospital_specialties = hospital_specialties;
 	}
 }

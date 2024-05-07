@@ -13,9 +13,6 @@ public class Allergies implements Serializable{
 	private String allergiesName;
 	private List <Patient> patients;
 	
-	public Allergies() {
-		
-	}
 	
 	public Allergies(Integer allergiesID, String allergiesName) {
 		this.allergiesID= allergiesID;
@@ -23,6 +20,10 @@ public class Allergies implements Serializable{
 		this.patients= new ArrayList<>();
 	}
 	
+	public Allergies(Integer allergiesID, String allergiesName,List <Patient> patients) {
+		super();
+		this.patients= patients;
+	}
 	
     public Integer getAllergiesID() {
         return allergiesID;

@@ -14,18 +14,18 @@ public class Treatment implements Serializable{
     private String treatmentType;
     private List <Visit> visits;
 
-    public Treatment() {
+   public Treatment(Integer treatmentID, String treatmentType) {
+        this.treatmentID = treatmentID;
+        this.treatmentType = treatmentType;
+        this.visits= new ArrayList<>();
     }
 
     public Treatment(Integer treatmentID, String treatmentType, List <Visit> visits) {
         this.treatmentID = treatmentID;
         this.treatmentType = treatmentType;
-        this.visits= new ArrayList<>();
+        this.visits= visits;
     }
-    public Treatment(Integer treatmentID, String treatmentType) {
-        this.treatmentID = treatmentID;
-        this.treatmentType = treatmentType;
-    }
+    
 
 	@Override
 	public boolean equals(Object obj) {

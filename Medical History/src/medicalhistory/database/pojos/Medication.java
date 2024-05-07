@@ -1,4 +1,5 @@
 package medicalhistory.database.pojos;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,6 +35,8 @@ public class Medication {
 	public Medication(int medication_id, String type) {
 		this.medication_id= medication_id;
 		this.type=type;
+		this.manufacturers=new ArrayList<>();
+		this.visits= new ArrayList<>();
 	}
 
 	
@@ -44,6 +47,7 @@ public class Medication {
 	
 	public Medication(int medication_id, String type, List <Manufacturer> manufacturers, List <Visit> visits) {
 		super();
+		this.manufacturers= manufacturers;
 		this.visits=visits;
 	}
 	

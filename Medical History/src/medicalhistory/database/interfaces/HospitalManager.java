@@ -14,7 +14,6 @@ public interface HospitalManager {
 	public List<Hospital> getHospitalByDoctor(int doctor_id);
 	public Hospital getHospitalByVisit(int visit_id);
 	public List<Hospital> getHospitalByPatient(int patientID);
-	public List<String> getSpecialtybyHospital(int hospitalID);
 	
 	
 	

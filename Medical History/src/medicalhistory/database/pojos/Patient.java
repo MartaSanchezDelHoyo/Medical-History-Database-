@@ -23,9 +23,7 @@ public class Patient implements Serializable{
 	private List <Visit> visits ;
 	private List <Doctor> doctors;
 
-	public Patient(Integer patientID, String patientName, String Sex, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors, String sex) {
-		super();
-		this.patientID = patientID;
+	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email) {
 		this.patientName = patientName;
 		this.sex = sex;
 		this.dateofbirth = dateofbirth;
@@ -36,14 +34,15 @@ public class Patient implements Serializable{
 		this.doctors = new ArrayList<>();
 	}
 
-	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email) {
-		this.patientName = patientName;
-		this.sex = sex;
-		this.dateofbirth = dateofbirth;
-		this.bloodtype = bloodtype;
-		this.email = email;
+	
+	public Patient(Integer patientID, String patientName, String Sex, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
+		super();
+		this.allergies = allergies;
+		this.visits = visits;
+		this.doctors =doctors;
 	}
 
+	
 	public List<Allergies> getAllergies() {
 		return allergies;
 	}

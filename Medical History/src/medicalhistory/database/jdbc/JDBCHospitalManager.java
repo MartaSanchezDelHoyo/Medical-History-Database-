@@ -65,9 +65,8 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
-				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospital_id);
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors, visits, hospital_specialties );
+				//Solo se ven los doctores del hospital
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors);
 				
 			}
 			rs.close();
@@ -95,9 +94,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
-				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
-	            //No necesitaria la lista de visits
-				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, visits);
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            hospitals.add(hospital);
 	        }
 	        
@@ -123,10 +120,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
-	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
-	            List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-	            //No haria falta ninguna de las dos listas
-	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, hospital_specialties);
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            
 	        resultSet.close();
 	        statement.close();
@@ -153,11 +147,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospitalID");
 	            String hospitalName = resultSet.getString("hospitalName");
 	            String hospitalAddress = resultSet.getString("hospitalAddress");
-	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
-				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospitalID);
-				List<String> hospital_specialties =conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-				//No haria falta ninguna de las dos listas
-				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, doctors, visits, hospital_specialties);
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            hospitals.add(hospital);
 	        }
 	        
@@ -170,26 +160,6 @@ public class JDBCHospitalManager implements HospitalManager {
 		
 	}
 	
-	public List<String> getSpecialtybyHospital(int hospitalID){
-		List<String> hospital_specialties = new ArrayList<String>();
-		try {
-			String sql = "SELECT Hospital_specialties  FROM hospital WHERE hospitalID LIKE ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setString(1, "%" + hospitalID + "%");
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				hospital_specialties = conMan.getHospitalMan().getSpecialtybyHospital(hospitalID);
-			}
-			    search.close();
-				rs.close();
-			return hospital_specialties;
-			
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return hospital_specialties;
-	}
 	
 
 	public ConnectionManager getConMan() {

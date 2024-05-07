@@ -1,6 +1,7 @@
 package medicalhistory.database.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Test implements Serializable{
@@ -13,10 +14,13 @@ public class Test implements Serializable{
 	private List <Visit> visits;
 	
 	public Test(int test_id, String type) {
-		super();
 		this.test_id = test_id;
 		this.type = type;
+		this.visits= new ArrayList<>();
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Test [test_id=" + test_id + ", type=" + type + "]";

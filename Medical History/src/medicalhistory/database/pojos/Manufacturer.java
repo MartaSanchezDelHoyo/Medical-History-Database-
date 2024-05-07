@@ -18,6 +18,7 @@ public class Manufacturer implements Serializable{
 	public Manufacturer(Integer manufacturerID, String manufacturerName) {
 		this.manufacturerID = manufacturerID;
 		this.manufacturerName = manufacturerName;
+		this.medications= new ArrayList<>();
 	}
 	
 	public Manufacturer(Integer manufacturerID, String manufacturerName, List <Medication> medications) {

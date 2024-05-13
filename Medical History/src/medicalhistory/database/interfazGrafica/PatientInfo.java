@@ -117,7 +117,7 @@ public class PatientInfo extends JFrame {
     // Método para agregar un botón al panel de botones
     private void agregarBoton() {
     	//TODO bloque for para las visitas con el array 
-    	for 
+    	//for 
         JButton boton = new JButton(texto);
         botonPanel.add(boton);
         boton.addActionListener(new ActionListener() {

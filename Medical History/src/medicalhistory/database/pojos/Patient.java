@@ -19,16 +19,18 @@ public class Patient implements Serializable{
 	private Date dateofbirth;
 	private String bloodtype;
 	private String email;
+	private byte[] photo;
 	private List <Allergies> allergies;
 	private List <Visit> visits ;
 	private List <Doctor> doctors;
 
-	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email) {
+	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email, byte[]photo) {
 		this.patientName = patientName;
 		this.sex = sex;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
+		this.setPhoto(photo);
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
@@ -141,6 +143,16 @@ public class Patient implements Serializable{
 		return "Patient [patientID=" + patientID + ", sex=" + sex + ", patientName=" + patientName + ", dateofbirth="
 				+ dateofbirth + ", bloodtype=" + bloodtype + ", email=" + email + ", allergies=" + allergies
 				+ ", visits=" + visits + ", doctors=" + doctors + "]";
+	}
+
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 
 

@@ -32,7 +32,7 @@ public class Menu {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	 private static Scanner scanner;
 	
-	 public static void main(String[] Args) {
+	 public static void main(String[] Args) throws IOException {
 		 conMan= new ConnectionManager();
 		 patientMan = conMan.getPatientMan();
 		 doctorMan = conMan.getDocMan();
@@ -41,6 +41,7 @@ public class Menu {
 		 visitMan= conMan.getVisitMan();
 		 medicationMan= conMan.getMedicationMan();
 		 treatmentMan= conMan.getTreatmentMan();
+		 
 		 addPatient();
 		 System.out.print("Search the patient");
 		 getPatientsByName();
@@ -64,14 +65,11 @@ public class Menu {
 		//User u = new User(username, password, r);
 		//userMan.register(u);
 	}
-<<<<<<< HEAD
+
 	
 	
 	 public static void addPatient() {
-=======
 
-	 public void addPatient() {
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
 	        try {
 	            System.out.println("Enter patient name:");
 	            String name = reader.readLine();
@@ -85,17 +83,18 @@ public class Menu {
 	            String bloodtype = reader.readLine();
 	            System.out.println("Enter patient email:");
 	            String email = reader.readLine();
-
-	            Patient patient = new Patient(name, sex, dateOfBirth, bloodtype, email);
+                byte[] photo=null;
+	            
+	            Patient patient = new Patient(name, sex, dateOfBirth, bloodtype, email, photo);
 	            patientMan.addPatient(patient);
 	        } catch (IOException e) {
 	            System.err.println("Error reading input: " + e.getMessage());
 	        }
 	    }
 
-		public static void getPatientsByName() {
+		public static void getPatientsByName() throws IOException {
 			System.out.println("Enter patient name:");
-			String name = scanner.nextLine();
+			String name = reader.readLine();
 			List<Patient> patients = patientMan.getPatientByName(name);
 			for (Patient patient : patients) {
 				System.out.println(patient);

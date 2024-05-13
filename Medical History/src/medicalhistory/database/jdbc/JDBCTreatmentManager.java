@@ -8,17 +8,26 @@ import java.util.List;
 
 import medicalhistory.database.interfaces.TreatmentManager;
 import medicalhistory.database.pojos.Treatment;
-import medicalhistory.database.pojos.Visit;
+
 
 public class JDBCTreatmentManager implements TreatmentManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	/*
+	 * Method that connects this JDBC with the connection manager
+	 */
 	public JDBCTreatmentManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
 	}
 	
+	
+    /**
+     * @param
+     * @return
+     * @exception
+     */
     public void addTreatment(Treatment treatment) {
         try {
             String template = "INSERT INTO treatments (treatmentId, type) VALUES (?, ?)";;
@@ -33,7 +42,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
         }
     }
 	
-	// necesito que me expliquen esto
+	/*
+	 * Method to see the type of a treatment knowing the treatmentID
+	 */
 	public String getTreatmentType(int treatmentID ) {
 		String treatmentType = null;
 		try {
@@ -54,6 +65,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return treatmentType;
 	}
 	
+	/*
+	 * Method to get all the information of a treatment by the treatmentID
+	 */
 	public Treatment getTreatment(int treatmentId) {
 	    Treatment treatment = null;
 	    try {
@@ -76,7 +90,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 
 	
-	// necesito que me expliquen esto
+	/*
+	 * Method to get the list of treatments of a visit by visit_id
+	 */
 	public List<Treatment> getTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=null;
 		
@@ -101,6 +117,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return listOfTreatments;
 	}
 	
+	/*
+	 * Getters and setters of the attribute conMan
+	 */
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

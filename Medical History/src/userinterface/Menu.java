@@ -85,6 +85,7 @@ public class Menu {
 	            String email = reader.readLine();
                 byte[] photo=null;
 	            
+     
 	            Patient patient = new Patient(name, sex, dateOfBirth, bloodtype, email, photo);
 	            patientMan.addPatient(patient);
 	        } catch (IOException e) {

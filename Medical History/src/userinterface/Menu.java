@@ -30,8 +30,23 @@ public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 private Scanner scanner;
+	 private static Scanner scanner;
 	
+	 public static void main(String[] Args) {
+		 conMan= new ConnectionManager();
+		 patientMan = conMan.getPatientMan();
+		 doctorMan = conMan.getDocMan();
+		 hospitalMan = conMan.getHospitalMan();
+		 testMan= conMan.getTestMan();
+		 visitMan= conMan.getVisitMan();
+		 medicationMan= conMan.getMedicationMan();
+		 treatmentMan= conMan.getTreatmentMan();
+		 addPatient();
+		 System.out.print("Search the patient");
+		 getPatientsByName();
+	 }
+	 
+	 
 	private static void menuLogin() throws NumberFormatException, IOException {
 		System.out.print("Username:");
 		String username = reader.readLine();
@@ -51,15 +66,16 @@ public class Menu {
 	}
 	
 	
-	 public void addPatient() {
+	 public static void addPatient() {
 	        try {
 	            System.out.println("Enter patient name:");
 	            String name = reader.readLine();
 	            System.out.println("Enter patient sex:");
 	            String sex = reader.readLine();
-	            System.out.println("Enter patient birth date (yyyy-MM-dd):");
-	            String dateStr = scanner.nextLine();
-	            Date dateOfBirth = Date.valueOf(dateStr);
+	            System.out.println("Enter patient birth date (DD-MM-YYYY):");
+	            String dateStr = reader.readLine();
+	            LocalDate date= LocalDate.parse(dateStr, formatter);
+	            Date dateOfBirth = Date.valueOf(date);
 	            System.out.println("Enter patient bloodtype:");
 	            String bloodtype = reader.readLine();
 	            System.out.println("Enter patient email:");
@@ -72,7 +88,7 @@ public class Menu {
 	        }
 	    }
 
-		public void getPatientsByName() {
+		public static void getPatientsByName() {
 			System.out.println("Enter patient name:");
 			String name = scanner.nextLine();
 			List<Patient> patients = patientMan.getPatientByName(name);
@@ -113,7 +129,6 @@ public class Menu {
 			System.out.println("Enter patient email:");
 			String email = scanner.nextLine();
 			newpatient.setEmail(email);
-
 			patientMan.changePatient(newpatient);
 		}
 
@@ -220,13 +235,14 @@ public class Menu {
 
 	public void addHospital() {
 	try {
+		int id= 3;
 		// Get hospital details from the user
 		System.out.println("Enter hospital name:");
 		String name = scanner.nextLine();
-
 		System.out.println("Enter hospital address:");
 		String address = scanner.nextLine();
-		Hospital hospital= new Hospital(name, address);
+		
+		Hospital hospital= new Hospital(id, name, address);
 		hospitalMan.addHospital(hospital);
 	} catch (Exception e) {
 		System.err.println("Error adding hospital: " + e.getMessage());

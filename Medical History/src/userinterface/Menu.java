@@ -64,9 +64,14 @@ public class Menu {
 		//User u = new User(username, password, r);
 		//userMan.register(u);
 	}
+<<<<<<< HEAD
 	
 	
 	 public static void addPatient() {
+=======
+
+	 public void addPatient() {
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
 	        try {
 	            System.out.println("Enter patient name:");
 	            String name = reader.readLine();
@@ -391,7 +396,7 @@ public class Menu {
 	public void getTest() {
 		System.out.println("Enter test ID:");
 		int id = scanner.nextInt();
-		Test test = testMan.showTest(id);
+		Test test = testMan.getTest(id);
 		System.out.println(test);
 	}
 
@@ -466,7 +471,7 @@ public class Menu {
 
 			System.out.println("Enter test ID:");
 			int testId = scanner.nextInt();
-			Test test =testMan.showTest(testId);
+			Test test =testMan.getTest(testId);
 
 			System.out.println("Enter hospital ID:");
 			int hospitalId = scanner.nextInt();

@@ -100,7 +100,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
@@ -136,7 +136,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
@@ -174,7 +174,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				
@@ -213,7 +213,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
@@ -248,7 +248,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
@@ -285,7 +285,7 @@ public class JDBCVisitManager implements VisitManager {
 				String duration_medication = rs.getString("duration_medication");
 				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().showTest(rs.getInt("test_id"));
+				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("visit_id"));
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);

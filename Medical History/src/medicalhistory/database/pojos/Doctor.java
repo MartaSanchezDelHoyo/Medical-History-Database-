@@ -3,6 +3,7 @@ package medicalhistory.database.pojos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,18 @@ public class Doctor implements Serializable{
 	
 	
 
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param doctor_id
+	 * @param name
+	 * @param surname
+	 * @param speciality
+	 * @param contact
+	 * @param patients
+	 * @param hospitals
+	 * @param visits
+	 * @param photo
+	 */
 	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
 			List<Hospital> hospitals, List<Visit> visits,byte[] photo) {
 		this.doctor_id = doctor_id;
@@ -35,6 +48,15 @@ public class Doctor implements Serializable{
 		this.visits = visits;
 		this.photo=photo;
 	}
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param doctor_id
+	 * @param name
+	 * @param surname
+	 * @param speciality
+	 * @param contact
+	 * @param photo
+	 */
 	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]photo) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
@@ -47,6 +69,14 @@ public class Doctor implements Serializable{
 		this.visits=new ArrayList<>();
 	}
 	
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param name
+	 * @param surname
+	 * @param specialty
+	 * @param contact
+	 * @param photo
+	 */
 	public Doctor(String name, String surname, String specialty, String contact,byte[]photo) {
 		this.setName(name);
 		this.setSurname(surname);
@@ -61,8 +91,8 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="
-				+ speciality + ", contact=" + contact + ", patients=" + patients + ", hospitals=" + hospitals
-				+ ", visits=" + visits + "]";
+				+ speciality + ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", patients=" + patients
+				+ ", hospitals=" + hospitals + ", visits=" + visits + "]";
 	}
 
 	@Override
@@ -158,8 +188,6 @@ public class Doctor implements Serializable{
 	public List <Visit> getVisits() {
 		return visits;
 	}
-
-
 
 	public void setVisits(List <Visit> visits) {
 		this.visits = visits;

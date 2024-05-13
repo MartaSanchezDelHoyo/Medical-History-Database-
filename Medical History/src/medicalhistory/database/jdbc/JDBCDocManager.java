@@ -11,11 +11,19 @@ public class JDBCDocManager implements DoctorManager {
 	private Connection c;
 	private ConnectionManager conMan;
 
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCDocManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
 	}
  
+	/**
+	 *This method allows to add a doctor in the database
+	 *@param to the object Doctor with the  actualized information 
+	 */
 	@Override
 	public void addDoctor(Doctor a) {
 		try {
@@ -36,6 +44,11 @@ public class JDBCDocManager implements DoctorManager {
 		
 	}
 
+	/**
+	 *Adds all the doctors to list that have as specialty the same as the parameter
+	 *@param specialty is the specialty we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
 	@Override
 	public List<Doctor> getDoctorsbySpecialties(String specialty) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -71,6 +84,12 @@ public class JDBCDocManager implements DoctorManager {
 	}
 	
 // hace falta get doctror by photo??
+
+	/**
+	 *Adds all the doctors to list that work in the hospital that the parameter indicates
+	 *@param hospitalName is the hospital we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
 	@Override
 	public List<Doctor> getDoctorsbyHospital(String hospitalName) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -101,7 +120,13 @@ public class JDBCDocManager implements DoctorManager {
 		}
 		return doctors;
 	}
-
+	
+	/**
+	 *Adds all the doctors to a list that has the same name and surname that the parameter indicates
+	 *@param name_ is the name we want to group the doctors by 
+	 *@param surname_ is the surname we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
 	@Override
 	public List<Doctor> getDoctorByNameSurname(String name_, String surname_) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -134,6 +159,10 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 
+	/**
+	 *Updates the data of a doctor that already exists in the database
+	 *@param a is the object Doctor that has the updated information 
+	 */
 	@Override
 	public void changeDoctor(Doctor a) {
 		String template = "UPDATE authors SET name = ?, surname = ?,specialty = ?,contact = ?,photo=? WHERE id = ?";
@@ -156,6 +185,11 @@ public class JDBCDocManager implements DoctorManager {
 		
 	}
 
+	/**
+	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
+	 *@param id is the id from the doctor we want to get from the database
+	 *@return Doctor object with all the actualized information from the database
+	  */
 	@Override
 	public Doctor getDoctor(int id) {
 		try {
@@ -178,6 +212,11 @@ public class JDBCDocManager implements DoctorManager {
 	
 	}
 
+	/**
+	 *Returns an object doctor that has all the information of a doctor from the database with an specified patient searched by the patients id
+	 *@param patientId is the id of the patient we want to get their doctors from the database
+	 *@return List of Doctor object with all the actualized information from the database
+	  */
 	@Override
 	public List<Doctor> getDoctors(int patientId){
 	    List<Doctor> doctors = new ArrayList<>();
@@ -210,7 +249,7 @@ public class JDBCDocManager implements DoctorManager {
 	    }
 	    return doctors;
 	}
-
+	
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

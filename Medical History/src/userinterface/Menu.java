@@ -30,7 +30,7 @@ public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 private static Scanner scanner = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 	
 	 public static void main(String[] Args) throws IOException {
 		 conMan= new ConnectionManager();
@@ -44,7 +44,9 @@ public class Menu {
 		 
 		 addPatient();
 		 System.out.print("Search the patient \n");
-		 
+		 Patient patient = patientMan.getPatient("Paco");
+		 System.out.print(patient);
+
 	 }
 	 
 	 
@@ -79,6 +81,7 @@ public class Menu {
 	            String dateStr = reader.readLine();
 	            LocalDate date= LocalDate.parse(dateStr, formatter);
 	            Date dateOfBirth = Date.valueOf(date);
+	            System.out.println(dateOfBirth);
 	            System.out.println("Enter patient bloodtype:");
 	            String bloodtype = reader.readLine();
 	            System.out.println("Enter patient email:");
@@ -110,7 +113,7 @@ public class Menu {
 			System.out.println(patient);
 		}
 
-		public void changePatient() {
+		public void changePatient() throws IOException {
 			System.out.println("Enter patient ID:");
 			int id = scanner.nextInt();  
 			Patient newpatient = patientMan.getPatient(id); 
@@ -121,9 +124,11 @@ public class Menu {
 
 
 			System.out.println("Enter patient birth date (yyyy-MM-dd):");
-			String dateStr = scanner.nextLine();
-			Date dateOfBirth = Date.valueOf(dateStr);
+            String dateStr = reader.readLine();
+            LocalDate date= LocalDate.parse(dateStr, formatter);
+            Date dateOfBirth = Date.valueOf(date);
 			newpatient.setDateofbirth(dateOfBirth);
+			System.out.println(dateOfBirth);
 
 			System.out.println("Enter patient bloodtype:");
 			String bloodtype = scanner.nextLine();

@@ -91,6 +91,34 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patient;
 	}
+	
+	@Override
+	public Patient getPatient(String name ) {
+	    Patient patient= null;
+	    try {
+	        String sql = "SELECT * FROM patients WHERE name = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setString(1,name);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
+	          //Falta lista de alergias y de doctores
+	            patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
+	            
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving patients by name: " + e.getMessage());
+	    }
+	    return patient;
+	}
 	@Override
 	public void changePatient(Patient a) {
 	    try {

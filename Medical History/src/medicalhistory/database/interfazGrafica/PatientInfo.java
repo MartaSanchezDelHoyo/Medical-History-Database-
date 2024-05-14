@@ -130,9 +130,10 @@ public class PatientInfo extends JFrame {
     }
             });
         }
-    }
+
         // Refrescar el panel para que los cambios se muestren correctamente
-        botonPanel.revalidate();
-        botonPanel.repaint();
+	panelBotonesMedication.revalidate();
+	panelBotonesMedication.repaint();
     }
+}
     

@@ -21,9 +21,9 @@ public class JDBCPatientManager implements PatientManager {
 	        PreparedStatement statement = c.prepareStatement(sql);
 
 	        statement.setString(1, a.getPatientName());
-	        statement.setString(2, a.getSex());
-	        statement.setDate(3, a.getDateofbirth());
-	        statement.setString(4, a.getBloodtype());
+	        statement.setDate(2, a.getDateofbirth());
+	        statement.setString(4, a.getEmail());
+	        statement.setString(3, a.getBloodtype());
 	        statement.setBytes(5, a.getPhoto());
 	        statement.executeUpdate();
 	        statement.close();
@@ -46,13 +46,13 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            String patientName = resultSet.getString("name");
-	            String sex = resultSet.getString("sex");
-	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
-	            String bloodtype = resultSet.getString("bloodtype");
-	            String email = resultSet.getString("email"); 
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
 	            //Falta lista de alergias y de doctores
-	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
+	            Patient patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
 	            patients.add(patient);
 	        }
 	        
@@ -74,13 +74,13 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            String patientName = resultSet.getString("name");
-	            String sex = resultSet.getString("sex");
-	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
-	            String bloodtype = resultSet.getString("bloodtype");
-	            String email = resultSet.getString("email"); 
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
 	          //Falta lista de alergias y de doctores
-	            patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
+	            patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
 	            
 	        }
 	        
@@ -94,12 +94,13 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void changePatient(Patient a) {
 	    try {
-	        String sql = "UPDATE patients SET name = ?, sex = ?, dateofbirth = ?, email = ? WHERE patient_id = ?";
+	        String sql = "UPDATE patients SET name = ?, date_of_birth = ?, contact = ?, blood_type = ?, photo = ?,  WHERE patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, a.getPatientName());
-	        statement.setString(2, a.getSex());
-	        statement.setDate(3, a.getDateofbirth());
-	        statement.setString(4, a.getEmail());
+	        statement.setDate(2, a.getDateofbirth());
+	        statement.setString(3, a.getEmail());
+	        statement.setString(4, a.getBloodtype());
+	        statement.setBytes(5, a.getPhoto());
 	        statement.setInt(5, a.getPatientID());
 	        
 	        int rowsUpdated = statement.executeUpdate();
@@ -129,12 +130,12 @@ public class JDBCPatientManager implements PatientManager {
 
 	        while (resultSet.next()) {
 	            String patientName = resultSet.getString("name");
-	            String sex = resultSet.getString("sex");
-	            Date dateOfBirth = resultSet.getDate("dateofbirth"); 
-	            String bloodtype = resultSet.getString("bloodtype");
-	            String email = resultSet.getString("email");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
 	            //Falta lista de alergias
-	            Patient patient = new Patient (patientName, sex, dateOfBirth, bloodtype, email);
+	            Patient patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
 	            patients.add(patient);
 	        }
 	        

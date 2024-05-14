@@ -86,7 +86,7 @@ public class Menu {
                 byte[] photo=null;
 	            
      
-	            Patient patient = new Patient(name, sex, dateOfBirth, bloodtype, email, photo);
+	            Patient patient = new Patient(name, dateOfBirth, bloodtype, email, photo);
 	            patientMan.addPatient(patient);
 	        } catch (IOException e) {
 	            System.err.println("Error reading input: " + e.getMessage());
@@ -118,9 +118,6 @@ public class Menu {
 			String name = scanner.nextLine();
 			newpatient.setPatientName(name);
 
-			System.out.println("Enter patient sex: ");
-			String sex = scanner.nextLine();
-			newpatient.setSex(sex);
 
 			System.out.println("Enter patient birth date (yyyy-MM-dd):");
 			String dateStr = scanner.nextLine();

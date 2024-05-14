@@ -14,7 +14,6 @@ public class Patient implements Serializable{
 	 */
 	private static final long serialVersionUID = -2478862032476138610L;
 	private Integer patientID;
-	private String sex;
 	private String patientName;
 	private Date dateofbirth;
 	private String bloodtype;
@@ -24,9 +23,8 @@ public class Patient implements Serializable{
 	private List <Visit> visits ;
 	private List <Doctor> doctors;
 
-	public Patient(String patientName, String sex, Date dateofbirth, String bloodtype, String email, byte[]photo) {
+	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
 		this.patientName = patientName;
-		this.sex = sex;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
@@ -37,7 +35,7 @@ public class Patient implements Serializable{
 	}
 
 	
-	public Patient(Integer patientID, String patientName, String Sex, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
 		super();
 		this.allergies = allergies;
 		this.visits = visits;
@@ -96,12 +94,7 @@ public class Patient implements Serializable{
 	public void setAlergies(List <Allergies> allergies) {
 		this.allergies = allergies;
 	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+	
 	public List <Visit> getVisits() {
 		return visits;
 	}
@@ -119,7 +112,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(allergies, bloodtype, dateofbirth, doctors, email, patientID, patientName, sex, visits);
+		return Objects.hash(allergies, bloodtype, dateofbirth, doctors, email, patientID, patientName, visits);
 	}
 
 	@Override
@@ -134,13 +127,12 @@ public class Patient implements Serializable{
 		return Objects.equals(allergies, other.allergies) && Objects.equals(bloodtype, other.bloodtype)
 				&& Objects.equals(dateofbirth, other.dateofbirth) && Objects.equals(doctors, other.doctors)
 				&& Objects.equals(email, other.email) && Objects.equals(patientID, other.patientID)
-				&& Objects.equals(patientName, other.patientName) && Objects.equals(sex, other.sex)
-				&& Objects.equals(visits, other.visits);
+				&& Objects.equals(patientName, other.patientName) && Objects.equals(visits, other.visits);
 	}
 
 	@Override
 	public String toString() {
-		return "Patient [patientID=" + patientID + ", sex=" + sex + ", patientName=" + patientName + ", dateofbirth="
+		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth="
 				+ dateofbirth + ", bloodtype=" + bloodtype + ", email=" + email + ", allergies=" + allergies
 				+ ", visits=" + visits + ", doctors=" + doctors + "]";
 	}

@@ -122,6 +122,7 @@ public class PatientInfo extends JFrame {
             JButton boton = new JButton("Treatment:" + a.getTreatments().get(i).toString());
             panelBotonesMedication.add(boton);
             boton.addActionListener(new ActionListener() {
+            	
             public void actionPerformed(ActionEvent e) {
             //open new treatment parameter
         panelBotonesMedication.revalidate();

@@ -17,14 +17,14 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient a) {
 	    try {
-	        String sql = "INSERT INTO patients (name, surname, age, gender, email) VALUES (?, ?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO patients (name, date_of_birth, contact, blood_type, photo) VALUES (?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
 
 	        statement.setString(1, a.getPatientName());
 	        statement.setString(2, a.getSex());
 	        statement.setDate(3, a.getDateofbirth());
 	        statement.setString(4, a.getBloodtype());
-	        statement.setString(4, a.getEmail());
+	        statement.setBytes(5, a.getPhoto());
 	        statement.executeUpdate();
 	        statement.close();
 	        

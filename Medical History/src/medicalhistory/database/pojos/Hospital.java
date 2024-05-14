@@ -5,20 +5,20 @@ import java.util.Objects;
 import java.io.Serializable;
 
 public class Hospital implements Serializable{
-	/**
-	 * 
-	 */
+
+	
 	private static final long serialVersionUID = -1457717917835220464L;
 	private Integer hospitalID;
     private String hospitalName;
     private String hospitalAddress;
     private List <Doctor> Hospital_doctors;
     private List <Visit> Hospital_visits;
-    
-    
-    
-    
         
+    /** 
+     * @param hospitalID identification of the hospital
+     * @param hospitalName name of the hospital
+     * @param hospitalAddress address of the hospital
+     */
     public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
@@ -27,11 +27,24 @@ public class Hospital implements Serializable{
 		this.Hospital_visits = new ArrayList<>();
 	}
 
+	/**Constructor without the visits as a parameter
+	 * @param hospitalID
+	 * @param hospitalName
+	 * @param hospitalAddress
+	 * @param hospital_doctors list of doctors of the hospital
+	 */
 	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors) {
 		super();
 		this.Hospital_doctors= hospital_doctors;
 	}
 	
+	/**Constructor with every parameter
+	 * @param hospitalID
+	 * @param hospitalName
+	 * @param hospitalAddress
+	 * @param hospital_doctors
+	 * @param hospital_visits list of visits of the hospitals
+	 */
 	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<Visit> hospital_visits) {
 		super();
 	this.Hospital_doctors =hospital_doctors;
@@ -39,7 +52,6 @@ public class Hospital implements Serializable{
 	}
 	
 
-	
 
 	@Override
     public int hashCode() {
@@ -54,7 +66,10 @@ public class Hospital implements Serializable{
                 ", hospitalAddress='" + hospitalAddress + '\'' +
                 '}';
     }
-    
+    /** Equals method to compare two treatmentID
+	 * @param Object 
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

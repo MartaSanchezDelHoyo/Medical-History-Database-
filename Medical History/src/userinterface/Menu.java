@@ -30,7 +30,7 @@ public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 private static Scanner scanner = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 	
 	 public static void main(String[] Args) throws IOException {
 		 conMan= new ConnectionManager();
@@ -44,6 +44,11 @@ public class Menu {
 		 
 		 addPatient();
 		 System.out.print("Search the patient \n");
+		 List<Patient> patients = patientMan.getPatientByName("Paco");
+			for (Patient patient : patients) {
+				System.out.println(patient);
+				System.out.println("Hola");
+			}
 		 
 	 }
 	 

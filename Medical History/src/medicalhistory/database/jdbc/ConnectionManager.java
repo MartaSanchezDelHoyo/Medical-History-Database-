@@ -36,7 +36,7 @@ public class ConnectionManager {
 	private void connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/library.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/medicalhistory.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 		} catch (ClassNotFoundException cnfE) {
 			System.out.println("Databases libraries not loaded");

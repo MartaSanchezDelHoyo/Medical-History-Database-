@@ -44,12 +44,7 @@ public class Menu {
 		 
 		 addPatient();
 		 System.out.print("Search the patient \n");
-		 List<Patient> patients = patientMan.getPatientByName("Paco");
-			for (Patient patient : patients) {
-				System.out.println(patient);
-				System.out.print("Caca");
-			}
-
+		 
 	 }
 	 
 	 

@@ -3,12 +3,14 @@ package medicalhistory.database.interfazGrafica;
 import javax.swing.*;
 
 import medicalhistory.database.pojos.Patient;
+import medicalhistory.database.pojos.Visit;
 
 import java.awt.*;
 import java.awt.event.*;
 
 public class PatientInfo extends JFrame {
     private JPanel botonPanel;
+	private Container panelBotonesMedication;
 
 	public PatientInfo(Patient a) {
         setTitle("Patient Information");
@@ -115,18 +117,21 @@ public class PatientInfo extends JFrame {
         setVisible(true);
     }
     // Método para agregar un botón al panel de botones
-    private void agregarBoton() {
-    	//TODO bloque for para las visitas con el array 
-    	for 
-        JButton boton = new JButton(texto);
-        botonPanel.add(boton);
-        boton.addActionListener(new ActionListener() {
+	private void addBotonTreatments(Visit a) {
+        for (int i = 1; i <= a.getTreatments().size(); i++) {
+            JButton boton = new JButton("Treatment:" + a.getTreatments().get(i).toString());
+            panelBotonesMedication.add(boton);
+            boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(PatientInfo.this, "Has pulsado: " + ((JButton)e.getSource()).getText());
-            }
-        });
+            //open new treatment parameter
+        panelBotonesMedication.revalidate();
+        panelBotonesMedication.repaint();
+    }
+            });
+        }
+    }
         // Refrescar el panel para que los cambios se muestren correctamente
         botonPanel.revalidate();
         botonPanel.repaint();
     }
-    }
+    

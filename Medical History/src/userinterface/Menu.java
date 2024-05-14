@@ -30,7 +30,7 @@ public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 private static Scanner scanner;
+	 private static Scanner scanner = new Scanner(System.in);
 	
 	 public static void main(String[] Args) throws IOException {
 		 conMan= new ConnectionManager();
@@ -43,8 +43,8 @@ public class Menu {
 		 treatmentMan= conMan.getTreatmentMan();
 		 
 		 addPatient();
-		 System.out.print("Search the patient");
-		 getPatientsByName();
+		 System.out.print("Search the patient \n");
+		 
 	 }
 	 
 	 
@@ -102,9 +102,10 @@ public class Menu {
 			}
 		}
 
-		public void getPatient() {
+		public static void getPatient()  {
 			System.out.println("Enter patient ID:");
-			int id = scanner.nextInt();
+			int id = scanner.nextInt(); 
+			System.out.println(id);
 			Patient patient = patientMan.getPatient(id);
 			System.out.println(patient);
 		}
@@ -134,14 +135,14 @@ public class Menu {
 			patientMan.changePatient(newpatient);
 		}
 
-		public void getPatients() {
+		public static void getPatients() {
 			System.out.println("Enter the doctor ID:");
 			int id = scanner.nextInt();
 			List <Patient> patients = patientMan.getPatients(id);
 			System.out.println(patients);
 		}
 
-	    public void addDoctor() {
+	    public static void addDoctor() {
 	        try {
 	           
 	            System.out.println("Enter doctor name:");

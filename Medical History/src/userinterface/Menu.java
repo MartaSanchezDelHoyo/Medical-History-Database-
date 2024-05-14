@@ -44,7 +44,8 @@ public class Menu {
 		 
 		 addPatient();
 		 System.out.print("Search the patient \n");
-		 Patient patient = patientMan.getPatient("Paco");
+		 String Paco= "Paco";
+		 Patient patient = patientMan.getPatient(Paco);
 		 System.out.print(patient);
 
 	 }
@@ -75,13 +76,11 @@ public class Menu {
 	        try {
 	            System.out.println("Enter patient name:");
 	            String name = reader.readLine();
-	            System.out.println("Enter patient sex:");
-	            String sex = reader.readLine();
 	            System.out.println("Enter patient birth date (DD-MM-YYYY):");
 	            String dateStr = reader.readLine();
 	            LocalDate date= LocalDate.parse(dateStr, formatter);
 	            Date dateOfBirth = Date.valueOf(date);
-	            System.out.println(dateOfBirth);
+	            
 	            System.out.println("Enter patient bloodtype:");
 	            String bloodtype = reader.readLine();
 	            System.out.println("Enter patient email:");
@@ -91,6 +90,8 @@ public class Menu {
      
 	            Patient patient = new Patient(name, dateOfBirth, bloodtype, email, photo);
 	            patientMan.addPatient(patient);
+	            System.out.println(date);
+	            System.out.println(dateOfBirth);
 	        } catch (IOException e) {
 	            System.err.println("Error reading input: " + e.getMessage());
 	        }

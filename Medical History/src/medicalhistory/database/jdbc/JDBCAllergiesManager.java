@@ -24,7 +24,7 @@ public class JDBCAllergiesManager implements AllergiesManager{
 	
 	 public void addAllergy(Allergies allergies) {
 	        try {
-	            String template = "INSERT INTO allergies (allergy_type) VALUES (?)";;
+	            String template = "INSERT INTO allergies (allergy_type) VALUES ('?')";;
 	            PreparedStatement pstmt = c.prepareStatement(template);
 	            pstmt.setString(1, allergies.getAllergiesName());
 	            pstmt.executeUpdate();

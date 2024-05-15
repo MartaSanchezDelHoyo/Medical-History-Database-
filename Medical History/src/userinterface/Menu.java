@@ -42,11 +42,11 @@ public class Menu {
 		 visitMan= conMan.getVisitMan();
 		 medicationMan= conMan.getMedicationMan();
 		 treatmentMan= conMan.getTreatmentMan();
-		 allergiesMan= conMan.getAllergiesMan();
+		 allergiesMan=conMan.getAllergiesMan();
 		 
 		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
-		 getPatientsByName();
+		
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
 		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
 		 Test test =new Test("Radiografía", null);
@@ -55,11 +55,12 @@ public class Menu {
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
-         System.out.println(doc);
-         conMan.getDocMan().addDoctor(doc);
+         Allergies allergy= new Allergies("Meat");
+ 
+         conMan.getAllergiesMan().addAllergy(allergy);
          System.out.println("Firewall pass");
-         Doctor docUno= conMan.getDocMan().getDoctor(1);
-         System.out.println(docUno);
+         Allergies allergyDos= conMan.getAllergiesMan().getAllergy(2);
+         System.out.println(allergy);
       
         
         //Manufacturer has an error in db
@@ -514,5 +515,9 @@ public class Menu {
 		List<Visit> visits = visitMan.getVisitByTreatment(id);
 		System.out.println(visits);
 	}
+
+
+
+	
 
 }

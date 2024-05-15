@@ -27,7 +27,7 @@ public class JDBCDocManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor a) {
 		try {
-			String template = "INSERT INTO doctors (name,surname, speciality,contact, photo) VALUES (?, ?, ?,?,?)";
+			String template = "INSERT INTO doctors (name, surname, speciality, contact, photo) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, a.getName());
@@ -202,7 +202,7 @@ public class JDBCDocManager implements DoctorManager {
 			List<Patient> patients= conMan.getPatientMan().getPatients(id);
 			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
 			byte[] photo =rs.getBytes("photo");
-			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"),patients,hospitals,visits, photo);
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"), photo);
 			return a;} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();

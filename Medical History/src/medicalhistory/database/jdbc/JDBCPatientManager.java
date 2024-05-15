@@ -14,6 +14,8 @@ public class JDBCPatientManager implements PatientManager {
 		this.setConMan(connectionManager);
 	}
 	
+	
+	
 	@Override
 	public void addPatient(Patient a) {
 	    try {
@@ -22,8 +24,8 @@ public class JDBCPatientManager implements PatientManager {
 
 	        statement.setString(1, a.getPatientName());
 	        statement.setDate(2, a.getDateofbirth());
-	        statement.setString(4, a.getEmail());
-	        statement.setString(3, a.getBloodtype());
+	        statement.setString(3, a.getEmail());
+	        statement.setString(4, a.getBloodtype());
 	        statement.setBytes(5, a.getPhoto());
 	        statement.executeUpdate();
 	        statement.close();
@@ -46,13 +48,14 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
 	        	String patientName = resultSet.getString("name");
 	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
 	            //Falta lista de alergias y de doctores
-	            Patient patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
+	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
 	            patients.add(patient);
 	        }
 	        
@@ -65,22 +68,23 @@ public class JDBCPatientManager implements PatientManager {
 	}
 	
 	@Override
-	public Patient getPatient(int patientID ) {
+	public Patient getPatient(int patient_ID ) {
 	    Patient patient= null;
 	    try {
 	        String sql = "SELECT * FROM patients WHERE patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1,patientID);
+	        statement.setInt(1,patient_ID);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
 	        	String patientName = resultSet.getString("name");
 	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
 	          //Falta lista de alergias y de doctores
-	            patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
+	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo);
 	            
 	        }
 	        
@@ -102,13 +106,14 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
 	        	String patientName = resultSet.getString("name");
 	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
 	          //Falta lista de alergias y de doctores
-	            patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
+	            patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
 	            
 	        }
 	        
@@ -122,14 +127,14 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void changePatient(Patient a) {
 	    try {
-	        String sql = "UPDATE patients SET name = ?, date_of_birth = ?, contact = ?, blood_type = ?, photo = ?,  WHERE patient_id = ?";
+	        String sql = "UPDATE patients SET name = ?, date_of_birth = ?, contact = ?, blood_type = ?, photo = ? WHERE patient_id = ? ";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, a.getPatientName());
 	        statement.setDate(2, a.getDateofbirth());
 	        statement.setString(3, a.getEmail());
 	        statement.setString(4, a.getBloodtype());
 	        statement.setBytes(5, a.getPhoto());
-	        statement.setInt(5, a.getPatientID());
+	        statement.setInt(6, a.getPatientID());
 	        
 	        int rowsUpdated = statement.executeUpdate();
 	        
@@ -157,13 +162,14 @@ public class JDBCPatientManager implements PatientManager {
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
 	            String patientName = resultSet.getString("name");
 	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
 	            //Falta lista de alergias
-	            Patient patient = new Patient (patientName, dateOfBirth, bloodtype, email, photo);
+	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
 	            patients.add(patient);
 	        }
 	        

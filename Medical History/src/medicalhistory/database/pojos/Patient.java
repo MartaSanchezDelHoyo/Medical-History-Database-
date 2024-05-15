@@ -23,6 +23,7 @@ public class Patient implements Serializable{
 	private List <Visit> visits ;
 	private List <Doctor> doctors;
 
+	
 	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
 		this.patientName = patientName;
 		this.dateofbirth = dateofbirth;
@@ -33,10 +34,29 @@ public class Patient implements Serializable{
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
 	}
+	
+	
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
+		this.patientID=patientID;
+		this.patientName = patientName;
+		this.dateofbirth = dateofbirth;
+		this.bloodtype = bloodtype;
+		this.email = email;
+		this.setPhoto(photo);
+		this.allergies = new ArrayList<>();
+		this.visits = new ArrayList<>();
+		this.doctors = new ArrayList<>();
+	
+	}
 
 	
 	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
-		super();
+		this.patientID=patientID;
+		this.patientName = patientName;
+		this.dateofbirth = dateofbirth;
+		this.bloodtype = bloodtype;
+		this.email = email;
+		this.setPhoto(photo);
 		this.allergies = allergies;
 		this.visits = visits;
 		this.doctors =doctors;

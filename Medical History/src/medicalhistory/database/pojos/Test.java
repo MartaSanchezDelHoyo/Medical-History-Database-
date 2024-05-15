@@ -11,9 +11,16 @@ public class Test implements Serializable{
 	private static final long serialVersionUID = 888971237847553913L;
 	private int test_id;
 	private String type;
+	private byte[] archivoPDF;
 	private List <Visit> visits;
 	
-	public Test(int test_id, String type) {
+	public Test( String type, byte[] archivoPDF) {
+		this.setArchivoPDF(archivoPDF);
+		this.type = type;
+		this.visits= new ArrayList<>();
+	}
+	public Test(int test_id, String type, byte[] archivoPDF) {
+		this.setArchivoPDF(archivoPDF);
 		this.test_id = test_id;
 		this.type = type;
 		this.visits= new ArrayList<>();
@@ -61,5 +68,11 @@ public class Test implements Serializable{
 
 	public void setVisits(List<Visit> visits) {
 		this.visits = visits;
+	}
+	public byte[] getArchivoPDF() {
+		return archivoPDF;
+	}
+	public void setArchivoPDF(byte[] archivoPDF) {
+		this.archivoPDF = archivoPDF;
 	}
 }

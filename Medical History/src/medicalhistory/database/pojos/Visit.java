@@ -14,7 +14,6 @@ public class Visit implements Serializable {
 	private Integer visit_id; 
 	private Date visit_date;
 	private String visit_observation;
-	private String duration_medication;
 	private Hospital hospital;
 	private Patient visit_patient;
 	private Doctor visit_doctor;
@@ -22,27 +21,48 @@ public class Visit implements Serializable {
 	private List <Medication> medications;
 	private List <Treatment> treatments;
 	
-	public Visit(int visitId, Date visitDate, String observations, String durationMedication, Patient patientId, Doctor doctorId, Test testId, Hospital hospitalId) {
+	
+	public Visit(Date visitDate, String observations, Patient patient, Doctor doctor , Test test, Hospital hospital) {
+		this.visit_date = visitDate;
+		this.visit_observation = observations;
+		this.hospital = hospital;
+		this.visit_patient = patient;
+		this.visit_doctor = doctor;
+		this.visit_test=test;
+	}
+	
+	public Visit(int visitId, Date visitDate, String observations, Patient patient, Doctor doctor, Test test, Hospital hospital) {
 		this.visit_id = visitId;
 		this.visit_date = visitDate;
 		this.visit_observation = observations;
-		this.duration_medication = durationMedication;
-		this.hospital = hospitalId;
-		this.visit_patient = patientId;
-		this.visit_doctor = doctorId;
-		this.visit_test=testId;
+		this.hospital = hospital;
+		this.visit_patient = patient;
+		this.visit_doctor = doctor;
+		this.visit_test=test;
 	}
 	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test, List<Medication> medications) {
-		super();
+	public Visit(Integer visit_id, Date visit_date, String visit_observation, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test, List<Medication> medications) {
+		this.visit_id = visit_id;
+		this.visit_date = visit_date;
+		this.visit_observation = visit_observation;
+		this.hospital = hospital;
+		this.visit_patient = visit_patient;
+		this.visit_doctor = visit_doctor;
+		this.visit_test=visit_test;
 		this.medications = medications;
 		
 	}
 	
 	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, String duration_medication, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
+	public Visit(Integer visit_id, Date visit_date, String visit_observation, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
 			 List<Medication> medications, List<Treatment> treatments) {
-		super();
+		this.visit_id = visit_id;
+		this.visit_date = visit_date;
+		this.visit_observation = visit_observation;
+		this.hospital = hospital;
+		this.visit_patient = visit_patient;
+		this.visit_doctor = visit_doctor;
+		this.visit_test=visit_test; 
 		this.medications = medications;
 		this.treatments = treatments;
 	}
@@ -80,12 +100,6 @@ public class Visit implements Serializable {
 	}
 	public void setVisit_observation(String visit_observation) {
 		this.visit_observation = visit_observation;
-	}
-	public String getDuration_medication() {
-		return duration_medication;
-	}
-	public void setDuration_medication(String duration_medication) {
-		this.duration_medication = duration_medication;
 	}
 
 	public Hospital getHospital() {
@@ -131,7 +145,7 @@ public class Visit implements Serializable {
 	@Override
 	public String toString() {
 		return "Visit [visit_id=" + visit_id + ", visit_date=" + visit_date + ", visit_observation=" + visit_observation
-				+ ", duration_medication=" + duration_medication + ", hospital=" + hospital + ", visit_patient=" + visit_patient 
+				+ ", hospital=" + hospital + ", visit_patient=" + visit_patient 
 				+ ", visit_doctor=" + visit_doctor + ", visit_test=" + visit_test +
 				", medications=" + medications + ", treatments=" + treatments + "]";
 	}

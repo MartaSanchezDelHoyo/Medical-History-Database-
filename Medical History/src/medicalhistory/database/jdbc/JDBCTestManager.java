@@ -25,11 +25,11 @@ public class JDBCTestManager implements TestManager{
 	
 	public void addTest(Test entry) {
 		try {
-			String template = "INSERT INTO test (test_id, type) VALUES (?, ?)";
+			String template = "INSERT INTO tests (test_type, pdf) VALUES (?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getTest_id());
-			pstmt.setString(2, entry.getType());
+			pstmt.setString(1,entry.getType());
+			pstmt.setBytes(2, entry.getArchivoPDF());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -46,15 +46,15 @@ public class JDBCTestManager implements TestManager{
     public Test getTest (Visit toSearch) {
 		Test obtained = null;
 		try {
-			String sql = "SELECT t.test_id, t.test_type FROM Visits AS v JOIN test AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
+			String sql = "SELECT t.test_id, t.test_type FROM Visits AS v JOIN tests AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, toSearch.getVisit_id());
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer test_id = rs.getInt("test_id");
 				String test_type = rs.getString("test_type");
-				
-				obtained = new Test(test_id, test_type);
+				byte[] archivoPDF= rs.getBytes("pdf");
+				obtained = new Test(test_id, test_type, archivoPDF);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -80,8 +80,8 @@ public class JDBCTestManager implements TestManager{
 			while(rs.next()) {
 				Integer test_id = rs.getInt("test_id");
 				String test_type = rs.getString("test_type");
-				
-				obtained = new Test(test_id, test_type);
+				byte[] archivoPDF= rs.getBytes("pdf");
+				obtained = new Test(test_id, test_type, archivoPDF);
 			}
 			return obtained;
 		} catch (SQLException e) {
@@ -106,10 +106,11 @@ public class JDBCTestManager implements TestManager{
 	        ResultSet resultSet = statement.executeQuery();
 	        
 	        while (resultSet.next()) {
-	            int testId = resultSet.getInt("test_id");
-	            String testName = resultSet.getString("test_name");
-	            Test test = new Test(testId, testName);
-	            tests.add(test);
+	            int test_id = resultSet.getInt("test_id");
+	            String test_type = resultSet.getString("test_type");
+	            byte[] archivoPDF= resultSet.getBytes("pdf");
+	            Test obtained = new Test(test_id, test_type, archivoPDF);
+	            tests.add(obtained);
 	        }
 	        
 	        resultSet.close();

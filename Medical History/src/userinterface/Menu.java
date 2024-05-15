@@ -41,13 +41,31 @@ public class Menu {
 		 visitMan= conMan.getVisitMan();
 		 medicationMan= conMan.getMedicationMan();
 		 treatmentMan= conMan.getTreatmentMan();
+		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
+         Date dateOfBirth = Date.valueOf(date);
+		 getPatientsByName();
+		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
+		 Doctor doc= new Doctor("Almodovar", "Ramirez", "Trauma", "almo@gmail.com",null);
+		 Test test =new Test("Radiografía", null);
+		 Hospital hos= new Hospital("Viamed Santa Elena", "Calle don Pepe, 29");
+         Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
+         
+         conMan.getTestMan().addTest(test);
+		
+        // conMan.getDocMan().addDoctor(doc);
+        // System.out.println("Firewall pass");
+        // conMan.getDocMan().getDoctor(1);
 		 
-		 addPatient();
-		 System.out.print("Search the patient \n");
-		 String Paco= "Paco";
-		 Patient patient = patientMan.getPatient(Paco);
-		 System.out.print(patient);
-
+		 
+		 
+		 //conMan.getPatientMan().changePatient(acambiar);
+		 // getPatientsByName();
+		 //Patient obt= conMan.getPatientMan().getPatient("Nico");
+		 
+		 //Patient obtDOS= conMan.getPatientMan().getPatient(3);
+		 
+		 
+		
 	 }
 	 
 	 
@@ -114,17 +132,15 @@ public class Menu {
 			System.out.println(patient);
 		}
 
-		public void changePatient() throws IOException {
+		public static void changePatient() throws IOException {
 			System.out.println("Enter patient ID:");
 			int id = scanner.nextInt();  
 			Patient newpatient = patientMan.getPatient(id); 
 
 			System.out.println("Enter patient name:");
-			String name = scanner.nextLine();
+			String name = reader.readLine();
 			newpatient.setPatientName(name);
-
-
-			System.out.println("Enter patient birth date (yyyy-MM-dd):");
+			System.out.println("Enter patient birth date (DD-MM-YYYY):");
             String dateStr = reader.readLine();
             LocalDate date= LocalDate.parse(dateStr, formatter);
             Date dateOfBirth = Date.valueOf(date);
@@ -132,11 +148,11 @@ public class Menu {
 			System.out.println(dateOfBirth);
 
 			System.out.println("Enter patient bloodtype:");
-			String bloodtype = scanner.nextLine();
+			String bloodtype = reader.readLine();
 			newpatient.setBloodtype(bloodtype);
 
 			System.out.println("Enter patient email:");
-			String email = scanner.nextLine();
+			String email = reader.readLine();
 			newpatient.setEmail(email);
 			patientMan.changePatient(newpatient);
 		}

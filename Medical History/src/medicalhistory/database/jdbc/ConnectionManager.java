@@ -32,6 +32,7 @@ public class ConnectionManager {
 		this.testMan =new JDBCTestManager(this);
 		this.treatmentMan= new JDBCTreatmentManager(this);
 		this.medicationMan= new JDBCMedicationManager(this);
+		this.allergiesMan=new JDBCAllergiesManager(this);
 		this.createTables();
 	}
 	private void connect() {

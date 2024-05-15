@@ -56,8 +56,8 @@ public class Menu {
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
- 
-         conMan.getAllergiesMan().addAllergy(allergy);
+                  
+          conMan.getAllergiesMan().addAllergy(allergy);
          System.out.println("Firewall pass");
          Allergies allergyDos= conMan.getAllergiesMan().getAllergy(2);
          System.out.println(allergy);

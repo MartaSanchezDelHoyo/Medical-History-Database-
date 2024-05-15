@@ -34,16 +34,15 @@ public class JDBCVisitManager implements VisitManager {
 	@Override
 	public void addVisit (Visit temporal) {
 		try {
-			String template = "INSERT INTO Visits (visit_id, date, observations, patient_id, doctor_id, test_id, hospital_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String template = "INSERT INTO Visits (date, observations, patient_id, doctor_id, test_id, hospital_id) VALUES ( ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, temporal.getVisit_id());
-			pstmt.setDate(2, temporal.getVisit_date());
-			pstmt.setString(3, temporal.getVisit_observation());
-			pstmt.setInt(4, temporal.getVisit_patient().getPatientID());
-			pstmt.setInt(5, temporal.getVisit_doctor().getDoctor_id());
-			pstmt.setInt(6, temporal.getVisit_test().getTest_id());
-			pstmt.setInt(7, temporal.getHospital().getHospitalID());
+			pstmt.setDate(1, temporal.getVisit_date());
+			pstmt.setString(2, temporal.getVisit_observation());
+			pstmt.setInt(3, temporal.getVisit_patient().getPatientID());
+			pstmt.setInt(4, temporal.getVisit_doctor().getDoctor_id());
+			pstmt.setInt(5, temporal.getVisit_test().getTest_id());
+			pstmt.setInt(6, temporal.getHospital().getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -59,16 +58,15 @@ public class JDBCVisitManager implements VisitManager {
 	@Override
     public void changeVisit (Visit temporal) {
 		try {
-			String template = "UPDATE Visits SET visit_id = ?, date = ?, observations = ?, patient_id = ?, doctor_id = ?, test_id = ?, hospital_id = ? WHERE visit_id= ?";
+			String template = "UPDATE Visits SET date = ?, observations = ?, patient_id = ?, doctor_id = ?, test_id = ?, hospital_id = ? WHERE visit_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, temporal.getVisit_id());
-			pstmt.setDate(2, temporal.getVisit_date());
-			pstmt.setString(3, temporal.getVisit_observation());
-			pstmt.setInt(4, temporal.getVisit_patient().getPatientID());
-			pstmt.setInt(5, temporal.getVisit_doctor().getDoctor_id());
-			pstmt.setInt(6, temporal.getVisit_test().getTest_id());
-			pstmt.setInt(7, temporal.getHospital().getHospitalID());
+			pstmt.setDate(1, temporal.getVisit_date());
+			pstmt.setString(2, temporal.getVisit_observation());
+			pstmt.setInt(3, temporal.getVisit_patient().getPatientID());
+			pstmt.setInt(4, temporal.getVisit_doctor().getDoctor_id());
+			pstmt.setInt(5, temporal.getVisit_test().getTest_id());
+			pstmt.setInt(6, temporal.getHospital().getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -77,8 +75,8 @@ public class JDBCVisitManager implements VisitManager {
 		}
 	}
 	
-	//realmente necesitamos un metodo que imprime TODAS la visitas que ha tenido un hospital en su historia??
-	//no implementado en el menu
+	
+	
 	/**
 	 * To show visits that are in the hospital we have selected
 	 */
@@ -159,7 +157,7 @@ public class JDBCVisitManager implements VisitManager {
 		List<Visit> listVisit= new ArrayList<Visit>();
 		
 		try {
-			String sql = "SELECT v.* FROM visit-treatment AS vt JOIN Visits AS v ON vt.visit_id = v.visit_id WHERE vt.treatment_id= ?";
+			String sql = "SELECT v.* FROM visit_treatment AS vt JOIN Visits AS v ON vt.visit_id = v.visit_id WHERE vt.treatment_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, treatment_id);
 			ResultSet rs = search.executeQuery();

@@ -36,6 +36,27 @@ public class JDBCTestManager implements TestManager{
 			e.printStackTrace();
 		}			
 	}
+	
+	/** Update of a test
+	 * @param the test that will get updated
+	 */
+	@Override
+	public void changeTest (Test entry) {
+		try {
+			String template = "UPDATE tests SET test_type= ?, pdf= ? WHERE test_id= ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, entry.getType());
+			pstmt.setBytes(2, entry.getArchivoPDF());
+			pstmt.setInt(3, entry.getTest_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 *Returns an object test that has all the information of a test from the database that is from a specified visit of the database
 	 *@param toSearch is the Visit object with the information we are looking for in the database 
@@ -45,7 +66,7 @@ public class JDBCTestManager implements TestManager{
     public Test getTest (Visit toSearch) {
 		Test obtained = null;
 		try {
-			String sql = "SELECT t.test_id, t.test_type FROM Visits AS v JOIN tests AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
+			String sql = "SELECT t.test_id, t.test_type, t.pdf FROM Visits AS v JOIN tests AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, toSearch.getVisit_id());
 			ResultSet rs = search.executeQuery();

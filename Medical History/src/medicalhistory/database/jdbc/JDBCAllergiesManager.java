@@ -8,6 +8,7 @@ import java.util.List;
 
 import medicalhistory.database.interfaces.AllergiesManager;
 import medicalhistory.database.pojos.Allergies;
+import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Treatment;
 
 public class JDBCAllergiesManager implements AllergiesManager{
@@ -23,7 +24,7 @@ public class JDBCAllergiesManager implements AllergiesManager{
 	
 	 public void addAllergy(Allergies allergies) {
 	        try {
-	            String template = "INSERT INTO allergies (allergy_type) VALUES ( ?)";;
+	            String template = "INSERT INTO allergies (allergy_type) VALUES (?)";;
 	            PreparedStatement pstmt = c.prepareStatement(template);
 	            pstmt.setString(1, allergies.getAllergiesName());
 	            pstmt.executeUpdate();
@@ -34,6 +35,24 @@ public class JDBCAllergiesManager implements AllergiesManager{
 	        }
 	    }
 	
+	 /** Update of a allergy
+		 * @param the allergy that will get updated
+		 */
+		@Override
+		public void changeAllergy (Allergies allergies) {
+			try {
+				String template = "UPDATE hospitals SET allergy_type= ? WHERE allergy_id= ?";
+				PreparedStatement pstmt;
+				pstmt = c.prepareStatement(template);
+				pstmt.setString(1, allergies.getAllergiesName());
+				pstmt.setInt(2, allergies.getAllergiesID());
+				pstmt.executeUpdate();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("Error in the database");
+				e.printStackTrace();
+			}
+		}
 	 public Allergies getAllergy(int allergy_id ) {
 		 Allergies allergy = null;
 			try {

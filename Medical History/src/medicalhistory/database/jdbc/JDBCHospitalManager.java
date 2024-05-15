@@ -101,16 +101,16 @@ public class JDBCHospitalManager implements HospitalManager {
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN hospital-doctor ON hospital.hospitalID = hospital-doctor.hospitalID " +
-	                     "WHERE  hospital-doctor.doctor_id= ?";
+	                     "INNER JOIN hospital_doctor ON hospital.hospital_id = hospital_doctor.hospital_id " +
+	                     "WHERE  hospital_doctor.doctor_id= ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setInt(1, doctor_id);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            int hospitalID = resultSet.getInt("hospitalID");
-	            String hospitalName = resultSet.getString("hospitalName");
-	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            int hospitalID = resultSet.getInt("hospital_id");
+	            String hospitalName = resultSet.getString("hospital_name");
+	            String hospitalAddress = resultSet.getString("hospital_adress");
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            hospitals.add(hospital);
 	        }
@@ -132,15 +132,15 @@ public class JDBCHospitalManager implements HospitalManager {
 		Hospital hospital = null;
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
+	                     "INNER JOIN Visits ON hospital.hospital_id = Visits.hospital_id " +
 	                     "WHERE  Visits.visit_id= ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setInt(1, visit_id);
 	        ResultSet resultSet = statement.executeQuery();
 
-	            int hospitalID = resultSet.getInt("hospitalID");
-	            String hospitalName = resultSet.getString("hospitalName");
-	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            int hospitalID = resultSet.getInt("hospital_id");
+	            String hospitalName = resultSet.getString("hospital_name");
+	            String hospitalAddress = resultSet.getString("hospital_adress");
 	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            
 	        resultSet.close();
@@ -162,17 +162,17 @@ public class JDBCHospitalManager implements HospitalManager {
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
 	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN Visits ON hospital.hospitalID = Visits.hospitalID " +
-	        		     "INNER JOIN patients ON Visits. patient_id =patients.patientID "+
-	                     "WHERE  patients.patientID= ?";
+	                     "INNER JOIN Visits ON hospital.hospital_id = Visits.hospital_id " +
+	        		     "INNER JOIN patients ON Visits.patient_id =patients.patient_id "+
+	                     "WHERE  patients.patient_id= ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setInt(1, patientID);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
-	            int hospitalID = resultSet.getInt("hospitalID");
-	            String hospitalName = resultSet.getString("hospitalName");
-	            String hospitalAddress = resultSet.getString("hospitalAddress");
+	            int hospitalID = resultSet.getInt("hospital_id");
+	            String hospitalName = resultSet.getString("hospital_name");
+	            String hospitalAddress = resultSet.getString("hospital_adress");
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
 	            hospitals.add(hospital);
 	        }

@@ -150,36 +150,7 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	}
 
-	@Override
-	public List<Patient> getPatients(int doctorId){
-	    List<Patient> patients = new ArrayList<>();
-	    try {
-	        String sql = "SELECT patients.* FROM patients " +
-	                     "INNER JOIN Patient_Doctor ON patients.patient_id = Patient_Doctor.patient_id " +
-	                     "WHERE Patient_Doctor.doctor_id = ?";
-	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1, doctorId);
-	        ResultSet resultSet = statement.executeQuery();
-
-	        while (resultSet.next()) {
-	        	int patientID= resultSet.getInt("patient_id");
-	            String patientName = resultSet.getString("name");
-	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
-	            String email = resultSet.getString("contact");
-	            String bloodtype = resultSet.getString("blood_type");
-	            byte[] photo = resultSet.getBytes("photo");
-	            //Falta lista de alergias
-	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
-	            patients.add(patient);
-	        }
-	        
-	        resultSet.close();
-	        statement.close();
-	    } catch (SQLException e) {
-	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
-	    }
-	    return patients;
-	}
+	
 	public Connection getC() {
 		return c;
 	}

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import medicalhistory.database.interfaces.TreatmentManager;
+import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Treatment;
 
 
@@ -40,6 +41,24 @@ public class JDBCTreatmentManager implements TreatmentManager {
         }
     }
 	
+    /** Update of a treatment
+	 * @param the treatment that will get updated
+	 */
+	@Override
+	public void changeTreatment (Treatment treatment) {
+		try {
+			String template = "UPDATE treatments SET treatment_type= ? WHERE treatment_id= ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setString(1, treatment.getTreatmentType());
+			pstmt.setInt(2, treatment.getTreatmentID());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+	}
 	
 	/**This method gets the treatment type by the treatment id
 	 *@param ID of the treatment

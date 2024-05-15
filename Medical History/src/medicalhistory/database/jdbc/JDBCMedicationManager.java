@@ -189,7 +189,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
 		try {
-			String sql = "SELECT m.manufacturer_id, m.manufacturer_name FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
+			String sql = "SELECT m.manufacturer_id, m.manufacturer_name FROM manufacturer_medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, manufacturerId);
 			ResultSet rs = search.executeQuery();

@@ -17,6 +17,7 @@ public class ConnectionManager {
 	private VisitManager visitMan;
 	private TreatmentManager treatmentMan;
 	private MedicationManager medicationMan;
+	private AllergiesManager allergiesMan;
 	// Design pattern Singleton
 
 	public Connection getConnection() {
@@ -240,5 +241,11 @@ public class ConnectionManager {
 	}
 	public void setMedicationMan(MedicationManager medicationMan) {
 		this.medicationMan = medicationMan;
+	}
+	public AllergiesManager getAllergiesMan() {
+		return allergiesMan;
+	}
+	public void setAllergiesMan(AllergiesManager allergiesMan) {
+		this.allergiesMan = allergiesMan;
 	}
 }

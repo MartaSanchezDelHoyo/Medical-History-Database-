@@ -26,6 +26,7 @@ public class Menu {
 	private static VisitManager visitMan;
 	private static MedicationManager medicationMan;
 	private static TreatmentManager treatmentMan;
+	private static AllergiesManager allergiesMan;
 	// private static UserMan userMan;
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -41,6 +42,8 @@ public class Menu {
 		 visitMan= conMan.getVisitMan();
 		 medicationMan= conMan.getMedicationMan();
 		 treatmentMan= conMan.getTreatmentMan();
+		 allergiesMan= conMan.getAllergiesMan();
+		 
 		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
 		 getPatientsByName();

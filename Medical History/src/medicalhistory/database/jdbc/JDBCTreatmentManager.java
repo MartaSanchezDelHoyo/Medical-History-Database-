@@ -30,10 +30,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
      */
     public void addTreatment(Treatment treatment) {
         try {
-            String template = "INSERT INTO treatments (treatmentId, type) VALUES (?, ?)";;
+            String template = "INSERT INTO treatments (treatment_type) VALUES ( ?)";
             PreparedStatement pstmt = c.prepareStatement(template);
-            pstmt.setInt(1, treatment.getTreatmentID());
-            pstmt.setString(2, treatment.getTreatmentType());
+            pstmt.setString(1, treatment.getTreatmentType());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -48,12 +47,12 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	public String getTreatmentType(int treatmentID ) {
 		String treatmentType = null;
 		try {
-			String sql = "SELECT treatmentType FROM treatment WHERE treatmentID= ?";
+			String sql = "SELECT treatment_type FROM treatments WHERE treatment_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, treatmentID);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				treatmentType = rs.getString("treatmentType");
+				treatmentType = rs.getString("treatment_type");
 			}
 			rs.close();
 			search.close();
@@ -68,16 +67,16 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	/*
 	 * Method to get all the information of a treatment by the treatmentID
 	 */
-	public Treatment getTreatment(int treatmentId) {
+	public Treatment getTreatment(int treatment_id) {
 	    Treatment treatment = null;
 	    try {
 	        String sql = "SELECT * FROM treatments WHERE treatment_id= ?";
 	        PreparedStatement search = c.prepareStatement(sql);
-	        search.setInt(1, treatmentId);
+	        search.setInt(1, treatment_id);
 	        ResultSet rs = search.executeQuery();
 	        while (rs.next()) {
 	            Integer obtainedTreatmentID = rs.getInt("treatment_id");
-	            String obtainedTreatmentType = rs.getString("type");
+	            String obtainedTreatmentType = rs.getString("treatment_type");
 	            treatment = new Treatment(obtainedTreatmentID, obtainedTreatmentType);
 	        }
 	        rs.close();
@@ -97,13 +96,13 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		List<Treatment> listOfTreatments=null;
 		
 		try {
-			String sql = "SELECT t.treatment_id, t.treatment_type FROM visit-treatment AS vt JOIN treatments AS t ON vt.treatment_id=t.treatment_id WHERE vt.visit_id= ?";
+			String sql = "SELECT t.treatment_id, t.treatment_type FROM visit_treatment AS vt JOIN treatments AS t ON vt.treatment_id=t.treatment_id WHERE vt.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, visit_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				Integer treatmentID = rs.getInt("treatmentID");
-				String treatmentType = rs.getString("treatmentType");
+				Integer treatmentID = rs.getInt("treatment_id");
+				String treatmentType = rs.getString("treatment_type");
 				Treatment obtained = new Treatment(treatmentID,treatmentType);
 				listOfTreatments.add(obtained);
 			}

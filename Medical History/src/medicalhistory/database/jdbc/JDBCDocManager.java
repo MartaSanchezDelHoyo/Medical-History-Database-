@@ -64,10 +64,10 @@ public class JDBCDocManager implements DoctorManager {
 				String specialty_ = rs.getString("specialty");
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
-				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits, photo);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,/*patients, hospitals, visits,*/ photo);
 				doctors.add(newDoctor);
 			}
 			
@@ -105,10 +105,10 @@ public class JDBCDocManager implements DoctorManager {
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
-				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits, photo);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,/*patients, hospitals, visits,*/ photo);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -143,10 +143,10 @@ public class JDBCDocManager implements DoctorManager {
 				String specialty = rs.getString("specialty");
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
-				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits,photo);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact/*,patients, hospitals, visits,*/,photo);
 				doctors.add(newDoctor);
 			}
 			search.close();

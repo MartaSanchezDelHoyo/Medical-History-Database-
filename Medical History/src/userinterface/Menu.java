@@ -144,12 +144,12 @@ public class Menu {
 			patientMan.changePatient(newpatient);
 		}
 
-		public static void getPatients() {
+		/*public static void getPatients() {
 			System.out.println("Enter the doctor ID:");
 			int id = scanner.nextInt();
 			List <Patient> patients = patientMan.getPatients(id);
 			System.out.println(patients);
-		}
+		}*/
 
 	    public static void addDoctor() {
 	        try {

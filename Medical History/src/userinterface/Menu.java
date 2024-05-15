@@ -74,26 +74,7 @@ public class Menu {
 		
 	 }
 	 
-	 
-	private static void menuLogin() throws NumberFormatException, IOException {
-		System.out.print("Username:");
-		String username = reader.readLine();
-		System.out.print("Password:");
-		String password = reader.readLine();
-		//User u = userMan.login(username, password);
-		// TODO Redirect the user to the proper menu
-	}
-	
-	private static void menuRegister() throws NumberFormatException, IOException {
-		System.out.print("Choose a username:");
-		String username = reader.readLine();
-		System.out.print("Choose a password:");
-		String password = reader.readLine();
-		//User u = new User(username, password, r);
-		//userMan.register(u);
-	}
 
-	
 	
 	 public static void addPatient() {
 

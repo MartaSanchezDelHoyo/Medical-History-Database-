@@ -67,7 +67,7 @@ public class JDBCDocManager implements DoctorManager {
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits,photo);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,patients, hospitals, visits, photo);
 				doctors.add(newDoctor);
 			}
 			
@@ -108,7 +108,7 @@ public class JDBCDocManager implements DoctorManager {
 				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits,photo);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,patients, hospitals, visits, photo);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -165,11 +165,11 @@ public class JDBCDocManager implements DoctorManager {
 	 */
 	@Override
 	public void changeDoctor(Doctor a) {
-		String template = "UPDATE authors SET name = ?, surname = ?,specialty = ?,contact = ?,photo=? WHERE id = ?";
+		String template = "UPDATE doctors SET name = ?, surname = ?,specialty = ?,contact = ?, photo=? WHERE doctor_id = ?";
 		PreparedStatement search;
 		try {
 			search = c.prepareStatement(template);
-			search.setInt(5,   a.getDoctor_id());
+			search.setInt(6,   a.getDoctor_id());
 		    search.setString(1, a.getName());
 		    search.setString(2, a.getSurname());
 		    search.setString(3, a.getSpecialty());
@@ -212,43 +212,7 @@ public class JDBCDocManager implements DoctorManager {
 	
 	}
 
-	/**
-	 *Returns an object doctor that has all the information of a doctor from the database with an specified patient searched by the patients id
-	 *@param patientId is the id of the patient we want to get their doctors from the database
-	 *@return List of Doctor object with all the actualized information from the database
-	  */
-	@Override
-	public List<Doctor> getDoctors(int patientId){
-	    List<Doctor> doctors = new ArrayList<>();
-	    try {
-	        String sql = "SELECT doctors.* FROM doctors " +
-	                     "INNER JOIN Patient_Doctor ON doctors.doctor_id = Patient_Doctor.doctor_id " +
-	                     "WHERE Patient_Doctor.patient_id = ?";
-	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1, patientId);
-	        ResultSet resultSet = statement.executeQuery();
-
-	        while (resultSet.next()) {
-	            int doctorId = resultSet.getInt("doctor_id");
-	            String doctorName = resultSet.getString("name");
-	            String doctorSurname = resultSet.getString("surname");
-	            String specialization = resultSet.getString("specialty");
-	            String contact = resultSet.getString("contact");
-	            byte[] photo =resultSet.getBytes("photo");
-	            List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctorId);
-				List<Patient> patients= conMan.getPatientMan().getPatients(doctorId);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctorId);
-	            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, specialization, contact,patients,hospitals, visits,photo);
-	            doctors.add(doctor);
-	        }
-	        
-	        resultSet.close();
-	        statement.close();
-	    } catch (SQLException e) {
-	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
-	    }
-	    return doctors;
-	}
+	
 	
 	public ConnectionManager getConMan() {
 		return conMan;

@@ -57,9 +57,9 @@ public class JDBCVisitManager implements VisitManager {
 	 */
 	
 	@Override
-    public void changeVisit (int visitIdToChange, Visit temporal) {
+    public void changeVisit (Visit temporal) {
 		try {
-			String template = "UPDATE Visit SET visit_id = ?, date = ?, observations = ?, duration_medication = ?, patient_id = ?, doctor_id = ?, test_id = ?, hospital_id = ?. WHERE visit_id= ?";
+			String template = "UPDATE Visits SET visit_id = ?, date = ?, observations = ?, patient_id = ?, doctor_id = ?, test_id = ?, hospital_id = ? WHERE visit_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setInt(1, temporal.getVisit_id());

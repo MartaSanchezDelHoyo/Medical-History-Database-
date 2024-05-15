@@ -12,6 +12,5 @@ public interface DoctorManager {
 	public List<Doctor> getDoctorByNameSurname(String name, String surname);
 	public void changeDoctor(Doctor a);
 	public Doctor getDoctor(int id) ;
-	public List<Doctor> getDoctors(int patientId);
 	
 }

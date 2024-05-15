@@ -210,12 +210,7 @@ public class Menu {
 		System.out.println(doctor);
 	}
 
-	public void getDoctors() {
-		System.out.println("Enter patient ID:");
-		int id = scanner.nextInt();
-		List <Doctor> doctors = doctorMan.getDoctors(id);
-		System.out.println(doctors);
-	}
+	
 
 	public void changeDoctor() {
 		System.out.println("Enter doctor ID:");

@@ -13,12 +13,18 @@ public class JDBCHospitalManager implements HospitalManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCHospitalManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c= connectionManager.getConnection();
 	}
 
-
+	/**This method allows to add a hospital in the database
+     * @param Obj hospital to add the information
+     */
 	public void addHospital (Hospital temporal) {
 		try {
 			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
@@ -34,7 +40,9 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 	}
 
-	//metodos de aqui para abajo no añadidos al menu (pipe tonto no lo capta)
+	/** Update of a hospital
+	 * @param the hospital that will get updated
+	 */
 	@Override
 	public void changeHospital (Hospital temporal) {
 		try {
@@ -50,8 +58,12 @@ public class JDBCHospitalManager implements HospitalManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-	}	
-
+	}
+	
+	/**Method to get all the information of a hospital by the hospitalID
+	 * @param ID of the hospital
+	 * @return Obj hospital who's information you want
+	 */
 	@Override
 	public Hospital getHospital (int hospitalID) {
 		Hospital obtained = null;
@@ -78,7 +90,12 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return obtained;
 	}
-
+	
+	/**
+	 *Adds all the hospitals where a specific doctor works in to a list
+	 *@param ID of the doctor 
+	 *@return List of hospitals that fulfill  this condition 
+	 */
 	@Override
 	public List<Hospital> getHospitalByDoctor(int doctor_id){
 		List<Hospital> hospitals = new ArrayList<>();
@@ -106,6 +123,10 @@ public class JDBCHospitalManager implements HospitalManager {
 	    return hospitals;
 	}
 	
+	/**Method to get all the information of a hospital by the visit_id
+	 * @param ID of the visit
+	 * @return Obj hospital who's information you want
+	 */
 	@Override
 	public Hospital getHospitalByVisit(int visit_id){
 		Hospital hospital = null;
@@ -131,6 +152,11 @@ public class JDBCHospitalManager implements HospitalManager {
 		
 	}
 	
+	/**
+	 *Adds all the hospitals where a specific patient works in to a list
+	 *@param ID of the patient 
+	 *@return List of hospitals that fulfill  this condition 
+	 */
 	@Override
 	public List<Hospital> getHospitalByPatient(int patientID){
 		List<Hospital> hospitals = new ArrayList<>();
@@ -160,7 +186,9 @@ public class JDBCHospitalManager implements HospitalManager {
 		
 	}
 	
-	
+	/**
+	 * Getters and setters of the attribute conMan
+	 */
 
 	public ConnectionManager getConMan() {
 		return conMan;

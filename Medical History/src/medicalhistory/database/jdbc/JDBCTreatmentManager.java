@@ -14,8 +14,9 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
-	/*
-	 * Method that connects this JDBC with the connection manager
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
 	 */
 	public JDBCTreatmentManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
@@ -23,10 +24,8 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 	
 	
-    /**
-     * @param
-     * @return
-     * @exception
+    /**This method allows to add a treatment in the database
+     * @param Obj treatment to add the information
      */
     public void addTreatment(Treatment treatment) {
         try {
@@ -42,8 +41,10 @@ public class JDBCTreatmentManager implements TreatmentManager {
         }
     }
 	
-	/*
-	 * Method to see the type of a treatment knowing the treatmentID
+	
+	/**This method gets the treatment type by the treatment id
+	 *@param ID of the treatment
+	 *@return String with the treatment type
 	 */
 	public String getTreatmentType(int treatmentID ) {
 		String treatmentType = null;
@@ -65,8 +66,10 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return treatmentType;
 	}
 	
-	/*
-	 * Method to get all the information of a treatment by the treatmentID
+
+	/**Method to get all the information of a treatment by the treatmentID
+	 * @param ID of the treatment
+	 * @return Obj treatment who's information you want
 	 */
 	public Treatment getTreatment(int treatmentId) {
 	    Treatment treatment = null;
@@ -90,8 +93,10 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 
 	
-	/*
-	 * Method to get the list of treatments of a visit by visit_id
+	/**
+	 *Adds all the treatment done in a specific visit to a list
+	 *@param ID of the visit 
+	 *@return List of treatments that fulfill  this condition 
 	 */
 	public List<Treatment> getTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=null;
@@ -117,7 +122,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 		return listOfTreatments;
 	}
 	
-	/*
+	/**
 	 * Getters and setters of the attribute conMan
 	 */
 	public ConnectionManager getConMan() {

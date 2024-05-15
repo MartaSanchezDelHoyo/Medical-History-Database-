@@ -81,7 +81,7 @@ public class Treatment implements Serializable{
                 ", treatmentType='" + treatmentType + '\'' +
                 '}';
     }
-    /*
+    /**
      * Getter and setters of the attributes
      */
     

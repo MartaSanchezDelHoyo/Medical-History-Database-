@@ -100,6 +100,10 @@ public class Hospital implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Getters and setters
+	 */
+	
     public Integer getHospitalID() {
         return hospitalID;
     }

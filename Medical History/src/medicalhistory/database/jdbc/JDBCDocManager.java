@@ -27,7 +27,7 @@ public class JDBCDocManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor a) {
 		try {
-			String template = "INSERT INTO doctors (name, surname, speciality, contact, photo) VALUES (?, ?, ?, ?, ?)";
+			String template = "INSERT INTO doctors (name, surname, specialty, contact, photo) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, a.getName());
@@ -94,7 +94,7 @@ public class JDBCDocManager implements DoctorManager {
 	public List<Doctor> getDoctorsbyHospital(String hospitalName) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
-			String sql = "SELECT * FROM doctors AS d JOIN hospital-doctor AS hd ON d.doctor_id=hd.doctor_id JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE h.hospital_name= ?";
+			String sql = "SELECT d.* FROM doctors AS d JOIN hospital_doctor AS hd ON d.doctor_id=hd.doctor_id JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE h.hospital_name= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setString(1, "%" + hospitalName + "%");
 			ResultSet rs = search.executeQuery();
@@ -198,9 +198,9 @@ public class JDBCDocManager implements DoctorManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
-			List<Patient> patients= conMan.getPatientMan().getPatients(id);
-			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
+			//List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
+			//List<Patient> patients= conMan.getPatientMan().getPatients(id);
+			//List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
 			byte[] photo =rs.getBytes("photo");
 			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"), photo);
 			return a;} catch (SQLException e) {

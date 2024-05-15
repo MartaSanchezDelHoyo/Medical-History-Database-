@@ -27,11 +27,10 @@ public class JDBCMedicationManager implements MedicationManager {
 	 */
 	public void addMedication(Medication entry) {
 		try {
-			String template = "INSERT INTO medication (medication_id, type) VALUES (?, ?)";
+			String template = "INSERT INTO medications (medication_type) VALUES ( ? )";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getMedication_id());
-			pstmt.setString(2, entry.getType());
+			pstmt.setString(1, entry.getType());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -46,11 +45,10 @@ public class JDBCMedicationManager implements MedicationManager {
 	
 	public void addManufacturer( Manufacturer entry ) {
 		try {
-			String template = "INSERT INTO manufacturer (manufacturerID, manufacturerName) VALUES (?, ?)";
+			String template = "INSERT INTO manufacturers (manufacturer_name) VALUES ( ? )";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, entry.getManufacturerID());
-			pstmt.setString(2, entry.getManufacturerName());
+			pstmt.setString(1, entry.getManufacturerName());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -65,7 +63,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	
 	public void modifyMedication(Medication entry) {
 		try {
-			String template = "UPDATE medication SET type= ?, WHERE medicationID= ?";
+			String template = "UPDATE medications SET type= ?, WHERE medication_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, entry.getType());
@@ -82,13 +80,13 @@ public class JDBCMedicationManager implements MedicationManager {
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
 		try {
-			String sql = "SELECT m.medication_id, m.type FROM Visits AS v JOIN test AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
+			String sql = "SELECT m.medication_id, m.medication_type FROM Visits AS v JOIN medications AS m ON v.medication_id=m.medication_id WHERE v.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, toSearch.getVisit_id());
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer medication_id = rs.getInt("medication_id");
-				String type = rs.getString("type");
+				String type = rs.getString("medication_type");
 				List<Manufacturer> listOfManufacturers = conMan.getMedicationMan().showManufacturers(medication_id);
 				obtained = new Medication(medication_id,type, listOfManufacturers);
 			}
@@ -108,7 +106,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
 		try {
-			String sql = "SELECT m.medication_id, m.type FROM visit-medication AS vm JOIN medications AS m ON vm.medication_id=m.medication_id WHERE vm.visit_id= ?";
+			String sql = "SELECT m.medication_id, m.medication_type FROM visit_medication AS vm JOIN medications AS m ON vm.medication_id=m.medication_id WHERE vm.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, visit_id);
 			ResultSet rs = search.executeQuery();
@@ -137,7 +135,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
 		try {
-			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN medications AS m ON mm.medication_id=m.medication_id WHERE mm.manufacturer_id= ?";
+			String sql = "SELECT m.medication_id, m.medication_type FROM manufacturer_medication AS mm JOIN medications AS m ON mm.medication_id=m.medication_id WHERE mm.manufacturer_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, manufacturer_id);
 			ResultSet rs = search.executeQuery();
@@ -164,7 +162,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
 		try {
-			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
+			String sql = "SELECT m.manufacturer_id, m.manufacturer_name FROM manufacturer_medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, medication_id);
 			ResultSet rs = search.executeQuery();
@@ -191,7 +189,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
 		try {
-			String sql = "SELECT m.medication_id, m.type FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
+			String sql = "SELECT m.manufacturer_id, m.manufacturer_name FROM manufacturer-medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, manufacturerId);
 			ResultSet rs = search.executeQuery();

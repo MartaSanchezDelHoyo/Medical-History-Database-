@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import medicalhistory.database.interfaces.TestManager;
-import medicalhistory.database.pojos.Test;
-import medicalhistory.database.pojos.Visit;
+import medicalhistory.database.pojos.*;
 
 public class JDBCTestManager implements TestManager{
 	private Connection c;

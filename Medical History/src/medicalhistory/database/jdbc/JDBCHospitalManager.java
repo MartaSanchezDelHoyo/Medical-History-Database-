@@ -38,7 +38,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	@Override
 	public void changeHospital (Hospital temporal) {
 		try {
-			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, WHERE hospital_id= ?";
+			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ? WHERE hospital_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, temporal.getHospitalName());
@@ -64,9 +64,9 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
-				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
+				//List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
 				//Solo se ven los doctores del hospital
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, doctors);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
 				
 			}
 			rs.close();

@@ -15,7 +15,7 @@ public class Doctor implements Serializable{
 	private int doctor_id;
 	private String name;
 	private String surname;
-	private String speciality;
+	private String specialty;
 	private String contact;
 	private byte[] photo;
 	private List <Patient> patients;
@@ -29,7 +29,7 @@ public class Doctor implements Serializable{
 	 * @param doctor_id
 	 * @param name
 	 * @param surname
-	 * @param speciality
+	 * @param specialty
 	 * @param contact
 	 * @param patients
 	 * @param hospitals
@@ -41,7 +41,7 @@ public class Doctor implements Serializable{
 		this.doctor_id = doctor_id;
 		this.name = name;
 		this.surname = surname;
-		this.speciality = speciality;
+		this.specialty = speciality;
 		this.contact = contact;
 		this.patients = patients;
 		this.hospitals = hospitals;
@@ -53,7 +53,7 @@ public class Doctor implements Serializable{
 	 * @param doctor_id
 	 * @param name
 	 * @param surname
-	 * @param speciality
+	 * @param specialty
 	 * @param contact
 	 * @param photo
 	 */
@@ -61,7 +61,7 @@ public class Doctor implements Serializable{
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);
-		this.setSpeciality(speciality);
+		this.setSpecialty(speciality);
 		this.setContact(contact);
 		this.setPhoto(photo);
 		this.patients=new ArrayList<>();
@@ -80,7 +80,7 @@ public class Doctor implements Serializable{
 	public Doctor(String name, String surname, String specialty, String contact,byte[]photo) {
 		this.setName(name);
 		this.setSurname(surname);
-		this.setSpeciality(specialty);
+		this.setSpecialty(specialty);
 		this.setContact(contact);
 		this.setPhoto(photo);
 		this.patients=new ArrayList<>();
@@ -91,13 +91,13 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="
-				+ speciality + ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", patients=" + patients
+				+ specialty + ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", patients=" + patients
 				+ ", hospitals=" + hospitals + ", visits=" + visits + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(contact, doctor_id, hospitals, name, patients, speciality, surname, visits);
+		return Objects.hash(contact, doctor_id, hospitals, name, patients, specialty, surname, visits);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class Doctor implements Serializable{
 		Doctor other = (Doctor) obj;
 		return Objects.equals(contact, other.contact) && doctor_id == other.doctor_id
 				&& Objects.equals(hospitals, other.hospitals) && Objects.equals(name, other.name)
-				&& Objects.equals(patients, other.patients) && Objects.equals(speciality, other.speciality)
+				&& Objects.equals(patients, other.patients) && Objects.equals(specialty, other.specialty)
 				&& Objects.equals(surname, other.surname) && Objects.equals(visits, other.visits);
 	}
 
@@ -132,11 +132,11 @@ public class Doctor implements Serializable{
 	}
 
 	public String getSpecialty() {
-		return speciality;
+		return specialty;
 	}
 
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
 	}
 	
 	public String getContact() {

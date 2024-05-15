@@ -32,6 +32,13 @@ public class Medication {
 		return medication_id == other.medication_id && Objects.equals(type, other.type);
 	}
 
+	public Medication(String type) {
+		this.type=type;
+		this.manufacturers=new ArrayList<>();
+		this.visits= new ArrayList<>();
+	}
+
+	
 	public Medication(int medication_id, String type) {
 		this.medication_id= medication_id;
 		this.type=type;
@@ -41,12 +48,16 @@ public class Medication {
 
 	
 	public Medication(int medication_id, String type, List <Manufacturer> manufacturers) {
-		super();
+		this.medication_id= medication_id;
+		this.type=type;
 		this.manufacturers= manufacturers;
+		this.visits= new ArrayList<>();
+		
 	}
 	
 	public Medication(int medication_id, String type, List <Manufacturer> manufacturers, List <Visit> visits) {
-		super();
+		this.medication_id= medication_id;
+		this.type=type;
 		this.manufacturers= manufacturers;
 		this.visits=visits;
 	}

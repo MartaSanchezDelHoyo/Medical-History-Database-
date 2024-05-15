@@ -45,24 +45,27 @@ public class Menu {
          Date dateOfBirth = Date.valueOf(date);
 		 getPatientsByName();
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
-		 Doctor doc= new Doctor("Almodovar", "Ramirez", "Trauma", "almo@gmail.com",null);
+		 Doctor doc= new Doctor("Enrique", "Iglesias", "Cantology", "enry@gmail.com",null);
 		 Test test =new Test("Radiografía", null);
-		 Hospital hos= new Hospital("Viamed Santa Elena", "Calle don Pepe, 29");
+		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
          Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
+         Medication med= new Medication("Vivaporux");
+         Manufacturer manu= new Manufacturer("Pfizer");
          
-         conMan.getTestMan().addTest(test);
-		
-        // conMan.getDocMan().addDoctor(doc);
-        // System.out.println("Firewall pass");
-        // conMan.getDocMan().getDoctor(1);
+         System.out.println(doc);
+         conMan.getDocMan().addDoctor(doc);
+         System.out.println("Firewall pass");
+         Doctor docUno= conMan.getDocMan().getDoctor(1);
+         System.out.println(docUno);
+      
+        
+        //Manufacturer has an error in db
+        //Medication has an error in db
+		//Test has an error in db
+        // conMan.getTestMan().addTest(test);
+		//Patient verifyed (Without lists)
+        //Hospital verifyed (Without lists)
 		 
-		 
-		 
-		 //conMan.getPatientMan().changePatient(acambiar);
-		 // getPatientsByName();
-		 //Patient obt= conMan.getPatientMan().getPatient("Nico");
-		 
-		 //Patient obtDOS= conMan.getPatientMan().getPatient(3);
 		 
 		 
 		
@@ -226,7 +229,7 @@ public class Menu {
 
 		System.out.println("Enter doctor specialty:");
 		String specialty = scanner.nextLine();
-		newDoctor.setSpeciality(specialty);
+		newDoctor.setSpecialty(specialty);
 
 		System.out.println("Enter doctor contact:");
 		String contact = scanner.nextLine();
@@ -405,7 +408,7 @@ public class Menu {
 			System.out.println("Enter test type:");
 			String type = scanner.nextLine();
 
-			Test test = new Test(testId, type);
+			Test test = new Test( type, null);
 
 			testMan.addTest(test);
 		} catch (Exception e) {
@@ -478,8 +481,6 @@ public class Menu {
 			System.out.println("Enter visit observations:");
 			String observations = scanner.nextLine();
 
-			System.out.println("Enter duration of medication:");
-			String durationMedication = scanner.nextLine();
 
 			System.out.println("Enter patient ID:");
 			int patientId = scanner.nextInt();
@@ -497,7 +498,7 @@ public class Menu {
 			int hospitalId = scanner.nextInt();
 			Hospital hospital =hospitalMan.getHospital(hospitalId);
 			
-			Visit visit = new Visit(visitId, visitDate, observations, durationMedication, patient, doctor, test, hospital);
+			Visit visit = new Visit(visitDate, observations, patient, doctor, test, hospital);
 		
 			visitMan.addVisit(visit);
 		} catch (Exception e) {

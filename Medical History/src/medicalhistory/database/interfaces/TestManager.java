@@ -2,8 +2,7 @@ package medicalhistory.database.interfaces;
 
 import java.util.List;
 
-import medicalhistory.database.pojos.Test;
-import medicalhistory.database.pojos.Visit;
+import medicalhistory.database.pojos.*;
 
 public interface TestManager {
 

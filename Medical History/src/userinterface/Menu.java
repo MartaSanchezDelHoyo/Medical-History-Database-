@@ -45,13 +45,13 @@ public class Menu {
          Date dateOfBirth = Date.valueOf(date);
 		 getPatientsByName();
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
-		 Doctor doc= new Doctor("Enrique", "Iglesias", "Cantology", "enry@gmail.com",null);
+		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
 		 Test test =new Test("Radiografía", null);
 		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
          Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
-         
+         Treatment treat= new Treatment("Radiografía");
          System.out.println(doc);
          conMan.getDocMan().addDoctor(doc);
          System.out.println("Firewall pass");

@@ -16,6 +16,16 @@ public class Treatment implements Serializable{
     private String treatmentType;
     private List <Visit> visits;
     
+    
+    /** Constructor without the visits as a parameter
+     * @param treatmentID identification of a treatment
+     * @param treatmentType type of treatment
+     */
+      public Treatment( String treatmentType) {
+          this.treatmentType = treatmentType;
+          this.visits= new ArrayList<>();
+      }
+    
    /** Constructor without the visits as a parameter
    * @param treatmentID identification of a treatment
    * @param treatmentType type of treatment

@@ -25,8 +25,9 @@ import medicalhistory.database.pojos.User;
 			try {
 				this.getRole("librarian");
 			} catch(NoResultException e) {
-				this.createRole(new Role("librarian"));
-				this.createRole(new Role("borrower"));
+				this.createRole(new Role("Doctor"));
+				this.createRole(new Role("Patient"));
+				this.createRole(new Role("Hospiatl"));
 			}
 		}
 		

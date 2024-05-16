@@ -38,7 +38,7 @@ public class JDBCPatientManager implements PatientManager {
 	}
 	
 	@Override
-	public void addAllergiestoPatient (Patient a, Allergies s){
+	public void linkAllergiesToPatient (Patient a, Allergies s){
 	    try {
 	        String sql = "INSERT INTO patient_allergy (patient_id, allergy_id) VALUES (?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);

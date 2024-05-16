@@ -41,14 +41,15 @@ public class JDBCMedicationManager implements MedicationManager {
 	
 	
 	/**
-	 * To add a medication into the database
+	 * To link a medication to a manufacturer into the database
 	 */
 	public void linkMedicationToManufacturer(Medication entry, Manufacturer manu) {
 		try {
-			String template = "INSERT INTO medications (medication_type) VALUES ( ? )";
+			String template = "INSERT INTO manufacturer_medication (medication_id, manufacturer_id) VALUES ( ?, ? )";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
-			pstmt.setString(1, entry.getType());
+			pstmt.setInt(1, entry.getMedication_id());
+			pstmt.setInt(2, manu.getManufacturerID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

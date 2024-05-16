@@ -47,17 +47,17 @@ public class Menu {
 		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
 		
-		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
-		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
-		 Test test =new Test("Radiografía", null);
-		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
-         Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
+		 //Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
+		//Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
+		 //Test test =new Test("Radiografía", null);
+		 //Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
+         //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
                   
-         conMan.getVisitMan().addVisit(visit);
+         //conMan.getVisitMan().addVisit(visit);
          
          //Alergies aller= conMan.getAllergiesMan()
          

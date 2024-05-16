@@ -2,6 +2,7 @@ package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
 
+import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Visit;
 
@@ -10,7 +11,10 @@ import java.awt.event.*;
 
 public class PatientInfo extends JFrame {
     private JPanel botonPanel;
-	private Container panelBotonesMedication;
+	private JPanel botonPanelAllergies;
+	private JPanel botonPanelVisits;
+	private JPanel botonPanelDoctors;
+	private AbstractButton botonRetorno;
 
 	public PatientInfo(Patient a) {
         setTitle("Patient Information");
@@ -92,23 +96,33 @@ public class PatientInfo extends JFrame {
         principalPanel.setLayout(new BorderLayout());
 
         // Crear un panel para los botones con un layout vertical
-       botonPanel = new JPanel();
-        botonPanel.setLayout(new BoxLayout(botonPanel, BoxLayout.Y_AXIS));
-
-        // Agregar el panel de botones a un JScrollPane
-        JScrollPane scrollPane = new JScrollPane(botonPanel);
-        principalPanel.add(scrollPane, BorderLayout.CENTER);
+        botonPanelAllergies = new JPanel();
+        botonPanelAllergies.setBounds(62, 313, 1461, 72);
+        panel.add(botonPanelAllergies);
+        botonPanelAllergies.setLayout(null);
         
-        JPanel principalPanel_1 = new JPanel();
-        principalPanel_1.setBounds(33, 681, 1543, 213);
-        panel.add(principalPanel_1);
-        principalPanel_1.setLayout(new BorderLayout());
-
-        // Crear un botón de retorno
-        JButton botonRetorno = new JButton("Return");
-        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        botonRetorno.setBounds(0, 908, 137, 44);
-        panel.add(botonRetorno);
+        botonPanelVisits = new JPanel();
+        botonPanelVisits.setBounds(62, 313, 1461, 72);
+        panel.add(botonPanelVisits);
+        botonPanelVisits.setLayout(null);
+        
+        botonPanelDoctors = new JPanel();
+        botonPanelDoctors.setBounds(62, 313, 1461, 72);
+        panel.add( botonPanelDoctors);
+        botonPanelDoctors.setLayout(null);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 0, 1334, 72);
+        botonPanelAllergies.add(scrollPane);
+        
+        JScrollPane scrollPane2 = new JScrollPane();
+        scrollPane.setBounds(10, 0, 1334, 72);
+        botonPanelVisits.add(scrollPane2);
+        
+        JScrollPane scrollPane3 = new JScrollPane();
+        scrollPane.setBounds(10, 0, 1334, 72);
+         botonPanelDoctors.add(scrollPane2);
+     
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual
@@ -117,23 +131,53 @@ public class PatientInfo extends JFrame {
         setVisible(true);
     }
     // Método para agregar un botón al panel de botones
-	private void addBotonTreatments(Visit a) {
-        for (int i = 1; i <= a.getTreatments().size(); i++) {
-            JButton boton = new JButton("Treatment:" + a.getTreatments().get(i).toString());
-            panelBotonesMedication.add(boton);
-            boton.addActionListener(new ActionListener() {
-            	
+	
+    private void botonAllergies (Doctor a) {
+    	for (int i=0; i<=a.getPatients().size();i++) {
+        JButton boton = new JButton("Patient ID: "+a.getPatients().get(i).getPatientID()+" Name: "+a.getPatients().get(i).getPatientName());
+        botonPanelAllergies.add(boton);
+        int l =i;
+        boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //open new treatment parameter
-        panelBotonesMedication.revalidate();
-        panelBotonesMedication.repaint();
-    }
-            });
-        }
-
+                new PatientInfo(a.getPatients().get(l));
+            }
+        });
+        
         // Refrescar el panel para que los cambios se muestren correctamente
-	panelBotonesMedication.revalidate();
-	panelBotonesMedication.repaint();
+        botonPanelAllergies.revalidate();
+        botonPanelAllergies.repaint();}
+    	}
+    	
+    	private void botonVisit (Patient a) {
+        	for (int i=0; i<=a.getVisits().size();i++) {
+            JButton boton = new JButton("Visit ID: "+a.getVisits().get(i).getVisit_id()+" Date: "+a.getVisits().get(i).getVisit_date()+"Patient:"+a.getVisits().get(i).getVisit_patient());
+            botonPanelVisits.add(boton);
+            int l =i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new VisitInfo(a.getVisits().get(l));
+                }
+            });
+            
+            // Refrescar el panel para que los cambios se muestren correctamente
+            botonPanelVisits.revalidate();
+            botonPanelVisits.repaint();}
+        	}
+     private void botonDoctors (Patient a) {
+       for (int i=0; i<=a.getDoctors().size();i++) {
+          JButton boton = new JButton("Hospital ID: "+a.getDoctors().get(i).getDoctor_id()+" Name: "+a.getDoctors().get(i).getName()+" Surname: "+a.getDoctors().get(i).getSurname()+" Specialty:"+a.getDoctors().get(i).getSpecialty());
+          botonPanelDoctors.add(boton);
+          int l =i;
+          boton.addActionListener(new ActionListener() {
+        	  public void actionPerformed(ActionEvent e) {
+                    new DoctorInfoPatient(a.getDoctors().get(l),a);
+                    }
+          });
+                
+          // Refrescar el panel para que los cambios se muestren correctamente
+          botonPanelDoctors.revalidate();
+          botonPanelDoctors.repaint();
+        }	
     }
 }
     

@@ -18,7 +18,6 @@ public class Doctor implements Serializable{
 	private String specialty;
 	private String contact;
 	private byte[] photo;
-	private String username;
 	private List <Patient> patients;
 	private List <Hospital> hospitals;
 	private List <Visit> visits;
@@ -38,7 +37,7 @@ public class Doctor implements Serializable{
 	 * @param photo
 	 */
 	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
-			List<Hospital> hospitals, List<Visit> visits,byte[] photo, String username) {
+			List<Hospital> hospitals, List<Visit> visits,byte[] photo) {
 		this.doctor_id = doctor_id;
 		this.name = name;
 		this.surname = surname;
@@ -48,7 +47,6 @@ public class Doctor implements Serializable{
 		this.hospitals = hospitals;
 		this.visits = visits;
 		this.photo=photo;
-		this.username=username;
 	}
 	/**
 	 * Constructor of the object doctor that has as parameters:
@@ -59,14 +57,13 @@ public class Doctor implements Serializable{
 	 * @param contact
 	 * @param photo
 	 */
-	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]photo, String username) {
+	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]photo) {
 		this.setDoctor_id(doctor_id);
 		this.setName(name);
 		this.setSurname(surname);
 		this.setSpecialty(speciality);
 		this.setContact(contact);
 		this.setPhoto(photo);
-		this.username=username;
 		this.patients=new ArrayList<>();
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();
@@ -80,27 +77,29 @@ public class Doctor implements Serializable{
 	 * @param contact
 	 * @param photo
 	 */
-	public Doctor(String name, String surname, String specialty, String contact,byte[]photo, String username) {
+	public Doctor(String name, String surname, String specialty, String contact,byte[]photo) {
 		this.setName(name);
 		this.setSurname(surname);
 		this.setSpecialty(specialty);
 		this.setContact(contact);
 		this.setPhoto(photo);
-		this.username=username;
 		this.patients=new ArrayList<>();
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="
+				+ specialty + ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", patients=" + patients
+				+ ", hospitals=" + hospitals + ", visits=" + visits + "]";
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(photo);
-		result = prime * result
-				+ Objects.hash(contact, doctor_id, hospitals, name, patients, specialty, surname, username, visits);
-		return result;
+		return Objects.hash(contact, doctor_id, hospitals, name, patients, specialty, surname, visits);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -112,22 +111,10 @@ public class Doctor implements Serializable{
 		Doctor other = (Doctor) obj;
 		return Objects.equals(contact, other.contact) && doctor_id == other.doctor_id
 				&& Objects.equals(hospitals, other.hospitals) && Objects.equals(name, other.name)
-				&& Objects.equals(patients, other.patients) && Arrays.equals(photo, other.photo)
-				&& Objects.equals(specialty, other.specialty) && Objects.equals(surname, other.surname)
-				&& Objects.equals(username, other.username) && Objects.equals(visits, other.visits);
+				&& Objects.equals(patients, other.patients) && Objects.equals(specialty, other.specialty)
+				&& Objects.equals(surname, other.surname) && Objects.equals(visits, other.visits);
 	}
-	@Override
-	public String toString() {
-		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", specialty=" + specialty
-				+ ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", username=" + username
-				+ ", patients=" + patients + ", hospitals=" + hospitals + ", visits=" + visits + "]";
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
 	public int getDoctor_id() {
 		return doctor_id;
 	}

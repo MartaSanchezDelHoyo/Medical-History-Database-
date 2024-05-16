@@ -67,7 +67,8 @@ public class ConnectionManager {
 					+ "surname TEXT NOT NULL,"
 					+ "specialty TEXT NOT NULL,"
 					+ "contact TEXT NOT NULL,"
-					+ "photo  BLOB"
+					+ "photo  BLOB,"
+					+ "username TEXT NOT NULL"
 					+ ")";
 			createTables1.executeUpdate(create1);
 			createTables1.close();
@@ -78,7 +79,8 @@ public class ConnectionManager {
 					+ " date_of_birth DATE NOT NULL,"
 					+ " contact  TEXT NOT NULL,"
 					+ " blood_type TEXT NOT NULL,"
-					+ " photo  BLOB"
+					+ " photo  BLOB,"
+					+ " username TEXT NOT NULL"
 					+ ")";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
@@ -91,6 +93,7 @@ public class ConnectionManager {
 					+ " doctor_id INTEGER NOT NULL ,"
 					+ " test_id INTEGER NOT NULL,"
 					+ " hospital_id INTEGER NOT NULL,"
+					+ " username TEXT NOT NULL,"
 					+ " FOREIGN KEY (patient_id) references patients (patient_id),"
 					+ " FOREIGN KEY (doctor_id) references doctors(doctor_id),"
 					+ " FOREIGN KEY (test_id) references tests (test_id),"

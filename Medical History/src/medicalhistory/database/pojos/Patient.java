@@ -2,6 +2,7 @@ package medicalhistory.database.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,30 +20,33 @@ public class Patient implements Serializable{
 	private String bloodtype;
 	private String email;
 	private byte[] photo;
+	private String username;
 	private List <Allergies> allergies;
 	private List <Visit> visits ;
 	private List <Doctor> doctors;
 
 	
-	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
+	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username) {
 		this.patientName = patientName;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
 		this.setPhoto(photo);
+		this.username=username;
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
 	}
 	
 	
-	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username) {
 		this.patientID=patientID;
 		this.patientName = patientName;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
 		this.setPhoto(photo);
+		this.username=username;
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
@@ -50,19 +54,62 @@ public class Patient implements Serializable{
 	}
 
 	
-	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors, String username) {
 		this.patientID=patientID;
 		this.patientName = patientName;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
 		this.setPhoto(photo);
+		this.username=username;
 		this.allergies = allergies;
 		this.visits = visits;
 		this.doctors =doctors;
 	}
 
 	
+	
+	@Override
+	public String toString() {
+		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth=" + dateofbirth
+				+ ", bloodtype=" + bloodtype + ", email=" + email + ", photo=" + Arrays.toString(photo) + ", username="
+				+ username + ", allergies=" + allergies + ", visits=" + visits + ", doctors=" + doctors + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(photo);
+		result = prime * result + Objects.hash(allergies, bloodtype, dateofbirth, doctors, email, patientID,
+				patientName, username, visits);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Patient other = (Patient) obj;
+		return Objects.equals(allergies, other.allergies) && Objects.equals(bloodtype, other.bloodtype)
+				&& Objects.equals(dateofbirth, other.dateofbirth) && Objects.equals(doctors, other.doctors)
+				&& Objects.equals(email, other.email) && Objects.equals(patientID, other.patientID)
+				&& Objects.equals(patientName, other.patientName) && Arrays.equals(photo, other.photo)
+				&& Objects.equals(username, other.username) && Objects.equals(visits, other.visits);
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public List<Allergies> getAllergies() {
 		return allergies;
 	}
@@ -130,38 +177,9 @@ public class Patient implements Serializable{
 		this.doctors = doctors;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(allergies, bloodtype, dateofbirth, doctors, email, patientID, patientName, visits);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Patient other = (Patient) obj;
-		return Objects.equals(allergies, other.allergies) && Objects.equals(bloodtype, other.bloodtype)
-				&& Objects.equals(dateofbirth, other.dateofbirth) && Objects.equals(doctors, other.doctors)
-				&& Objects.equals(email, other.email) && Objects.equals(patientID, other.patientID)
-				&& Objects.equals(patientName, other.patientName) && Objects.equals(visits, other.visits);
-	}
-
-	@Override
-	public String toString() {
-		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth="
-				+ dateofbirth + ", bloodtype=" + bloodtype + ", email=" + email + ", allergies=" + allergies
-				+ ", visits=" + visits + ", doctors=" + doctors + "]";
-	}
-
-
 	public byte[] getPhoto() {
 		return photo;
 	}
-
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;

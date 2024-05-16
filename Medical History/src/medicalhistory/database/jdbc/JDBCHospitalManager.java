@@ -27,11 +27,12 @@ public class JDBCHospitalManager implements HospitalManager {
      */
 	public void addHospital (Hospital temporal) {
 		try {
-			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?)";
+			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, temporal.getHospitalName());
 			pstmt.setString(2, temporal.getHospitalAddress());
+			pstmt.setString(3, temporal.getUsername());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -46,12 +47,13 @@ public class JDBCHospitalManager implements HospitalManager {
 	@Override
 	public void changeHospital (Hospital temporal) {
 		try {
-			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ? WHERE hospital_id= ?";
+			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, username=? WHERE hospital_id= ?";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setString(1, temporal.getHospitalName());
 			pstmt.setString(2, temporal.getHospitalAddress());
-			pstmt.setInt(3, temporal.getHospitalID());
+			pstmt.setString(3, temporal.getUsername());
+			//pstmt.setInt(3, temporal.getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -76,9 +78,10 @@ public class JDBCHospitalManager implements HospitalManager {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
+				String username = rs.getString("username");
 				//List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
 				//Solo se ven los doctores del hospital
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, username);
 				
 			}
 			rs.close();
@@ -111,7 +114,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
 	            String hospitalAddress = resultSet.getString("hospital_adress");
-				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            String username =resultSet.getString("username");
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
 	            hospitals.add(hospital);
 	        }
 	        
@@ -141,7 +145,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
 	            String hospitalAddress = resultSet.getString("hospital_adress");
-	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            String username =resultSet.getString("username");
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
 	            
 	        resultSet.close();
 	        statement.close();
@@ -173,7 +178,8 @@ public class JDBCHospitalManager implements HospitalManager {
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
 	            String hospitalAddress = resultSet.getString("hospital_adress");
-				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress);
+	            String username =resultSet.getString("username");
+				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
 	            hospitals.add(hospital);
 	        }
 	        

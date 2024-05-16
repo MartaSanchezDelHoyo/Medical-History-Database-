@@ -19,7 +19,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient a) {
 	    try {
-	        String sql = "INSERT INTO patients (name, date_of_birth, contact, blood_type, photo) VALUES (?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO patients (name, date_of_birth, contact, blood_type, photo, username) VALUES (?, ?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
 
 	        statement.setString(1, a.getPatientName());
@@ -27,6 +27,7 @@ public class JDBCPatientManager implements PatientManager {
 	        statement.setString(3, a.getEmail());
 	        statement.setString(4, a.getBloodtype());
 	        statement.setBytes(5, a.getPhoto());
+	        statement.setString(6, a.getUsername());
 	        statement.executeUpdate();
 	        statement.close();
 	        
@@ -54,8 +55,9 @@ public class JDBCPatientManager implements PatientManager {
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
+	            String username = resultSet.getString("username");
 	            //Falta lista de alergias y de doctores
-	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
+	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo, username);
 	            patients.add(patient);
 	        }
 	        
@@ -83,8 +85,9 @@ public class JDBCPatientManager implements PatientManager {
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
+	            String username =resultSet.getString("username");
 	          //Falta lista de alergias y de doctores
-	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo);
+	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo, username);
 	            
 	        }
 	        
@@ -112,8 +115,9 @@ public class JDBCPatientManager implements PatientManager {
 	            String email = resultSet.getString("contact");
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
+	            String username = resultSet.getString("username");
 	          //Falta lista de alergias y de doctores
-	            patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo);
+	            patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo, username);
 	            
 	        }
 	        

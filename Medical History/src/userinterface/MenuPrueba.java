@@ -33,18 +33,11 @@ public class MenuPrueba {
 	private static Scanner scanner = new Scanner(System.in);
 	 
 	public static void main(String[] Args) throws IOException {
+		
 		 conMan= new ConnectionManager();
-		 patientMan = conMan.getPatientMan();
-		 doctorMan = conMan.getDocMan();
-		 hospitalMan = conMan.getHospitalMan();
-		 testMan= conMan.getTestMan();
-		 visitMan= conMan.getVisitMan();
-		 medicationMan= conMan.getMedicationMan();
-		 treatmentMan= conMan.getTreatmentMan();
 		 
-		 addDoctor();
-
-	 }
+		 
+    }
 	
 	 public static void addDoctor() {
 	        try {
@@ -79,7 +72,7 @@ public class MenuPrueba {
 	    }
 
 	 
-		public void changeDoctor() {
+		public static void changeDoctor() {
 			System.out.println("Enter doctor ID:");
 			int id = scanner.nextInt();
 			Doctor newDoctor = doctorMan.getDoctor(id);
@@ -125,4 +118,19 @@ public class MenuPrueba {
 			List<Doctor> doctors = doctorMan.getDoctorByNameSurname(name, surname);
 			System.out.println(doctors);
 		}
+		/*
+		ConnectionManager connectionManager = new ConnectionManager();
+		JDBCAllergiesManager allergiesManager = new JDBCAllergiesManager(connectionManager);
+		Allergies allergies = new Allergies("Peanuts");
+		allergiesManager.addAllergy(allergies);
+		Allergies addedAllergy = allergiesManager.getAllergy(allergies.getAllergiesID());
+		if (addedAllergy != null) {
+		    System.out.println("Allergy added successfully!");
+		} else {
+		    System.out.println("Failed to add allergy!");
+		}
+		connectionManager.close();
+		*/
+
 }
+

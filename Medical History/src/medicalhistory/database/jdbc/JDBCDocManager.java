@@ -46,6 +46,53 @@ public class JDBCDocManager implements DoctorManager {
 	}
 
 	/**
+	 * To link a doctor to a hospital into the database
+	 */
+	public void linkDoctorToHospital(Hospital hos, Doctor doc) {
+		try {
+			String template = "INSERT INTO hospital_doctor (hospital_id, doctor_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, hos.getHospitalID());
+			pstmt.setInt(2, doc.getDoctor_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
+	/**
+	 *Updates the data of a doctor that already exists in the database
+	 *@param a is the object Doctor that has the updated information 
+	 */
+	@Override
+	public void changeDoctor(Doctor a) {
+		String template = "UPDATE doctors SET name = ?, surname = ?,specialty = ?,contact = ?, photo=?, username=? WHERE doctor_id = ?";
+		PreparedStatement search;
+		try {
+			search = c.prepareStatement(template);
+			search.setInt(6,   a.getDoctor_id());
+		    search.setString(1, a.getName());
+		    search.setString(2, a.getSurname());
+		    search.setString(3, a.getSpecialty());
+		    search.setString(4, a.getContact());
+		    search.setBytes(5, a.getPhoto());
+		    search.setString(6, a.getUsername());
+		    search.executeUpdate();
+			search.close();
+			search.close();
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	
+	/**
 	 *Adds all the doctors to list that have as specialty the same as the parameter
 	 *@param specialty is the specialty we want to group the doctors by 
 	 *@return List of doctors that fulfill  this condition 
@@ -163,33 +210,7 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 
-	/**
-	 *Updates the data of a doctor that already exists in the database
-	 *@param a is the object Doctor that has the updated information 
-	 */
-	@Override
-	public void changeDoctor(Doctor a) {
-		String template = "UPDATE doctors SET name = ?, surname = ?,specialty = ?,contact = ?, photo=?, username=? WHERE doctor_id = ?";
-		PreparedStatement search;
-		try {
-			search = c.prepareStatement(template);
-			search.setInt(6,   a.getDoctor_id());
-		    search.setString(1, a.getName());
-		    search.setString(2, a.getSurname());
-		    search.setString(3, a.getSpecialty());
-		    search.setString(4, a.getContact());
-		    search.setBytes(5, a.getPhoto());
-		    search.setString(6, a.getUsername());
-		    search.executeUpdate();
-			search.close();
-			search.close();
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		
-	}
-
+	
 	/**
 	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
 	 *@param id is the id from the doctor we want to get from the database

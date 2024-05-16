@@ -12,6 +12,8 @@ import medicalhistory.database.pojos.Visit;
 
 public interface VisitManager {
 	public void addVisit (Visit temporal);
+	public void linkMedicationToVisit(Visit visit, Medication medi);
+	public void linkTreatmentToVisit(Visit visit, Treatment treat);
     public void changeVisit (Visit temporal);
     public List<Visit> getVisitByHospital (int hospital_id);
     public List<Visit> getVisitByTest (int test_id);

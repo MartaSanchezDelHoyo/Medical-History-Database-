@@ -12,6 +12,7 @@ import medicalhistory.database.interfaces.TestManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
+import medicalhistory.database.pojos.Manufacturer;
 import medicalhistory.database.pojos.Medication;
 import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Test;
@@ -49,6 +50,43 @@ public class JDBCVisitManager implements VisitManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
+	}
+	
+	
+	/**
+	 * To link a medication to a visit into the database
+	 */
+	public void linkMedicationToVisit(Visit visit, Medication medi) {
+		try {
+			String template = "INSERT INTO visit_medication (medication_id, visit_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, medi.getMedication_id());
+			pstmt.setInt(2, visit.getVisit_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
+	/**
+	 * To link a treatment to a visit into the database
+	 */
+	public void linkTreatmentToVisit(Visit visit, Treatment treat) {
+		try {
+			String template = "INSERT INTO visit_treatment (treatment_id, visit_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, treat.getTreatmentID());
+			pstmt.setInt(2, visit.getVisit_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
 	}
 	
 	/**

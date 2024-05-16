@@ -9,6 +9,7 @@ import medicalhistory.database.pojos.Visit;
 public interface MedicationManager {
 	
 	public void addMedication (Medication entry);
+	public void linkMedicationToManufacturer(Medication entry, Manufacturer manu);
 	public void addManufacturer (Manufacturer entry);
 	public void modifyMedication (Medication entry); 
     public Medication showMedication(Visit toSearch);

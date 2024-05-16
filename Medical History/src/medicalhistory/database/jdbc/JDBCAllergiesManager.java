@@ -41,7 +41,7 @@ public class JDBCAllergiesManager implements AllergiesManager{
 		@Override
 		public void changeAllergy (Allergies allergies) {
 			try {
-				String template = "UPDATE hospitals SET allergy_type= ? WHERE allergy_id= ?";
+				String template = "UPDATE allergies SET allergy_type= ? WHERE allergy_id= ?";
 				PreparedStatement pstmt;
 				pstmt = c.prepareStatement(template);
 				pstmt.setString(1, allergies.getAllergiesName());

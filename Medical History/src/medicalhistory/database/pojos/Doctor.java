@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Doctor implements Serializable{
 	/**
 	 * 
@@ -64,6 +65,7 @@ public class Doctor implements Serializable{
 		this.setSpecialty(speciality);
 		this.setContact(contact);
 		this.setPhoto(photo);
+		
 		this.patients=new ArrayList<>();
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();

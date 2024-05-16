@@ -91,7 +91,6 @@ public class JDBCDocManager implements DoctorManager {
 	}
 
 	
-	
 	/**
 	 *Adds all the doctors to list that have as specialty the same as the parameter
 	 *@param specialty is the specialty we want to group the doctors by 
@@ -116,7 +115,7 @@ public class JDBCDocManager implements DoctorManager {
 				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
 				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
 				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,/*patients, hospitals, visits,*/ photo, username);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact, photo, username);
 				doctors.add(newDoctor);
 			}
 			

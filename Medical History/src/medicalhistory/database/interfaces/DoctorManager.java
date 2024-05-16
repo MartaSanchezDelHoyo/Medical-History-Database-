@@ -13,7 +13,6 @@ public interface DoctorManager {
 	public List<Doctor> getDoctorsbySpecialties(String specialty);
 	public List<Doctor> getDoctorsbyHospital(String hospitalName);
 	public List<Doctor> getDoctorByNameSurname(String name, String surname);
-	
 	public Doctor getDoctor(int id) ;
 	
 }

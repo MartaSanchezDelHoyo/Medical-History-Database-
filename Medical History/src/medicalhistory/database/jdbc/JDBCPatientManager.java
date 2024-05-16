@@ -205,7 +205,6 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error updating patient information: " + e.getMessage());
 	    }
 	}
-
 	
 	public Connection getC() {
 		return c;

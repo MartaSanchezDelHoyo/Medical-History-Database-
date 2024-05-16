@@ -10,7 +10,6 @@ public interface PatientManager {
 	public List<Patient> getPatientByName(String name);
 	public Patient getPatient(int patient_id);
 	public Patient getPatient(String name);
-	
 
 
 }

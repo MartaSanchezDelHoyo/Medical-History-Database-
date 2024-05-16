@@ -55,7 +55,7 @@ public class Menu {
          //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
 
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null, "jose");
-		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
+		 //Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
 		 Test test =new Test("Radiografía", null);
 		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30", "luis");
          Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);

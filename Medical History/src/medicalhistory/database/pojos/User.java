@@ -26,6 +26,7 @@ public class User implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String username;
 	private String password;
+	private String name;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 	
@@ -78,6 +79,17 @@ public class User implements Serializable {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

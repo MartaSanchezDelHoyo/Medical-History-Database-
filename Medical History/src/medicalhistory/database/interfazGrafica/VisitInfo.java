@@ -1,10 +1,13 @@
 package medicalhistory.database.interfazGrafica;
 
+import medicalhistory.database.jdbc.*;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Date;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
@@ -21,8 +24,9 @@ public class VisitInfo extends JFrame {
 	private JPanel panel = new JPanel();
 	private JPanel botonPanelPatients;
 	private JTextField DoctorText;
-	private Container panelBotonesMedication;
-	
+	private JPanel panelBotonesMedication;
+	private Connection c;
+	private ConnectionManager conMan;
 	
 public VisitInfo (Visit a) {	
 	setTitle("Visit Information");
@@ -155,6 +159,8 @@ public VisitInfo (Visit a) {
             dispose(); // Cierra la ventana actual
         }
     });
+	addBotonMedications( a);
+	addBotonTreatments(a);
     setVisible(true);
 }
 
@@ -165,6 +171,7 @@ public VisitInfo (Visit a) {
             boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             //open new medication parameter
+            
         panelBotonesMedication.revalidate();
         panelBotonesMedication.repaint();
     }
@@ -184,11 +191,5 @@ public VisitInfo (Visit a) {
             });
         }
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new VisitInfo (null);
-            }
-        });
-    }
+  
 }

@@ -73,4 +73,21 @@ public class Registation extends JFrame {
             }
         });
     }
+
+	public JTextField getCampoUsuario() {
+		return campoUsuario;
+	}
+
+	public void setCampoUsuario(JTextField campoUsuario) {
+		this.campoUsuario = campoUsuario;
+	}
+
+	public JPasswordField getCampoContraseña() {
+		return campoContraseña;
+	}
+
+	public void setCampoContraseña(JPasswordField campoContraseña) {
+		this.campoContraseña = campoContraseña;
+	}
+    
 }

@@ -11,6 +11,7 @@ public class Hospital implements Serializable{
 	private Integer hospitalID;
     private String hospitalName;
     private String hospitalAddress;
+	private String username;
     private List <Doctor> Hospital_doctors;
     private List <Visit> Hospital_visits;
        
@@ -20,9 +21,10 @@ public class Hospital implements Serializable{
      * @param hospitalName name of the hospital
      * @param hospitalAddress address of the hospital
      */
-    public Hospital(String hospitalName, String hospitalAddress) {
+    public Hospital(String hospitalName, String hospitalAddress, String username) {
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
+		this.username=username;
 		this.Hospital_doctors = new ArrayList<>();
 		this.Hospital_visits = new ArrayList<>();
 	}
@@ -32,10 +34,11 @@ public class Hospital implements Serializable{
      * @param hospitalName name of the hospital
      * @param hospitalAddress address of the hospital
      */
-    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress) {
+    public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username) {
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
+		this.username=username;
 		this.Hospital_doctors = new ArrayList<>();
 		this.Hospital_visits = new ArrayList<>();
 	}
@@ -46,7 +49,7 @@ public class Hospital implements Serializable{
 	 * @param hospitalAddress
 	 * @param hospital_doctors list of doctors of the hospital
 	 */
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors) {
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, String username) {
 		super();
 		this.Hospital_doctors= hospital_doctors;
 	}
@@ -58,31 +61,25 @@ public class Hospital implements Serializable{
 	 * @param hospital_doctors
 	 * @param hospital_visits list of visits of the hospitals
 	 */
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<Visit> hospital_visits) {
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<Visit> hospital_visits, String username) {
 		super();
 	this.Hospital_doctors =hospital_doctors;
 	this.Hospital_visits= hospital_visits;
 	}
 	
-
+	
+    @Override
+	public String toString() {
+		return "Hospital [hospitalID=" + hospitalID + ", hospitalName=" + hospitalName + ", hospitalAddress="
+				+ hospitalAddress + ", username=" + username + ", Hospital_doctors=" + Hospital_doctors
+				+ ", Hospital_visits=" + Hospital_visits + "]";
+	}
 
 	@Override
-    public int hashCode() {
-        return Objects.hash(hospitalID, hospitalName, hospitalAddress);
-    }
+	public int hashCode() {
+		return Objects.hash(Hospital_doctors, Hospital_visits, hospitalAddress, hospitalID, hospitalName, username);
+	}
 
-    @Override
-    public String toString() {
-        return "HospitalPOJO{" +
-                "hospitalID=" + hospitalID +
-                ", hospitalName='" + hospitalName + '\'' +
-                ", hospitalAddress='" + hospitalAddress + '\'' +
-                '}';
-    }
-    /** Equals method to compare two treatmentID
-	 * @param Object 
-	 * @return boolean
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -92,19 +89,22 @@ public class Hospital implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Hospital other = (Hospital) obj;
-		if (hospitalID == null) {
-			if (other.hospitalID != null)
-				return false;
-		} else if (!hospitalID.equals(other.hospitalID))
-			return false;
-		return true;
+		return Objects.equals(Hospital_doctors, other.Hospital_doctors)
+				&& Objects.equals(Hospital_visits, other.Hospital_visits)
+				&& Objects.equals(hospitalAddress, other.hospitalAddress)
+				&& Objects.equals(hospitalID, other.hospitalID) && Objects.equals(hospitalName, other.hospitalName)
+				&& Objects.equals(username, other.username);
 	}
-	
-	/**
-	 * Getters and setters
-	 */
-	
-    public Integer getHospitalID() {
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Integer getHospitalID() {
         return hospitalID;
     }
 

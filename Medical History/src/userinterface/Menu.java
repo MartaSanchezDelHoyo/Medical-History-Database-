@@ -57,19 +57,19 @@ public class Menu {
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
                   
-          conMan.getAllergiesMan().addAllergy(allergy);
-         System.out.println("Firewall pass");
-         Allergies allergyDos= conMan.getAllergiesMan().getAllergy(2);
-         System.out.println(allergy);
-      
-        
+         conMan.getVisitMan().addVisit(visit);
+         
+         //Alergies aller= conMan.getAllergiesMan()
+         
+         //Doctor newDoc= conMan.getDocMan().getDoctor(1);
+        // System.out.println(newDoc);
         //Manufacturer has an error in db
         //Medication has an error in db
 		//Test has an error in db
         // conMan.getTestMan().addTest(test);
 		//Patient verifyed (Without lists)
         //Hospital verifyed (Without lists)
-		 
+		 //Doctor verifyed (Without lists)
 		 
 		 
 		

@@ -37,7 +37,23 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	}
 	
-	
+	@Override
+	public void addAllergiestoPatient (Patient a, Allergies s){
+	    try {
+	        String sql = "INSERT INTO patient_allergy (patient_id, allergy_id) VALUES (?, ?)";
+	        PreparedStatement statement = c.prepareStatement(sql);
+
+	        statement.setInt(1, a.getPatientID());
+	        statement.setInt(2, s.getAllergiesID());
+	  
+	        statement.executeUpdate();
+	        statement.close();
+	        
+	        System.out.println("Allergy added to patient successfully");
+	    } catch (SQLException e) {
+	        System.err.println("Error adding allergy: " + e.getMessage());
+	    }
+	}
 	
 	@Override
 	public List<Patient> getPatientByName(String name) {

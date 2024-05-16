@@ -55,6 +55,42 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	}
 	
+	
+	/**
+	 *Adds all the doctors to list that have as specialty the same as the parameter
+	 *@param specialty is the specialty we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
+	@Override
+	public Patient getPatientssbyUsername(String usern) {
+		Patient newPatient=null;
+		try {
+			String sql = "SELECT * FROM patients WHERE username LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setString(1, "%" + usern + "%");
+			ResultSet resultSet = search.executeQuery();
+			while(resultSet.next()) {
+				int patientID= resultSet.getInt("patient_id");
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
+	            String username = resultSet.getString("username");
+				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
+	            newPatient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo, username);
+			}
+			    search.close();
+			    resultSet.close();
+				
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return newPatient;
+	}
 	@Override
 	public List<Patient> getPatientByName(String name) {
 	    List<Patient> patients = new ArrayList<>();

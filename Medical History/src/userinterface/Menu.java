@@ -47,24 +47,24 @@ public class Menu {
 		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
 		
-<<<<<<< HEAD
+
 		 //Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
 		//Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
 		 //Test test =new Test("Radiografía", null);
 		 //Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
          //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
-=======
+
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null, "jose");
 		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
 		 Test test =new Test("Radiografía", null);
 		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30", "luis");
          Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
+
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
-<<<<<<< HEAD
+
                   
          //conMan.getVisitMan().addVisit(visit);
          
@@ -72,14 +72,7 @@ public class Menu {
          
          //Doctor newDoc= conMan.getDocMan().getDoctor(1);
         // System.out.println(newDoc);
-=======
-         
-         Allergies allergy2 = conMan.getAllergiesMan().getAllergy(4);
-         System.out.println(allergy2);
-      
-        
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
-        //Manufacturer has an error in db
+
         //Medication has an error in db
 		//Test has an error in db
         // conMan.getTestMan().addTest(test);

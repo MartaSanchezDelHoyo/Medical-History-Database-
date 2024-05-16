@@ -132,7 +132,41 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 	
-// hace falta get doctror by photo??
+	/**
+	 *Adds all the doctors to list that have as specialty the same as the parameter
+	 *@param specialty is the specialty we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
+	@Override
+	public Doctor getDoctorsbyUsername(String usern) {
+		Doctor newDoctor=null;
+		try {
+			String sql = "SELECT * FROM doctors WHERE username LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setString(1, "%" + usern + "%");
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer doctor_id = rs.getInt("doctor_id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String specialty_ = rs.getString("specialty");
+				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
+				String username = rs.getString("username");
+				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
+				newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,/*patients, hospitals, visits,*/ photo, username);
+			}
+			    search.close();
+				rs.close();
+				
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return newDoctor;
+	}
 
 	/**
 	 *Adds all the doctors to list that work in the hospital that the parameter indicates

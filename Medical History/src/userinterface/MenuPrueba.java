@@ -63,7 +63,7 @@ public class MenuPrueba {
 	            fis.read(image);
 	            fis.close();
 
-	            Doctor doctor = new Doctor(name, surname, specialty, contact,image);
+	            Doctor doctor = 	;
 	            doctorMan.addDoctor(doctor);
 	            
 	        } catch (Exception e) {

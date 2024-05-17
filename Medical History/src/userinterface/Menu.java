@@ -69,13 +69,13 @@ public class Menu {
          Patient pati= conMan.getPatientMan().getPatient(1);
          Patient getPatientByName= conMan.getPatientMan().getPatient(1);
          getPatientByName.setDateofbirth(dateOfBirth);
-         
+         conMan.getPatientMan().changePatient(getPatientByName);
          //conMan.getVisitMan().addVisit(visit);
          
          //Alergies aller= conMan.getAllergiesMan()
          
          //Doctor newDoc= conMan.getDocMan().getDoctor(1);
-        System.out.println(getPatientByName);
+        //System.out.println(getPatientByName);
 
         //Medication has an error in db
 		//Test has an error in db

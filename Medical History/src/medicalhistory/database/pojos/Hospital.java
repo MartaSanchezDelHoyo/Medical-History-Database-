@@ -37,8 +37,8 @@ public class Hospital implements Serializable{
     public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username) {
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
+	    this.username=username;
 		this.hospitalAddress = hospitalAddress;
-		this.username=username;
 		this.Hospital_doctors = new ArrayList<>();
 		this.Hospital_visits = new ArrayList<>();
 	}
@@ -49,9 +49,13 @@ public class Hospital implements Serializable{
 	 * @param hospitalAddress
 	 * @param hospital_doctors list of doctors of the hospital
 	 */
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, String username) {
-		super();
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username, List<Doctor> hospital_doctors) {
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.username=username;
+		this.hospitalAddress = hospitalAddress;
 		this.Hospital_doctors= hospital_doctors;
+		this.Hospital_visits = new ArrayList<>();
 	}
 	
 	/**Constructor with every parameter
@@ -61,11 +65,16 @@ public class Hospital implements Serializable{
 	 * @param hospital_doctors
 	 * @param hospital_visits list of visits of the hospitals
 	 */
-	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, List<Doctor> hospital_doctors, List<Visit> hospital_visits, String username) {
-		super();
-	this.Hospital_doctors =hospital_doctors;
-	this.Hospital_visits= hospital_visits;
+	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username, List<Doctor> hospital_doctors, List<Visit> hospital_visits) {
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.username=username;
+		this.hospitalAddress = hospitalAddress;
+	    this.Hospital_doctors =hospital_doctors;
+	    this.Hospital_visits= hospital_visits;
 	}
+	
+	
 	
 	
     @Override

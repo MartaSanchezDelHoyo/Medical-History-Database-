@@ -28,11 +28,11 @@ public class Patient implements Serializable{
 	
 	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username) {
 		this.patientName = patientName;
+		this.username=username;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
-		this.setPhoto(photo);
-		this.username=username;
+		this.photo= photo;
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
@@ -42,26 +42,39 @@ public class Patient implements Serializable{
 	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username) {
 		this.patientID=patientID;
 		this.patientName = patientName;
+		this.username=username;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
-		this.setPhoto(photo);
-		this.username=username;
+		this.photo= photo;
 		this.allergies = new ArrayList<>();
 		this.visits = new ArrayList<>();
 		this.doctors = new ArrayList<>();
 	
 	}
 
-	
-	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors, String username) {
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username, List<Allergies> allergies) {
 		this.patientID=patientID;
 		this.patientName = patientName;
+		this.username=username;
 		this.dateofbirth = dateofbirth;
 		this.bloodtype = bloodtype;
 		this.email = email;
-		this.setPhoto(photo);
+		this.photo= photo;
+		this.allergies = allergies;
+		this.visits = new ArrayList<>();
+		this.doctors = new ArrayList<>();
+	
+	}
+	
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username,List<Allergies> allergies, List <Visit> visits, List <Doctor> doctors) {
+		this.patientID=patientID;
+		this.patientName = patientName;
 		this.username=username;
+		this.dateofbirth = dateofbirth;
+		this.bloodtype = bloodtype;
+		this.email = email;
+		this.photo= photo;
 		this.allergies = allergies;
 		this.visits = visits;
 		this.doctors =doctors;

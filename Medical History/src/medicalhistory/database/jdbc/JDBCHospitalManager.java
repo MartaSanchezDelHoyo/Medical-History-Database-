@@ -80,9 +80,11 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_adress = rs.getString("hospital_adress");
 				String username = rs.getString("username");
-				//List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
-				//Solo se ven los doctores del hospital
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, username);
+				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
+				List<Patient> patients= conMan.getPatientMan().getPatientsByHospital(hospital_id);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
+			
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress,username, doctors);
 				
 			}
 			rs.close();
@@ -95,6 +97,39 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	
+
+	/**Method to get all the information of a hospital by the visit_id
+	 * @param ID of the visit
+	 * @return Obj hospital who's information you want
+	 */
+	@Override
+	public Hospital getHospitalByVisit(int visit_id){
+		Hospital hospital = null;
+	    try {
+	        String sql = "SELECT hospitals.* FROM hospitals " +
+	                     "INNER JOIN Visits ON hospital.hospital_id = Visits.hospital_id " +
+	                     "WHERE  Visits.visit_id= ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1, visit_id);
+	        ResultSet resultSet = statement.executeQuery();
+
+	            int hospitalID = resultSet.getInt("hospital_id");
+	            String hospitalName = resultSet.getString("hospital_name");
+	            String hospitalAddress = resultSet.getString("hospital_adress");
+	            String username =resultSet.getString("username");
+	            //No haria falta esta lista (Solo para prueba)
+	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalAddress);
+	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username, doctors);
+	            
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
+	    }
+	    return hospital;
+		
+	}
+	
 	/**
 	 *Adds all the hospitals where a specific doctor works in to a list
 	 *@param ID of the doctor 
@@ -104,9 +139,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	public List<Hospital> getHospitalByDoctor(int doctor_id){
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
-	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN hospital_doctor ON hospital.hospital_id = hospital_doctor.hospital_id " +
-	                     "WHERE  hospital_doctor.doctor_id= ?";
+	        String sql =  "SELECT DISTINCT h.* FROM Visits AS v JOIN hospitals AS h ON v.hospital_id = h.hospital_id WHERE v.doctor_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setInt(1, doctor_id);
 	        ResultSet resultSet = statement.executeQuery();
@@ -128,35 +161,6 @@ public class JDBCHospitalManager implements HospitalManager {
 	    return hospitals;
 	}
 	
-	/**Method to get all the information of a hospital by the visit_id
-	 * @param ID of the visit
-	 * @return Obj hospital who's information you want
-	 */
-	@Override
-	public Hospital getHospitalByVisit(int visit_id){
-		Hospital hospital = null;
-	    try {
-	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN Visits ON hospital.hospital_id = Visits.hospital_id " +
-	                     "WHERE  Visits.visit_id= ?";
-	        PreparedStatement statement = c.prepareStatement(sql);
-	        statement.setInt(1, visit_id);
-	        ResultSet resultSet = statement.executeQuery();
-
-	            int hospitalID = resultSet.getInt("hospital_id");
-	            String hospitalName = resultSet.getString("hospital_name");
-	            String hospitalAddress = resultSet.getString("hospital_adress");
-	            String username =resultSet.getString("username");
-	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
-	            
-	        resultSet.close();
-	        statement.close();
-	    } catch (SQLException e) {
-	        System.err.println("Error retrieving doctors for patient: " + e.getMessage());
-	    }
-	    return hospital;
-		
-	}
 	
 	/**
 	 *Adds all the hospitals where a specific patient works in to a list
@@ -167,10 +171,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	public List<Hospital> getHospitalByPatient(int patientID){
 		List<Hospital> hospitals = new ArrayList<>();
 	    try {
-	        String sql = "SELECT hospitals.* FROM hospitals " +
-	                     "INNER JOIN Visits ON hospital.hospital_id = Visits.hospital_id " +
-	        		     "INNER JOIN patients ON Visits.patient_id =patients.patient_id "+
-	                     "WHERE  patients.patient_id= ?";
+	        String sql =  "SELECT DISTINCT h.* FROM Visits AS v JOIN hospitals AS h ON v.hospital_id = h.hospital_id WHERE v.patient_id = ?";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setInt(1, patientID);
 	        ResultSet resultSet = statement.executeQuery();

@@ -1,12 +1,24 @@
 package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
+
+import medicalhistory.database.jpa.JPAUserManager;
+import medicalhistory.database.pojos.Doctor;
+import medicalhistory.database.pojos.Hospital;
+import medicalhistory.database.pojos.Patient;
+import medicalhistory.database.pojos.Role;
+import medicalhistory.database.pojos.User;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class Registation extends JFrame {
     private JTextField campoUsuario;
     private JPasswordField campoContraseña;
+    private static JPAUserManager userMan;
+    boolean register = false;
+    private JLabel resultLabel;
 
     public Registation() {
         setTitle("Registro de Usuario");
@@ -36,15 +48,56 @@ public class Registation extends JFrame {
         campoContraseña.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         campoContraseña.setBounds(534, 413, 544, 64);
 
-        JButton botonRegistrar = new JButton("Log in ");
-        botonRegistrar.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 29));
-        botonRegistrar.setBounds(702, 603, 211, 64);
-        botonRegistrar.addActionListener(new ActionListener() {
+       
+        JButton loginButon = new JButton("Log in ");
+        loginButon.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 29));
+        loginButon.setBounds(878, 699, 211, 64);
+        loginButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String usuario = campoUsuario.getText();
-                String contraseña = new String(campoContraseña.getPassword());
-                // agregar la lógica para procesar el registro
-                JOptionPane.showMessageDialog(Registation.this, "Usuario registrado:\nUsuario: " + usuario + "\nContraseña: " + contraseña);
+                String username = campoUsuario.getText();
+                String password = new String(campoContraseña.getPassword());
+                Object userman;
+				// agregar la lógica para procesar el registro
+                User user = userMan.login(username, password);
+                if (user != null) {
+                    register=true;
+                } 
+            }
+        });
+        
+        JButton registerButton = new JButton("Sign in");
+        registerButton.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 29));
+        registerButton.setBounds(534, 699, 211, 64);
+        registerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = campoUsuario.getText();
+                String password = new String(campoContraseña.getPassword());
+               
+				// agregar la lógica para procesar el registro
+               
+                openSmallWindow();
+                User user = new User(username, password,new Role(resultLabel.toString()));
+
+                if (user != null) {
+                    register=true;
+                } 
+                switch (resultLabel.toString()) {
+			    case "Doctor":
+			    	new AddDoctor();
+			    	userMan.register(user);
+			        break;
+			    case "Patient":
+			    	// Add Patient user window
+			       new PatientInfo(patient);
+			        break;
+			    case "Hospital":
+			       Hospital hospi= hospitalMan.getHospitalbyUsername(user.getUsername());
+			       new HospitalInfo(hospi);
+			        break;
+			    default:
+			        
+			        break;
+			}
             }
         });
         panel.setLayout(null);
@@ -53,7 +106,8 @@ public class Registation extends JFrame {
         panel.add(campoUsuario);
         panel.add(labelContraseña);
         panel.add(campoContraseña);
-        panel.add(botonRegistrar);
+        panel.add(registerButton);
+        panel.add(loginButon);
 
         getContentPane().add(panel);
         
@@ -64,6 +118,7 @@ public class Registation extends JFrame {
         panel.add(lblNewLabel);
 
         setVisible(true);
+		
     }
 
     public static void main(String[] args) {
@@ -73,6 +128,10 @@ public class Registation extends JFrame {
             }
         });
     }
+
+	public boolean isRegister() {
+		return register;
+	}
 
 	public JTextField getCampoUsuario() {
 		return campoUsuario;
@@ -89,5 +148,66 @@ public class Registation extends JFrame {
 	public void setCampoContraseña(JPasswordField campoContraseña) {
 		this.campoContraseña = campoContraseña;
 	}
-    
+	private void openSmallWindow() {
+        JDialog smallWindow = new JDialog(this, "Select your role", true);
+        smallWindow.setSize(300, 200);
+        smallWindow.setLayout(new FlowLayout());
+
+        // Crear botones de radio
+        JRadioButton option1 = new JRadioButton("Doctor");
+        JRadioButton option2 = new JRadioButton("Patient");
+        JRadioButton option3 = new JRadioButton("Administrator");
+
+        // Agrupar los botones de radio para que solo se pueda seleccionar uno
+        ButtonGroup group = new ButtonGroup();
+        group.add(option1);
+        group.add(option2);
+        group.add(option3);
+
+        JButton confirmButton = new JButton("Confirmar");
+        confirmButton.setEnabled(false);
+        // Botón para confirmar la selección
+        
+        ActionListener radioButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                confirmButton.setEnabled(true);
+            }
+        };
+        option1.addActionListener(radioButtonListener);
+        option2.addActionListener(radioButtonListener);
+        option3.addActionListener(radioButtonListener);
+        confirmButton.addActionListener(new ActionListener() {
+        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+                String selectedOption = null;
+                if (option1.isSelected()) {
+                    selectedOption = "Opción 1";
+                } else if (option2.isSelected()) {
+                    selectedOption = "Opción 2";
+                } else if (option3.isSelected()) {
+                    selectedOption = "Opción 3";
+                }
+
+				// Devolver la opción seleccionada a la clase original
+                if (selectedOption != null) {
+                    resultLabel.setText("You selected: " + selectedOption);
+                } 
+
+                // Cerrar la ventana pequeña
+                smallWindow.dispose();
+            }
+        });
+
+        // Agregar componentes a la ventana pequeña
+        smallWindow.add(option1);
+        smallWindow.add(option2);
+        smallWindow.add(option3);
+        smallWindow.add(confirmButton);
+
+        smallWindow.setLocationRelativeTo(this); // Centrar la ventana pequeña respecto a la ventana principal
+        smallWindow.setVisible(true);
+    }
 }

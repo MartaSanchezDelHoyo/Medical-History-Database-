@@ -39,21 +39,21 @@ public static void main(String[] args) {
            Registation registation = new Registation();
            try {
         	   User user = new User();
-			if ( userman.login(registation.getCampoUsuario().toString(),registation.getCampoContraseña().toString()) != null ){
+			if ( registation.isRegister()==true ){
 				user =userman.login(registation.getCampoUsuario().toString(),registation.getCampoContraseña().toString());
 				JOptionPane.showInputDialog("Welcome back "+ registation.getCampoUsuario().toString());
 				Role role=user.getRole();
 				switch (role.toString()) {
 			    case "Doctor":
-			    	Doctor doc=docMan.getDoctor(user.getId());
+			    	Doctor doc=docMan.getDoctorsbyUsername(user.getUsername());
 			    	new DoctorInfo(doc);
 			        break;
 			    case "Patient":
-			       Patient patient= patientMan.getPatient(user.getId());
+			       Patient patient= patientMan.getPatientssbyUsername(user.getUsername());
 			       new PatientInfo(patient);
 			        break;
 			    case "Hospital":
-			       Hospital hospi= hospitalMan.getHospital(user.getId());
+			       Hospital hospi= hospitalMan.getHospitalbyUsername(user.getUsername());
 			       new HospitalInfo(hospi);
 			        break;
 			    default:
@@ -62,7 +62,7 @@ public static void main(String[] args) {
 			}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showInputDialog("User not found");
 			e.printStackTrace();
 		}
         }

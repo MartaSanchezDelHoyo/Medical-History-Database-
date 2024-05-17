@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Doctor implements Serializable{
 	/**
 	 * 
@@ -15,16 +16,78 @@ public class Doctor implements Serializable{
 	private int doctor_id;
 	private String name;
 	private String surname;
+	private String username;
 	private String specialty;
 	private String contact;
 	private byte[] photo;
-	private String username;
 	private List <Patient> patients;
 	private List <Hospital> hospitals;
 	private List <Visit> visits;
 	
-	
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param name
+	 * @param surname
+	 * @param specialty
+	 * @param contact
+	 * @param photo
+	 */
+	public Doctor(String name, String surname,String username, String specialty, String contact, byte[]photo) {
+		this.name = name;
+		this.surname = surname;
+		this.username= username;
+		this.specialty = specialty;
+		this.contact = contact;
+		this.photo=photo;
+		this.patients=new ArrayList<>();
+		this.hospitals=new ArrayList<>();
+		this.visits=new ArrayList<>();
+	}
 
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param doctor_id
+	 * @param name
+	 * @param surname
+	 * @param specialty
+	 * @param contact
+	 * @param photo
+	 */
+	public Doctor(int doctor_id, String name, String surname,String username, String speciality, String contact, byte[]photo) {
+		this.doctor_id = doctor_id;
+		this.name = name;
+		this.surname = surname;
+		this.username= username;
+		this.specialty = speciality;
+		this.contact = contact;
+		this.photo=photo;
+		this.patients=new ArrayList<>();
+		this.hospitals=new ArrayList<>();
+		this.visits=new ArrayList<>();
+	}
+	
+	/**
+	 * Constructor of the object doctor that has as parameters:
+	 * @param doctor_id
+	 * @param name
+	 * @param surname
+	 * @param specialty
+	 * @param contact
+	 * @param photo
+	 */
+	public Doctor(int doctor_id, String name, String surname,String username, String speciality, String contact, byte[]photo, List<Hospital> hospitals) {
+		this.doctor_id = doctor_id;
+		this.name = name;
+		this.surname = surname;
+		this.username= username;
+		this.specialty = speciality;
+		this.contact = contact;
+		this.photo=photo;
+		this.patients=new ArrayList<>();
+		this.hospitals=hospitals;
+		this.visits=new ArrayList<>();
+	}
+	
 	/**
 	 * Constructor of the object doctor that has as parameters:
 	 * @param doctor_id
@@ -37,60 +100,32 @@ public class Doctor implements Serializable{
 	 * @param visits
 	 * @param photo
 	 */
-	public Doctor(int doctor_id, String name, String surname, String speciality, String contact, List<Patient> patients,
-			List<Hospital> hospitals, List<Visit> visits,byte[] photo, String username) {
+	public Doctor(int doctor_id, String name, String surname,String username, String speciality, String contact,byte[] photo, List<Patient> patients,
+			List<Hospital> hospitals, List<Visit> visits) {
 		this.doctor_id = doctor_id;
 		this.name = name;
 		this.surname = surname;
+		this.username= username;
 		this.specialty = speciality;
 		this.contact = contact;
+		this.photo=photo;
 		this.patients = patients;
 		this.hospitals = hospitals;
 		this.visits = visits;
-		this.photo=photo;
-		this.username=username;
-	}
-	/**
-	 * Constructor of the object doctor that has as parameters:
-	 * @param doctor_id
-	 * @param name
-	 * @param surname
-	 * @param specialty
-	 * @param contact
-	 * @param photo
-	 */
-	public Doctor(int doctor_id, String name, String surname,String speciality, String contact,byte[]photo, String username) {
-		this.setDoctor_id(doctor_id);
-		this.setName(name);
-		this.setSurname(surname);
-		this.setSpecialty(speciality);
-		this.setContact(contact);
-		this.setPhoto(photo);
-		this.username=username;
-		this.patients=new ArrayList<>();
-		this.hospitals=new ArrayList<>();
-		this.visits=new ArrayList<>();
+		
 	}
 	
-	/**
-	 * Constructor of the object doctor that has as parameters:
-	 * @param name
-	 * @param surname
-	 * @param specialty
-	 * @param contact
-	 * @param photo
-	 */
-	public Doctor(String name, String surname, String specialty, String contact,byte[]photo, String username) {
-		this.setName(name);
-		this.setSurname(surname);
-		this.setSpecialty(specialty);
-		this.setContact(contact);
-		this.setPhoto(photo);
-		this.username=username;
-		this.patients=new ArrayList<>();
-		this.hospitals=new ArrayList<>();
-		this.visits=new ArrayList<>();
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="
+				+ specialty + ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", patients=" + patients
+				+ ", hospitals=" + hospitals + ", visits=" + visits + "]";
 	}
+
+	
 
 	@Override
 	public int hashCode() {
@@ -115,18 +150,6 @@ public class Doctor implements Serializable{
 				&& Objects.equals(patients, other.patients) && Arrays.equals(photo, other.photo)
 				&& Objects.equals(specialty, other.specialty) && Objects.equals(surname, other.surname)
 				&& Objects.equals(username, other.username) && Objects.equals(visits, other.visits);
-	}
-	@Override
-	public String toString() {
-		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", specialty=" + specialty
-				+ ", contact=" + contact + ", photo=" + Arrays.toString(photo) + ", username=" + username
-				+ ", patients=" + patients + ", hospitals=" + hospitals + ", visits=" + visits + "]";
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public int getDoctor_id() {
 		return doctor_id;
@@ -196,8 +219,6 @@ public class Doctor implements Serializable{
 		this.hospitals = hospitals;
 	}
 
-
-
 	public List <Visit> getVisits() {
 		return visits;
 	}
@@ -212,5 +233,10 @@ public class Doctor implements Serializable{
 		this.photo = photo;
 	}
 	
-	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

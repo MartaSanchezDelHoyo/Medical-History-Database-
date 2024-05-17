@@ -39,6 +39,25 @@ public class JDBCMedicationManager implements MedicationManager {
 		}			
 	}
 	
+	
+	/**
+	 * To link a medication to a manufacturer into the database
+	 */
+	public void linkMedicationToManufacturer(Medication entry, Manufacturer manu) {
+		try {
+			String template = "INSERT INTO manufacturer_medication (medication_id, manufacturer_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, entry.getMedication_id());
+			pstmt.setInt(2, manu.getManufacturerID());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
 	/**
 	 * To add a manufacturer into the database
 	 */

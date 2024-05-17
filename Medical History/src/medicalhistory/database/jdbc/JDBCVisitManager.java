@@ -12,6 +12,7 @@ import medicalhistory.database.interfaces.TestManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
+import medicalhistory.database.pojos.Manufacturer;
 import medicalhistory.database.pojos.Medication;
 import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Test;
@@ -51,6 +52,43 @@ public class JDBCVisitManager implements VisitManager {
 		}
 	}
 	
+	
+	/**
+	 * To link a medication to a visit into the database
+	 */
+	public void linkMedicationToVisit(Visit visit, Medication medi) {
+		try {
+			String template = "INSERT INTO visit_medication (medication_id, visit_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, medi.getMedication_id());
+			pstmt.setInt(2, visit.getVisit_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
+	/**
+	 * To link a treatment to a visit into the database
+	 */
+	public void linkTreatmentToVisit(Visit visit, Treatment treat) {
+		try {
+			String template = "INSERT INTO visit_treatment (treatment_id, visit_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, treat.getTreatmentID());
+			pstmt.setInt(2, visit.getVisit_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
 	/**
 	 * To change the visit selected, introducing the new visit changed
 	 */
@@ -76,6 +114,42 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	
+		/**
+		 * To show the visits related with the doctor we have selected (By the object)
+		 */
+		
+		@Override
+	    public Visit getVisit (int visitID) {
+			
+			Visit obtained=null;
+			
+			try {
+				String sql = "SELECT * FROM Visits WHERE doctor_id= ?";
+				PreparedStatement search = c.prepareStatement(sql);
+				search.setInt(1, visitID);
+				ResultSet rs = search.executeQuery();
+				while(rs.next()) {
+					Integer visit_id = rs.getInt("visit_id");
+					Date date = rs.getDate("date");
+					String observations = rs.getString("observations");
+					Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
+					Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
+					Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
+					Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("hospital_id"));
+					List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
+					List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
+					obtained = new Visit(visit_id, date, observations, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
+				}
+				rs.close();
+				search.close();
+				return obtained;
+			} catch (SQLException e) {
+				System.out.println("Error looking for a doctor");
+				e.printStackTrace();
+			}
+			return obtained;
+		}
+		
 	
 	/**
 	 * To show visits that are in the hospital we have selected
@@ -97,6 +171,7 @@ public class JDBCVisitManager implements VisitManager {
 				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
 				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
 				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("hospital_id"));
+				//A lo mejor dederia quitarse (Solo para prueba)
 				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
 				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
 				Visit obtained = new Visit(visit_id, date, observations, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
@@ -184,42 +259,6 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
-	//no implementado en el menu
-	/**
-	 * To show the visits related with the doctor we have selected (By the object)
-	 */
-	
-	@Override
-    public Visit getVisit (int visitID) {
-		
-		Visit obtained=null;
-		
-		try {
-			String sql = "SELECT * FROM Visits WHERE doctor_id= ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, visitID);
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer visit_id = rs.getInt("visit_id");
-				Date date = rs.getDate("date");
-				String observations = rs.getString("observations");
-				Patient patient= conMan.getPatientMan().getPatient(rs.getInt("patient_id"));
-				Doctor doctor = conMan.getDocMan().getDoctor(rs.getInt("doctor_id"));
-				Test test= conMan.getTestMan().getTest(rs.getInt("test_id"));
-				Hospital hospital = conMan.getHospitalMan().getHospital(rs.getInt("hospital_id"));
-				List<Medication> listOfMedications= conMan.getMedicationMan().showMedications(visit_id);
-				List<Treatment> listOfTreatments= conMan.getTreatmentMan().getTreatments(visit_id);
-				obtained = new Visit(visit_id, date, observations, hospital, patient, doctor, test, listOfMedications, listOfTreatments);
-			}
-			rs.close();
-			search.close();
-			return obtained;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		return obtained;
-	}
 	
 	/**
 	 * To show the visits related with the doctor we have selected

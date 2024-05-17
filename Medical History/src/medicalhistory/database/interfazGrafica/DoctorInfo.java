@@ -21,6 +21,9 @@ import medicalhistory.database.pojos.Patient;
 public class DoctorInfo extends JFrame {
 	
 	private JPanel botonPanelPatients;
+	private JPanel botonPanelVisits;
+	private JPanel botonPanelHospiatls;
+	
 	
 	public DoctorInfo(Doctor a) {
 		
@@ -97,18 +100,19 @@ public class DoctorInfo extends JFrame {
         panel.add(botonPanelPatients);
         botonPanelPatients.setLayout(null);
         
+        botonPanelVisits = new JPanel();
+        botonPanelVisits.setBounds(62, 313, 1461, 72);
+        panel.add(botonPanelVisits);
+        botonPanelVisits.setLayout(null);
+        
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 0, 1334, 72);
         botonPanelPatients.add(scrollPane);
         
-        JPanel botonPanelVisits = new JPanel();
-        botonPanelVisits.setLayout(null);
-        botonPanelVisits.setBounds(62, 520, 1461, 124);
-        panel.add(botonPanelVisits);
+        JScrollPane scrollPane2 = new JScrollPane();
+        scrollPane.setBounds(10, 0, 1334, 72);
+        botonPanelVisits.add(scrollPane2);
         
-        JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(0, 0, 1461, 127);
-        botonPanelVisits.add(scrollPane_1);
      
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -119,21 +123,53 @@ public class DoctorInfo extends JFrame {
     }
     // Método para agregar un botón al panel de botones
 	
-    private void agregarBoton(Doctor a) {
+    private void botonPatient (Doctor a) {
     	for (int i=0; i<=a.getPatients().size();i++) {
         JButton boton = new JButton("Patient ID: "+a.getPatients().get(i).getPatientID()+" Name: "+a.getPatients().get(i).getPatientName());
         botonPanelPatients.add(boton);
+        int l =i;
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(DoctorInfo.this, "You selected: " + ((JButton)e.getSource()).getText());
-                
+                new PatientInfo(a.getPatients().get(l));
             }
         });
+        
         // Refrescar el panel para que los cambios se muestren correctamente
         botonPanelPatients.revalidate();
-        botonPanelPatients.repaint();
+        botonPanelPatients.repaint();}
+    	}
+    	
+    	private void botonVisit (Doctor a) {
+        	for (int i=0; i<=a.getPatients().size();i++) {
+            JButton boton = new JButton("Visit ID: "+a.getVisits().get(i).getVisit_id()+" Date: "+a.getVisits().get(i).getVisit_date()+"Patient:"+a.getVisits().get(i).getVisit_patient());
+            botonPanelVisits.add(boton);
+            int l =i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new VisitInfo(a.getVisits().get(l));
+                }
+            });
+            
+            // Refrescar el panel para que los cambios se muestren correctamente
+            botonPanelVisits.revalidate();
+            botonPanelVisits.repaint();}
+        	}
+     private void botonHospital (Doctor a) {
+       for (int i=0; i<=a.getPatients().size();i++) {
+          JButton boton = new JButton("Hospital ID: "+a.getHospitals().get(i).getHospitalID()+" Name: "+a.getHospitals().get(i).getHospitalAddress()+" Adress: "+a.getHospitals().get(i).getHospitalAddress());
+          botonPanelPatients.add(boton);
+          int l =i;
+          boton.addActionListener(new ActionListener() {
+        	  public void actionPerformed(ActionEvent e) {
+                    new HospitalInfo(a.getHospitals().get(l));
+                    }
+          });
+                
+          // Refrescar el panel para que los cambios se muestren correctamente
+          botonPanelPatients.revalidate();
+          botonPanelPatients.repaint();
+        }	
     }
-    }
-    }
+}
 
 

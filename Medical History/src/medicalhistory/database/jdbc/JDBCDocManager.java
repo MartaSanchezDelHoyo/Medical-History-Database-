@@ -46,6 +46,116 @@ public class JDBCDocManager implements DoctorManager {
 	}
 
 	/**
+	 * To link a doctor to a hospital into the database
+	 */
+	public void linkDoctorToHospital(Hospital hos, Doctor doc) {
+		try {
+			String template = "INSERT INTO hospital_doctor (hospital_id, doctor_id) VALUES ( ?, ? )";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, hos.getHospitalID());
+			pstmt.setInt(2, doc.getDoctor_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}			
+	}
+	
+	/**
+	 *Updates the data of a doctor that already exists in the database
+	 *@param a is the object Doctor that has the updated information 
+	 */
+	@Override
+	public void changeDoctor(Doctor a) {
+		String template = "UPDATE doctors SET name = ?, surname = ?,specialty = ?,contact = ?, photo=?, username=? WHERE doctor_id = ?";
+		PreparedStatement search;
+		try {
+			search = c.prepareStatement(template);
+			search.setInt(6,   a.getDoctor_id());
+		    search.setString(1, a.getName());
+		    search.setString(2, a.getSurname());
+		    search.setString(3, a.getSpecialty());
+		    search.setString(4, a.getContact());
+		    search.setBytes(5, a.getPhoto());
+		    search.setString(6, a.getUsername());
+		    search.executeUpdate();
+			search.close();
+			search.close();
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	/**
+	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
+	 *@param id is the id from the doctor we want to get from the database
+	 *@return Doctor object with all the actualized information from the database
+	  */
+	@Override
+	public Doctor getDoctor(int id) {
+		try {
+			String sql = "SELECT * FROM doctors WHERE doctor_id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
+			List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(id);
+			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
+			byte[] photo =rs.getBytes("photo");
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("username"), rs.getString("specialty"),rs.getString("contact"), photo, patients, hospitals, visits);
+			return a;} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		
+		return null;
+	
+	}
+
+	
+	/**
+	 *Adds all the doctors to list that have as specialty the same as the parameter
+	 *@param specialty is the specialty we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
+	@Override
+	public Doctor getDoctorsbyUsername(String usern) {
+		Doctor newDoctor=null;
+		try {
+			String sql = "SELECT * FROM doctors WHERE username LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setString(1, "%" + usern + "%");
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer doctor_id = rs.getInt("doctor_id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String specialty = rs.getString("specialty");
+				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
+				String username = rs.getString("username");
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
+				newDoctor = new Doctor(doctor_id, name, surname,username, specialty, contact,photo, patients, hospitals, visits);
+			}
+			    search.close();
+				rs.close();
+				
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return newDoctor;
+	}
+	
+	/**
 	 *Adds all the doctors to list that have as specialty the same as the parameter
 	 *@param specialty is the specialty we want to group the doctors by 
 	 *@return List of doctors that fulfill  this condition 
@@ -66,10 +176,10 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
 				String username = rs.getString("username");
-				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
-				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty_, contact,/*patients, hospitals, visits,*/ photo, username);
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, username, specialty_, contact, photo,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
 			
@@ -85,7 +195,37 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 	
-// hace falta get doctror by photo??
+	@Override
+	public List<Doctor> getDoctorsByPatient(int patientId) {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+	    try {
+	        String sql = "SELECT DISTINCT d.* FROM Visits AS v JOIN doctors AS d ON v.doctor_id = d.doctor_id WHERE v.patient_id = ?";
+	        PreparedStatement search = c.prepareStatement(sql);
+	        search.setInt(1, patientId);
+	        ResultSet rs = search.executeQuery();
+
+	        while (rs.next()) {
+	        	Integer doctor_id = rs.getInt("doctor_id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String specialty = rs.getString("specialty");
+				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
+				String username = rs.getString("username");
+				//NO meter ninguna lista (Pablo)
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, username, specialty, contact, photo);
+	            doctors.add(newDoctor);
+	        }
+	        
+	        rs.close();
+	        search.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving patients by name: " + e.getMessage());
+	    }
+	    return doctors;
+	}
+	
+	
 
 	/**
 	 *Adds all the doctors to list that work in the hospital that the parameter indicates
@@ -108,10 +248,8 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
 				String username = rs.getString("username");
-				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
-				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact,/*patients, hospitals, visits,*/ photo, username);
+				//NO meter ninguna lista (Pablo)
+				Doctor newDoctor = new Doctor(doctor_id, name, surname,username, specialty, contact, photo);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -147,10 +285,10 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
 				String username = rs.getString("username");
-				/*List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
-				List<Patient> patients= conMan.getPatientMan().getPatients(doctor_id);
-				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);*/
-				Doctor newDoctor = new Doctor(doctor_id, name, surname, specialty, contact/*,patients, hospitals, visits,*/,photo, username);
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, username, specialty, contact, photo,patients, hospitals, visits);
 				doctors.add(newDoctor);
 			}
 			search.close();
@@ -163,60 +301,7 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 
-	/**
-	 *Updates the data of a doctor that already exists in the database
-	 *@param a is the object Doctor that has the updated information 
-	 */
-	@Override
-	public void changeDoctor(Doctor a) {
-		String template = "UPDATE doctors SET name = ?, surname = ?,specialty = ?,contact = ?, photo=?, username=? WHERE doctor_id = ?";
-		PreparedStatement search;
-		try {
-			search = c.prepareStatement(template);
-			search.setInt(6,   a.getDoctor_id());
-		    search.setString(1, a.getName());
-		    search.setString(2, a.getSurname());
-		    search.setString(3, a.getSpecialty());
-		    search.setString(4, a.getContact());
-		    search.setBytes(5, a.getPhoto());
-		    search.setString(6, a.getUsername());
-		    search.executeUpdate();
-			search.close();
-			search.close();
-		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
-			e.printStackTrace();
-		}
-		
-	}
-
-	/**
-	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
-	 *@param id is the id from the doctor we want to get from the database
-	 *@return Doctor object with all the actualized information from the database
-	  */
-	@Override
-	public Doctor getDoctor(int id) {
-		try {
-			String sql = "SELECT * FROM doctors WHERE doctor_id = " + id;
-			Statement st;
-			st = c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			rs.next();
-			//List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
-			//List<Patient> patients= conMan.getPatientMan().getPatients(id);
-			//List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
-			byte[] photo =rs.getBytes("photo");
-			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("specialty"),rs.getString("contact"), photo, rs.getString("username"));
-			return a;} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
-		
-		return null;
 	
-	}
-
 	
 	
 	public ConnectionManager getConMan() {

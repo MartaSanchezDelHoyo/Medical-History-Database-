@@ -25,11 +25,14 @@ import javax.swing.JTextField;
 import medicalhistory.database.interfaces.DoctorManager;
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.interfaces.PatientManager;
+import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Patient;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import javax.swing.JScrollPane;
 
 public class AddDoctor extends JFrame {
 
@@ -42,8 +45,14 @@ public class AddDoctor extends JFrame {
 	private static DoctorManager docMan;
 	private static HospitalManager hospiMan;
 	private static PatientManager patientMan;
+	private static ConnectionManager conMan;
 
 	public AddDoctor() {
+		conMan = new ConnectionManager();
+		patientMan=conMan.getPatientMan();
+		hospiMan=conMan.getHospitalMan();
+		docMan=conMan.getDocMan();
+		
 		setTitle("Doctor Information");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +129,7 @@ public class AddDoctor extends JFrame {
        
        JButton selectHospitalButton = new JButton("Select a Hospital for the doctor");
        selectHospitalButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-       selectHospitalButton.setBounds(32, 344, 647, 52);
+       selectHospitalButton.setBounds(10, 245, 647, 52);
        selectHospitalButton.addActionListener( new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -146,10 +155,9 @@ public class AddDoctor extends JFrame {
 
                    // Si el usuario hizo clic en "OK" (aceptar)
                    if (result == JOptionPane.OK_OPTION) {
-                       try {
+                       try { 
                            // Obtener el ID del hospital del campo de texto y convertirlo a entero
                            int hospitalId = Integer.parseInt(textHospitalId.getText());
-
                            // Obtener el hospital con el ID proporcionado
                            Hospital hospital = hospiMan.getHospital(hospitalId);
 
@@ -158,7 +166,7 @@ public class AddDoctor extends JFrame {
 
                            // Si llegamos aquí, la entrada es válida
                            validInput = true;
-                       } catch (NumberFormatException ex) {
+                       } catch (NullPointerException ex) {
                            // Manejar la excepción si el usuario no ingresó un número válido
                            JOptionPane.showMessageDialog(null, "Please enter a valid Hospital ID.", "Error", JOptionPane.ERROR_MESSAGE);
                        }
@@ -170,9 +178,31 @@ public class AddDoctor extends JFrame {
            }
            
        });
-       panel.add(selectHospitalButton);
+       JPanel hospitalSelectedPanel=new JPanel();
+       hospitalSelectedPanel.setSize(1148, 166);
+       hospitalSelectedPanel.setLocation(24, 658);
+       if(!hospitals.isEmpty()) {
+       for(int i=0;i<=hospitals.size()+1;i++) {
+       JLabel lblHospitalSelected = new JLabel("Name: " +hospitals.get(i).getHospitalName()+"Adress: "+hospitals.get(i).getHospitalAddress());
+       lblHospitalSelected.setBounds(24, 34, 95, 26);
+       lblHospitalSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       hospitalSelectedPanel.add(lblHospitalSelected);
+       }   
+       }
+       panel.add(hospitalSelectedPanel);
+       hospitalSelectedPanel.setLayout(null);
        
-List<Patient> patients= new ArrayList( );
+       JLabel lblDoctorPatients = new JLabel("Doctor´s patients:");
+       lblDoctorPatients.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       lblDoctorPatients.setBounds(483, 0, 179, 26);
+       hospitalSelectedPanel.add(lblDoctorPatients);
+       
+       JScrollPane scrollPane_1 = new JScrollPane();
+       scrollPane_1.setBounds(-52, 25, 1148, 141);
+       hospitalSelectedPanel.add(scrollPane_1);
+        panel.add(selectHospitalButton);
+        
+List<Patient> patients= new ArrayList<Patient>( );
        
        JButton selectPatientButton = new JButton("Select a patient for the doctor");
        selectPatientButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -204,20 +234,21 @@ List<Patient> patients= new ArrayList( );
                    // Si el usuario hizo clic en "OK" (aceptar)
                    if (result == JOptionPane.OK_OPTION) {
                        try {
-                           // Obtener el ID del hospital del campo de texto y convertirlo a entero
+                           
+                    	   // Obtener el ID del hospital del campo de texto y convertirlo a entero
                            int patientId = Integer.parseInt(textPatientId.getText());
-
+                         
                            // Obtener el hospital con el ID proporcionado
                            Patient patient = patientMan.getPatient(patientId);
-
+                           
                            // Agregar el hospital a la lista de hospitales
                           patients.add(patient);
 
                            // Si llegamos aquí, la entrada es válida
                            validInput = true;
-                       } catch (NumberFormatException ex) {
+                       } catch (NullPointerException |  NumberFormatException ex) {
                            // Manejar la excepción si el usuario no ingresó un número válido
-                           JOptionPane.showMessageDialog(null, "Please enter a valid Patient ID.", "Error", JOptionPane.ERROR_MESSAGE);
+                           JOptionPane.showMessageDialog(null, "Please enter a valid Patient ID."+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                        }
                    } else {
                        // Si el usuario canceló la operación, salimos del bucle
@@ -227,19 +258,49 @@ List<Patient> patients= new ArrayList( );
            }
            
        });
-       panel.add(selectPatientButton);
-       //rodear de try Catch 
        
-        JButton createDoctorButton = new JButton("Add Doctor to the database");
+       JPanel patientSelectedPanel=new JPanel();
+       patientSelectedPanel.setSize(1148, 166);
+       patientSelectedPanel.setLocation(23, 337);
+       
+       JScrollPane scrollPane = new JScrollPane();
+       scrollPane.setBounds(0, 25, 1148, 141);
+       patientSelectedPanel.add(scrollPane);
+       panel.add(selectPatientButton);
+       
+       if(!patients.isEmpty()) {
+    	   for(int i=0;i<=patients.size()+1;i++) {
+		       JLabel lblPatientSelected = new JLabel("Name: " +patients.get(i).getPatientName()+"Adress: "+patients.get(i).getEmail());
+		       lblPatientSelected.setBounds(24, 34, 95, 26);
+		       lblPatientSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+		       scrollPane.add(lblPatientSelected);
+    	   }   
+       }
+       panel.add(patientSelectedPanel);
+       patientSelectedPanel.setLayout(null);
+       
+       JLabel lblDoctorHospitals = new JLabel("Doctor´s hospitals:");
+       lblDoctorHospitals.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       lblDoctorHospitals.setBounds(483, 0, 179, 26);
+       patientSelectedPanel.add(lblDoctorHospitals);
+ 
+       JButton createDoctorButton = new JButton("Add Doctor to the database");
+       //rodear de try Catch 
         createDoctorButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         createDoctorButton.setBounds(1261, 900, 315, 52);
         createDoctorButton.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	try {
             	 docMan.addDoctor(new Doctor ( textName.toString(), textSurname.toString(),textSpecialty.toString(),textContact.toString(),imageBytes,patients,hospitals));
-            }
-            
+            } catch (NullPointerException a) {
+                // Manejar la excepción si el usuario no ingresó un número válido
+                JOptionPane.showMessageDialog(null, "Please enter a valid Doctor information."+a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        }
         });
+      
+       
        
   
         panel.add(createDoctorButton);

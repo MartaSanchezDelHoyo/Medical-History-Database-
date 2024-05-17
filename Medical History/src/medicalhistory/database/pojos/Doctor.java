@@ -99,6 +99,7 @@ public class Doctor implements Serializable{
 		this.photo = photo;
 		this.patients = patients;
 		this.hospitals = hospitals;
+		this.visits=new ArrayList<Visit>();
 	}
 	@Override
 	public String toString() {

@@ -1,8 +1,6 @@
 package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
-
-import medicalhistory.database.pojos.Medication;
 import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Visit;
 import java.awt.BorderLayout;
@@ -12,7 +10,7 @@ import java.awt.Font;
 
 public class MedicationInfo extends JFrame{
 	private JTextField textField;
-	public MedicationInfo(Medication m) {
+	public MedicationInfo() {
 		getContentPane().setForeground(new Color(255, 255, 255));
 		getContentPane().setFont(new Font("Dialog", Font.PLAIN, 24));
 		setBackground(new Color(255, 255, 255));

@@ -44,11 +44,8 @@ public class Menu {
 		 treatmentMan= conMan.getTreatmentMan();
 		 allergiesMan=conMan.getAllergiesMan();
 		 
-<<<<<<< HEAD
+
 		 LocalDate date= LocalDate.parse("25-02-2004", formatter);
-=======
-		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
          Date dateOfBirth = Date.valueOf(date);
 		
          
@@ -69,16 +66,13 @@ public class Menu {
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
-<<<<<<< HEAD
+
          Patient pati= conMan.getPatientMan().getPatient(1);
          Patient getPatientByName= conMan.getPatientMan().getPatient(1);
          getPatientByName.setDateofbirth(dateOfBirth);
          conMan.getPatientMan().changePatient(getPatientByName);
-=======
 
-                  
->>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
-         //conMan.getVisitMan().addVisit(visit);
+           
          
          //Alergies aller= conMan.getAllergiesMan()
          

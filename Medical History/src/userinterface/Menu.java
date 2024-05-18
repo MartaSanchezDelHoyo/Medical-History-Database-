@@ -48,7 +48,9 @@ public class Menu {
 		 LocalDate date= LocalDate.parse("25-02-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
 		
+
          System.out.println(dateOfBirth);
+
 		 //Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
 		//Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
 		 //Test test =new Test("Radiografía", null);

@@ -82,6 +82,23 @@ public class Patient implements Serializable{
 
 	
 	
+	
+
+
+	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[] photo,
+			List<Allergies> allergies, List<Doctor> doctors, String username) {
+		super();
+		this.patientName = patientName;
+		this.dateofbirth = dateofbirth;
+		this.bloodtype = bloodtype;
+		this.email = email;
+		this.photo = photo;
+		this.username = username;
+		this.allergies = allergies;
+		this.doctors = doctors;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Patient [patientID=" + patientID + ", patientName=" + patientName + ", dateofbirth=" + dateofbirth

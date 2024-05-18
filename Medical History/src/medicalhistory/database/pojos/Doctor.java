@@ -118,6 +118,20 @@ public class Doctor implements Serializable{
 	
 	
 	
+
+	public Doctor( String name, String surname, String specialty, String contact, byte[] photo,
+			List<Patient> patients, List<Hospital> hospitals ,String username) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.specialty = specialty;
+		this.contact = contact;
+		this.photo = photo;
+		this.patients = patients;
+		this.hospitals = hospitals;
+		this.visits=new ArrayList<Visit>();
+		this.username=username;
+	}
 	@Override
 	public String toString() {
 		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", surname=" + surname + ", speciality="

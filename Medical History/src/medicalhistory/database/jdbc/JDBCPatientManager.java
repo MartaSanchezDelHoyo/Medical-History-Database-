@@ -101,7 +101,7 @@ public class JDBCPatientManager implements PatientManager {
 	            
 	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo, username, aller,visits, doctors);
 	            
-	        }
+	       }
 	        
 	        resultSet.close();
 	        statement.close();

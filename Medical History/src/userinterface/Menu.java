@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,7 +44,11 @@ public class Menu {
 		 treatmentMan= conMan.getTreatmentMan();
 		 allergiesMan=conMan.getAllergiesMan();
 		 
+<<<<<<< HEAD
 		 LocalDate date= LocalDate.parse("25-02-2004", formatter);
+=======
+		 LocalDate date= LocalDate.parse("24-05-2004", formatter);
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
          Date dateOfBirth = Date.valueOf(date);
 		
 
@@ -56,20 +59,24 @@ public class Menu {
          //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
 
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null, "jose");
-		 Doctor doc= new Doctor("Ariana", "Grande", "Pableraas_04","Radiology", "ary@gmail.com",null );
+		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
 		 Test test =new Test("Radiografía", null);
 		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30", "luis");
          Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
-         Visit toChange= conMan.getVisitMan().getVisit(3);
-         
+
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
+<<<<<<< HEAD
          Patient pati= conMan.getPatientMan().getPatient(1);
          Patient getPatientByName= conMan.getPatientMan().getPatient(1);
          getPatientByName.setDateofbirth(dateOfBirth);
          conMan.getPatientMan().changePatient(getPatientByName);
+=======
+
+                  
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
          //conMan.getVisitMan().addVisit(visit);
          
          //Alergies aller= conMan.getAllergiesMan()

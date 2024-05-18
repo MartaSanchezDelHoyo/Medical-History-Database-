@@ -104,7 +104,7 @@ public class ConnectionManager {
 			String create4 = "CREATE TABLE hospitals ( "
 					+ " hospital_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " hospital_name TEXT NOT NULL,"
-					+ " hospital_adress TEXT NOT NULL"
+					+ " hospital_address TEXT NOT NULL"
 					+ " )";
 			createTables4.executeUpdate(create4);
 			createTables4.close();

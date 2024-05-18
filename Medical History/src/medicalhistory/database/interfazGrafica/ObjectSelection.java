@@ -9,11 +9,11 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorSelection extends JFrame {
+public class ObjectSelection extends JFrame {
     private List< Object> objects;
     private Object selectedObject;
 
-    public DoctorSelection(List<Object> objects) {
+    public ObjectSelection(List<Object> objects) {
         this.objects = objects;
         setTitle("Selección de Doctores");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

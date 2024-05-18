@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import medicalhistory.database.interfaces.AllergiesManager;
@@ -76,7 +77,7 @@ public class JDBCAllergiesManager implements AllergiesManager{
 		}
 	 
 	 public List<Allergies> getAllergies(int patient_id) {
-			List<Allergies> listOfAllergies = null;
+			List<Allergies> listOfAllergies =  new ArrayList<>();
 			
 			try {
 				String sql = "SELECT a.allergy_id, a.allergy_type FROM patient_allergy AS pa JOIN allergies AS a ON pa.allergy_id=a.allergy_id WHERE pa.patient_id= ?";

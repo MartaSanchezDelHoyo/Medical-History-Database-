@@ -8,6 +8,7 @@ public interface PatientManager {
 	public void changePatient(Patient a);
 	public Patient getPatientssbyUsername(String usern);
 	public List<Patient> getPatientByName(String name);
+	public Patient getPatientCI(int patient_ID );
 	public List<Patient> getPatientsByHospital(int hospital_id);
 	public List<Patient> getPatientsByDoctor(int doctor_id);
 	public Patient getPatient(int patient_id);

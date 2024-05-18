@@ -10,6 +10,7 @@ public interface DoctorManager {
 	public void linkDoctorToHospital(Hospital hos, Doctor doc);
 	public void changeDoctor(Doctor a);
 	public Doctor getDoctor(int id);
+	public Doctor getDoctorCI(int id);
 	public Doctor getDoctorsbyUsername(String usern);
 	public List<Doctor> getDoctorsbySpecialties(String specialty);
 	public List<Doctor> getDoctorsByPatient(int patientId);

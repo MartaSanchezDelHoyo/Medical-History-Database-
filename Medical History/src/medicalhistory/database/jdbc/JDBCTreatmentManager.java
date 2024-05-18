@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import medicalhistory.database.interfaces.TreatmentManager;
@@ -117,7 +118,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	 *@return List of treatments that fulfill  this condition 
 	 */
 	public List<Treatment> getTreatments(int visit_id) {
-		List<Treatment> listOfTreatments=null;
+		List<Treatment> listOfTreatments=new ArrayList<>();
 		
 		try {
 			String sql = "SELECT t.treatment_id, t.treatment_type FROM visit_treatment AS vt JOIN treatments AS t ON vt.treatment_id=t.treatment_id WHERE vt.visit_id= ?";

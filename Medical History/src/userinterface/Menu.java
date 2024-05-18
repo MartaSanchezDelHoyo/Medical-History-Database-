@@ -45,12 +45,20 @@ public class Menu {
 		 allergiesMan=conMan.getAllergiesMan();
 		 
 
-		 LocalDate date= LocalDate.parse("25-02-2004", formatter);
+		 LocalDate date= LocalDate.parse("05-05-2024", formatter);
          Date dateOfBirth = Date.valueOf(date);
-         Patient acambiar= conMan.getPatientMan().getPatient(1);
-         acambiar.setDateofbirth(dateOfBirth);
-         conMan.getPatientMan().changePatient(acambiar);
+         Visit acambiar= conMan.getVisitMan().getVisit(5);
+         System.out.println(acambiar);
+         
+         acambiar.setVisit_date(dateOfBirth);
+         conMan.getVisitMan().changeVisit(acambiar);
          System.out.println(dateOfBirth);
+         System.out.println(acambiar);
+         
+         Doctor a2= conMan.getDocMan().getDoctorCI(1);
+         Doctor a3= conMan.getDocMan().getDoctor(1);
+         System.out.println(a2);
+         System.out.println(a3);
         		 
 
          

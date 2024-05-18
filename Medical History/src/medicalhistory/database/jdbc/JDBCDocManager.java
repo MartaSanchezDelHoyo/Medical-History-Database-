@@ -104,6 +104,25 @@ public class JDBCDocManager implements DoctorManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
+			byte[] photo =rs.getBytes("photo");
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("username"), rs.getString("specialty"),rs.getString("contact"), photo);
+			return a;} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		
+		return null;
+	
+	}
+	
+	@Override
+	public Doctor getDoctorCI(int id) {
+		try {
+			String sql = "SELECT * FROM doctors WHERE doctor_id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
 			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
 			List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(id);
 			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
@@ -117,7 +136,6 @@ public class JDBCDocManager implements DoctorManager {
 		return null;
 	
 	}
-
 	
 	/**
 	 *Adds all the doctors to list that have as specialty the same as the parameter

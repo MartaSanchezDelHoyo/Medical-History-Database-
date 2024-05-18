@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Patient patientID="456" dateofbirth="1992-06-15" bloodtype="O+" email="james.bond@gmail.com" username="patient456">
+    <patientName>John Doe</patientName>
+    <Allergies>
+        <Allergy allergiesID="001" allergiesName="Peanuts"/>
+        <Allergy allergiesID="002" allergiesName="Shellfish"/>
+    </Allergies>
+    <Doctors>
+        <Doctor name="John" surname="Doe" contact="johndoe@gmail.com" specialty="Dermatology"/>
+        <Doctor name="Mark" surname="Johnson" contact="mark.johnson@gmail.com" specialty="Pediatrics"/>
+    </Doctors>
+</Patient>

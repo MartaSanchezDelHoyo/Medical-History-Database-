@@ -76,7 +76,6 @@ public class Registation extends JFrame {
                
 				// agregar la lógica para procesar el registro
                 openSmallWindow();
-                System.out.println(resultLabel);
                 User user = new User(username, password,userMan.getRole(resultLabel));
 
                 if (user != null) {
@@ -91,7 +90,7 @@ public class Registation extends JFrame {
 			    	new AddPatient(user.getUsername());
 			    	userMan.register(user);
 			        break;
-			    case "Hospital":
+			    case "Administrator":
 			    	new AddHospital(user.getUsername());
 			    	userMan.register(user);
 			        break;
@@ -165,7 +164,7 @@ public class Registation extends JFrame {
         group.add(option2);
         group.add(option3);
 
-        JButton confirmButton = new JButton("Confirmar");
+        JButton confirmButton = new JButton("Confirm");
         confirmButton.setEnabled(false);
         // Botón para confirmar la selección
         
@@ -189,7 +188,7 @@ public class Registation extends JFrame {
                 } else if (option2.isSelected()) {
                     selectedOption = "Patient";
                 } else if (option3.isSelected()) {
-                    selectedOption = "Hospital";
+                    selectedOption = "Administrator";
                 }
 
 				// Devolver la opción seleccionada a la clase original

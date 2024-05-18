@@ -141,7 +141,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	        while (resultSet.next()) {
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
-	            String hospitalAddress = resultSet.getString("hospital_adress");
+	            String hospitalAddress = resultSet.getString("hospital_address");
 	            String username =resultSet.getString("username");
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
 	            hospitals.add(hospital);
@@ -170,7 +170,7 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
-	            String hospitalAddress = resultSet.getString("hospital_adress");
+	            String hospitalAddress = resultSet.getString("hospital_address");
 	            String username =resultSet.getString("username");
 	            hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username);
 	            
@@ -200,7 +200,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	        while (resultSet.next()) {
 	            int hospitalID = resultSet.getInt("hospital_id");
 	            String hospitalName = resultSet.getString("hospital_name");
-	            String hospitalAddress = resultSet.getString("hospital_adress");
+	            String hospitalAddress = resultSet.getString("hospital_address");
 	            String username =resultSet.getString("username");
 	            List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospitalID);
 				Hospital hospital = new Hospital(hospitalID, hospitalName, hospitalAddress, username, doctors);

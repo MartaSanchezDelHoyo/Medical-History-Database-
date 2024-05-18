@@ -45,23 +45,8 @@ public class JDBCDocManager implements DoctorManager {
 		
 	}
 
-	/**
-	 * To link a doctor to a hospital into the database
-	 */
-	public void linkDoctorToHospital(Hospital hos, Doctor doc) {
-		try {
-			String template = "INSERT INTO hospital_doctor (hospital_id, doctor_id) VALUES ( ?, ? )";
-			PreparedStatement pstmt;
-			pstmt = c.prepareStatement(template);
-			pstmt.setInt(1, hos.getHospitalID());
-			pstmt.setInt(2, doc.getDoctor_id());
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}			
-	}
+	
+	
 	
 	/**
 	 *Updates the data of a doctor that already exists in the database
@@ -104,6 +89,25 @@ public class JDBCDocManager implements DoctorManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
+			byte[] photo =rs.getBytes("photo");
+			Doctor a = new Doctor (rs.getInt("doctor_id"), rs.getString("name"), rs.getString("surname"),rs.getString("username"), rs.getString("specialty"),rs.getString("contact"), photo);
+			return a;} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		
+		return null;
+	
+	}
+	
+	@Override
+	public Doctor getDoctorCI(int id) {
+		try {
+			String sql = "SELECT * FROM doctors WHERE doctor_id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
 			List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(id);
 			List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(id);
 			List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(id);
@@ -117,7 +121,6 @@ public class JDBCDocManager implements DoctorManager {
 		return null;
 	
 	}
-
 	
 	/**
 	 *Adds all the doctors to list that have as specialty the same as the parameter
@@ -233,12 +236,12 @@ public class JDBCDocManager implements DoctorManager {
 	 *@return List of doctors that fulfill  this condition 
 	 */
 	@Override
-	public List<Doctor> getDoctorsbyHospital(String hospitalName) {
+	public List<Doctor> getDoctorsbyHospital(int hospitalID) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
-			String sql = "SELECT d.* FROM doctors AS d JOIN hospital_doctor AS hd ON d.doctor_id=hd.doctor_id JOIN hospitals AS h ON hd.hospital_id=h.hospital_id WHERE h.hospital_name= ?";
+			String sql = "SELECT DISTINCT d.* FROM Visits AS v JOIN doctors AS d ON v.doctor_id=d.doctor_id WHERE v.hospital_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setString(1, "%" + hospitalName + "%");
+			search.setInt(1,hospitalID );
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer doctor_id = rs.getInt("doctor_id");
@@ -248,7 +251,7 @@ public class JDBCDocManager implements DoctorManager {
 				String contact = rs.getString("contact");
 				byte[] photo =rs.getBytes("photo");
 				String username = rs.getString("username");
-				//NO meter ninguna lista (Pablo)
+				//NO meter ninguna lista 
 				Doctor newDoctor = new Doctor(doctor_id, name, surname,username, specialty, contact, photo);
 				doctors.add(newDoctor);
 			}

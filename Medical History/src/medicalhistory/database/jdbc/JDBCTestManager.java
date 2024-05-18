@@ -66,7 +66,7 @@ public class JDBCTestManager implements TestManager{
     public Test getTest (Visit toSearch) {
 		Test obtained = null;
 		try {
-			String sql = "SELECT t.test_id, t.test_type, t.pdf FROM Visits AS v JOIN tests AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
+			String sql = "SELECT t.* FROM Visits AS v JOIN tests AS t ON v.test_id=t.test_id WHERE v.visit_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, toSearch.getVisit_id());
 			ResultSet rs = search.executeQuery();

@@ -95,11 +95,41 @@ public class JDBCPatientManager implements PatientManager {
 	            String bloodtype = resultSet.getString("blood_type");
 	            byte[] photo = resultSet.getBytes("photo");
 	            String username =resultSet.getString("username");
+	            
+	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo, username);
+	            
+	       }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving patients by name: " + e.getMessage());
+	    }
+	    return patient;
+	}
+	
+	@Override
+	public Patient getPatientCI(int patient_ID ) {
+	    Patient patient= null;
+	    try {
+	        String sql = "SELECT * FROM patients WHERE patient_id = ?";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        statement.setInt(1,patient_ID);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
+	            String username =resultSet.getString("username");
 	            List<Allergies> aller = conMan.getAllergiesMan().getAllergies(patientID);
 	            List<Visit> visits = conMan.getVisitMan().getVisitByPatient(patientID);
 	            List<Doctor> doctors = conMan.getDocMan().getDoctorsByPatient(patientID);
 	            
-	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo, username, aller,visits, doctors);
+	            patient = new Patient (patientID,patientName, dateOfBirth, bloodtype, email, photo, username, aller, visits, doctors);
 	            
 	       }
 	        

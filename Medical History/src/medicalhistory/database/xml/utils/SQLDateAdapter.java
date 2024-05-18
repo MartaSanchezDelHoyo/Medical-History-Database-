@@ -1,4 +1,4 @@
-package madicalhistory.database.xml.utils;
+package medicalhistory.database.xml.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

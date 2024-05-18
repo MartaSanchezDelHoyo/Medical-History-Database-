@@ -1,4 +1,4 @@
-package madicalhistory.database.xml.utils;
+package medicalhistory.database.xml.utils;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;

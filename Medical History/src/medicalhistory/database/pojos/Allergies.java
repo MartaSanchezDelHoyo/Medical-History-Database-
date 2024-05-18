@@ -3,14 +3,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
+@Entity
+@Table (name= "allergies")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Allergies implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 309157577865656134L;
+	@XmlElement
 	private Integer allergiesID;
+	@XmlElement
 	private String allergiesName;
+	@XmlTransient
 	private List <Patient> patients;
 	
 	public Allergies( String allergiesName) {

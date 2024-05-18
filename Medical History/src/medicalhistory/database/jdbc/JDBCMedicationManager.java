@@ -131,7 +131,7 @@ public class JDBCMedicationManager implements MedicationManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer medication_id = rs.getInt("medication_id");
-				String type = rs.getString("type");
+				String type = rs.getString("medication_type");
 				List<Manufacturer> listOfManufacturers = conMan.getMedicationMan().showManufacturers(medication_id);
 				Medication obtained = new Medication(medication_id,type, listOfManufacturers);
 				listOfMedications.add(obtained);

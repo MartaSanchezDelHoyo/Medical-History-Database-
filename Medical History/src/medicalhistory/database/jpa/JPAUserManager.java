@@ -16,7 +16,7 @@ import medicalhistory.database.pojos.User;
 		private EntityManager em;
 		
 		public JPAUserManager() {
-			em = Persistence.createEntityManagerFactory("library-provider").createEntityManager();
+			em = Persistence.createEntityManagerFactory("medicalhistory-provider").createEntityManager();
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
@@ -27,7 +27,7 @@ import medicalhistory.database.pojos.User;
 			} catch(NoResultException e) {
 				this.createRole(new Role("Doctor"));
 				this.createRole(new Role("Patient"));
-				this.createRole(new Role("Hospiatl"));
+				this.createRole(new Role("Administrator"));
 			}
 		}
 		

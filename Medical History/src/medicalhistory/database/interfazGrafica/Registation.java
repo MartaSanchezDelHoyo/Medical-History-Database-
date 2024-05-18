@@ -18,9 +18,10 @@ public class Registation extends JFrame {
     private JPasswordField campoContraseña;
     private static JPAUserManager userMan;
     boolean register = false;
-    private JLabel resultLabel;
+    private String resultLabel;
 
     public Registation() {
+    	userMan=new JPAUserManager();
         setTitle("Registro de Usuario");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,25 +75,25 @@ public class Registation extends JFrame {
                 String password = new String(campoContraseña.getPassword());
                
 				// agregar la lógica para procesar el registro
-               
                 openSmallWindow();
-                User user = new User(username, password,new Role(resultLabel.toString()));
+                System.out.println(resultLabel);
+                User user = new User(username, password,userMan.getRole(resultLabel));
 
                 if (user != null) {
                     register=true;
                 } 
                 switch (resultLabel.toString()) {
 			    case "Doctor":
-			    	new AddDoctor();
+			    	new AddDoctor(user.getUsername());
 			    	userMan.register(user);
 			        break;
 			    case "Patient":
-			    	// Add Patient user window
-			       new PatientInfo(patient);
+			    	new AddPatient(user.getUsername());
+			    	userMan.register(user);
 			        break;
 			    case "Hospital":
-			       Hospital hospi= hospitalMan.getHospitalbyUsername(user.getUsername());
-			       new HospitalInfo(hospi);
+			    	new AddHospital(user.getUsername());
+			    	userMan.register(user);
 			        break;
 			    default:
 			        
@@ -184,16 +185,16 @@ public class Registation extends JFrame {
             	
                 String selectedOption = null;
                 if (option1.isSelected()) {
-                    selectedOption = "Opción 1";
+                    selectedOption = "Doctor";
                 } else if (option2.isSelected()) {
-                    selectedOption = "Opción 2";
+                    selectedOption = "Patient";
                 } else if (option3.isSelected()) {
-                    selectedOption = "Opción 3";
+                    selectedOption = "Hospital";
                 }
 
 				// Devolver la opción seleccionada a la clase original
                 if (selectedOption != null) {
-                    resultLabel.setText("You selected: " + selectedOption);
+                    resultLabel=selectedOption;
                 } 
 
                 // Cerrar la ventana pequeña

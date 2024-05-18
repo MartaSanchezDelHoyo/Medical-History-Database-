@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,8 @@ import medicalhistory.database.pojos.Patient;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
+
 import javax.swing.JScrollPane;
 
 public class AddDoctor extends JFrame {
@@ -47,7 +50,7 @@ public class AddDoctor extends JFrame {
 	private static PatientManager patientMan;
 	private static ConnectionManager conMan;
 
-	public AddDoctor() {
+	public AddDoctor(String username) {
 		conMan = new ConnectionManager();
 		patientMan=conMan.getPatientMan();
 		hospiMan=conMan.getHospitalMan();
@@ -123,6 +126,10 @@ public class AddDoctor extends JFrame {
             }
         });
         
+        JButton botonRetorno = new JButton("Return");
+        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        botonRetorno.setBounds(10, 917, 95, 35);
+        panel.add(botonRetorno);
 
        panel.add(selectImageButton);
        List<Hospital> hospitals= new ArrayList<Hospital>( );
@@ -178,19 +185,31 @@ public class AddDoctor extends JFrame {
            }
            
        });
-       JPanel hospitalSelectedPanel=new JPanel();
+       JPanel hospitalSelectedPanel = new JPanel();
        hospitalSelectedPanel.setSize(1148, 166);
        hospitalSelectedPanel.setLocation(24, 658);
-       if(!hospitals.isEmpty()) {
-       for(int i=0;i<=hospitals.size()+1;i++) {
-       JLabel lblHospitalSelected = new JLabel("Name: " +hospitals.get(i).getHospitalName()+"Adress: "+hospitals.get(i).getHospitalAddress());
-       lblHospitalSelected.setBounds(24, 34, 95, 26);
-       lblHospitalSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-       hospitalSelectedPanel.add(lblHospitalSelected);
-       }   
+       hospitalSelectedPanel.setLayout(new BorderLayout()); // Use BorderLayout for the JScrollPane
+
+       // Create a JPanel to hold the labels
+       JPanel labelPanel = new JPanel();
+       labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for the labels
+
+       JScrollPane scrollPane = new JScrollPane(labelPanel); // Add labelPanel to the JScrollPane
+       scrollPane.setBounds(0, 25, 1148, 141);
+       hospitalSelectedPanel.add(scrollPane, BorderLayout.CENTER); // Add the JScrollPane to the hospitalSelectedPanel
+
+       if (!hospitals.isEmpty()) {
+           for (int i = 0; i < hospitals.size(); i++) { // Iterate correctly through the list
+               JLabel lblHospitalSelected = new JLabel("Name: " + hospitals.get(i).getHospitalName() + " Address: " + hospitals.get(i).getHospitalAddress());
+               lblHospitalSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+               labelPanel.add(lblHospitalSelected); // Add the JLabel to the labelPanel
+           }
+           // Set preferred size of the labelPanel to fit all labels
+           labelPanel.setPreferredSize(new Dimension(scrollPane.getWidth(), labelPanel.getComponentCount() * 30));
        }
+
        panel.add(hospitalSelectedPanel);
-       hospitalSelectedPanel.setLayout(null);
+
        
        JLabel lblDoctorPatients = new JLabel("Doctor´s patients:");
        lblDoctorPatients.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -207,6 +226,7 @@ List<Patient> patients= new ArrayList<Patient>( );
        JButton selectPatientButton = new JButton("Select a patient for the doctor");
        selectPatientButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
        selectPatientButton.setBounds(32, 562, 315, 52);
+       panel.add(selectPatientButton);
        selectPatientButton.addActionListener( new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -259,25 +279,30 @@ List<Patient> patients= new ArrayList<Patient>( );
            
        });
        
-       JPanel patientSelectedPanel=new JPanel();
+       JPanel patientSelectedPanel = new JPanel();
        patientSelectedPanel.setSize(1148, 166);
        patientSelectedPanel.setLocation(23, 337);
-       
-       JScrollPane scrollPane = new JScrollPane();
-       scrollPane.setBounds(0, 25, 1148, 141);
-       patientSelectedPanel.add(scrollPane);
-       panel.add(selectPatientButton);
-       
-       if(!patients.isEmpty()) {
-    	   for(int i=0;i<=patients.size()+1;i++) {
-		       JLabel lblPatientSelected = new JLabel("Name: " +patients.get(i).getPatientName()+"Adress: "+patients.get(i).getEmail());
-		       lblPatientSelected.setBounds(24, 34, 95, 26);
-		       lblPatientSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-		       scrollPane.add(lblPatientSelected);
-    	   }   
+       patientSelectedPanel.setLayout(new BorderLayout()); // Use BorderLayout for the JScrollPane
+
+       // Create a JPanel to hold the labels
+       JPanel labelPanel_1 = new JPanel();
+       labelPanel_1.setLayout(new BoxLayout(labelPanel_1, BoxLayout.Y_AXIS)); // Use BoxLayout for the labels
+
+       JScrollPane scrollPanel = new JScrollPane(labelPanel_1); // Add labelPanel to the JScrollPane
+       scrollPanel.setBounds(0, 25, 1148, 141);
+       patientSelectedPanel.add(scrollPanel, BorderLayout.CENTER); // Add the JScrollPane to the patientSelectedPanel
+
+       if (!patients.isEmpty()) {
+           for (int i = 0; i < patients.size(); i++) { // Iterate correctly through the list
+               JLabel lblPatientSelected = new JLabel("Name: " + patients.get(i).getPatientName() + " Adress: " + patients.get(i).getEmail());
+               lblPatientSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+               labelPanel_1.add(lblPatientSelected); // Add the JLabel to the labelPanel
+           }
+           // Set preferred size of the labelPanel to fit all labels
+           labelPanel_1.setPreferredSize(new Dimension(scrollPanel.getWidth(), labelPanel_1.getComponentCount() * 30));
        }
+
        panel.add(patientSelectedPanel);
-       patientSelectedPanel.setLayout(null);
        
        JLabel lblDoctorHospitals = new JLabel("Doctor´s hospitals:");
        lblDoctorHospitals.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -292,17 +317,14 @@ List<Patient> patients= new ArrayList<Patient>( );
             @Override
             public void actionPerformed(ActionEvent e) {
             	try {
-            	 docMan.addDoctor(new Doctor ( textName.toString(), textSurname.toString(),textSpecialty.toString(),textContact.toString(),imageBytes,patients,hospitals));
+            	 docMan.addDoctor(new Doctor ( textName.toString(), textSurname.toString(),textSpecialty.toString(),textContact.toString(),imageBytes,patients,hospitals,username));
             } catch (NullPointerException a) {
                 // Manejar la excepción si el usuario no ingresó un número válido
                 JOptionPane.showMessageDialog(null, "Please enter a valid Doctor information."+a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         }
         });
-      
-       
-       
-  
+     
         panel.add(createDoctorButton);
         
                 imageLabel = new JLabel("Ninguna imagen seleccionada.");
@@ -327,7 +349,5 @@ List<Patient> patients= new ArrayList<Patient>( );
             }
         }
     }
-	public static void main(String[] args) {
-        new AddDoctor();
-    }
+
 }

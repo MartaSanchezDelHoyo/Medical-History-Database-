@@ -29,6 +29,14 @@ public class Hospital implements Serializable{
 		this.Hospital_visits = new ArrayList<>();
 	}
     
+    public Hospital(String hospitalName, String hospitalAddress, String username,List<Doctor> hospital_doctors) {
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
+		this.username=username;
+		this.Hospital_visits = new ArrayList<>();
+		this.Hospital_doctors=hospital_doctors;
+	}
+    
     /** 
      * @param hospitalID identification of the hospital
      * @param hospitalName name of the hospital

@@ -77,7 +77,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			while(rs.next()) {
 				Integer hospital_id = rs.getInt("hospital_id");
 				String hospital_name = rs.getString("hospital_name");
-				String hospital_adress = rs.getString("hospital_adress");
+				String hospital_adress = rs.getString("hospital_address");
 				String username = rs.getString("username");
 				//List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_adress);
 				//Solo se ven los doctores del hospital
@@ -202,6 +202,12 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	public void setConMan(ConnectionManager conMan) {
 		this.conMan = conMan;
+	}
+
+	@Override
+	public Hospital getHospitalbyUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

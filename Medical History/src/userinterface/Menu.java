@@ -47,29 +47,48 @@ public class Menu {
 
 		 LocalDate date= LocalDate.parse("25-02-2004", formatter);
          Date dateOfBirth = Date.valueOf(date);
-		
+         Patient acambiar= conMan.getPatientMan().getPatient(1);
+         acambiar.setDateofbirth(dateOfBirth);
+         conMan.getPatientMan().changePatient(acambiar);
+         System.out.println(dateOfBirth);
+        		 
 
+         
+
+         
+         
 		 //Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null);
-		//Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
+		 //Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null);
 		 //Test test =new Test("Radiografía", null);
 		 //Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30");
          //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
 
+		/* 
 		 Patient acambiar= new Patient( 15,"Pablo", dateOfBirth, "b+", "nico@gm.com", null, "jose");
-		 Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
+		 //Doctor doc= new Doctor("Ariana", "Grande", "Radiology", "ary@gmail.com",null, "pablo");
 		 Test test =new Test("Radiografía", null);
 		 Hospital hos= new Hospital(1,"Vicceroy", "Calle Maria Maria, 30", "luis");
-         Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
-
+         //Visit visit= new Visit(dateOfBirth,"AYAYA", acambiar, doc, test, hos);
+        
          Medication med= new Medication("Vivaporux");
          Manufacturer manu= new Manufacturer("Pfizer");
          Treatment treat= new Treatment("Radiografía");
          Allergies allergy= new Allergies("Meat");
 
-         Patient pati= conMan.getPatientMan().getPatient(1);
-         Patient getPatientByName= conMan.getPatientMan().getPatient(1);
-         getPatientByName.setDateofbirth(dateOfBirth);
-         conMan.getPatientMan().changePatient(getPatientByName);
+         
+         List<Medication> medUno= conMan.getMedicationMan().showMedicationsByManufacturer(1);
+         //System.out.println(medUno);
+         
+         for (Medication persona : medUno) {
+             System.out.println(persona);
+         }
+		*/
+         
+         
+         //Patient pati= conMan.getPatientMan().getPatient(1);
+         //Patient getPatientByName= conMan.getPatientMan().getPatient(1);
+         //getPatientByName.setDateofbirth(dateOfBirth);
+         //conMan.getPatientMan().changePatient(getPatientByName);
 
            
          

@@ -3,11 +3,21 @@
 <Patient patientID="456" dateofbirth="1992-06-15" bloodtype="O+" email="james.bond@gmail.com" username="patient456">
     <patientName>John Doe</patientName>
     <allergies>
-        <Allergies allergiesID="001" allergiesName="Peanuts"/>
-        <Allergies allergiesID="002" allergiesName="Shellfish"/>
+        <Allergies allergiesID="001">
+			<allergiesName>Peanuts</allergiesName>
+		</Allergies>
+        <Allergies allergiesID="002">
+			<allergiesName>Shellfish</allergiesName>
+        </Allergies>
     </allergies>
     <Doctors>
-        <Doctor name="John" surname="Doe" contact="johndoe@gmail.com" specialty="Dermatology"/>
-        <Doctor name="Mark" surname="Johnson" contact="mark.johnson@gmail.com" specialty="Pediatrics"/>
+        <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
+			<name>Jane</name>
+            <surname>Smith</surname>
+        </Doctor>
+        <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
+			 <name>Mark</name>
+            <surname>Johnson</surname>
+        </Doctor>
     </Doctors>
 </Patient>

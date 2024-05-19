@@ -5,11 +5,19 @@
     <surname>Doe</surname>
     <specialty>Cardiology</specialty>
     <Patients>
-        <Patient patientName="Jane Smith" dateofbirth="1990-01-01" email="jane.smith@gmail.com"/>
-        <Patient patientName="Bob Brown" dateofbirth="1985-05-23" email="bob.brown@gmail.com"/>
+        <Patient dateofbirth="1990-01-01" email="jane.smith@gmail.com">
+            <patientName>Miriam Lush</patientName>
+        </Patient>
+        <Patient dateofbirth="1985-05-23" email="bob.brown@gmail.com">
+			<patientName>Bob Brown</patientName>
+        </Patient>
     </Patients>
     <Hospitals>
-        <Hospital hospitalName="City Hospital" hospitalAddress="123 Main St"/>
-        <Hospital hospitalName="County Hospital" hospitalAddress="456 Elm St"/>
+        <Hospital hospitalAddress="123 Main St">
+			<hospitalName>City Hospital</hospitalName>
+        </Hospital>
+        <Hospital hospitalAddress="456 Elm St">
+			<hospitalName>County Hospital</hospitalName>
+        </Hospital>
     </Hospitals>
 </Doctor>

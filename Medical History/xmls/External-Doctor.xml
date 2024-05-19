@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!DOCTYPE Doctor [
-    <!ELEMENT Doctor (name | surname | specialty | Patients | Hospitals)>
+    <!ELEMENT Doctor (name, surname, specialty, Patients, Hospitals)>
     <!ATTLIST Doctor doctor_id CDATA #REQUIRED
                      contact CDATA #REQUIRED
                      username CDATA #REQUIRED>                      
@@ -9,13 +9,17 @@
     <!ELEMENT surname (#PCDATA)>
     <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT Patients (Patient+)>
-    <!ATTLIST Patient patientName CDATA #REQUIRED
-                      dateofbirth CDATA #REQUIRED
+    <!ELEMENT Patient (patientName)>
+    <!ATTLIST Patient dateofbirth CDATA #REQUIRED
                       email CDATA #REQUIRED>
+    <!ELEMENT patientName (#PCDATA)>
 
     <!ELEMENT Hospitals (Hospital+)> 
-    <!ATTLIST Hospital hospitalName CDATA #REQUIRED
-                     hospitalAddress CDATA #REQUIRED>
+    <!ELEMENT Hospital (hospitalName)>
+    <!ATTLIST Hospital hospitalAddress CDATA #REQUIRED>
+    <!ELEMENT hospitalName (#PCDATA)>
+
+
 ]>
 
 <Doctor doctor_id="123" contact="johndoe@gmail.com" username="drjohndoe">
@@ -23,11 +27,19 @@
     <surname>Doe</surname>
     <specialty>Cardiology</specialty>
     <Patients>
-        <Patient patientName="Jane Smith" dateofbirth="1990-01-01" email="jane.smith@gmail.com"/>
-        <Patient patientName="Bob Brown" dateofbirth="1985-05-23" email="bob.brown@gmail.com"/>
+        <Patient dateofbirth="1990-01-01" email="jane.smith@gmail.com">
+            <patientName>Miriam Lush</patientName>
+        </Patient>
+        <Patient dateofbirth="1985-05-23" email="bob.brown@gmail.com">
+			<patientName>Bob Brown</patientName>
+        </Patient>
     </Patients>
     <Hospitals>
-        <Hospital hospitalName="City Hospital" hospitalAddress="123 Main St"/>
-        <Hospital hospitalName="County Hospital" hospitalAddress="456 Elm St"/>
+        <Hospital hospitalAddress="123 Main St">
+			<hospitalName>City Hospital</hospitalName>
+        </Hospital>
+        <Hospital hospitalAddress="456 Elm St">
+			<hospitalName>County Hospital</hospitalName>
+        </Hospital>
     </Hospitals>
 </Doctor>

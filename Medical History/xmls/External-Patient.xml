@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!DOCTYPE Patient [
-    <!ELEMENT Patient (patientName | allergies | Doctors)>
+    <!ELEMENT Patient (patientName, allergies, Doctors)>
     <!ATTLIST Patient patientID CDATA #REQUIRED
                       dateofbirth CDATA #REQUIRED
                       bloodtype CDATA #REQUIRED
@@ -10,24 +10,36 @@
                       
     <!ELEMENT patientName (#PCDATA)>
     <!ELEMENT allergies (Allergies+)>
-    <!ATTLIST Allergies allergiesID CDATA #REQUIRED
-                      allergiesName CDATA #REQUIRED>
-                      
+    <!ELEMENT Allergies (allergiesName)>
+    <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
+    <!ELEMENT allergiesName (#PCDATA)>   
     <!ELEMENT Doctors (Doctor+)> 
-    <!ATTLIST Doctor name CDATA #REQUIRED
-                     surname CDATA #REQUIRED
-                     contact CDATA #REQUIRED
+    <!ELEMENT Doctor (name, surname )>
+    <!ATTLIST Doctor contact CDATA #REQUIRED
                      specialty CDATA #REQUIRED>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT surname (#PCDATA)>
+    
                     
-]>
+]>                  
 <Patient patientID="456" dateofbirth="1992-06-15" bloodtype="O+" email="james.bond@gmail.com" username="patient456">
     <patientName>John Doe</patientName>
     <allergies>
-        <Allergies allergiesID="001" allergiesName="Peanuts"/>
-        <Allergies allergiesID="002" allergiesName="Shellfish"/>
+        <Allergies allergiesID="001">
+			<allergiesName>Peanuts</allergiesName>
+		</Allergies>
+        <Allergies allergiesID="002">
+			<allergiesName>Shellfish</allergiesName>
+        </Allergies>
     </allergies>
     <Doctors>
-        <Doctor name="John" surname="Doe" contact="johndoe@gmail.com" specialty="Dermatology"/>
-        <Doctor name="Mark" surname="Johnson" contact="mark.johnson@gmail.com" specialty="Pediatrics"/>
+        <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
+			<name>Jane</name>
+            <surname>Smith</surname>
+        </Doctor>
+        <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
+			 <name>Mark</name>
+            <surname>Johnson</surname>
+        </Doctor>
     </Doctors>
 </Patient>

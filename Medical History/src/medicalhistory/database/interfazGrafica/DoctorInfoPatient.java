@@ -27,6 +27,11 @@ public class DoctorInfoPatient extends JFrame {
     JPanel panel = new JPanel();
     byte[] photo= a.getPhoto();
     ImageIcon imageIcon = new ImageIcon(photo);
+    
+    JLabel lblTextPhoto = new JLabel(imageIcon);
+    lblTextPhoto.setBounds(126, 46, 181, 219);
+    lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    panel.add(lblTextPhoto);
 
     getContentPane().add(panel);
     panel.setLayout(null);
@@ -55,7 +60,7 @@ public class DoctorInfoPatient extends JFrame {
     
     JButton btnVisit = new JButton("New visit");
     btnVisit.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    btnVisit.setBounds(245, 417, 163, 35);
+    btnVisit.setBounds(89, 420, 163, 35);
     panel.add(btnVisit);
     btnVisit.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
@@ -74,6 +79,17 @@ public class DoctorInfoPatient extends JFrame {
     lblTextcontact.setBackground(new Color(255, 255, 224));
     lblTextcontact.setBounds(969, 46, 107, 26);
     panel.add(lblTextcontact);
+    
+    JLabel lblTextSpecialty = new JLabel((String) null);
+    lblTextSpecialty.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    lblTextSpecialty.setBackground(new Color(255, 255, 224));
+    lblTextSpecialty.setBounds(969, 101, 221, 26);
+    panel.add(lblTextSpecialty);
+    
+    JLabel lblPhoto = new JLabel("Photo:");
+    lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+    lblPhoto.setBounds(10, 30, 103, 26);
+    panel.add(lblPhoto);
 
     
 	}

@@ -121,11 +121,7 @@ public class AddPatient extends JFrame{
             }
         });
         
-        JButton botonRetorno = new JButton("Return");
-        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        botonRetorno.setBounds(10, 917, 95, 35);
-        panel.add(botonRetorno);
-
+      
        panel.add(selectImageButton);
        
        List<Allergies> allergies= new ArrayList<Allergies>( );
@@ -328,7 +324,10 @@ public class AddPatient extends JFrame{
                      @Override
                      public void actionPerformed(ActionEvent e) {
                      	try {
-                     	 patientMan.addPatient(new Patient ( textName.toString(), Date.valueOf(textDateofBith.toString()),textBloodType.toString(),textContact.toString(),imageBytes,allergies,doctors,username));
+                     	 patientMan.addPatient(new Patient ( textName.getText(), Date.valueOf(textDateofBith.getText()),textBloodType.getText(),textContact.getText(),imageBytes,allergies,doctors,username));
+                     	 JOptionPane.showInputDialog(
+                                 "patient added correctly", JOptionPane.OK_CANCEL_OPTION);
+                    	 dispose();
                      } catch (NullPointerException a) {
                          // Manejar la excepción si el usuario no ingresó un número válido
                          JOptionPane.showMessageDialog(null, "Please enter a valid Doctor information."+a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

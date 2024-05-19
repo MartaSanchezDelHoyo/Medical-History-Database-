@@ -83,10 +83,7 @@ public class AddHospital extends JFrame {
 	    panel.add(textAddress);
 	    textAddress.setColumns(10);
 	    
-	    JButton botonRetorno = new JButton("Return");
-        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        botonRetorno.setBounds(10, 917, 95, 35);
-        panel.add(botonRetorno);
+	  
        
 	List<Doctor> doctors= new ArrayList<Doctor>( );
 	
@@ -177,7 +174,10 @@ public class AddHospital extends JFrame {
          @Override
          public void actionPerformed(ActionEvent e) {
          	try {
-         	 hospiMan.addHospital(new Hospital ( textName.toString(),textAddress.toString(),username,doctors));
+         	 hospiMan.addHospital(new Hospital ( textName.getText(),textAddress.getText(),username,doctors));
+         	 JOptionPane.showInputDialog(
+                     "hospital added correctly", JOptionPane.OK_CANCEL_OPTION);
+        	 dispose();
          } catch (NullPointerException a) {
              // Manejar la excepción si el usuario no ingresó un número válido
              JOptionPane.showMessageDialog(null, "Please enter a valid Doctor information."+a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

@@ -3,16 +3,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
+@Entity
+@Table (name= "hospitals")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital implements Serializable{
 
 	
 	private static final long serialVersionUID = -1457717917835220464L;
+	@XmlTransient
 	private Integer hospitalID;
+	@XmlAttribute
     private String hospitalName;
+	@XmlAttribute
     private String hospitalAddress;
+	@XmlTransient
 	private String username;
+	@XmlTransient
     private List <Doctor> Hospital_doctors;
+	@XmlTransient
     private List <Visit> Hospital_visits;
        
     

@@ -3,6 +3,14 @@ package medicalhistory.database.interfazGrafica;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import medicalhistory.database.interfaces.DoctorManager;
+import medicalhistory.database.interfaces.HospitalManager;
+import medicalhistory.database.interfaces.MedicationManager;
+import medicalhistory.database.interfaces.PatientManager;
+import medicalhistory.database.interfaces.TestManager;
+import medicalhistory.database.interfaces.TreatmentManager;
+import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.jpa.JPAUserManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
@@ -19,10 +27,24 @@ public class Registation extends JFrame {
     private static JPAUserManager userMan;
     boolean register = false;
     private String resultLabel;
+    private static DoctorManager docMan;
+    private static PatientManager patientMan;
+    private static HospitalManager hospitalMan;
+    private TestManager testMan;
+    private VisitManager visitMan;
+    private TreatmentManager treatmentMan;
+    private MedicationManager medicationMan;
+    private static ConnectionManager conMan;
+
 
     public Registation() {
-    	userMan=new JPAUserManager();
-        setTitle("Registro de Usuario");
+    	conMan = new ConnectionManager();
+	    userMan = new JPAUserManager();
+	    docMan= conMan.getDocMan();
+	    patientMan=conMan.getPatientMan();
+	    hospitalMan=conMan.getHospitalMan();
+	    
+	            setTitle("Registro de Usuario");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar la ventana en la pantalla
@@ -55,17 +77,47 @@ public class Registation extends JFrame {
         loginButon.setBounds(878, 699, 211, 64);
         loginButon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = campoUsuario.getText();
-                String password = new String(campoContraseña.getPassword());
-                Object userman;
-				// agregar la lógica para procesar el registro
-                User user = userMan.login(username, password);
-                if (user != null) {
-                    register=true;
-                } 
-            }
-        });
-        
+            	//try {
+	                String username = campoUsuario.getText();
+	                String password = new String(campoContraseña.getPassword());
+					// agregar la lógica para procesar el registro
+	                User user = userMan.login(username, password);
+	                try {
+	  	              
+		                if (user != null) {
+		                    System.out.println("User found: " + user.toString());
+
+		                    // Mostrar mensaje de bienvenida
+		                    JOptionPane.showMessageDialog(null, "Welcome back " + username);
+
+		                    Role role = user.getRole();
+		                    switch (role.getName()) {
+		                        case "Doctor":
+		                            Doctor doc = docMan.getDoctorsbyUsername(user.getUsername());
+		                            new DoctorInfo(doc);
+		                            break;
+		                        case "Patient":
+		                            Patient patient = patientMan.getPatientssbyUsername(user.getUsername());
+		                            new PatientInfo(patient);
+		                            break;
+		                        case "Hospital":
+		                            Hospital hospi = hospitalMan.getHospitalbyUsername(user.getUsername());
+		                            new HospitalInfo(hospi);
+		                            break;
+		                        default:
+		                            JOptionPane.showMessageDialog(null, "Unknown role");
+		                            break;
+		                    }
+		                } else {
+		                    JOptionPane.showMessageDialog(null, "User not found");
+		                }
+		            } catch (Exception a) {
+		                JOptionPane.showMessageDialog(null, "An error occurred: " + a.getMessage());
+		                a.printStackTrace();
+		            }
+		        }
+		    });
+
         JButton registerButton = new JButton("Sign in");
         registerButton.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 29));
         registerButton.setBounds(534, 699, 211, 64);
@@ -76,7 +128,6 @@ public class Registation extends JFrame {
                
 				// agregar la lógica para procesar el registro
                 openSmallWindow();
-                System.out.println(resultLabel);
                 User user = new User(username, password,userMan.getRole(resultLabel));
 
                 if (user != null) {
@@ -91,7 +142,7 @@ public class Registation extends JFrame {
 			    	new AddPatient(user.getUsername());
 			    	userMan.register(user);
 			        break;
-			    case "Hospital":
+			    case "Administrator":
 			    	new AddHospital(user.getUsername());
 			    	userMan.register(user);
 			        break;
@@ -165,7 +216,7 @@ public class Registation extends JFrame {
         group.add(option2);
         group.add(option3);
 
-        JButton confirmButton = new JButton("Confirmar");
+        JButton confirmButton = new JButton("Confirm");
         confirmButton.setEnabled(false);
         // Botón para confirmar la selección
         
@@ -189,7 +240,7 @@ public class Registation extends JFrame {
                 } else if (option2.isSelected()) {
                     selectedOption = "Patient";
                 } else if (option3.isSelected()) {
-                    selectedOption = "Hospital";
+                    selectedOption = "Administrator";
                 }
 
 				// Devolver la opción seleccionada a la clase original

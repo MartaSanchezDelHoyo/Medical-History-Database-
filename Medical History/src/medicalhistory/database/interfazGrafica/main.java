@@ -2,9 +2,9 @@ package medicalhistory.database.interfazGrafica;
 
 import java.sql.Connection;
 
-import javax.swing.*;
 
-import medicalhistory.database.jdbc.ConnectionManager;
+import javax.swing.*;
+import medicalhistory.database.jdbc.*;
 import medicalhistory.database.jpa.JPAUserManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
@@ -22,7 +22,6 @@ import medicalhistory.database.interfaces.VisitManager;
 public class main extends JFrame {
 
 private static ConnectionManager conMan;
-private Connection c;
 private static DoctorManager docMan;
 private static PatientManager patientMan;
 private static HospitalManager hospitalMan;
@@ -30,43 +29,21 @@ private TestManager testMan;
 private VisitManager visitMan;
 private TreatmentManager treatmentMan;
 private MedicationManager medicationMan;
-private static JPAUserManager userman;
+private static JPAUserManager userMan;
 
 
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-           Registation registation = new Registation();
-           try {
-        	   User user = new User();
-			if ( registation.isRegister()==true ){
-				user =userman.login(registation.getCampoUsuario().toString(),registation.getCampoContraseña().toString());
-				JOptionPane.showInputDialog("Welcome back "+ registation.getCampoUsuario().toString());
-				Role role=user.getRole();
-				switch (role.toString()) {
-			    case "Doctor":
-			    	Doctor doc=docMan.getDoctorsbyUsername(user.getUsername());
-			    	new DoctorInfo(doc);
-			        break;
-			    case "Patient":
-			       Patient patient= patientMan.getPatientssbyUsername(user.getUsername());
-			       new PatientInfo(patient);
-			        break;
-			    case "Hospital":
-			       Hospital hospi= hospitalMan.getHospitalbyUsername(user.getUsername());
-			       new HospitalInfo(hospi);
-			        break;
-			    default:
-			        
-			        break;
-			}
-			}
-		} catch (Exception e) {
-			JOptionPane.showInputDialog("User not found");
-			e.printStackTrace();
-		}
-        }
-    });
-}
- 
+	public static void main(String[] args) {
+		
+	    SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	         
+	            try {
+	            	 new Registation();
+	            } catch (Exception e) {
+	                JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage());
+	                e.printStackTrace();
+	            }
+	        }
+	    });
+	}
 }

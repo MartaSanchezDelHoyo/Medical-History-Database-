@@ -6,23 +6,44 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * 
- */
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import medicalhistory.database.xml.utils.SQLDateAdapter;
+
+@Entity
+@Table (name= "patients")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name= "Patient")
+@XmlType (propOrder = { "patientID", "allergies", "doctors"})
 public class Patient implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2478862032476138610L;
+	@XmlAttribute
 	private Integer patientID;
+	@XmlElement
 	private String patientName;
+	@XmlAttribute
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dateofbirth;
+	@XmlAttribute
 	private String bloodtype;
+	@XmlAttribute
 	private String email;
+	@XmlTransient
 	private byte[] photo;
+	@XmlAttribute
 	private String username;
+	@XmlElement(name= "Allergies")
+	@XmlElementWrapper(name = "allergies")
 	private List <Allergies> allergies;
+	@XmlTransient
 	private List <Visit> visits ;
+	@XmlElement(name= "Doctor")
+	@XmlElementWrapper(name = "Doctors")
 	private List <Doctor> doctors;
 
 	

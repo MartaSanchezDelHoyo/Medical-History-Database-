@@ -50,13 +50,18 @@ public class Menu {
          Visit acambiar= conMan.getVisitMan().getVisit(5);
          System.out.println(acambiar);
          
+<<<<<<< HEAD
          /*acambiar.setVisit_date(dateOfBirth);
          conMan.getVisitMan().changeVisit(acambiar);
+=======
+        // acambiar.setVisit_date(dateOfBirth);
+         //conMan.getVisitMan().changeVisit(acambiar);
+>>>>>>> branch 'master' of https://github.com/MartaSanchezDelHoyo/Medical-History-Database-.git
          System.out.println(dateOfBirth);
          System.out.println(acambiar);*/
          
-         Doctor a2= conMan.getDocMan().getDoctorCI(1);
-         Doctor a3= conMan.getDocMan().getDoctor(1);
+         Doctor a2= conMan.getDocMan().getDoctorCI(3);
+         Doctor a3= conMan.getDocMan().getDoctor(3);
          System.out.println(a2);
          System.out.println(a3);
         		 

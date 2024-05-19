@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import medicalhistory.database.interfaces.UserManager;
@@ -23,12 +24,25 @@ import medicalhistory.database.pojos.User;
 			// Create default roles
 			// If they don't exist already
 			try {
-				this.getRole("librarian");
-			} catch(NoResultException e) {
-				this.createRole(new Role("Doctor"));
-				this.createRole(new Role("Patient"));
-				this.createRole(new Role("Administrator"));
-			}
+		        em.getTransaction().begin();
+		        createRole(new Role("Administrator"));
+		        em.getTransaction().commit();
+		    } catch (PersistenceException e) {
+		        em.getTransaction().rollback();
+		        // Log or handle the exception appropriately
+		        e.printStackTrace();
+		    }
+
+		    try {
+		        em.getTransaction().begin();
+		        createRole(new Role("Doctor"));
+		        createRole(new Role("Patient"));
+		        em.getTransaction().commit();
+		    } catch (PersistenceException e) {
+		        em.getTransaction().rollback();
+		        // Log or handle the exception appropriately
+		        e.printStackTrace();
+		    }
 		}
 		
 		@Override
@@ -40,15 +54,28 @@ import medicalhistory.database.pojos.User;
 
 		@Override
 		public void createRole(Role r) {
-			em.getTransaction().begin();
-			em.persist(r);
-			em.getTransaction().commit();
+			Role existingRole = getRole(r.getName());
+		    if (existingRole == null) {
+		        try {
+		            em.getTransaction().begin();
+		            em.persist(r);
+		            em.getTransaction().commit();
+		        } catch (PersistenceException e) {
+		            em.getTransaction().rollback();
+		            // Log or handle the exception appropriately
+		            e.printStackTrace();
+		        }
+		    } else {
+		        System.out.println("Role '" + r.getName() + "' already exists.");
+		    }
 		}
+		
 
 		@Override
 		public Role getRole(String name) {
 			Query q = em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 			q.setParameter(1, name);
+			System.out.println(name+" "+q.getResultList().toString());
 			Role r = (Role) q.getSingleResult();
 			return r;
 		}

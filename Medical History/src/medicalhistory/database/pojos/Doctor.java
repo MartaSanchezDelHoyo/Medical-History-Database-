@@ -6,22 +6,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
-
+@Entity
+@Table (name= "doctors")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name= "Doctor")
+@XmlType (propOrder = { "name", "surname", "specialty", "Patients", "Hospitals"})
 public class Doctor implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4748700239185078330L;
+	@XmlAttribute
 	private int doctor_id;
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String surname;
+	@XmlAttribute
 	private String username;
+	@XmlElement
 	private String specialty;
+	@XmlAttribute
 	private String contact;
+	@XmlTransient
 	private byte[] photo;
+	@XmlElement(name= "Patient")
+	@XmlElementWrapper(name = "Patients")
 	private List <Patient> patients;
+	@XmlElement(name= "Hospital")
+	@XmlElementWrapper(name = "Hospitals")
 	private List <Hospital> hospitals;
+	@XmlTransient
 	private List <Visit> visits;
 	
 	/**

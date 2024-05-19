@@ -46,4 +46,5 @@ public class ObjectSelection extends JFrame {
     public Object getDoctorSeleccionado() {
         return selectedObject;
     }
+   
 }

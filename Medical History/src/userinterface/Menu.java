@@ -50,10 +50,13 @@ public class Menu {
          Visit acambiar= conMan.getVisitMan().getVisit(5);
          System.out.println(acambiar);
          
-        // acambiar.setVisit_date(dateOfBirth);
+
+         /*acambiar.setVisit_date(dateOfBirth);
+         conMan.getVisitMan().changeVisit(acambiar);
+         // acambiar.setVisit_date(dateOfBirth);
          //conMan.getVisitMan().changeVisit(acambiar);
          System.out.println(dateOfBirth);
-         System.out.println(acambiar);
+         System.out.println(acambiar);*/
          
          Doctor a2= conMan.getDocMan().getDoctorCI(3);
          Doctor a3= conMan.getDocMan().getDoctor(3);

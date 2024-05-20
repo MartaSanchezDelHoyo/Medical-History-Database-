@@ -21,7 +21,7 @@ public interface VisitManager {
     public Visit getVisit (int visitID);
     public List<Visit> getVisitByDoctor (int doctor_id);
     public List<Visit> getVisitByPatient (int patient_id);
-
+    public void deleteVisit(Visit temporal);
   
    
 }

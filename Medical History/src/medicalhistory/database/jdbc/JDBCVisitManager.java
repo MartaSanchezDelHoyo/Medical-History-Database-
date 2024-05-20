@@ -56,6 +56,7 @@ public class JDBCVisitManager implements VisitManager {
 	/**
 	 * To link a medication to a visit into the database
 	 */
+	@Override
 	public void linkMedicationToVisit(Visit visit, Medication medi) {
 		try {
 			String template = "INSERT INTO visit_medication (medication_id, visit_id) VALUES ( ?, ? )";
@@ -74,6 +75,7 @@ public class JDBCVisitManager implements VisitManager {
 	/**
 	 * To link a treatment to a visit into the database
 	 */
+	@Override
 	public void linkTreatmentToVisit(Visit visit, Treatment treat) {
 		try {
 			String template = "INSERT INTO visit_treatment (treatment_id, visit_id) VALUES ( ?, ? )";
@@ -330,6 +332,22 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		return listVisit;
 	}
+	
+	@Override
+    public void deleteVisit(Visit temporal) {
+		try {
+			String template = "DELETE FROM Visits WHERE visit_id = ?";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, temporal.getVisit_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	public ConnectionManager getConMan() {

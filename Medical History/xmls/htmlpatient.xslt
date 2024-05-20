@@ -80,7 +80,7 @@
 
             <!-- Article -->
             <div class="article">
-                <h2><span><a href="#">Patient1 Info</a></span></h2>
+                <h2><span><a href="#">Patient 1 Info</a></span></h2>
 
                 <p><strong>Patient ID:</strong> <xsl:value-of select="@patientID"/></p>
                 <p><strong>Date of Birth:</strong> <xsl:value-of select="@dateofbirth"/></p>
@@ -110,19 +110,29 @@
 
             <!-- Article -->
             <div class="article">
-                <h2><span><a href="#">This is my third article</a></span></h2>
-                <p class="info noprint">
-                    <span class="date">2007-01-01 @ 00:01</span><span class="noscreen">,</span>
-                    <span class="cat"><a href="#">Category</a></span><span class="noscreen">,</span>
-                    <span class="user"><a href="#">My name</a></span><span class="noscreen">,</span>
-                    <span class="comments"><a href="#">Comments</a></span>
-                </p>
+              <h2><span><a href="#">Patient 2 Info</a></span></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam pellentesque enim blandit enim bibendum blandit.
-                Integer eu leo ac est aliquet imperdiet. Quisque nec justo id augue posuere malesuada. Nullam ac metus. Cras non leo
-                ut est placerat condimentum. Aliquam ut enim. Quisque non sapien in enim eleifend faucibus. Pellentesque sodales. Mauris
-                auctor arcu sit amet felis. Donec eget enim ut lacus pharetra condimentum. Nulla in felis vel tortor imperdiet consectetuer.
-                Sed id ante.</p>
+                <p><strong>Patient ID:</strong> <xsl:value-of select="@patientID"/></p>
+                <p><strong>Date of Birth:</strong> <xsl:value-of select="@dateofbirth"/></p>
+                <p><strong>Blood Type:</strong> <xsl:value-of select="@bloodtype"/></p>
+                <p><strong>Email:</strong> <xsl:value-of select="@email"/></p>
+                <p><strong>Username:</strong> <xsl:value-of select="@username"/></p>
+                <p><strong>Patient Name:</strong> <xsl:value-of select="patientName"/></p>
+
+                <h2>Allergies</h2>
+                <xsl:for-each select="allergies/Allergies">
+                    <p><strong>Allergy ID:</strong> <xsl:value-of select="@allergiesID"/>
+                    - <strong>Allergy Name:</strong> <xsl:value-of select="allergiesName"/></p>
+                </xsl:for-each>
+
+                <h2>Doctors</h2>
+                <xsl:for-each select="Doctors/Doctor">
+                    <p><strong>Contact:</strong> <xsl:value-of select="@contact"/>
+                    - <strong>Specialty:</strong> <xsl:value-of select="@specialty"/></p>
+                    <p><strong>Name:</strong> <xsl:value-of select="name"/>
+                    <xsl:value-of select="surname"/></p>
+                </xsl:for-each>
+
 
                 <p class="btn-more box noprint"><strong><a href="#">Continue</a></strong></p>
             </div> <!-- /article -->
@@ -131,19 +141,29 @@
             
             <!-- Article -->
             <div class="article">
-                <h2><span><a href="#">This is my second article</a></span></h2>
-                <p class="info noprint">
-                    <span class="date">2007-01-01 @ 00:01</span><span class="noscreen">,</span>
-                    <span class="cat"><a href="#">Category</a></span><span class="noscreen">,</span>
-                    <span class="user"><a href="#">My name</a></span><span class="noscreen">,</span>
-                    <span class="comments"><a href="#">Comments</a></span>
-                </p>
+                <h2><span><a href="#">Patient 3 Info</a></span></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam pellentesque enim blandit enim bibendum blandit.
-                Integer eu leo ac est aliquet imperdiet. Quisque nec justo id augue posuere malesuada. Nullam ac metus. Cras non leo
-                ut est placerat condimentum. Aliquam ut enim. Quisque non sapien in enim eleifend faucibus. Pellentesque sodales. Mauris
-                auctor arcu sit amet felis. Donec eget enim ut lacus pharetra condimentum. Nulla in felis vel tortor imperdiet consectetuer.
-                Sed id ante.</p>
+                <p><strong>Patient ID:</strong> <xsl:value-of select="@patientID"/></p>
+                <p><strong>Date of Birth:</strong> <xsl:value-of select="@dateofbirth"/></p>
+                <p><strong>Blood Type:</strong> <xsl:value-of select="@bloodtype"/></p>
+                <p><strong>Email:</strong> <xsl:value-of select="@email"/></p>
+                <p><strong>Username:</strong> <xsl:value-of select="@username"/></p>
+                <p><strong>Patient Name:</strong> <xsl:value-of select="patientName"/></p>
+
+                <h2>Allergies</h2>
+                <xsl:for-each select="allergies/Allergies">
+                    <p><strong>Allergy ID:</strong> <xsl:value-of select="@allergiesID"/>
+                    - <strong>Allergy Name:</strong> <xsl:value-of select="allergiesName"/></p>
+                </xsl:for-each>
+
+                <h2>Doctors</h2>
+                <xsl:for-each select="Doctors/Doctor">
+                    <p><strong>Contact:</strong> <xsl:value-of select="@contact"/>
+                    - <strong>Specialty:</strong> <xsl:value-of select="@specialty"/></p>
+                    <p><strong>Name:</strong> <xsl:value-of select="name"/>
+                    <xsl:value-of select="surname"/></p>
+                </xsl:for-each>
+
 
                 <p class="btn-more box noprint"><strong><a href="#">Continue</a></strong></p>
             </div> <!-- /article -->
@@ -152,19 +172,28 @@
 
             <!-- Article -->
             <div class="article">
-                <h2><span><a href="#">This is my first article</a></span></h2>
-                <p class="info noprint">
-                    <span class="date">2007-01-01 @ 00:01</span><span class="noscreen">,</span>
-                    <span class="cat"><a href="#">Category</a></span><span class="noscreen">,</span>
-                    <span class="user"><a href="#">My name</a></span><span class="noscreen">,</span>
-                    <span class="comments"><a href="#">Comments</a></span>
-                </p>
+                <h2><span><a href="#">Patient 4 Info</a></span></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam pellentesque enim blandit enim bibendum blandit.
-                Integer eu leo ac est aliquet imperdiet. Quisque nec justo id augue posuere malesuada. Nullam ac metus. Cras non leo
-                ut est placerat condimentum. Aliquam ut enim. Quisque non sapien in enim eleifend faucibus. Pellentesque sodales. Mauris
-                auctor arcu sit amet felis. Donec eget enim ut lacus pharetra condimentum. Nulla in felis vel tortor imperdiet consectetuer.
-                Sed id ante.</p>
+                <p><strong>Patient ID:</strong> <xsl:value-of select="@patientID"/></p>
+                <p><strong>Date of Birth:</strong> <xsl:value-of select="@dateofbirth"/></p>
+                <p><strong>Blood Type:</strong> <xsl:value-of select="@bloodtype"/></p>
+                <p><strong>Email:</strong> <xsl:value-of select="@email"/></p>
+                <p><strong>Username:</strong> <xsl:value-of select="@username"/></p>
+                <p><strong>Patient Name:</strong> <xsl:value-of select="patientName"/></p>
+
+                <h2>Allergies</h2>
+                <xsl:for-each select="allergies/Allergies">
+                    <p><strong>Allergy ID:</strong> <xsl:value-of select="@allergiesID"/>
+                    - <strong>Allergy Name:</strong> <xsl:value-of select="allergiesName"/></p>
+                </xsl:for-each>
+
+                <h2>Doctors</h2>
+                <xsl:for-each select="Doctors/Doctor">
+                    <p><strong>Contact:</strong> <xsl:value-of select="@contact"/>
+                    - <strong>Specialty:</strong> <xsl:value-of select="@specialty"/></p>
+                    <p><strong>Name:</strong> <xsl:value-of select="name"/>
+                    <xsl:value-of select="surname"/></p>
+                </xsl:for-each>
 
                 <p class="btn-more box noprint"><strong><a href="#">Continue</a></strong></p>
             </div> <!-- /article -->

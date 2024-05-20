@@ -112,9 +112,8 @@ public class JDBCHospitalManager implements HospitalManager {
 				String hospital_adress = rs.getString("hospital_address");
 				String username = rs.getString("username");
 				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_id);
-				//Solo se ven los doctores del hospital
-				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, username, doctors);
-				
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, username, doctors, visits);
 			}
 			rs.close();
 			search.close();
@@ -127,9 +126,31 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	@Override
-	public Hospital getHospitalbyUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public Hospital getHospitalbyUsername(String username01) {
+		Hospital obtained = null;
+		try {
+			String sql = "SELECT * FROM hospitals WHERE username= ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setString(1, username01);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer hospital_id = rs.getInt("hospital_id");
+				String hospital_name = rs.getString("hospital_name");
+				String hospital_adress = rs.getString("hospital_address");
+				String username = rs.getString("username");
+				List<Doctor> doctors= conMan.getDocMan().getDoctorsbyHospital(hospital_id);
+				List<Visit> visits= conMan.getVisitMan().getVisitByHospital(hospital_id);
+				obtained = new Hospital(hospital_id, hospital_name, hospital_adress, username, doctors, visits);
+				
+			}
+			rs.close();
+			search.close();
+			return obtained;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return obtained;
 	}
 	
 	/**Method to get all the information of a hospital by the visit_id

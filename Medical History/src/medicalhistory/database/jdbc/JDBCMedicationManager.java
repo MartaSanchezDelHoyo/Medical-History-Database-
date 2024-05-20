@@ -25,6 +25,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To add a medication into the database
 	 */
+	@Override
 	public void addMedication(Medication entry) {
 		try {
 			String template = "INSERT INTO medications (medication_type) VALUES ( ? )";
@@ -43,6 +44,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To link a medication to a manufacturer into the database
 	 */
+	@Override
 	public void linkMedicationToManufacturer(Medication entry, Manufacturer manu) {
 		try {
 			String template = "INSERT INTO manufacturer_medication (medication_id, manufacturer_id) VALUES ( ?, ? )";
@@ -61,7 +63,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To add a manufacturer into the database
 	 */
-	
+	@Override
 	public void addManufacturer( Manufacturer entry ) {
 		try {
 			String template = "INSERT INTO manufacturers (manufacturer_name) VALUES ( ? )";
@@ -79,7 +81,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To modify a medication into the database, selecting the medication we want to change by the id, and introducing the new medication already modified
 	 */
-	
+	@Override
 	public void modifyMedication(Medication entry) {
 		try {
 			String template = "UPDATE medications SET type= ?, WHERE medication_id= ?";
@@ -96,6 +98,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	}
 	
 	//metodos (este y el siguiente) no añadidos al menu (pipe tonto no lo capta)
+	@Override
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
 		try {
@@ -121,6 +124,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To show the medications related with a visit, by introducing the id
 	 */
+	@Override
 	public List<Medication> showMedications(int visit_id) {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
@@ -150,6 +154,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To show the medications related with a manufacturer, the ones that produces
 	 */
+	@Override
 	public List<Medication> showMedicationsByManufacturer(int manufacturer_id) {
 		List<Medication> listOfMedications= new ArrayList<Medication>();
 
@@ -177,6 +182,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * to show all the manufacturers that are in the database
 	 */
+	@Override
 	public List<Manufacturer> showManufacturers(int medication_id) {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
@@ -204,6 +210,7 @@ public class JDBCMedicationManager implements MedicationManager {
 	/**
 	 * To show the manufcturer we have selected with all the medications that produces
 	 */
+	@Override
 	public List<Manufacturer> showManufacturerWithMedications(int manufacturerId) {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
@@ -228,6 +235,7 @@ public class JDBCMedicationManager implements MedicationManager {
 		}
 		return listOfManufacturers;
 	}
+	
 	
 	public ConnectionManager getConMan() {
 		return conMan;

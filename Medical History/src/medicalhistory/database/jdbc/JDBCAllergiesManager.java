@@ -23,6 +23,8 @@ public class JDBCAllergiesManager implements AllergiesManager{
 		this.c = connectionManager.getConnection();
 	}
 	
+	
+	@Override
 	 public void addAllergy(Allergies allergies) {
 	        try {
 	            String template = "INSERT INTO allergies (allergy_type) VALUES (?)";;
@@ -54,7 +56,9 @@ public class JDBCAllergiesManager implements AllergiesManager{
 				e.printStackTrace();
 			}
 		}
-	 public Allergies getAllergy(int allergy_id ) {
+		
+		@Override
+	    public Allergies getAllergy(int allergy_id ) {
 		 Allergies allergy = null;
 			try {
 				String sql = "SELECT * FROM allergies WHERE allergy_id= ?";
@@ -75,8 +79,9 @@ public class JDBCAllergiesManager implements AllergiesManager{
 			}
 			return allergy;
 		}
-	 
-	 public List<Allergies> getAllergies(int patient_id) {
+		
+		@Override
+	    public List<Allergies> getAllergies(int patient_id) {
 			List<Allergies> listOfAllergies =  new ArrayList<>();
 			
 			try {
@@ -100,6 +105,8 @@ public class JDBCAllergiesManager implements AllergiesManager{
 			return listOfAllergies;
 		}
 	
+		
+		
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

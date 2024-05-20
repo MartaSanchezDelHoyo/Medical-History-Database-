@@ -29,6 +29,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
     /**This method allows to add a treatment in the database
      * @param Obj treatment to add the information
      */
+	@Override
     public void addTreatment(Treatment treatment) {
         try {
             String template = "INSERT INTO treatments (treatment_type) VALUES ( ?)";
@@ -65,6 +66,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	 *@param ID of the treatment
 	 *@return String with the treatment type
 	 */
+	@Override
 	public String getTreatmentType(int treatmentID ) {
 		String treatmentType = null;
 		try {
@@ -90,6 +92,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	 * @param ID of the treatment
 	 * @return Obj treatment who's information you want
 	 */
+	@Override
 	public Treatment getTreatment(int treatment_id) {
 	    Treatment treatment = null;
 	    try {
@@ -117,6 +120,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	 *@param ID of the visit 
 	 *@return List of treatments that fulfill  this condition 
 	 */
+	@Override
 	public List<Treatment> getTreatments(int visit_id) {
 		List<Treatment> listOfTreatments=new ArrayList<>();
 		

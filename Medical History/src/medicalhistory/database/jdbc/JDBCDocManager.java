@@ -45,9 +45,6 @@ public class JDBCDocManager implements DoctorManager {
 		
 	}
 
-	
-	
-	
 	/**
 	 *Updates the data of a doctor that already exists in the database
 	 *@param a is the object Doctor that has the updated information 

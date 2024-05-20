@@ -19,7 +19,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient a) {
 	    try {
-	        String sql = "INSERT INTO patients (name, date_of_birth, contact, blood_type, photo, username) VALUES (?, ?, 	 ?, ?, ?)";
+	        String sql = "INSERT INTO patients (name, date_of_birth, contact, blood_type, photo, username) VALUES (?, ?, ?, ?, ?)";
 	        PreparedStatement statement = c.prepareStatement(sql);
 	        statement.setString(1, a.getPatientName());
 	        statement.setDate(2, a.getDateofbirth());
@@ -211,6 +211,7 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return patient;
 	}
+	
 	@Override
 	public List<Patient> getPatientByName(String name) {
 	    List<Patient> patients = new ArrayList<>();

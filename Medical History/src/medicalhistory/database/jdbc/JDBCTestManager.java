@@ -22,6 +22,7 @@ public class JDBCTestManager implements TestManager{
 		this.c = connectionManager.getConnection();
 	}
 	
+	@Override
 	public void addTest(Test entry) {
 		try {
 			String template = "INSERT INTO tests (test_type, pdf) VALUES (?, ?)";
@@ -62,7 +63,7 @@ public class JDBCTestManager implements TestManager{
 	 *@param toSearch is the Visit object with the information we are looking for in the database 
 	 *@return Test object with all the actualized information from the database
 	  */
-@Override
+    @Override
     public Test getTest (Visit toSearch) {
 		Test obtained = null;
 		try {

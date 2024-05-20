@@ -13,6 +13,6 @@ public interface PatientManager {
 	public List<Patient> getPatientsByDoctor(int doctor_id);
 	public Patient getPatient(int patient_id);
 	public Patient getPatient(String name);
-
+	public List<Patient> getAllPatients();
 
 }

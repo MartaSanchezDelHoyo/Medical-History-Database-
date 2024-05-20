@@ -301,7 +301,43 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 
-	
+	/**
+	 *Adds all the doctors to a list that has the same name and surname that the parameter indicates
+	 *@param name_ is the name we want to group the doctors by 
+	 *@param surname_ is the surname we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
+	@Override
+	public List<Doctor> getAllDoctors() {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+			String sql = "SELECT * FROM doctors";
+			PreparedStatement search = c.prepareStatement(sql);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer doctor_id = rs.getInt("doctor_id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String specialty = rs.getString("specialty");
+				String contact = rs.getString("contact");
+				byte[] photo =rs.getBytes("photo");
+				String username = rs.getString("username");
+				List<Hospital> hospitals = conMan.getHospitalMan().getHospitalByDoctor(doctor_id);
+				List<Patient> patients= conMan.getPatientMan().getPatientsByDoctor(doctor_id);
+				List<Visit> visits = conMan.getVisitMan().getVisitByDoctor(doctor_id);
+				Doctor newDoctor = new Doctor(doctor_id, name, surname, username, specialty, contact, photo,patients, hospitals, visits);
+				doctors.add(newDoctor);
+			}
+			search.close();
+			rs.close();
+			return doctors;
+		} catch (SQLException e) {
+			System.out.println("Error looking for a doctor");
+			e.printStackTrace();
+		}
+		return doctors;
+	}
+
 	
 	
 	public ConnectionManager getConMan() {

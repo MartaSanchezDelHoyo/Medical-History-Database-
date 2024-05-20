@@ -309,6 +309,37 @@ public class JDBCPatientManager implements PatientManager {
 	    return patients;
 	}
 	
+	
+	@Override
+	public List<Patient> getAllPatients() {
+	    List<Patient> patients = new ArrayList<>();
+	    try {
+	        String sql = "SELECT * FROM patients";
+	        PreparedStatement statement = c.prepareStatement(sql);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	int patientID= resultSet.getInt("patient_id");
+	        	String patientName = resultSet.getString("name");
+	            Date dateOfBirth = resultSet.getDate("date_of_birth"); 
+	            String email = resultSet.getString("contact");
+	            String bloodtype = resultSet.getString("blood_type");
+	            byte[] photo = resultSet.getBytes("photo");
+	            String username = resultSet.getString("username");
+	            List<Allergies> aller = conMan.getAllergiesMan().getAllergies(patientID);
+	            //No se necesitaria ninguna lista
+	            //Probar solo con la lista de alergias (Pablo)
+	            Patient patient = new Patient (patientID, patientName, dateOfBirth, bloodtype, email, photo, username, aller);
+	            patients.add(patient);
+	        }
+	        
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving patients by name: " + e.getMessage());
+	    }
+	    return patients;
+	}
 	public Connection getC() {
 		return c;
 	}

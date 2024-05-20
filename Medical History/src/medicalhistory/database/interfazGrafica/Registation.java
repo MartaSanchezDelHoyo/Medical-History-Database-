@@ -3,6 +3,7 @@ package medicalhistory.database.interfazGrafica;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import medicalhistory.database.interfaces.AllergiesManager;
 import medicalhistory.database.interfaces.DoctorManager;
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.interfaces.MedicationManager;
@@ -31,10 +32,11 @@ public class Registation extends JFrame {
     private static DoctorManager docMan;
     private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
-    private TestManager testMan;
+    private static TestManager testMan;
     private static VisitManager visitMan;
-    private TreatmentManager treatmentMan;
-    private MedicationManager medicationMan;
+    private static TreatmentManager treatmentMan;
+    private static MedicationManager medicationMan;
+    private static AllergiesManager allergyMan;
     private static ConnectionManager conMan;
 
 
@@ -103,6 +105,9 @@ public class Registation extends JFrame {
 		                            break;
 		                        case "Patient":
 		                            Patient patient = patientMan.getPatientssbyUsername(user.getUsername());
+		                            patient.setAlergies(allergyMan.getAllergies(patient.getPatientID()));
+		                            patient.setVisits(visitMan.getVisitByPatient(patient.getPatientID()));
+		                            
 		                            new PatientInfo(patient);
 		                            break;
 		                        case "Hospital":

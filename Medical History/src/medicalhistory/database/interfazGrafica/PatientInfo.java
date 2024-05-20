@@ -2,6 +2,9 @@ package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
 
+import medicalhistory.database.interfaces.DoctorManager;
+import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
 import medicalhistory.database.pojos.Visit;
@@ -15,8 +18,16 @@ public class PatientInfo extends JFrame {
 	private JPanel botonPanelVisits;
 	private JPanel botonPanelDoctors;
 	private AbstractButton botonRetorno;
-
+	private static VisitManager visitMan;
+    private static DoctorManager docMan;
+	private static ConnectionManager conMan;
+	
 	public PatientInfo(Patient a) {
+
+		conMan = new ConnectionManager();
+		visitMan= conMan.getVisitMan();
+		docMan= conMan.getDocMan();
+		
         setTitle("Patient Information");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,11 +35,14 @@ public class PatientInfo extends JFrame {
 
         JPanel panel = new JPanel();
         
+        ImageIcon imageIcon=null;
+        if(a.getPhoto()!=null) {
         byte[] photo= a.getPhoto();
-        ImageIcon imageIcon = new ImageIcon(photo);
+        imageIcon = new ImageIcon(photo);
+        }
         
         JLabel lblTextPhoto = new JLabel(imageIcon);
-        lblTextPhoto.setBounds(79, 46, 181, 219);
+        lblTextPhoto.setBounds(80, 46, 181, 219);
         lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblTextPhoto);
         
@@ -37,44 +51,44 @@ public class PatientInfo extends JFrame {
         
         JLabel lblBloodType = new JLabel("Blood type:");
         lblBloodType.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblBloodType.setBounds(686, 34, 137, 33);
+        lblBloodType.setBounds(899, 34, 137, 33);
         panel.add(lblBloodType);
        
         JLabel lblFullName = new JLabel("Full name:");
         lblFullName.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        lblFullName.setBounds(226, 34, 137, 33);
+        lblFullName.setBounds(383, 34, 137, 33);
         panel.add(lblFullName);
         
         JLabel lblContact = new JLabel("Contact:");
         lblContact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblContact.setBounds(226, 84, 137, 33);
+        lblContact.setBounds(383, 84, 137, 33);
         panel.add(lblContact);
         
         JLabel lblBirthDate = new JLabel("Birth date:");
         lblBirthDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblBirthDate.setBounds(226, 128, 137, 33);
+        lblBirthDate.setBounds(383, 131, 137, 33);
         panel.add(lblBirthDate);
         
         JLabel lblSex = new JLabel("Sex:");
         lblSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblSex.setBounds(686, 84, 137, 33);
+        lblSex.setBounds(899, 84, 137, 33);
         panel.add(lblSex);
         
         JLabel lblPatientId = new JLabel("Patient ID:");
         lblPatientId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblPatientId.setBounds(226, 170, 137, 33);
+        lblPatientId.setBounds(383, 175, 137, 33);
         panel.add(lblPatientId);
 
-        JLabel lblTextfullname = new JLabel("textFullName:");
+        JLabel lblTextfullname = new JLabel(a.getPatientName());
         lblTextfullname.setBackground(new Color(255, 255, 224));
         lblTextfullname.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblTextfullname.setBounds(340, 34, 312, 33);
+        lblTextfullname.setBounds(534, 34, 312, 33);
         panel.add(lblTextfullname);
         
-        JLabel lblTextcontact = new JLabel("textContact:");
+        JLabel lblTextcontact = new JLabel(a.getEmail());
         lblTextcontact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextcontact.setBackground(new Color(255, 255, 224));
-        lblTextcontact.setBounds(340, 84, 312, 33);
+        lblTextcontact.setBounds(544, 84, 312, 33);
         panel.add(lblTextcontact);
         
         
@@ -83,85 +97,111 @@ public class PatientInfo extends JFrame {
         lblAllergies.setBounds(33, 486, 137, 33);
         panel.add(lblAllergies);
         // Crear un panel para los botones con un layout vertical
-        botonPanelAllergies = new JPanel();
-        botonPanelAllergies.setBounds(33, 518, 1461, 128);
-        panel.add(botonPanelAllergies);
-        botonPanelAllergies.setLayout(null);
-        
-        for (int i=0; i<=a.getAlergies().size();i++) {
-	        JButton boton = new JButton("Allergy ID: "+a.getAlergies().get(i).getAllergiesID()+" Name: "+a.getAlergies().get(i).getAllergiesName());
-	        botonPanelAllergies.add(boton);
-	        int l =i;
-	        boton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                //new AllergieInfo (a.getAlergies().get(l));
-	            }
-	        });
-	        JScrollPane scrollPane = new JScrollPane(botonPanelAllergies);
-	        scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-	        panel.add(scrollPane);
-	        // Refrescar el panel para que los cambios se muestren correctamente
-	        botonPanelAllergies.revalidate();
-	        botonPanelAllergies.repaint();
-	        
+        JPanel botonAllergiesPatients = new JPanel();
+        botonAllergiesPatients.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getAllergies().size(); i++) {
+            JLabel allergy = new JLabel("Allergie ID: " + a.getAllergies().get(i).getAllergiesID() + " Name: " + a.getAllergies().get(i).getAllergiesName());
+            botonAllergiesPatients.add(allergy);
+            
         }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane1 = new JScrollPane(botonAllergiesPatients);
+        scrollPane1.setBounds(49, 513, 1332, 140); // Establecer el tamaño y posición del JScrollPane
+        scrollPane1.setPreferredSize(new Dimension(700, 300)); 
+       panel.add(scrollPane1);
         
+      a.setVisits(visitMan.getVisitByPatient(a.getPatientID()));
         JLabel lblVisits = new JLabel("Visits:");
         lblVisits.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblVisits.setBounds(33, 653, 137, 33);
         panel.add(lblVisits);
         
-        botonPanelVisits = new JPanel();
-        botonPanelVisits.setBounds(33, 697, 1461, 167);
-        panel.add(botonPanelVisits);
-        botonPanelVisits.setLayout(null);
-        
-        for (int i=0; i<=a.getVisits().size();i++) {
-	        JButton boton = new JButton("Visit ID: "+a.getVisits().get(i).getVisit_id()+" Date: "+a.getVisits().get(i).getVisit_date()+ " Doctor:"+a.getVisits().get(i).getVisit_doctor());
-	        botonPanelVisits.add(boton);
-	        int l =i;
-	        boton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                new VisitInfo (a.getVisits().get(l));
-	            }
-	        });
-	        JScrollPane scrollPane = new JScrollPane(botonPanelVisits);
-	        scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-	        panel.add(scrollPane);
-	        // Refrescar el panel para que los cambios se muestren correctamente
-	        botonPanelVisits.revalidate();
-	        botonPanelVisits.repaint();
-	        
+        JPanel botonPanelVisits = new JPanel();
+        botonPanelVisits.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getVisits().size(); i++) {
+            JButton boton = new JButton("Visit ID: " + a.getVisits().get(i).getVisit_id() + " /Date: " + a.getVisits().get(i).getVisit_date()+" /Doctor:" + a.getVisits().get(i).getVisit_doctor().getName()+" /Specialty: "+ a.getVisits().get(i).getVisit_doctor().getSpecialty());
+            botonPanelVisits.add(boton);
+            int l = i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new VisitInfo(a.getVisits().get(l));
+                }
+            });
         }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane2 = new JScrollPane(botonPanelVisits);
+        scrollPane2.setBounds(49, 713, 1332, 159); // Establecer el tamaño y posición del JScrollPane
+        scrollPane2.setPreferredSize(new Dimension(700, 300)); 
+       panel.add(scrollPane2);
         
+       a.setDoctors(docMan.getDoctorsByPatient(a.getPatientID()));
+      
         JLabel lblDoctors = new JLabel("Doctors:");
         lblDoctors.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblDoctors.setBounds(33, 241, 137, 33);
+        lblDoctors.setBounds(33, 269, 137, 33);
         panel.add(lblDoctors);
         
-        botonPanelDoctors = new JPanel();
-        botonPanelDoctors.setBounds(33, 312, 1461, 148);
-        panel.add( botonPanelDoctors);
-        botonPanelDoctors.setLayout(null);
-        
-        for (int i=0; i<=a.getDoctors().size();i++) {
-	        JButton boton = new JButton("Doctor ID: "+a.getDoctors().get(i).getDoctor_id()+" Specialty: "+a.getDoctors().get(i).getSpecialty()+" Name: "+a.getDoctors().get(i).getName());
-	        botonPanelDoctors.add(boton);
-	        int l =i;
-	        boton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                new DoctorInfoPatient (a.getDoctors().get(l),a);
-	            }
-	        });
-	        JScrollPane scrollPane = new JScrollPane(botonPanelDoctors);
-	        scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-	        panel.add(scrollPane);
-	        // Refrescar el panel para que los cambios se muestren correctamente
-	        botonPanelDoctors.revalidate();
-	        botonPanelDoctors.repaint();
-	        
+        JPanel botonPanelDoctors = new JPanel();
+        botonPanelDoctors.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getDoctors().size(); i++) {
+            JButton boton = new JButton("Doctor ID: " + a.getDoctors().get(i).getDoctor_id() + " /Name: " + a.getDoctors().get(i).getDoctor_id()+ " /Specialty:"+ a.getDoctors().get(i).getSpecialty());
+            botonPanelDoctors.add(boton);
+            int l = i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new DoctorInfoPatient(a.getDoctors().get(l),a);
+                }
+            });
         }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(botonPanelDoctors);
+        scrollPane.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
+        scrollPane.setPreferredSize(new Dimension(700, 300)); 
+       panel.add(scrollPane);
+       
+       JLabel lblPhoto = new JLabel("Photo:");
+       lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       lblPhoto.setBounds(0, 9, 103, 26);
+       panel.add(lblPhoto);
+       
+       JLabel lblTextBirthDate = new JLabel(a.getDateofbirth().toString());
+       lblTextBirthDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+       lblTextBirthDate.setBackground(new Color(255, 255, 224));
+       lblTextBirthDate.setBounds(534, 131, 312, 33);
+       panel.add(lblTextBirthDate);
+       
+       JLabel lblTextID = new JLabel(a.getPatientID().toString());
+       lblTextID.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+       lblTextID.setBackground(new Color(255, 255, 224));
+       lblTextID.setBounds(515, 175, 312, 33);
+       panel.add(lblTextID);
+       
+       JLabel lblTextBloodType = new JLabel(a.getBloodtype());
+       lblTextBloodType.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+       lblTextBloodType.setBackground(new Color(255, 255, 224));
+       lblTextBloodType.setBounds(1027, 34, 312, 33);
+       panel.add(lblTextBloodType);
+       
+       JLabel lblTextSex = new JLabel("sex");
+       lblTextSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+       lblTextSex.setBackground(new Color(255, 255, 224));
+       lblTextSex.setBounds(1014, 84, 312, 33);
+       panel.add(lblTextSex);
         
+       JButton botonRetorno = new JButton("Return");
+       botonRetorno.setBounds(10, 917, 114, 35);
+       botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       panel.add(botonRetorno);
+      
      
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -170,8 +210,5 @@ public class PatientInfo extends JFrame {
         });
         setVisible(true);
     }
-    // Método para agregar un botón al panel de botones
-	
-
 }
     

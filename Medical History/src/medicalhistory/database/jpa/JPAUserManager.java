@@ -109,4 +109,17 @@ import medicalhistory.database.pojos.User;
 			return u;
 		}
 
+		public User getUserByUsername(String username) {
+			User u = null;
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? ", User.class);
+			q.setParameter(1, username);
+
+			try {
+				u = (User) q.getSingleResult();
+			} catch (NoResultException e) {
+				return null;
+			}
+			return u;
+		}
+
 }

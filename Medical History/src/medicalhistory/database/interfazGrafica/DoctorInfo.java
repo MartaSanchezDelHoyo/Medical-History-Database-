@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -40,11 +41,17 @@ public class DoctorInfo extends JFrame {
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar la ventana en la pantalla
-
         
+        ImageIcon imageIcon=null;
+        if(a.getPhoto()!=null) {
         byte[] photo= a.getPhoto();
-        ImageIcon imageIcon = new ImageIcon(photo);
-        
+        imageIcon = new ImageIcon(photo);
+        }
+       
+        JLabel lblTextPhoto = new JLabel(imageIcon);
+        lblTextPhoto.setBounds(79, 46, 181, 219);
+        lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+        panel.add(lblTextPhoto);
         
         getContentPane().add(panel);
         panel.setLayout(null);
@@ -76,27 +83,26 @@ public class DoctorInfo extends JFrame {
         lblPatients.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblPatients);
         
-        botonPanelPatients = new JPanel();
-        botonPanelPatients.setBounds(49, 313, 1332, 142);
-        panel.add(botonPanelPatients);
-        botonPanelPatients.setLayout(null);
-        
-        for (int i=0; i<=a.getPatients().size();i++) {
-            JButton boton = new JButton("Patient ID: "+a.getPatients().get(i).getPatientID()+" Name: "+a.getPatients().get(i).getPatientName());
-           botonPanelPatients.add(boton);
-            int l =i;
+        JPanel botonPanelPatients = new JPanel();
+        botonPanelPatients.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getPatients().size(); i++) {
+            JButton boton = new JButton("Patient ID: " + a.getPatients().get(i).getPatientID() + " Name: " + a.getPatients().get(i).getPatientName());
+            botonPanelPatients.add(boton);
+            int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     new PatientInfo(a.getPatients().get(l));
                 }
             });
-            JScrollPane scrollPane = new JScrollPane(botonPanelPatients);
-            scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-            panel.add(scrollPane);
-            // Refrescar el panel para que los cambios se muestren correctamente
-            botonPanelPatients.revalidate();
-            botonPanelPatients.repaint();
-          }
+        }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane1 = new JScrollPane(botonPanelPatients);
+        scrollPane1.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
+        scrollPane1.setPreferredSize(new Dimension(700, 300)); 
+       panel.add(scrollPane1);
         	
         
         
@@ -105,55 +111,55 @@ public class DoctorInfo extends JFrame {
         lblVisits.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblVisits);
         
-         botonPanelVisits = new JPanel();
-        botonPanelVisits.setBounds(49, 513, 1332, 128);
-        panel.add(botonPanelVisits);
-        botonPanelVisits.setLayout(null);
-        
+        JPanel botonPanelVisits = new JPanel();
+        botonPanelVisits.setLayout(new GridLayout(0, 1)); // Disposición en una sola columna
 
-        for (int i=0; i<=a.getVisits().size();i++) {
-	        JButton boton = new JButton("Visit ID: "+a.getVisits().get(i).getVisit_id()+" Patient: "+a.getVisits().get(i).getVisit_patient().getPatientName());
-	       botonPanelVisits.add(boton);
-	        int l =i;
-	        boton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                new VisitInfo (a.getVisits().get(l));
-	            }
-	        });
-	        JScrollPane scrollPane = new JScrollPane(botonPanelVisits);
-	        scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-	        panel.add(scrollPane);
-	        // Refrescar el panel para que los cambios se muestren correctamente
-	        botonPanelVisits.revalidate();
-	        botonPanelVisits.repaint();
-	        
+        // Añadir botones al panel
+        for (int i = 0; i < a.getVisits().size(); i++) {
+            JButton boton = new JButton("Visit ID: " + a.getVisits().get(i).getVisit_id() + " Patient: " + a.getVisits().get(i).getVisit_patient().getPatientName());
+            botonPanelVisits.add(boton);
+            int l = i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new VisitInfo(a.getVisits().get(l));
+                }
+            });
         }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(botonPanelVisits);
+        scrollPane.setBounds(49, 513, 1332, 137); // Establecer el tamaño y posición del JScrollPane
+        scrollPane.setPreferredSize(new Dimension(700, 300)); // Establece el tamaño preferido del JScrollPane
+
+		panel.add(scrollPane);
+        
         
         JLabel lblHospitals = new JLabel("Hospitals:");
         lblHospitals.setBounds(31, 656, 89, 26);
         lblHospitals.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblHospitals);
         
-        botonPaneHospitals = new JPanel();
-        botonPaneHospitals .setBounds(49, 719, 1332, 151);
-        panel.add( botonPaneHospitals );
-        botonPaneHospitals .setLayout(null);
-  
-        for (int i=0; i<=a.getHospitals().size();i++) {
-	        JButton boton = new JButton("Hospital ID: "+a.getHospitals().get(i).getHospitalID()+" Name: "+a.getHospitals().get(i).getHospitalName()+" Address: "+a.getHospitals().get(i).getHospitalAddress());
-	       botonPaneHospitals.add(boton);
-	        int l =i;
-	        boton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                new HospitalInfo (a.getHospitals().get(l));
-	            }
-	        });
-	        JScrollPane scrollPane = new JScrollPane(botonPaneHospitals);
-	        scrollPane.setPreferredSize(new Dimension(200, 300)); // Establece el tamaño preferido del JScrollPane
-	        panel.add(scrollPane);
-	        // Refrescar el panel para que los cambios se muestren correctamente
-	        botonPaneHospitals.revalidate();
-	        botonPaneHospitals.repaint();}
+        JPanel botonPaneHospitals = new JPanel();
+        botonPaneHospitals.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getHospitals().size(); i++) {
+            JButton boton = new JButton("Hospital ID: " + a.getHospitals().get(i).getHospitalID() + " Name: " + a.getHospitals().get(i).getHospitalName() + " Address: " + a.getHospitals().get(i).getHospitalAddress());
+            botonPaneHospitals.add(boton);
+            int l = i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new HospitalInfo(a.getHospitals().get(l));
+                }
+            });
+        }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane2 = new JScrollPane(botonPaneHospitals);
+        scrollPane2.setBounds(49, 719, 1332, 159); // Establecer el tamaño y posición del JScrollPane
+        scrollPane2.setPreferredSize(new Dimension(1332, 300)); // Establece el tamaño preferido del JScrollPane
+
+     panel.add(scrollPane2);
         
         JLabel lblTextfullname = new JLabel(a.getName()+" "+a.getSurname());
         lblTextfullname.setBounds(579, 46, 221, 26);
@@ -162,7 +168,7 @@ public class DoctorInfo extends JFrame {
         panel.add(lblTextfullname);
         
         JLabel lblTextcontact = new JLabel(a.getContact());
-        lblTextcontact.setBounds(969, 46, 107, 26);
+        lblTextcontact.setBounds(969, 46, 284, 26);
         lblTextcontact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextcontact.setBackground(new Color(255, 255, 224));
         panel.add(lblTextcontact);
@@ -191,10 +197,17 @@ public class DoctorInfo extends JFrame {
         lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(lblPhoto);
         
-        JLabel lblTextPhoto = new JLabel(imageIcon);
-        lblTextPhoto.setBounds(79, 46, 181, 219);
-        lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        panel.add(lblTextPhoto);
+       
+        
+        JButton btnVisit = new JButton("New visit");
+        btnVisit.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        btnVisit.setBounds(1297, 917, 163, 35);
+        panel.add(btnVisit);
+        btnVisit.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	//new 
+        	}
+        });
         
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

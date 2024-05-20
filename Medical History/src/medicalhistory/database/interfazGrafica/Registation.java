@@ -20,6 +20,7 @@ import medicalhistory.database.pojos.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class Registation extends JFrame {
     private JTextField campoUsuario;
@@ -31,7 +32,7 @@ public class Registation extends JFrame {
     private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
     private TestManager testMan;
-    private VisitManager visitMan;
+    private static VisitManager visitMan;
     private TreatmentManager treatmentMan;
     private MedicationManager medicationMan;
     private static ConnectionManager conMan;
@@ -43,6 +44,7 @@ public class Registation extends JFrame {
 	    docMan= conMan.getDocMan();
 	    patientMan=conMan.getPatientMan();
 	    hospitalMan=conMan.getHospitalMan();
+	    visitMan=conMan.getVisitMan();
 	    
 	            setTitle("Registro de Usuario");
         setSize(1600, 1000);
@@ -94,6 +96,9 @@ public class Registation extends JFrame {
 		                    switch (role.getName()) {
 		                        case "Doctor":
 		                            Doctor doc = docMan.getDoctorsbyUsername(user.getUsername());
+		                            doc.setPatients(patientMan.getPatientsByDoctor(doc.getDoctor_id()));
+		                            doc.setHospitals(hospitalMan.getHospitalByDoctor(doc.getDoctor_id()));
+		                            doc.setVisits(visitMan.getVisitByDoctor(doc.getDoctor_id()));
 		                            new DoctorInfo(doc);
 		                            break;
 		                        case "Patient":
@@ -109,7 +114,7 @@ public class Registation extends JFrame {
 		                            break;
 		                    }
 		                } else {
-		                    JOptionPane.showMessageDialog(null, "User not found");
+		                    JOptionPane.showMessageDialog(null, "User not found please check your data ");
 		                }
 		            } catch (Exception a) {
 		                JOptionPane.showMessageDialog(null, "An error occurred: " + a.getMessage());
@@ -121,15 +126,22 @@ public class Registation extends JFrame {
         JButton registerButton = new JButton("Sign in");
         registerButton.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 29));
         registerButton.setBounds(534, 699, 211, 64);
-        registerButton.addActionListener(new ActionListener() {
+        
+        try {
+        	registerButton.addActionListener(new ActionListener() {
+        
             public void actionPerformed(ActionEvent e) {
                 String username = campoUsuario.getText();
                 String password = new String(campoContraseña.getPassword());
-               
+                
+                if (userMan.getUserByUsername(username) != null) {
+                    JOptionPane.showMessageDialog(null, "Username already exists. Please choose another one.");
+                    return; // Salir del método si el nombre de usuario ya está en uso
+                }
 				// agregar la lógica para procesar el registro
                 openSmallWindow();
                 User user = new User(username, password,userMan.getRole(resultLabel));
-
+                
                 if (user != null) {
                     register=true;
                 } 
@@ -152,6 +164,10 @@ public class Registation extends JFrame {
 			}
             }
         });
+        	}catch(Exception a) {
+        		JOptionPane.showMessageDialog(null, "An error occurred: " + a.getMessage());
+                a.printStackTrace();
+        	}
         panel.setLayout(null);
 
         panel.add(labelUsuario);

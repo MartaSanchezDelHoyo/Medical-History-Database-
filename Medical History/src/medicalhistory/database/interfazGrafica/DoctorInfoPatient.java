@@ -16,17 +16,22 @@ import medicalhistory.database.pojos.Patient;
 
 import javax.swing.JButton;
 
+
 public class DoctorInfoPatient extends JFrame {
+	private JPanel panel;
 	public DoctorInfoPatient(Doctor a,Patient b){
 		
+	panel = new JPanel();
 	setTitle("Doctor Information");
     setSize(1600, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null); // Centrar la ventana en la pantalla
 
-    JPanel panel = new JPanel();
+    ImageIcon imageIcon=null;
+    if(a.getPhoto()!=null) {
     byte[] photo= a.getPhoto();
-    ImageIcon imageIcon = new ImageIcon(photo);
+    imageIcon = new ImageIcon(photo);
+    }
     
     JLabel lblTextPhoto = new JLabel(imageIcon);
     lblTextPhoto.setBounds(126, 46, 181, 219);
@@ -64,7 +69,7 @@ public class DoctorInfoPatient extends JFrame {
     panel.add(btnVisit);
     btnVisit.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
-    	//new 
+    	new NewVisit(a,b);
     	}
     });
     
@@ -80,7 +85,13 @@ public class DoctorInfoPatient extends JFrame {
     lblTextcontact.setBounds(969, 46, 107, 26);
     panel.add(lblTextcontact);
     
-    JLabel lblTextSpecialty = new JLabel((String) null);
+    JLabel lblTextDoctorId = new JLabel(String.valueOf(a.getDoctor_id()));
+    lblTextDoctorId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    lblTextDoctorId.setBackground(new Color(255, 255, 224));
+    lblTextDoctorId.setBounds(589, 92, 211, 26);
+    panel.add(lblTextDoctorId);
+    
+    JLabel lblTextSpecialty = new JLabel(a.getSpecialty());
     lblTextSpecialty.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     lblTextSpecialty.setBackground(new Color(255, 255, 224));
     lblTextSpecialty.setBounds(969, 101, 221, 26);
@@ -91,6 +102,7 @@ public class DoctorInfoPatient extends JFrame {
     lblPhoto.setBounds(10, 30, 103, 26);
     panel.add(lblPhoto);
 
-    
+    setVisible(true);
 	}
+	
 }

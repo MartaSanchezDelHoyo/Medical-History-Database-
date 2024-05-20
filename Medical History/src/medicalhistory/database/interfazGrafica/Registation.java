@@ -107,11 +107,13 @@ public class Registation extends JFrame {
 		                            Patient patient = patientMan.getPatientssbyUsername(user.getUsername());
 		                            patient.setAlergies(allergyMan.getAllergies(patient.getPatientID()));
 		                            patient.setVisits(visitMan.getVisitByPatient(patient.getPatientID()));
-		                            
+		                            patient.setDoctors(docMan.getDoctorsByPatient(patient.getPatientID()));
 		                            new PatientInfo(patient);
 		                            break;
 		                        case "Hospital":
 		                            Hospital hospi = hospitalMan.getHospitalbyUsername(user.getUsername());
+		                            hospi.setHospital_doctors(docMan.getDoctorsbyHospital(hospi.getHospitalID()));
+		                            hospi.setHospital_visits(visitMan.getVisitByHospital(hospi.getHospitalID()));
 		                            new HospitalInfo(hospi);
 		                            break;
 		                        default:

@@ -6,17 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import medicalhistory.database.xml.utils.SQLDateAdapter;
 
-@Entity
-@Table (name= "patients")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name= "Patient")
-@XmlType (propOrder = { "patientID", "allergies", "doctors"})
+@XmlType (propOrder = { "patientName", "allergies", "doctors"})
 public class Patient implements Serializable{
 	/**
 	 * 
@@ -47,6 +45,11 @@ public class Patient implements Serializable{
 	private List <Doctor> doctors;
 
 	
+	public Patient() {
+		super();
+	}
+
+
 	public Patient(String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo, String username) {
 		this.patientName = patientName;
 		this.username=username;

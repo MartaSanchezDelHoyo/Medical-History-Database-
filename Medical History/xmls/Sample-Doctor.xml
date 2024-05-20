@@ -4,14 +4,6 @@
     <name>John</name>
     <surname>Doe</surname>
     <specialty>Cardiology</specialty>
-    <Patients>
-        <Patient dateofbirth="1990-01-01" email="jane.smith@gmail.com">
-            <patientName>Miriam Lush</patientName>
-        </Patient>
-        <Patient dateofbirth="1985-05-23" email="bob.brown@gmail.com">
-			<patientName>Bob Brown</patientName>
-        </Patient>
-    </Patients>
     <Hospitals>
         <Hospital hospitalAddress="123 Main St">
 			<hospitalName>City Hospital</hospitalName>

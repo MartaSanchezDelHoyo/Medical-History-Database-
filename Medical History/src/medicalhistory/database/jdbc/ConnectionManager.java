@@ -169,21 +169,13 @@ public class ConnectionManager {
 			createTables12.executeUpdate(create12);
 			createTables12.close();
 			Statement createTables13 = c.createStatement();
-			String create13 = "CREATE TABLE hospital_doctor ( "
-					+ " hospital_id INTEGER references hospitals(hospital_id) ,"
-					+ " doctor_id INTEGER references doctors (doctor_id),"
-					+ " PRIMARY KEY (hospital_id, doctor_id ),"
-					+ " )";
-			createTables13.executeUpdate(create13);
-			createTables13.close();
-			Statement createTables14 = c.createStatement();
-			String create14 = "CREATE TABLE patient_allergy ( "
+			String create13 = "CREATE TABLE patient_allergy ( "
 					+ " patient_id INTEGER references patients(patient_id) ,"
 					+ " allergy_id INTEGER references allergies (allergy_id),"
 					+ " PRIMARY KEY (patient_id, allergy_id ),"
 					+ " )";
-			createTables14.executeUpdate(create14);
-			createTables14.close();
+			createTables13.executeUpdate(create13);
+			createTables13.close();
 		} catch (SQLException sqlE) {
 			if (sqlE.getMessage().contains("already exist")){
 				System.out.println("No need to create the tables; already there");

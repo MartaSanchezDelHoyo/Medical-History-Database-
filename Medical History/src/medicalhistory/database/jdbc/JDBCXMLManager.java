@@ -14,8 +14,7 @@ public class JDBCXMLManager implements XMLManager  {
 
 	@Override
 	public File patient2Xml(Patient p) {
-		// TODO Auto-generated method stub
-		return null;
+	return null;
 	}
 
 	@Override

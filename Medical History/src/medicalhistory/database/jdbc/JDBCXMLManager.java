@@ -2,6 +2,9 @@ package medicalhistory.database.jdbc;
 
 import java.io.File;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -13,10 +16,15 @@ import medicalhistory.database.pojos.Patient;
 public class JDBCXMLManager implements XMLManager  {
 
 	@Override
-	public File patient2Xml(Patient p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public File patient2Xml(Patient patient) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+        File file = new File("./xmls/Patient-" + patient.getPatientID() + ".xml");
+        marshaller.marshal(patient, file);
+        return file;
+    }
 
 	@Override
 	public Patient xml2Patient(String filepath) {

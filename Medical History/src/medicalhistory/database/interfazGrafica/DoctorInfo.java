@@ -23,6 +23,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import medicalhistory.database.interfaces.HospitalManager;
+import medicalhistory.database.interfaces.PatientManager;
+import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
 
@@ -35,7 +39,18 @@ public class DoctorInfo extends JFrame {
 	private Container botonPaneHospitals;
 	private JPanel panel;
 	
+	private static PatientManager patientMan;
+    private static HospitalManager hospitalMan;
+    private static VisitManager visitMan;
+    private static ConnectionManager conMan;
 	public DoctorInfo(Doctor a) {
+		conMan = new ConnectionManager();
+		 patientMan=conMan.getPatientMan();
+		    hospitalMan=conMan.getHospitalMan();
+		    visitMan=conMan.getVisitMan();
+		a.setPatients(patientMan.getPatientsByDoctor(a.getDoctor_id()));
+        a.setHospitals(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));
+        a.setVisits(visitMan.getVisitByDoctor(a.getDoctor_id()));
 		panel = new JPanel();
         setTitle("Doctor Information");
         setSize(1600, 1000);
@@ -85,7 +100,8 @@ public class DoctorInfo extends JFrame {
         
         JPanel botonPanelPatients = new JPanel();
         botonPanelPatients.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
-
+        JLabel NullPatients;
+        if(a.getPatients()!=null) {
         // Añadir botones al panel
         for (int i = 0; i < a.getPatients().size(); i++) {
             JButton boton = new JButton("Patient ID: " + a.getPatients().get(i).getPatientID() + " Name: " + a.getPatients().get(i).getPatientName());
@@ -103,7 +119,12 @@ public class DoctorInfo extends JFrame {
         scrollPane1.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
         scrollPane1.setPreferredSize(new Dimension(700, 300)); 
        panel.add(scrollPane1);
-        	
+        }else {
+        	NullPatients= new JLabel("this doctor has no patients yet");
+        	NullPatients.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+        	botonPanelPatients.add(NullPatients);
+        	panel.add(botonPanelPatients);
+        }	
         
         
         JLabel lblVisits = new JLabel("Visits:");
@@ -113,7 +134,8 @@ public class DoctorInfo extends JFrame {
         
         JPanel botonPanelVisits = new JPanel();
         botonPanelVisits.setLayout(new GridLayout(0, 1)); // Disposición en una sola columna
-
+        JLabel NullVisits;
+        if(a.getVisits()!=null) {
         // Añadir botones al panel
         for (int i = 0; i < a.getVisits().size(); i++) {
             JButton boton = new JButton("Visit ID: " + a.getVisits().get(i).getVisit_id() + " Patient: " + a.getVisits().get(i).getVisit_patient().getPatientName());
@@ -125,7 +147,12 @@ public class DoctorInfo extends JFrame {
                 }
             });
         }
-
+        }else {
+        	NullVisits= new JLabel("this doctor has no visits yet");
+        	NullVisits.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+        	botonPanelVisits.add(NullVisits);
+        	panel.add(botonPanelVisits);
+        }	
         // Envuelve el panel en un JScrollPane
         JScrollPane scrollPane = new JScrollPane(botonPanelVisits);
         scrollPane.setBounds(49, 513, 1332, 137); // Establecer el tamaño y posición del JScrollPane
@@ -141,15 +168,16 @@ public class DoctorInfo extends JFrame {
         
         JPanel botonPaneHospitals = new JPanel();
         botonPaneHospitals.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
-
-        // Añadir botones al panel
+        
+        JLabel NullHospitals;
+        if(a.getHospitals()!=null) {
         for (int i = 0; i < a.getHospitals().size(); i++) {
             JButton boton = new JButton("Hospital ID: " + a.getHospitals().get(i).getHospitalID() + " Name: " + a.getHospitals().get(i).getHospitalName() + " Address: " + a.getHospitals().get(i).getHospitalAddress());
             botonPaneHospitals.add(boton);
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new HospitalInfo(a.getHospitals().get(l));
+                    new HospitalInfoPatient(a.getHospitals().get(l));
                 }
             });
         }
@@ -158,8 +186,13 @@ public class DoctorInfo extends JFrame {
         JScrollPane scrollPane2 = new JScrollPane(botonPaneHospitals);
         scrollPane2.setBounds(49, 719, 1332, 159); // Establecer el tamaño y posición del JScrollPane
         scrollPane2.setPreferredSize(new Dimension(1332, 300)); // Establece el tamaño preferido del JScrollPane
-
-     panel.add(scrollPane2);
+        panel.add(scrollPane2);
+        }else {
+        	NullHospitals= new JLabel("this doctor has no visits yet");
+        	NullHospitals.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+        	botonPaneHospitals.add(NullHospitals);
+        	panel.add(botonPaneHospitals);
+        }	
         
         JLabel lblTextfullname = new JLabel(a.getName()+" "+a.getSurname());
         lblTextfullname.setBounds(579, 46, 221, 26);

@@ -47,6 +47,7 @@ public class Registation extends JFrame {
 	    patientMan=conMan.getPatientMan();
 	    hospitalMan=conMan.getHospitalMan();
 	    visitMan=conMan.getVisitMan();
+	    allergyMan=conMan.getAllergiesMan();
 	    
 	            setTitle("Registro de Usuario");
         setSize(1600, 1000);
@@ -98,22 +99,17 @@ public class Registation extends JFrame {
 		                    switch (role.getName()) {
 		                        case "Doctor":
 		                            Doctor doc = docMan.getDoctorsbyUsername(user.getUsername());
-		                            doc.setPatients(patientMan.getPatientsByDoctor(doc.getDoctor_id()));
-		                            doc.setHospitals(hospitalMan.getHospitalByDoctor(doc.getDoctor_id()));
-		                            doc.setVisits(visitMan.getVisitByDoctor(doc.getDoctor_id()));
+		                            
 		                            new DoctorInfo(doc);
 		                            break;
 		                        case "Patient":
 		                            Patient patient = patientMan.getPatientssbyUsername(user.getUsername());
-		                            patient.setAlergies(allergyMan.getAllergies(patient.getPatientID()));
-		                            patient.setVisits(visitMan.getVisitByPatient(patient.getPatientID()));
-		                            patient.setDoctors(docMan.getDoctorsByPatient(patient.getPatientID()));
+		                            
 		                            new PatientInfo(patient);
 		                            break;
-		                        case "Hospital":
+		                        case "Administrator":
 		                            Hospital hospi = hospitalMan.getHospitalbyUsername(user.getUsername());
-		                            hospi.setHospital_doctors(docMan.getDoctorsbyHospital(hospi.getHospitalID()));
-		                            hospi.setHospital_visits(visitMan.getVisitByHospital(hospi.getHospitalID()));
+		                           
 		                            new HospitalInfo(hospi);
 		                            break;
 		                        default:
@@ -151,7 +147,7 @@ public class Registation extends JFrame {
                 
                 if (user != null) {
                     register=true;
-                } 
+               
                 switch (resultLabel.toString()) {
 			    case "Doctor":
 			    	new AddDoctor(user.getUsername());
@@ -168,6 +164,7 @@ public class Registation extends JFrame {
 			    default:
 			        
 			        break;
+                }
 			}
             }
         });

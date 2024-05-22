@@ -1,5 +1,7 @@
 package medicalhistory.database.interfazGrafica;
 
+import medicalhistory.database.interfaces.MedicationManager;
+import medicalhistory.database.interfaces.TreatmentManager;
 import medicalhistory.database.jdbc.*;
 import java.awt.Color;
 import java.awt.Container;
@@ -27,10 +29,16 @@ public class VisitInfo extends JFrame {
 	private JPanel botonPanelPatients;
 	private JLabel DoctorText;
 	private JPanel panelBotonesMedication;
-	private Connection c;
-	private ConnectionManager conMan;
+	private static ConnectionManager conMan;
+	 private static MedicationManager medicationMan;
+	 private static TreatmentManager treatmentMan;
+	
 	
 public VisitInfo (Visit a) {	
+	conMan = new ConnectionManager();
+	medicationMan=conMan.getMedicationMan();
+	treatmentMan= conMan.getTreatmentMan();
+	
 	setTitle("Visit Information");
     setSize(1600, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,9 +50,18 @@ public VisitInfo (Visit a) {
 
     JLabel lblVisitId = new JLabel("Visit ID:");
     lblVisitId.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblVisitId.setBounds(213, 46, 103, 26);
+    lblVisitId.setBounds(121, 63, 103, 26);
     panel.add(lblVisitId);
    
+    JLabel lblObserbations = new JLabel("Observations:");
+    lblObserbations.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+    lblObserbations.setBounds(22, 689, 171, 35);
+    panel.add(lblObserbations);
+    
+    JLabel lblTextObserbations =new JLabel (a.getVisit_observation());
+    lblTextObserbations.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    lblTextObserbations.setBounds(32, 736, 1121, 143);
+    panel.add(lblTextObserbations);
     
     JLabel lblDate = new JLabel("Date:");
     lblDate.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -89,34 +106,40 @@ public VisitInfo (Visit a) {
     lblMedications.setBounds(22, 290, 171, 35);
     panel.add(lblMedications);
     
+    a.setMedications(medicationMan.showMedications(a.getVisit_id()));
+    
     JPanel botonPanelMaications = new JPanel();
     botonPanelMaications.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
-if(a.getMedications()!=null) {
+
+    if(a.getMedications()!=null) {
     // Añadir botones al panel
-    for (int i = 0; i < a.getMedications().size(); i++) {
-        JButton boton = new JButton("Madication ID: " + a.getMedications().get(i).getMedication_id() + " /Type: " + a.getMedications().get(i).getType()+" /Manufacturer:"+a.getMedications().get(i).getManufacturers());
-        botonPanelMaications.add(boton);
-        int l = i;
-        boton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new MedicationInfo(a.getMedications().get(l));
-            }
-        });
+	    for (int i = 0; i < a.getMedications().size(); i++) {
+	        JButton boton = new JButton("Madication ID: " + a.getMedications().get(i).getMedication_id() + " /Type: " + a.getMedications().get(i).getType()+" /Manufacturer:"+a.getMedications().get(i).getManufacturers());
+	        botonPanelMaications.add(boton);
+	        int l = i;
+	        boton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                new MedicationInfo(a.getMedications().get(l));
+	            }
+	        });
     }
 
     // Envuelve el panel en un JScrollPane
     JScrollPane scrollPane1 = new JScrollPane(botonPanelMaications);
     scrollPane1.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
     scrollPane1.setPreferredSize(new Dimension(700, 300)); 
-   panel.add(scrollPane1);
-}else {
-	JLabel medication=new JLabel("NO Treatments in this visit");
-	botonPanelMaications.add(medication);
-    panel.add(botonPanelMaications);
-}
+    panel.add(scrollPane1);
+	}else {
+		JLabel medication=new JLabel("NO Treatments in this visit");
+		botonPanelMaications.add(medication);
+	    panel.add(botonPanelMaications);
+	}
+    
+    a.setTreatments(treatmentMan.getTreatments(a.getVisit_id()));
+    
     JLabel lblTreatments = new JLabel("Treatments");
     lblTreatments.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblTreatments.setBounds(22, 633, 124, 26);
+    lblTreatments.setBounds(22, 522, 124, 26);
     panel.add(lblTreatments);
 
     JPanel botonPanelTreatmentd = new JPanel();
@@ -132,10 +155,10 @@ if(a.getMedications()!=null) {
     JScrollPane scrollPane2 = new JScrollPane(botonPanelTreatmentd);
     scrollPane2.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
     scrollPane2.setPreferredSize(new Dimension(700, 300)); 
-   panel.add(scrollPane2);
+    panel.add(scrollPane2);
     }else {
-    	JLabel medication=new JLabel("NO Treatments in this visit");
-    botonPanelTreatmentd.add(medication);
+    	JLabel treatment=new JLabel("NO Treatments in this visit");
+    botonPanelTreatmentd.add(treatment);
     panel.add(botonPanelTreatmentd);}
 
     // Envuelve el panel en un JScrollPane

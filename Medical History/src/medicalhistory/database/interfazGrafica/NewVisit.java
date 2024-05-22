@@ -49,58 +49,68 @@ public class NewVisit extends JFrame{
 	;
 	    JLabel lblDate = new JLabel("Date:");
 	    lblDate.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	    lblDate.setBounds(213, 95, 72, 26);
+	    lblDate.setBounds(213, 170, 85, 40);
 	    panel.add(lblDate);
 	 
 	    JTextField lblTextDate = new JTextField();
 	    lblTextDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
 	    lblTextDate.setBackground(new Color(255, 255, 224));
-	    lblTextDate.setBounds(320, 95, 107, 26);
+	    lblTextDate.setBounds(308, 170, 176, 40);
 	    panel.add(lblTextDate);
-	
-	    // Crear un botón de retorno
-	   
+
 	 
 	    JLabel lblDoctor = new JLabel("Doctor:");
 	    lblDoctor.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	    lblDoctor.setBounds(584, 46, 103, 26);
+	    lblDoctor.setBounds(213, 295, 113, 40);
 	    panel.add(lblDoctor);
 	    
 	    JLabel lblTextfullname = new JLabel(a.getName()+" "+a.getSurname());
-        lblTextfullname.setBounds(579, 46, 221, 26);
+        lblTextfullname.setBounds(308, 293, 312, 45);
         lblTextfullname.setBackground(new Color(255, 255, 224));
         lblTextfullname.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblTextfullname);
 	    
 	    JLabel lblHospital = new JLabel("Hospital :");
 	    lblHospital.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	    lblHospital.setBounds(584, 95, 103, 26);
+	    lblHospital.setBounds(732, 200, 103, 26);
 	    panel.add(lblHospital);
 	    
 	    openSmallWindow(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));	    
 	    JLabel lblPatient = new JLabel("Patient :");
 	    lblPatient.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	    lblPatient.setBounds(584, 144, 103, 26);
+	    lblPatient.setBounds(732, 302, 103, 26);
 	    panel.add(lblPatient);
 	    
 	    JLabel lblTextPatientname = new JLabel(b.getPatientName());
         lblTextPatientname.setBackground(new Color(255, 255, 224));
         lblTextPatientname.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblTextPatientname.setBounds(534, 34, 312, 33);
+        lblTextPatientname.setBounds(838, 299, 312, 33);
         panel.add(lblTextPatientname);
 	    
 	     JButton botonRetorno = new JButton("Return");
 	    botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	    botonRetorno.setBounds(10, 917, 95, 35);
+	    botonRetorno.setBounds(10, 917, 192, 35);
 	    panel.add(botonRetorno);
 	    
-	    visitMan.addVisit(new Visit(Date.valueOf(lblTextDate.getText()), "planned visit ", b, a, null, selectedOption));
+	    
+	     JButton botonCreation = new JButton("Create visit");
+	    botonCreation.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+	    botonCreation.setBounds(1022, 775, 508, 177);
+	    panel.add(botonCreation);
+	    botonCreation.addActionListener(new ActionListener() {
+	    	@Override
+            public void actionPerformed(ActionEvent e) {
+	    		 visitMan.addVisit(new Visit(Date.valueOf(lblTextDate.getText()), "planned visit ", b, a, null, selectedOption));
+	    	}
+	    });
+	    
+	   
 	    setVisible(true);
 	}
 	private void openSmallWindow(List<Hospital> options) {
         JDialog smallWindow = new JDialog(this, "Select your hospital", true);
         smallWindow.setSize(300, 200);
-        smallWindow.setLayout(new FlowLayout());
+        smallWindow.getContentPane().setLayout(new FlowLayout());
 
         // Crear botones de radio
         
@@ -138,13 +148,13 @@ public class NewVisit extends JFrame{
                 		}
                 });
             group.add(radioButton);
-           smallWindow.add(radioButton);
+           smallWindow.getContentPane().add(radioButton);
         }
         
 
         // Agregar componentes a la ventana pequeña
         
-        smallWindow.add(confirmButton);
+        smallWindow.getContentPane().add(confirmButton);
 
         smallWindow.setLocationRelativeTo(this); // Centrar la ventana pequeña respecto a la ventana principal
         smallWindow.setVisible(true);

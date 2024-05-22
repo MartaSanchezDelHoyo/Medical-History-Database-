@@ -1,26 +1,24 @@
 package medicalhistory.database.interfazGrafica;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import medicalhistory.database.interfaces.DoctorManager;
@@ -31,15 +29,9 @@ import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Patient;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-
-import javax.swing.JScrollPane;
-
-public class AddDoctor extends JFrame {
-
+public class AddDoctorBasic extends JFrame{
 	private JTextField textName;
+	private JTextField textUsername;
 	private JTextField textSurname;
 	private JTextField textSpecialty;
 	private JTextField textContact;
@@ -50,7 +42,7 @@ public class AddDoctor extends JFrame {
 	private static PatientManager patientMan;
 	private static ConnectionManager conMan;
 
-	public AddDoctor(String username) {
+	public AddDoctorBasic() {
 		conMan = new ConnectionManager();
 		patientMan=conMan.getPatientMan();
 		hospiMan=conMan.getHospitalMan();
@@ -91,6 +83,11 @@ public class AddDoctor extends JFrame {
         lblContact.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(lblContact);
         
+        JLabel lblUsername = new JLabel("Photo:");
+        lblUsername.setBounds(24, 34, 95, 26);
+        lblUsername.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(lblUsername);
+        
         JLabel lblImage = new JLabel("Photo:");
         lblImage.setBounds(24, 34, 95, 26);
         lblImage.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -116,6 +113,11 @@ public class AddDoctor extends JFrame {
 	    panel.add(textContact );
 	    textContact.setColumns(10);
 	    
+	    textUsername = new JTextField();
+        textUsername.setBounds(556, 98, 298, 20);
+	    panel.add(textUsername);
+	    textUsername.setColumns(10);
+
 	    JButton botonRetorno = new JButton("Return");
         botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         botonRetorno.setBounds(10, 917, 95, 35);
@@ -126,7 +128,7 @@ public class AddDoctor extends JFrame {
                 dispose(); // Cierra la ventana actual
             }
         });
-
+	    
         JButton selectImageButton = new JButton("Select image");
         selectImageButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         selectImageButton.setBounds(24, 186, 242, 38);
@@ -324,7 +326,7 @@ List<Patient> patients= new ArrayList<Patient>( );
             @Override
             public void actionPerformed(ActionEvent e) {
             	try {
-            	 docMan.addDoctor(new Doctor ( textName.getText(), textSurname.getText(),textSpecialty.getText(),textContact.getText(),imageBytes,patients,hospitals,username));
+            	 docMan.addDoctor(new Doctor ( textName.getText(), textSurname.getText(),textSpecialty.getText(),textContact.getText(),imageBytes,patients,hospitals, textUsername.getText()));
             	 JOptionPane.showInputDialog(
                          "doctor added correctly", JOptionPane.OK_CANCEL_OPTION);
             	 dispose();
@@ -361,3 +363,6 @@ List<Patient> patients= new ArrayList<Patient>( );
     }
 
 }
+
+
+

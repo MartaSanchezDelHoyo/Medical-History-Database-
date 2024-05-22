@@ -2,6 +2,7 @@ package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
 
+import medicalhistory.database.interfaces.AllergiesManager;
 import medicalhistory.database.interfaces.DoctorManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
@@ -17,9 +18,11 @@ public class PatientInfo extends JFrame {
 	private JPanel botonPanelAllergies;
 	private JPanel botonPanelVisits;
 	private JPanel botonPanelDoctors;
+	private static AllergiesManager allergyMan;
 	private AbstractButton botonRetorno;
 	private static VisitManager visitMan;
     private static DoctorManager docMan;
+    
 	private static ConnectionManager conMan;
 	
 	public PatientInfo(Patient a) {
@@ -27,7 +30,11 @@ public class PatientInfo extends JFrame {
 		conMan = new ConnectionManager();
 		visitMan= conMan.getVisitMan();
 		docMan= conMan.getDocMan();
+		allergyMan=conMan.getAllergiesMan();
 		
+		a.setAlergies(allergyMan.getAllergies(a.getPatientID()));
+        a.setVisits(visitMan.getVisitByPatient(a.getPatientID()));
+        a.setDoctors(docMan.getDoctorsByPatient(a.getPatientID()));
         setTitle("Patient Information");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,8 +119,7 @@ public class PatientInfo extends JFrame {
         scrollPane1.setBounds(49, 513, 1332, 140); // Establecer el tamaño y posición del JScrollPane
         scrollPane1.setPreferredSize(new Dimension(700, 300)); 
        panel.add(scrollPane1);
-        
-      a.setVisits(visitMan.getVisitByPatient(a.getPatientID()));
+     
         JLabel lblVisits = new JLabel("Visits:");
         lblVisits.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblVisits.setBounds(33, 653, 137, 33);
@@ -139,8 +145,7 @@ public class PatientInfo extends JFrame {
         scrollPane2.setBounds(49, 713, 1332, 159); // Establecer el tamaño y posición del JScrollPane
         scrollPane2.setPreferredSize(new Dimension(700, 300)); 
        panel.add(scrollPane2);
-        
-       a.setDoctors(docMan.getDoctorsByPatient(a.getPatientID()));
+     
       
         JLabel lblDoctors = new JLabel("Doctors:");
         lblDoctors.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));

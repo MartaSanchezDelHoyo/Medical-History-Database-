@@ -3,7 +3,6 @@ package medicalhistory.database.interfazGrafica;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,16 +24,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import medicalhistory.database.interfaces.*;
-
+import medicalhistory.database.interfaces.AllergiesManager;
+import medicalhistory.database.interfaces.DoctorManager;
+import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Allergies;
 import medicalhistory.database.pojos.Doctor;
-import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Patient;
 
-public class AddPatient extends JFrame{
+public class AddPatientBasic extends JFrame{
 	private JTextField textName;
+	private JTextField textUsername;
 	private JTextField textDateofBith;
 	private JTextField textBloodType;
 	private JTextField textContact;
@@ -45,8 +45,7 @@ public class AddPatient extends JFrame{
 	private static PatientManager patientMan;
 	private static ConnectionManager conMan;
 	private JTextField textSex;
-
-	public AddPatient(String username) {
+	public AddPatientBasic () {
 		conMan = new ConnectionManager();
 		patientMan=conMan.getPatientMan();
 		allergyMan=conMan.getAllergiesMan();
@@ -91,6 +90,11 @@ public class AddPatient extends JFrame{
         lblImage.setBounds(24, 34, 95, 26);
         lblImage.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(lblImage);
+        
+        JLabel lblUsername = new JLabel("Photo:");
+        lblUsername.setBounds(24, 34, 95, 26);
+        lblUsername.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(lblUsername);
        
         textName = new JTextField();
         textName.setBounds(556, 98, 298, 20);
@@ -111,6 +115,11 @@ public class AddPatient extends JFrame{
 	    textContact.setBounds(969, 52, 399, 20);
 	    panel.add(textContact );
 	    textContact.setColumns(10);
+
+	    textUsername = new JTextField();
+        textUsername.setBounds(556, 98, 298, 20);
+	    panel.add(textUsername);
+	    textUsername.setColumns(10);
 	    
 	    JButton botonRetorno = new JButton("Return");
         botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -122,8 +131,7 @@ public class AddPatient extends JFrame{
                 dispose(); // Cierra la ventana actual
             }
         });
-
-        
+	    
         JButton selectImageButton = new JButton("Select image");
         selectImageButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         selectImageButton.setBounds(24, 186, 242, 38);
@@ -144,10 +152,12 @@ public class AddPatient extends JFrame{
        selectAllergiesButton.setBounds(43, 555, 647, 52);
        panel.add(selectAllergiesButton);
        
-    // Crear un panel para la ventana emergente
-	   JPanel allergiesPanel = new JPanel();
-       allergiesPanel.setLayout(new BoxLayout(allergiesPanel, BoxLayout.Y_AXIS));
-       // Establecer un diseño de cuadrícula de una sola columna
+       JScrollPane allergiesSelectedPanel = new JScrollPane();
+       allergiesSelectedPanel.setSize(1266, 200);
+       allergiesSelectedPanel.setLocation(66, 619);
+       allergiesSelectedPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+       allergiesSelectedPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+       
        selectAllergiesButton.addActionListener( new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -155,7 +165,9 @@ public class AddPatient extends JFrame{
         	   boolean validInput = false;
 
                while (!validInput) {
-                   
+                   // Crear un panel para la ventana emergente
+            	   JPanel allergiesPanel = new JPanel();
+                   allergiesPanel.setLayout(new BoxLayout(allergiesPanel, BoxLayout.Y_AXIS));
                    // Añadir una etiqueta y un campo de texto para ingresar el ID del hospital
                    JLabel lblAllergie = new JLabel("Allergie Id:");
                    lblAllergie.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -194,24 +206,30 @@ public class AddPatient extends JFrame{
            
        });
        
-       
+       JPanel allergySelectedPanel = new JPanel();
+       allergySelectedPanel.setSize(1148, 166);
+       allergySelectedPanel.setLocation(24, 658);
+       allergySelectedPanel.setLayout(new BorderLayout()); // Use BorderLayout for the JScrollPane
+
        // Create a JPanel to hold the labels
        JPanel labelPanel = new JPanel();
        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for the labels
 
-       
-       
+       JScrollPane scrollPane = new JScrollPane(labelPanel); // Add labelPanel to the JScrollPane
+       scrollPane.setBounds(0, 25, 1148, 141);
+       allergySelectedPanel.add(scrollPane, BorderLayout.CENTER); // Add the JScrollPane to the hospitalSelectedPanel
+
        if (!allergies.isEmpty()) {
            for (int i = 0; i < allergies.size(); i++) { // Iterate correctly through the list
                JLabel lblHospitalSelected = new JLabel("Name: " + allergies.get(i).getAllergiesName() );
                lblHospitalSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
                labelPanel.add(lblHospitalSelected); // Add the JLabel to the labelPanel
            }
-          
+           // Set preferred size of the labelPanel to fit all labels
+           labelPanel.setPreferredSize(new Dimension(scrollPane.getWidth(), labelPanel.getComponentCount() * 30));
        }
-       JScrollPane scrollPane = new JScrollPane(labelPanel); // Add labelPanel to the JScrollPane
-       scrollPane.setBounds(0, 308, 1148, 212);
-       panel.add(scrollPane );
+
+       panel.add(allergySelectedPanel);
 
         
 	List<Doctor> doctors= new ArrayList<Doctor>( );
@@ -272,22 +290,27 @@ public class AddPatient extends JFrame{
 	JPanel doxtorSelectedPanel = new JPanel();
 	doxtorSelectedPanel.setSize(1148, 166);
 	doxtorSelectedPanel.setLocation(24, 658);
-	doxtorSelectedPanel.setLayout(new GridLayout(0, 1)); // Use BorderLayout for the JScrollPane
+	doxtorSelectedPanel.setLayout(new BorderLayout()); // Use BorderLayout for the JScrollPane
 
+	// Create a JPanel to hold the labels
+	JPanel labelPanel1 = new JPanel();
+	labelPanel1.setLayout(new BoxLayout(labelPanel1, BoxLayout.Y_AXIS)); // Use BoxLayout for the labels
+
+	JScrollPane scrollPane1 = new JScrollPane(labelPanel1); // Add labelPanel to the JScrollPane
+	scrollPane1.setBounds(0, 25, 1148, 141);
+	doxtorSelectedPanel.add(scrollPane1, BorderLayout.CENTER); // Add the JScrollPane to the hospitalSelectedPanel
 
 	if (!doctors.isEmpty()) {
 	    for (int i = 0; i < doctors.size(); i++) { // Iterate correctly through the list
 	        JLabel lblDoctorSelected = new JLabel("Name: " + doctors.get(i).getName() + " Surname: " + doctors.get(i).getSurname()+" Specialty: "+doctors.get(i).getSpecialty());
 	        lblDoctorSelected.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-	        doxtorSelectedPanel .add(lblDoctorSelected); // Add the JLabel to the labelPanel
+	        labelPanel1.add(lblDoctorSelected); // Add the JLabel to the labelPanel
 	    }
-	    
+	    // Set preferred size of the labelPanel to fit all labels
+	    labelPanel1.setPreferredSize(new Dimension(scrollPane1.getWidth(), labelPanel1.getComponentCount() * 30));
 	}
 
-	JScrollPane scrollPane1 = new JScrollPane(doxtorSelectedPanel); // Add labelPanel to the JScrollPane
-	scrollPane1.setBounds(0, 630, 1148, 288);
-	scrollPane1.setPreferredSize(new Dimension(700, 300)); 
-	panel.add(scrollPane1 );
+	panel.add(doxtorSelectedPanel);
 
 
                 imageLabel = new JLabel("Ninguna imagen seleccionada.");
@@ -303,7 +326,16 @@ public class AddPatient extends JFrame{
                 textSex.setColumns(10);
                 textSex.setBounds(531, 135, 330, 20);
                 panel.add(textSex);
+                JPanel doctorsSelectedPanel=new JPanel();
+                panel.add(doctorsSelectedPanel);
+                doctorsSelectedPanel.setSize(1266, 198);
+                doctorsSelectedPanel.setLocation(66, 312);
                 
+                
+                JScrollPane scrollPane_1 = new JScrollPane();
+                doctorsSelectedPanel.add(scrollPane_1);
+                scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                 
                 JButton createPatientButton = new JButton("Add patient to the database");
                 //rodear de try Catch 
@@ -313,7 +345,7 @@ public class AddPatient extends JFrame{
                      @Override
                      public void actionPerformed(ActionEvent e) {
                      	try {
-                     	 patientMan.addPatient(new Patient ( textName.getText(), Date.valueOf(textDateofBith.getText()),textBloodType.getText(),textContact.getText(),imageBytes,allergies,doctors,username));
+                     	 patientMan.addPatient(new Patient ( textName.getText(), Date.valueOf(textDateofBith.getText()),textBloodType.getText(),textContact.getText(),imageBytes,allergies,doctors,textUsername.getText()));
                      	 JOptionPane.showInputDialog(
                                  "patient added correctly", JOptionPane.OK_CANCEL_OPTION);
                     	 dispose();
@@ -352,4 +384,5 @@ public class AddPatient extends JFrame{
         }
     }
 	
+
 }

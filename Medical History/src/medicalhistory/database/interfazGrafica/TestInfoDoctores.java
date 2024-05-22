@@ -1,7 +1,9 @@
 package medicalhistory.database.interfazGrafica;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,14 +12,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import medicalhistory.database.interfaces.PatientManager;
+import medicalhistory.database.interfaces.TestManager;
+import medicalhistory.database.interfaces.TreatmentManager;
+import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.*;
 
-public class TestInfo extends JFrame {
+public class TestInfoDoctores extends JFrame {
+	 private static ConnectionManager conMan;
+	   private static TreatmentManager treatmentMan;
+	 private static PatientManager patientMan;
+	 private static VisitManager visitMan;
+	 private static TestManager testMan;
 	private JPanel panel = new JPanel();
 	private JPanel botonPanelPatients;
 
-public TestInfo(Test a) {
-		
+public TestInfoDoctores(Test a) {
+		conMan = new ConnectionManager();
+		 patientMan=conMan.getPatientMan();
+		 testMan=conMan.getTestMan();
+		 visitMan=conMan.getVisitMan();
+		 
         setTitle("Test Information");
         setSize(1600, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,23 +74,27 @@ public TestInfo(Test a) {
         panel.add(botonRetorno);
         
                 // Crear un panel para los botones con un layout vertical
-        botonPanelPatients = new JPanel();
-        botonPanelPatients.setBounds(43, 709, 1480, 169);
-        panel.add(botonPanelPatients);
-        botonPanelPatients.setLayout(null);
-        
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(-30, 0, 1491, 169);
-        botonPanelPatients.add(scrollPane);
-        
         JPanel botonPanelVisits = new JPanel();
-        botonPanelVisits.setLayout(null);
-        botonPanelVisits.setBounds(41, 336, 1461, 275);
-        panel.add(botonPanelVisits);
-        
-        JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(-10, 0, 1471, 275);
-        botonPanelVisits.add(scrollPane_1);
+        botonPanelVisits.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+
+        // Añadir botones al panel
+        for (int i = 0; i < a.getVisits().size(); i++) {
+            JButton boton = new JButton("Visits ID: " + a.getVisits().get(i).getVisit_id() + " /Name: " +a.getVisits().get(i).getVisit_date()+ " /Specialty:"+ a.getVisits().get(i).getVisit_doctor().getSpecialty());
+            botonPanelVisits.add(boton);
+            int l = i;
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new VisitInfo(a.getVisits().get(l));
+                }
+            });
+        }
+
+        // Envuelve el panel en un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(botonPanelVisits);
+        scrollPane.setBounds(49, 313, 1332, 159); // Establecer el tamaño y posición del JScrollPane
+        scrollPane.setPreferredSize(new Dimension(700, 300)); 
+       panel.add(scrollPane);
+       
      
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

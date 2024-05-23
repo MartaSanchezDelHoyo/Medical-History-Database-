@@ -6,8 +6,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-@Entity
-@Table (name= "hospitals")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital implements Serializable{
 

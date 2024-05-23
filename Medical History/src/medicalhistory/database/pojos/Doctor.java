@@ -9,15 +9,12 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-@Entity
-@Table (name= "doctors")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name= "Doctor")
-@XmlType (propOrder = { "name", "surname", "specialty", "Patients", "Hospitals"})
+@XmlType (propOrder = { "name", "surname", "specialty","hospitals"})
 public class Doctor implements Serializable{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4748700239185078330L;
 	@XmlAttribute
 	private int doctor_id;
@@ -33,11 +30,10 @@ public class Doctor implements Serializable{
 	private String contact;
 	@XmlTransient
 	private byte[] photo;
-	@XmlElement(name= "Patient")
-	@XmlElementWrapper(name = "Patients")
+	@XmlTransient
 	private List <Patient> patients;
 	@XmlElement(name= "Hospital")
-	@XmlElementWrapper(name = "Hospitals")
+	@XmlElementWrapper(name = "hospitals")
 	private List <Hospital> hospitals;
 	@XmlTransient
 	private List <Visit> visits;
@@ -61,6 +57,11 @@ public class Doctor implements Serializable{
 		this.hospitals=new ArrayList<>();
 		this.visits=new ArrayList<>();
 	}
+	
+	public Doctor() {
+		super();
+	}
+
 
 	/**
 	 * Constructor of the object doctor that has as parameters:

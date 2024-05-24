@@ -3,7 +3,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:output method="html" indent="yes"/>
-    <xsl:template match="/Patient">
+    <xsl:template match="/Doctor">
         <html>
             <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />

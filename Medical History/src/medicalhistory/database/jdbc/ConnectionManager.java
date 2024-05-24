@@ -18,6 +18,7 @@ public class ConnectionManager {
 	private TreatmentManager treatmentMan;
 	private MedicationManager medicationMan;
 	private AllergiesManager allergiesMan;
+	private XMLManager xmlMan; 
 	// Design pattern Singleton
 
 	public Connection getConnection() {
@@ -33,6 +34,7 @@ public class ConnectionManager {
 		this.treatmentMan= new JDBCTreatmentManager(this);
 		this.medicationMan= new JDBCMedicationManager(this);
 		this.allergiesMan=new JDBCAllergiesManager(this);
+		this.xmlMan=new JDBCXMLManager();
 		this.createTables();
 	}
 	private void connect() {
@@ -243,5 +245,12 @@ public class ConnectionManager {
 	}
 	public void setAllergiesMan(AllergiesManager allergiesMan) {
 		this.allergiesMan = allergiesMan;
+	}
+	public XMLManager setXMLMan(XMLManager xmlMan) {
+		this.xmlMan= xmlMan;
+		return null;
+	}
+	public XMLManager getXMLMan() {
+		return xmlMan;
 	}
 }

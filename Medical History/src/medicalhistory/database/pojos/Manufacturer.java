@@ -15,6 +15,11 @@ public class Manufacturer implements Serializable{
 	private String manufacturerName;
 	private List <Medication> medications;
 	
+	public Manufacturer() {
+		super();
+	}
+	
+	
 	public Manufacturer(String manufacturerName) {
 		this.manufacturerName = manufacturerName;
 		this.medications= new ArrayList<>();

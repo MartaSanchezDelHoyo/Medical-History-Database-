@@ -105,7 +105,18 @@ public class Patient implements Serializable{
 	}
 
 	
-	
+	public Patient(Integer patientID, String patientName, Date dateofbirth, String bloodtype, String email, byte[]photo) {
+		this.patientID=patientID;
+		this.patientName = patientName;
+		this.username=username;
+		this.dateofbirth = dateofbirth;
+		this.bloodtype = bloodtype;
+		this.email = email;
+		this.photo= photo;
+		this.allergies = allergies;
+		this.visits = visits;
+		this.doctors =doctors;
+	}
 	
 
 

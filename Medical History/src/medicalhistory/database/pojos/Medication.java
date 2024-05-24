@@ -10,6 +10,10 @@ public class Medication {
     private List <Manufacturer> manufacturers;
 	private List <Visit> visits;
     
+	public Medication() {
+		super();
+	}
+	
 	@Override
 	public String toString() {
 		return "Medication [medication_id=" + medication_id + ", type=" + type + "]";

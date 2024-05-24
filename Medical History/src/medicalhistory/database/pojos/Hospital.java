@@ -25,7 +25,10 @@ public class Hospital implements Serializable{
 	@XmlTransient
     private List <Visit> Hospital_visits;
        
-    
+	public Hospital() {
+		super();
+	}
+	
     /** 
      * @param hospitalID identification of the hospital
      * @param hospitalName name of the hospital

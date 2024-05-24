@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Doctor doctor_id="123" contact="johndoe@gmail.com" username="drjohndoe">
+    <name>John</name>
+    <surname>Doe</surname>
+    <specialty>Cardiology</specialty>
+    <Hospitals>
+        <Hospital hospitalAddress="123 Main St">
+			<hospitalName>City Hospital</hospitalName>
+        </Hospital>
+        <Hospital hospitalAddress="456 Elm St">
+			<hospitalName>County Hospital</hospitalName>
+        </Hospital>
+    </Hospitals>
+</Doctor>

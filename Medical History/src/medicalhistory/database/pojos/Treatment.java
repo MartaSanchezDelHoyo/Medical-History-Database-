@@ -15,7 +15,11 @@ public class Treatment implements Serializable{
 	private Integer treatmentID;
     private String treatmentType;
     private List <Visit> visits;
-    
+	
+    public Treatment() {
+		super();
+	}
+	
     
     /** Constructor without the visits as a parameter
      * @param treatmentID identification of a treatment

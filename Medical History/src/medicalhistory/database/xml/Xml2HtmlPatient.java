@@ -24,7 +24,7 @@ public class Xml2HtmlPatient {
 	}
 
 	public static void main(String[] args) {
-		simpleTransform("./xmls/htmlpatient.xml", "./xmls/htmlpatient.xslt", "./xmls/ExternalHtmlPatient.html");
+		simpleTransform("./xmls/htmldoctor.xml", "./xmls/htmldoctor.xslt", "./xmls/ExternalHtmlDoctor.html");
 
 	}
 }

@@ -21,6 +21,9 @@ public class Visit implements Serializable {
 	private List <Medication> medications;
 	private List <Treatment> treatments;
 	
+	public Visit() {
+		super();
+	}
 	
 	public Visit(Date visitDate, String observations, Patient patient, Doctor doctor , Test test, Hospital hospital) {
 		this.visit_date = visitDate;

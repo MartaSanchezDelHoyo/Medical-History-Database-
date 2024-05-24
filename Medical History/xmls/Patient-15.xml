@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Patient patientID="15" dateofbirth="2024-05-05" bloodtype="b+" email="nico@gm.com">
+    <patientName>Pablo</patientName>
+</Patient>

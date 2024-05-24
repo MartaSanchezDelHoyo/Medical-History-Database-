@@ -21,6 +21,10 @@ public class Allergies implements Serializable{
 	@XmlTransient
 	private List <Patient> patients;
 	
+	public Allergies() {
+		super();
+	}
+	
 	public Allergies( String allergiesName) {
 		this.allergiesName= allergiesName;
 		this.patients= new ArrayList<>();

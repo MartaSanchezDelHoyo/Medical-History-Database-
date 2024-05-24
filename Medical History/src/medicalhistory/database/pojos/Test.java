@@ -14,6 +14,10 @@ public class Test implements Serializable{
 	private byte[] archivoPDF;
 	private List <Visit> visits;
 	
+	public Test() {
+		super();
+	}
+	
 	public Test( String type, byte[] archivoPDF) {
 		this.setArchivoPDF(archivoPDF);
 		this.type = type;

@@ -10,10 +10,10 @@
                       
     <!ELEMENT patientName (#PCDATA)>
     <!ELEMENT allergies (Allergies+)>
+    <!ELEMENT Doctors (Doctor+)> 
     <!ELEMENT Allergies (allergiesName)>
     <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
     <!ELEMENT allergiesName (#PCDATA)>   
-    <!ELEMENT Doctors (Doctor+)> 
     <!ELEMENT Doctor (name, surname )>
     <!ATTLIST Doctor contact CDATA #REQUIRED
                      specialty CDATA #REQUIRED>

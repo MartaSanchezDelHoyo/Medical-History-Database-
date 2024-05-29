@@ -25,7 +25,7 @@
 			<hospitalName>City Hospital</hospitalName>
         </Hospital>
         <Hospital hospitalAddress="456 Elm St">
-			<hospitalName>County Hospital</hospitalName>
+			<hospitalName>Country Hospital</hospitalName>
         </Hospital>
     </hospitals>
 </Doctor>

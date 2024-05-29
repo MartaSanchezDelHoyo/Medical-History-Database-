@@ -201,7 +201,7 @@ public class AddDoctorBasic extends JFrame{
 
                    // Mostrar una ventana emergente para seleccionar el hospital
                    int result = JOptionPane.showConfirmDialog(null, hospitalPanel,
-                           "Select Hospital", JOptionPane.OK_CANCEL_OPTION);
+                           "Select Hospital", JOpionPane.OK_CANCEL_OPTION);
 
                    // Si el usuario hizo clic en "OK" (aceptar)
                    if (result == JOptionPane.OK_OPTION) {

@@ -28,26 +28,24 @@ import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
+import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Patient;
 
 public class DoctorInfoHospial extends JFrame {
-	
-	private JPanel botonPanelPatients;
-	private JPanel botonPanelVisits;
-	private JPanel botonPanelHospiatls;
-	
-	private Container botonPaneHospitals;
+
 	private JPanel panel;
 	
 	private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
     private static VisitManager visitMan;
     private static ConnectionManager conMan;
-	public DoctorInfoHospial(Doctor a) {
+	public DoctorInfoHospial(Doctor a, Hospital b) {
+		
 		conMan = new ConnectionManager();
 		 patientMan=conMan.getPatientMan();
 		    hospitalMan=conMan.getHospitalMan();
 		    visitMan=conMan.getVisitMan();
+		    
 		a.setPatients(patientMan.getPatientsByDoctor(a.getDoctor_id()));
         a.setHospitals(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));
         a.setVisits(visitMan.getVisitByDoctor(a.getDoctor_id()));
@@ -64,7 +62,7 @@ public class DoctorInfoHospial extends JFrame {
         }
        
         JLabel lblTextPhoto = new JLabel(imageIcon);
-        lblTextPhoto.setBounds(79, 46, 181, 219);
+        lblTextPhoto.setBounds(112, 46, 181, 219);
         lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblTextPhoto);
         
@@ -208,7 +206,7 @@ public class DoctorInfoHospial extends JFrame {
 
         // Crear un botón de retorno
         JButton botonRetorno = new JButton("Return");
-        botonRetorno.setBounds(10, 917, 114, 35);
+        botonRetorno.setBounds(10, 882, 346, 79);
         botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(botonRetorno);
        
@@ -230,7 +228,18 @@ public class DoctorInfoHospial extends JFrame {
         lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(lblPhoto);
         
-       
+        JButton botonChange=new JButton("Change doctor info");
+        botonChange.setBounds(1230, 879, 346, 84);
+        botonChange.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonChange);
+        botonChange.addActionListener(new ActionListener() {
+        	 public void actionPerformed(ActionEvent e) {
+        		 if( a.getHospitals().contains(b)) {
+                 new DoctorInfoChange(a);}
+        		 else{  JOptionPane.showMessageDialog(null, "You can´t acces this information");}// Cierra la ventana actual
+             }
+        });
+        
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual

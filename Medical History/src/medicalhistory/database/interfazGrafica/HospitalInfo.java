@@ -105,7 +105,7 @@ public HospitalInfo(Hospital a) {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new DoctorInfo(a.getHospital_doctors().get(l));
+                    new DoctorInfoHospial(a.getHospital_doctors().get(l),a);
                 }
             });
         }

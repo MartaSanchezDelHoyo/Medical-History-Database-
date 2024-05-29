@@ -1,12 +1,13 @@
 package medicalhistory.database.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import medicalhistory.database.pojos.*;
 
 
 public interface DoctorManager {
-	public void addDoctor(Doctor a);
+	public void addDoctor(Doctor a) throws SQLException;
 	public void changeDoctor(Doctor a);
 	public Doctor getDoctor(int id);
 	public Doctor getDoctorCI(int id);

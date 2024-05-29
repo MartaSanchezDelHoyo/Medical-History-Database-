@@ -1,5 +1,6 @@
 package medicalhistory.database.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import medicalhistory.database.pojos.Doctor;
@@ -11,7 +12,7 @@ import medicalhistory.database.pojos.Treatment;
 import medicalhistory.database.pojos.Visit;
 
 public interface VisitManager {
-	public void addVisit (Visit temporal);
+	public void addVisit (Visit temporal) throws SQLException;
 	public void linkMedicationToVisit(Visit visit, Medication medi);
 	public void linkTreatmentToVisit(Visit visit, Treatment treat);
     public void changeVisit (Visit temporal);

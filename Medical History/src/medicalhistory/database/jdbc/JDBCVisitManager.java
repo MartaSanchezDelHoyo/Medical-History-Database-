@@ -30,10 +30,11 @@ public class JDBCVisitManager implements VisitManager {
 	
 	/**
 	 * To add a visit into the program
+	 * @throws SQLException 
 	 */
 	
 	@Override
-	public void addVisit (Visit temporal) {
+	public void addVisit (Visit temporal) throws SQLException {
 		try {
 			String template = "INSERT INTO Visits (date, observations, patient_id, doctor_id, test_id, hospital_id) VALUES ( ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
@@ -42,13 +43,17 @@ public class JDBCVisitManager implements VisitManager {
 			pstmt.setString(2, temporal.getVisit_observation());
 			pstmt.setInt(3, temporal.getVisit_patient().getPatientID());
 			pstmt.setInt(4, temporal.getVisit_doctor().getDoctor_id());
+			if(temporal.getVisit_test()==null) {
+				pstmt.setInt(5, 0);
+			}else {
 			pstmt.setInt(5, temporal.getVisit_test().getTest_id());
+			}
 			pstmt.setInt(6, temporal.getHospital().getHospitalID());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
+			System.out.println(e.toString());
+			throw new SQLException("Error creating the visit, please check all data are provided ");
 		}
 	}
 	

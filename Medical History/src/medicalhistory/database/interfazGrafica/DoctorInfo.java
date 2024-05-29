@@ -231,17 +231,6 @@ public class DoctorInfo extends JFrame {
         panel.add(lblPhoto);
         
        
-        
-        JButton btnVisit = new JButton("New visit");
-        btnVisit.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        btnVisit.setBounds(1297, 917, 163, 35);
-        panel.add(btnVisit);
-        btnVisit.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-        	//new 
-        	}
-        });
-        
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual

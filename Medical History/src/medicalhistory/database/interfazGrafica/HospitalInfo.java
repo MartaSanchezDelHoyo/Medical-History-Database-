@@ -137,26 +137,7 @@ public HospitalInfo(Hospital a) {
         scrollPane2.setBounds(49, 713, 1332, 159); // Establecer el tamaño y posición del JScrollPane
         scrollPane2.setPreferredSize(new Dimension(700, 300)); 
        panel.add(scrollPane2);
-       
-       JButton btnAddPatient = new JButton("Add Patient");
-       btnAddPatient.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-       btnAddPatient.setBounds(247, 186, 212, 35);
-       panel.add(btnAddPatient);
-       btnAddPatient.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               new AddPatientBasic();
-           }
-       });
-       
-       JButton btnAddDoctor = new JButton("Add Doctor");
-       btnAddDoctor.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-       btnAddDoctor.setBounds(693, 195, 232, 35);
-       panel.add(btnAddDoctor);
-       btnAddDoctor.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               new AddDoctorBasic();
-           }
-       });
+      
        
        JLabel lblHospitalId = new JLabel(a.getHospitalID().toString());
        lblHospitalId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));

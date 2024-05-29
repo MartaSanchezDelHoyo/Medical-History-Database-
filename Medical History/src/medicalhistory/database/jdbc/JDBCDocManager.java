@@ -23,24 +23,34 @@ public class JDBCDocManager implements DoctorManager {
 	/**
 	 *This method allows to add a doctor in the database
 	 *@param to the object Doctor with the  actualized information 
+	 * @throws SQLException 
 	 */
 	@Override
-	public void addDoctor(Doctor a) {
-		try {
+	public void addDoctor(Doctor a) throws SQLException {
+	
 			String template = "INSERT INTO doctors (name, surname, specialty, contact, photo, username) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt;
+			try {
+		
 			pstmt = c.prepareStatement(template);
+			System.out.println("1");
 			pstmt.setString(1, a.getName());
+			System.out.println("2");
 			pstmt.setString(2, a.getSurname());
+			System.out.println("3");
 			pstmt.setString(3, a.getSpecialty());
+			System.out.println("4");
 			pstmt.setString(4, a.getContact());
+			System.out.println("5");
 			pstmt.setBytes(5, a.getPhoto());
+			System.out.println("6");
 			pstmt.setString(6, a.getUsername());
+			System.out.println("7");
 			pstmt.executeUpdate();
+			System.out.println("8");
 			pstmt.close();
 		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
+			 throw new SQLException("Error creating the object") ;
 		}
 		
 	}
@@ -64,7 +74,7 @@ public class JDBCDocManager implements DoctorManager {
 		    search.setString(6, a.getUsername());
 		    search.executeUpdate();
 			search.close();
-			search.close();
+			
 		} catch (SQLException e) {
 			System.out.println("Error looking for a doctor");
 			e.printStackTrace();

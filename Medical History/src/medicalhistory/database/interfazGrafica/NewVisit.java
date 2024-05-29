@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -52,7 +54,7 @@ public class NewVisit extends JFrame{
 	    lblDate.setBounds(213, 170, 85, 40);
 	    panel.add(lblDate);
 	 
-	    JTextField lblTextDate = new JTextField();
+	    JTextField lblTextDate = new JTextField("YYYY-mm-dd");
 	    lblTextDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
 	    lblTextDate.setBackground(new Color(255, 255, 224));
 	    lblTextDate.setBounds(308, 170, 176, 40);
@@ -99,9 +101,13 @@ public class NewVisit extends JFrame{
 	    panel.add(botonCreation);
 	    botonCreation.addActionListener(new ActionListener() {
 	    	@Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)  {
+	    		try {
 	    		 visitMan.addVisit(new Visit(Date.valueOf(lblTextDate.getText()), "planned visit ", b, a, null, selectedOption));
+	    	}catch(Exception ex){
+	    		JOptionPane.showMessageDialog(null, "Please enter valid information for a visit."+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	    	}
+	    		}
 	    });
 	    
 	   

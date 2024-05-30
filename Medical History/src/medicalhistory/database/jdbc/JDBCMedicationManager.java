@@ -116,11 +116,35 @@ public class JDBCMedicationManager implements MedicationManager {
 			search.close();
 			return obtained;
 		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
+			System.out.println("Error looking for the medicine");
 			e.printStackTrace();
 		}
 		return obtained;
 	}
+	
+	
+		@Override
+		public Medication showMedication(String name) {
+			Medication obtained = null;
+			try {
+				String sql = "SELECT * FROM medications WHERE medication_type= ?";
+				PreparedStatement search = c.prepareStatement(sql);
+				search.setString(1, name);
+				ResultSet rs = search.executeQuery();
+				while(rs.next()) {
+					Integer medication_id = rs.getInt("medication_id");
+					String type = rs.getString("medication_type");
+					obtained = new Medication(medication_id,type);
+				}
+				rs.close();
+				search.close();
+				return obtained;
+			} catch (SQLException e) {
+				System.out.println("Error looking for the medicine");
+				e.printStackTrace();
+			}
+			return obtained;
+		}
 	/**
 	 * To show the medications related with a visit, by introducing the id
 	 */
@@ -144,7 +168,7 @@ public class JDBCMedicationManager implements MedicationManager {
 			search.close();
 			return listOfMedications;
 		} catch (SQLException e) {
-			System.out.println("Error looking for a doctor");
+			System.out.println("Error looking for the medicines");
 			e.printStackTrace();
 		}
 		return listOfMedications;

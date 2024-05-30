@@ -16,6 +16,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	
 	/**
 	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
 	 * @param connectionManager
@@ -61,6 +62,7 @@ public class JDBCTreatmentManager implements TreatmentManager {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**This method gets the treatment type by the treatment id
 	 *@param ID of the treatment
@@ -114,6 +116,32 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	    return treatment;
 	}
 
+	
+	/**Method to get all the information of a treatment by the treatmentID
+	 * @param ID of the treatment
+	 * @return Obj treatment who's information you want
+	 */
+	@Override
+	public Treatment getTreatment(String name) {
+	    Treatment treatment = null;
+	    try {
+	        String sql = "SELECT * FROM treatments WHERE manufacturer_name= ?";
+	        PreparedStatement search = c.prepareStatement(sql);
+	        search.setString(1, name);
+	        ResultSet rs = search.executeQuery();
+	        while (rs.next()) {
+	            Integer obtainedTreatmentID = rs.getInt("treatment_id");
+	            String obtainedTreatmentType = rs.getString("treatment_type");
+	            treatment = new Treatment(obtainedTreatmentID, obtainedTreatmentType);
+	        }
+	        rs.close();
+	        search.close();
+	    } catch (SQLException e) {
+	        System.out.println("Error looking for a treatment");
+	        e.printStackTrace();
+	    }
+	    return treatment;
+	}
 	
 	/**
 	 *Adds all the treatment done in a specific visit to a list

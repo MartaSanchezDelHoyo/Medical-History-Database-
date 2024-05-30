@@ -8,8 +8,10 @@ public interface TreatmentManager {
 	
 	public void addTreatment(Treatment treatment);
 	public void changeTreatment (Treatment treatment) ;
+	//REVISAR
     public String getTreatmentType(int treatmentID );
-    public List<Treatment> getTreatments(int visit_id);
     public Treatment getTreatment (int treatmentid);
-
+    public Treatment getTreatment(String name);
+    public List<Treatment> getTreatments(int visit_id);
+    
 }

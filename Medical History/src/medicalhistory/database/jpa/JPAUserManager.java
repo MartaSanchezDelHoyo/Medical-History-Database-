@@ -108,6 +108,22 @@ import medicalhistory.database.pojos.User;
 			}
 			return u;
 		}
+		
+		@Override
+		public void ChangeUser(User a, String username, String password) {
+		     
+		    try {   a.setPassword(password);
+		    	a.setUsername(username);
+		    	em.getTransaction().begin();
+		    	em.merge(a);
+		        em.getTransaction().commit();
+
+		    } catch (Exception e) {
+		        em.getTransaction().rollback();
+		        throw e; // Re-throw the exception after rolling back the transaction
+		    }
+		}
+
 
 		public User getUserByUsername(String username) {
 			User u = null;

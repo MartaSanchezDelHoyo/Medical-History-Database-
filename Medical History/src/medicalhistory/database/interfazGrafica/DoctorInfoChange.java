@@ -32,6 +32,7 @@ import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
+import medicalhistory.database.jpa.JPAUserManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
 
@@ -44,6 +45,9 @@ public class DoctorInfoChange extends JFrame {
 	private Container botonPaneHospitals;
 	private JPanel panel;
 	private byte[] photo;
+	protected String input;
+	protected String input2;
+	protected JPAUserManager userMan;
 	private static  ImageIcon imageIcon;
 	private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
@@ -55,6 +59,7 @@ public class DoctorInfoChange extends JFrame {
 		 hospitalMan=conMan.getHospitalMan();
 		 visitMan=conMan.getVisitMan();
 		 docMan=conMan.getDocMan();
+		 userMan=new JPAUserManager();
 		    
 		a.setPatients(patientMan.getPatientsByDoctor(a.getDoctor_id()));
         a.setHospitals(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));
@@ -126,7 +131,7 @@ public class DoctorInfoChange extends JFrame {
         panel.add(botonRetorno);
        
               
-        JTextField lblTextDoctorId = new JTextField(String.valueOf(a.getDoctor_id()));
+        JLabel lblTextDoctorId = new JLabel(String.valueOf(a.getDoctor_id()));
         lblTextDoctorId.setBounds(309, 343, 402, 57);
         lblTextDoctorId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextDoctorId.setBackground(new Color(255, 255, 224));
@@ -169,6 +174,64 @@ public class DoctorInfoChange extends JFrame {
                 }
             }
         });
+        
+        
+        JButton changePassword = new JButton("Change password");
+        changePassword.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        changePassword.setBounds(389, 221, 286, 55);
+        panel.add(changePassword);
+        
+        changePassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	 try {
+    				input = JOptionPane.showInputDialog(null, "Enter the new password:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
+
+    				if (input != null) {
+    					input2 = JOptionPane.showInputDialog(null, "Confirm the new password:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
+    					if(input.toString().equals(input2.toString())) {
+    						userMan.ChangeUser(userMan.getUserByUsername(a.getUsername()), a.getUsername(), input2);
+    						JOptionPane.showMessageDialog(null, "Password changed successfully.", "Message", JOptionPane.OK_CANCEL_OPTION);
+    					}else {
+    						JOptionPane.showMessageDialog(null, "The password confirmation failed", "Warning", JOptionPane.WARNING_MESSAGE);
+    					}
+    				} else {
+    				    JOptionPane.showMessageDialog(null, "Didn´t enter any new password.", "Warning", JOptionPane.WARNING_MESSAGE);
+    				}
+    			} catch (Exception e1) {
+    				JOptionPane.showMessageDialog(null,"There was an error changing this password, please try again", "Warning", JOptionPane.WARNING_MESSAGE);
+    				e1.printStackTrace();
+    			}
+            }
+        });
+        
+        JButton changeUsername = new JButton("Change Username");
+        changeUsername.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        changeUsername.setBounds(1084, 221, 286, 55);
+        panel.add(changeUsername);
+        
+        changeUsername.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	 try {
+    				input = JOptionPane.showInputDialog(null, "Enter the new Username:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
+
+    				if (input != null) {
+    					input2 = JOptionPane.showInputDialog(null, "Confirm the new Username:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
+    					userMan.ChangeUser(userMan.getUserByUsername(a.getUsername()),input2,  userMan.getUserByUsername(a.getUsername()).getPassword());
+    					if(input.toString().equals(input2.toString())) {
+    						JOptionPane.showMessageDialog(null, "Username changed successfully.", "Message", JOptionPane.OK_CANCEL_OPTION);
+    					}else {
+    						JOptionPane.showMessageDialog(null, "The username confirmation failed", "Warning", JOptionPane.WARNING_MESSAGE);
+    					}
+    				} else {
+    				    JOptionPane.showMessageDialog(null, "Didn´t enter any new userame.", "Warning", JOptionPane.WARNING_MESSAGE);
+    				}
+    			} catch (Exception e1) {
+    				JOptionPane.showMessageDialog(null,"There was an error changing this username, please try again", "Warning", JOptionPane.WARNING_MESSAGE);
+    				e1.printStackTrace();
+    			}
+            }
+        });
+        
 
         JButton changeDoctor=new JButton("Change doctor data");
         changeDoctor.setBounds(1152, 854, 402, 77);

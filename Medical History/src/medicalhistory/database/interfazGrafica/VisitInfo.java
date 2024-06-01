@@ -50,7 +50,7 @@ public VisitInfo (Visit a) {
 
     JLabel lblVisitId = new JLabel("Visit ID:");
     lblVisitId.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblVisitId.setBounds(121, 63, 103, 26);
+    lblVisitId.setBounds(156, 69, 103, 26);
     panel.add(lblVisitId);
    
     JLabel lblObserbations = new JLabel("Observations:");
@@ -65,40 +65,40 @@ public VisitInfo (Visit a) {
     
     JLabel lblDate = new JLabel("Date:");
     lblDate.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblDate.setBounds(213, 95, 72, 26);
+    lblDate.setBounds(156, 134, 103, 62);
     panel.add(lblDate);
     
     JLabel lblTextVisitID = new JLabel(String.valueOf(a.getVisit_id()));
     lblTextVisitID.setBackground(new Color(255, 255, 224));
     lblTextVisitID.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-    lblTextVisitID.setBounds(339, 46, 221, 26);
+    lblTextVisitID.setBounds(269, 59, 221, 46);
     panel.add(lblTextVisitID);
     
     JLabel lblTextDate = new JLabel(a.getVisit_date().toString());
     lblTextDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     lblTextDate.setBackground(new Color(255, 255, 224));
-    lblTextDate.setBounds(320, 95, 107, 26);
+    lblTextDate.setBounds(269, 142, 263, 46);
     panel.add(lblTextDate);
 
     // Crear un botón de retorno
     JButton botonRetorno = new JButton("Return");
     botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    botonRetorno.setBounds(10, 917, 95, 35);
+    botonRetorno.setBounds(10, 890, 243, 62);
     panel.add(botonRetorno);
  
     JLabel lblDoctor = new JLabel("Doctor:");
     lblDoctor.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblDoctor.setBounds(584, 46, 103, 26);
+    lblDoctor.setBounds(570, 46, 103, 53);
     panel.add(lblDoctor);
     
     JLabel lblHospital = new JLabel("Hospital :");
     lblHospital.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblHospital.setBounds(584, 95, 103, 26);
+    lblHospital.setBounds(570, 124, 124, 46);
     panel.add(lblHospital);
     
     JLabel lblPatient = new JLabel("Patient :");
     lblPatient.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblPatient.setBounds(584, 144, 103, 26);
+    lblPatient.setBounds(570, 210, 143, 46);
     panel.add(lblPatient);
     
     JLabel lblMedications = new JLabel("Medications:");
@@ -159,25 +159,26 @@ public VisitInfo (Visit a) {
     }else {
     	JLabel treatment=new JLabel("NO Treatments in this visit");
     botonPanelTreatmentd.add(treatment);
-    panel.add(botonPanelTreatmentd);}
+    panel.add(botonPanelTreatmentd);
+    }
 
     // Envuelve el panel en un JScrollPane
     
     
     DoctorText = new JLabel(a.getVisit_doctor().getName()+" "+a.getVisit_doctor().getSurname());
-    DoctorText.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    DoctorText.setBounds(700, 46, 253, 26);
+    DoctorText.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    DoctorText.setBounds(680, 42, 712, 61);
     panel.add(DoctorText);
     
     
     JLabel lblHospitalName = new JLabel(a.getHospital().getHospitalName());
     lblHospitalName.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-    lblHospitalName.setBounds(697, 97, 689, 23);
+    lblHospitalName.setBounds(704, 124, 688, 46);
     panel.add(lblHospitalName);
     
     JLabel lblPatientName = new JLabel(a.getVisit_patient().getPatientName());
     lblPatientName.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-    lblPatientName.setBounds(697, 147, 351, 20);
+    lblPatientName.setBounds(723, 210, 415, 46);
     
     panel.add(lblPatientName);
     

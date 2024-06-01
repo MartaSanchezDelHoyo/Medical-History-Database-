@@ -19,6 +19,7 @@ import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
+import medicalhistory.database.pojos.User;
 
 public class HospitalInfoPatient extends JFrame{
 	JPanel panel = new JPanel();
@@ -27,7 +28,7 @@ public class HospitalInfoPatient extends JFrame{
     private static VisitManager visitMan;
     private static ConnectionManager conMan;
     
-public HospitalInfoPatient(Hospital a) {
+public HospitalInfoPatient(Hospital a , User u) {
 		conMan = new ConnectionManager();
 		 visitMan=conMan.getVisitMan();
 		 docMan= conMan.getDocMan();
@@ -105,7 +106,7 @@ public HospitalInfoPatient(Hospital a) {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new DoctorInfo(a.getHospital_doctors().get(l));
+                    new DoctorInfoGeneral(a.getHospital_doctors().get(l),u);
                 }
             });
         }

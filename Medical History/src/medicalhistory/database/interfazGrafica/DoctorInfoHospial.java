@@ -25,11 +25,14 @@ import javax.swing.JScrollPane;
 
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.interfaces.PatientManager;
+import medicalhistory.database.interfaces.UserManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
+import medicalhistory.database.jpa.JPAUserManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Hospital;
 import medicalhistory.database.pojos.Patient;
+import medicalhistory.database.pojos.User;
 
 public class DoctorInfoHospial extends JFrame {
 
@@ -38,14 +41,15 @@ public class DoctorInfoHospial extends JFrame {
 	private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
     private static VisitManager visitMan;
+    private static UserManager userMan;
     private static ConnectionManager conMan;
-	public DoctorInfoHospial(Doctor a, Hospital b) {
+	public DoctorInfoHospial(Doctor a, Hospital b, User c) {
 		
 		conMan = new ConnectionManager();
 		 patientMan=conMan.getPatientMan();
 		    hospitalMan=conMan.getHospitalMan();
 		    visitMan=conMan.getVisitMan();
-		    
+		    userMan = new JPAUserManager();
 		a.setPatients(patientMan.getPatientsByDoctor(a.getDoctor_id()));
         a.setHospitals(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));
         a.setVisits(visitMan.getVisitByDoctor(a.getDoctor_id()));
@@ -175,7 +179,7 @@ public class DoctorInfoHospial extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new HospitalInfoPatient(a.getHospitals().get(l));
+                    new HospitalInfoPatient(a.getHospitals().get(l),c);
                 }
             });
         }
@@ -234,8 +238,8 @@ public class DoctorInfoHospial extends JFrame {
         panel.add(botonChange);
         botonChange.addActionListener(new ActionListener() {
         	 public void actionPerformed(ActionEvent e) {
-        		 if( a.getHospitals().contains(b)) {
-                 new DoctorInfoChange(a);}
+        		 if( a.getHospitals().contains(b)|| c.getUsername()== a.getUsername()) {
+                 new DoctorInfoChangeHospital(a);}
         		 else{  JOptionPane.showMessageDialog(null, "You can´t acces this information");}// Cierra la ventana actual
              }
         });

@@ -23,12 +23,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import medicalhistory.database.interfaces.DoctorManager;
 import medicalhistory.database.interfaces.HospitalManager;
 import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.interfaces.VisitManager;
 import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
+import medicalhistory.database.pojos.User;
 
 public class DoctorInfo extends JFrame {
 	
@@ -38,16 +40,18 @@ public class DoctorInfo extends JFrame {
 	
 	private Container botonPaneHospitals;
 	private JPanel panel;
-	
+	private static DoctorManager doctorMan;
 	private static PatientManager patientMan;
     private static HospitalManager hospitalMan;
     private static VisitManager visitMan;
     private static ConnectionManager conMan;
-	public DoctorInfo(Doctor a) {
+	public DoctorInfo(Doctor a, User u) {
 		conMan = new ConnectionManager();
 		 patientMan=conMan.getPatientMan();
 		    hospitalMan=conMan.getHospitalMan();
 		    visitMan=conMan.getVisitMan();
+		 doctorMan=conMan.getDocMan()   ;
+		    
 		a.setPatients(patientMan.getPatientsByDoctor(a.getDoctor_id()));
         a.setHospitals(hospitalMan.getHospitalByDoctor(a.getDoctor_id()));
         a.setVisits(visitMan.getVisitByDoctor(a.getDoctor_id()));
@@ -143,7 +147,11 @@ public class DoctorInfo extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new VisitInfo(a.getVisits().get(l));
+                	if(a.getDoctor_id()==doctorMan.getDoctorsbyUsername(u.getUsername()).getDoctor_id()) {
+                    new VisitInfoDoctor(a.getVisits().get(l),doctorMan.getDoctorsbyUsername(a.getUsername()));
+                	}else {
+                		new VisitInfo(a.getVisits().get(l));
+                	}
                 }
             });
         }
@@ -177,7 +185,7 @@ public class DoctorInfo extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new HospitalInfoPatient(a.getHospitals().get(l));
+                    new HospitalInfoPatient(a.getHospitals().get(l),u);
                 }
             });
         }
@@ -208,10 +216,21 @@ public class DoctorInfo extends JFrame {
 
         // Crear un botón de retorno
         JButton botonRetorno = new JButton("Return");
-        botonRetorno.setBounds(10, 917, 114, 35);
+        botonRetorno.setBounds(6, 901, 154, 51);
         botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(botonRetorno);
+        
+        JButton botonChange = new JButton("Change doctor information");
+        botonChange.setBounds(1167, 46, 419, 83);
+        botonChange.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonChange);
        
+        botonChange.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new DoctorInfoChange(a);
+            }
+                
+            });
               
         JLabel lblTextDoctorId = new JLabel(String.valueOf(a.getDoctor_id()));
         lblTextDoctorId.setBounds(579, 92, 221, 26);
@@ -231,7 +250,7 @@ public class DoctorInfo extends JFrame {
         panel.add(lblPhoto);
         
        
-        botonRetorno.addActionListener(new ActionListener() {
+        botonChange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual
             }

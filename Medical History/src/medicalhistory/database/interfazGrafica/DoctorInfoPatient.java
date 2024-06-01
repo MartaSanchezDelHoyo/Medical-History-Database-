@@ -34,7 +34,7 @@ public class DoctorInfoPatient extends JFrame {
     }
     
     JLabel lblTextPhoto = new JLabel(imageIcon);
-    lblTextPhoto.setBounds(126, 46, 181, 219);
+    lblTextPhoto.setBounds(174, 11, 337, 276);
     lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     panel.add(lblTextPhoto);
 
@@ -44,28 +44,28 @@ public class DoctorInfoPatient extends JFrame {
     
     JLabel lblSpecialty = new JLabel("Specialty:");
     lblSpecialty.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblSpecialty.setBounds(864, 92, 95, 26);
+    lblSpecialty.setBounds(864, 450, 122, 58);
     panel.add(lblSpecialty);
     
     
     JLabel lblFullName = new JLabel("Full name:");
     lblFullName.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblFullName.setBounds(464, 46, 103, 26);
+    lblFullName.setBounds(266, 323, 144, 49);
     panel.add(lblFullName);
     
     JLabel lblContact = new JLabel("Contact:");
     lblContact.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblContact.setBounds(864, 46, 95, 26);
+    lblContact.setBounds(856, 318, 144, 58);
     panel.add(lblContact);
     
     JLabel lblDoctorId = new JLabel("Doctor ID:");
     lblDoctorId.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblDoctorId.setBounds(464, 92, 103, 26);
+    lblDoctorId.setBounds(266, 455, 144, 49);
     panel.add(lblDoctorId);
     
-    JButton btnVisit = new JButton("New visit");
+    JButton btnVisit = new JButton("Plan new visit with this doctor");
     btnVisit.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    btnVisit.setBounds(89, 420, 163, 35);
+    btnVisit.setBounds(361, 717, 735, 104);
     panel.add(btnVisit);
     btnVisit.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
@@ -76,30 +76,30 @@ public class DoctorInfoPatient extends JFrame {
     JLabel lblTextfullname = new JLabel(a.getName()+" "+a.getSurname());
     lblTextfullname.setBackground(new Color(255, 255, 224));
     lblTextfullname.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-    lblTextfullname.setBounds(579, 46, 221, 26);
+    lblTextfullname.setBounds(420, 314, 422, 67);
     panel.add(lblTextfullname);
     
     JLabel lblTextcontact = new JLabel(a.getContact());
     lblTextcontact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     lblTextcontact.setBackground(new Color(255, 255, 224));
-    lblTextcontact.setBounds(969, 46, 107, 26);
+    lblTextcontact.setBounds(1031, 309, 422, 77);
     panel.add(lblTextcontact);
     
     JLabel lblTextDoctorId = new JLabel(String.valueOf(a.getDoctor_id()));
     lblTextDoctorId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     lblTextDoctorId.setBackground(new Color(255, 255, 224));
-    lblTextDoctorId.setBounds(589, 92, 211, 26);
+    lblTextDoctorId.setBounds(420, 446, 422, 67);
     panel.add(lblTextDoctorId);
     
     JLabel lblTextSpecialty = new JLabel(a.getSpecialty());
     lblTextSpecialty.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
     lblTextSpecialty.setBackground(new Color(255, 255, 224));
-    lblTextSpecialty.setBounds(969, 101, 221, 26);
+    lblTextSpecialty.setBounds(1031, 441, 422, 77);
     panel.add(lblTextSpecialty);
     
     JLabel lblPhoto = new JLabel("Photo:");
     lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblPhoto.setBounds(10, 30, 103, 26);
+    lblPhoto.setBounds(61, 31, 103, 26);
     panel.add(lblPhoto);
 
     setVisible(true);

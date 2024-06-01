@@ -56,7 +56,7 @@ public class Registation extends JFrame {
 
         JPanel panel = new JPanel();
 
-        JLabel labelUsuario = new JLabel("Nombre de usuario:");
+        JLabel labelUsuario = new JLabel("Username:");
         labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
         labelUsuario.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         labelUsuario.setBounds(27, 315, 497, 64);
@@ -64,7 +64,7 @@ public class Registation extends JFrame {
         campoUsuario.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         campoUsuario.setBounds(534, 318, 544, 64);
         
-        JLabel labelContraseña = new JLabel("Contraseña:");
+        JLabel labelContraseña = new JLabel("Password:");
         labelContraseña.setHorizontalAlignment(SwingConstants.CENTER);
         labelContraseña.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 23));
         labelContraseña.setSize(487, 64);
@@ -100,17 +100,17 @@ public class Registation extends JFrame {
 		                        case "Doctor":
 		                            Doctor doc = docMan.getDoctorsbyUsername(user.getUsername());
 		                            
-		                            new DoctorInfo(doc);
+		                            new DoctorInfo(doc,user);
 		                            break;
 		                        case "Patient":
 		                            Patient patient = patientMan.getPatientssbyUsername(user.getUsername());
 		                            
-		                            new PatientInfo(patient);
+		                            new PatientInfoUserChange(patient);
 		                            break;
 		                        case "Administrator":
 		                            Hospital hospi = hospitalMan.getHospitalbyUsername(user.getUsername());
 		                           
-		                            new HospitalInfo(hospi);
+		                            new HospitalInfo(hospi,user);
 		                            break;
 		                        default:
 		                            JOptionPane.showMessageDialog(null, "Unknown role");

@@ -157,7 +157,7 @@ public class ConnectionManager {
 			Statement createTables11 = c.createStatement();
 			String create11 = "CREATE TABLE visit_medication ( "
 					+ " medication_id INTEGER references medications(medication_id) ,"
-					+ " visit_id INTEGER references visits (visit_id),"
+					+ " visit_id INTEGER references visits (visit_id) ON DELETE SET NULL,"
 					+ " PRIMARY KEY (medication_id, visit_id )"
 					+ " )";
 			createTables11.executeUpdate(create11);
@@ -165,7 +165,7 @@ public class ConnectionManager {
 			Statement createTables12 = c.createStatement();
 			String create12 = "CREATE TABLE visit_treatment ( "
 					+ " treatment_id INTEGER references treatments(treatment_id) ,"
-					+ " visit_id INTEGER references visits (visit_id),"
+					+ " visit_id INTEGER references visits (visit_id) ON DELETE SET NULL,"
 					+ " PRIMARY KEY (treatment_id, visit_id )"
 					+ " )";
 			createTables12.executeUpdate(create12);

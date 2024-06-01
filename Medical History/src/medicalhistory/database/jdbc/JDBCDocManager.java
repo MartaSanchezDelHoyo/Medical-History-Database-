@@ -65,7 +65,7 @@ public class JDBCDocManager implements DoctorManager {
 		PreparedStatement search;
 		try {
 			search = c.prepareStatement(template);
-			search.setInt(6,   a.getDoctor_id());
+			search.setInt(7,   a.getDoctor_id());
 		    search.setString(1, a.getName());
 		    search.setString(2, a.getSurname());
 		    search.setString(3, a.getSpecialty());
@@ -174,7 +174,7 @@ public class JDBCDocManager implements DoctorManager {
 	public List<Doctor> getDoctorsbySpecialties(String specialty) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
-			String sql = "SELECT * FROM doctors WHERE specialty LIKE ?";
+			String sql = "SELECT * FROM doctors WHERE specialty = ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setString(1, "%" + specialty + "%");
 			ResultSet rs = search.executeQuery();

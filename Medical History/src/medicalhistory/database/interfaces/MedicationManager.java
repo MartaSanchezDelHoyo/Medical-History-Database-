@@ -13,6 +13,7 @@ public interface MedicationManager {
 	public void addManufacturer (Manufacturer entry);
 	public void modifyMedication (Medication entry); 
     public Medication showMedication(Visit toSearch);
+    public Medication showMedication(String name);
     public List<Medication> showMedications(int visit_id);
     public List<Medication> showMedicationsByManufacturer(int manufacturer_id);
     public List<Manufacturer> showManufacturers(int medication_id);

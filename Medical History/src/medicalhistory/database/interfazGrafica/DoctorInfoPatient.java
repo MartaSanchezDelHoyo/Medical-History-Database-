@@ -99,8 +99,18 @@ public class DoctorInfoPatient extends JFrame {
     
     JLabel lblPhoto = new JLabel("Photo:");
     lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-    lblPhoto.setBounds(61, 31, 103, 26);
+    lblPhoto.setBounds(30, 48, 103, 26);
     panel.add(lblPhoto);
+    
+    JButton buttonReturn = new JButton("Return");
+    buttonReturn.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
+    buttonReturn.setBounds(10, 717, 184, 77);
+    panel.add(buttonReturn);
+    buttonReturn.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+    	dispose();
+    	}
+    });
 
     setVisible(true);
 	}

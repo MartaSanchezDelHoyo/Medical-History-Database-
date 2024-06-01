@@ -1,11 +1,15 @@
 package medicalhistory.database.interfazGrafica;
 
 import javax.swing.*;
+import javax.xml.bind.JAXBException;
 
 import medicalhistory.database.interfaces.AllergiesManager;
 import medicalhistory.database.interfaces.DoctorManager;
+import medicalhistory.database.interfaces.PatientManager;
 import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.interfaces.XMLManager;
 import medicalhistory.database.jdbc.ConnectionManager;
+import medicalhistory.database.jdbc.JDBCXMLManager;
 import medicalhistory.database.jpa.JPAUserManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
@@ -14,6 +18,9 @@ import medicalhistory.database.pojos.Visit;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -29,8 +36,10 @@ public class PatientInfoUserChange extends JFrame {
 	private ImageIcon imageIcon;
 	private static JPAUserManager userMan;
 	protected String input2;
+	
 	private static VisitManager visitMan;
     private static DoctorManager docMan;
+    private static PatientManager patientMan;
     
 	private static ConnectionManager conMan;
 	
@@ -40,6 +49,8 @@ public class PatientInfoUserChange extends JFrame {
 		visitMan= conMan.getVisitMan();
 		docMan= conMan.getDocMan();
 		allergyMan=conMan.getAllergiesMan();
+		patientMan=conMan.getPatientMan();
+		
 		
 		a.setAlergies(allergyMan.getAllergies(a.getPatientID()));
         a.setVisits(visitMan.getVisitByPatient(a.getPatientID()));
@@ -85,7 +96,7 @@ public class PatientInfoUserChange extends JFrame {
         });
         
         JLabel lblTextPhoto = new JLabel(imageIcon);
-        lblTextPhoto.setBounds(80, 46, 181, 219);
+        lblTextPhoto.setBounds(93, 34, 181, 219);
         lblTextPhoto.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         panel.add(lblTextPhoto);
         
@@ -112,27 +123,25 @@ public class PatientInfoUserChange extends JFrame {
         lblBirthDate.setBounds(383, 131, 137, 33);
         panel.add(lblBirthDate);
         
-        JLabel lblSex = new JLabel("Sex:");
-        lblSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblSex.setBounds(899, 84, 137, 33);
-        panel.add(lblSex);
         
         JLabel lblPatientId = new JLabel("Patient ID:");
         lblPatientId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblPatientId.setBounds(383, 175, 137, 33);
         panel.add(lblPatientId);
 
-        JLabel lblTextfullname = new JLabel(a.getPatientName());
+        JTextField lblTextfullname = new JTextField(a.getPatientName());
         lblTextfullname.setBackground(new Color(255, 255, 224));
         lblTextfullname.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextfullname.setBounds(534, 34, 312, 33);
         panel.add(lblTextfullname);
+        a.setPatientName(lblTextfullname.getText());
         
-        JLabel lblTextcontact = new JLabel(a.getEmail());
+        JTextField lblTextcontact = new JTextField(a.getEmail());
         lblTextcontact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextcontact.setBackground(new Color(255, 255, 224));
         lblTextcontact.setBounds(544, 84, 312, 33);
         panel.add(lblTextcontact);
+        a.setEmail(lblTextcontact.getText());
         
         JButton changePassword = new JButton("Change password");
         changePassword.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
@@ -227,10 +236,13 @@ public class PatientInfoUserChange extends JFrame {
 				int l=i;
          allergy.addActionListener(new ActionListener() {
 				    public void actionPerformed(ActionEvent e) {
-				        a.getAllergies().remove(l);
-				        botonAllergiesPatients.remove(allergy);
-				        botonAllergiesPatients.revalidate();
-				        botonAllergiesPatients.repaint();
+				    	int response =JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this allergy?", input, JOptionPane.YES_NO_OPTION);
+				    	if (response == JOptionPane.YES_OPTION) {
+			                a.getAllergies().remove(l);
+			                botonPanelAllergies.remove(allergy);
+			                panel.revalidate();
+			                panel.repaint();
+			            }
 				    }
 				});
 			} catch (Exception e) {
@@ -309,10 +321,11 @@ public class PatientInfoUserChange extends JFrame {
        lblTextBirthDate.setBounds(534, 131, 312, 33);
        panel.add(lblTextBirthDate);
        
+       
        JLabel lblTextID = new JLabel(a.getPatientID().toString());
        lblTextID.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
        lblTextID.setBackground(new Color(255, 255, 224));
-       lblTextID.setBounds(515, 175, 312, 33);
+       lblTextID.setBounds(511, 175, 312, 33);
        panel.add(lblTextID);
        
        JLabel lblTextBloodType = new JLabel(a.getBloodtype());
@@ -321,24 +334,51 @@ public class PatientInfoUserChange extends JFrame {
        lblTextBloodType.setBounds(1027, 34, 312, 33);
        panel.add(lblTextBloodType);
        
-       JLabel lblTextSex = new JLabel("sex");
-       lblTextSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-       lblTextSex.setBackground(new Color(255, 255, 224));
-       lblTextSex.setBounds(1014, 84, 312, 33);
-       panel.add(lblTextSex);
-        
+       JButton changepatient = new JButton("Change information");
+       changepatient.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       changepatient.setBounds(890, 122, 437, 50);
+       panel.add(changepatient);
+       
+      
+       changepatient.addActionListener(new ActionListener() {
+       	
+           public void actionPerformed(ActionEvent e) {
+           	try { int respuesta = JOptionPane.showConfirmDialog(null, "Are You sure you want to change this information in the database?", "Yes", JOptionPane.YES_NO_OPTION);
+           	  if (respuesta == JOptionPane.YES_OPTION) {
+           	    	patientMan.changePatient(a);
+           	    } else if (respuesta == JOptionPane.NO_OPTION) {
+           	        System.out.println("El usuario ha seleccionado No.");
+           	    }
+            }
+           catch(Exception ex) {
+           	JOptionPane.showInputDialog("there was an error changing the visit", a);;
+           }}
+       });
+
+       JButton botonXML = new JButton("Obtain Xml with your information until date");
+       botonXML.setBounds(893, 873, 644, 90);
+       botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       panel.add(botonXML);
+      
+        botonXML.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new XmlPatient(a);
+            }
+            
+        }); 
+       
        JButton botonRetorno = new JButton("Return");
-       botonRetorno.setBounds(10, 917, 114, 35);
+       botonRetorno.setBounds(10, 888, 249, 64);
        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
        panel.add(botonRetorno);
       
-     
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual
             }
         });
         setVisible(true);
-    }
-}
+        }
+	}
+
     

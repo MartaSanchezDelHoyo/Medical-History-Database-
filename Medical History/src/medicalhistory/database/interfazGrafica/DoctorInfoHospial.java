@@ -243,6 +243,17 @@ public class DoctorInfoHospial extends JFrame {
         		 else{  JOptionPane.showMessageDialog(null, "You can´t acces this information");}// Cierra la ventana actual
              }
         });
+        JButton botonXML = new JButton("Obtain Xml with this doctor´s information ");
+        botonXML.setBounds(527, 862, 644, 90);
+        botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonXML);
+       
+         botonXML.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+             	new XmDoctor(a);
+             }
+             
+         }); 
         
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

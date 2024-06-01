@@ -24,9 +24,10 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	/**This method allows to add a hospital in the database
      * @param Obj hospital to add the information
+	 * @throws SQLException 
      */
 	@Override
-	public void addHospital (Hospital temporal) {
+	public void addHospital (Hospital temporal) throws SQLException {
 		try {
 			String template = "INSERT INTO hospitals (hospital_name, hospital_adress) VALUES (?, ?, ?)";
 			PreparedStatement pstmt;
@@ -39,14 +40,16 @@ public class JDBCHospitalManager implements HospitalManager {
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
+			throw new SQLException();
 		}
 	}
 
 	/** Update of a hospital
 	 * @param the hospital that will get updated
+	 * @throws SQLException 
 	 */
 	@Override
-	public void changeHospital (Hospital temporal) {
+	public void changeHospital (Hospital temporal) throws SQLException {
 		try {
 			String template = "UPDATE hospitals SET hospital_name= ?, hospital_adress= ?, username=? WHERE hospital_id= ?";
 			PreparedStatement pstmt;
@@ -59,7 +62,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
-			e.printStackTrace();
+			throw new SQLException();
 		}
 	}
 	

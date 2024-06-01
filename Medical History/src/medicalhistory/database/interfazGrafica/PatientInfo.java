@@ -202,12 +202,22 @@ public class PatientInfo extends JFrame {
        lblTextSex.setBounds(1014, 84, 312, 33);
        panel.add(lblTextSex);
         
+       JButton botonXML = new JButton("Obtain Xml with your information until date");
+       botonXML.setBounds(893, 873, 644, 90);
+       botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+       panel.add(botonXML);
+      
+        botonXML.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new XmlPatient(a);
+            }
+            
+        });
        JButton botonRetorno = new JButton("Return");
        botonRetorno.setBounds(10, 917, 114, 35);
        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
        panel.add(botonRetorno);
-      
-     
+       
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual

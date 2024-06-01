@@ -63,7 +63,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 	}
 	
-	/**Method to get all the information of a hospital by the hospitalID
+	/**Method to show all the information of a hospital except for the lists by the hospitalID
 	 * @param ID of the hospital
 	 * @return Obj hospital who's information you want
 	 */
@@ -94,7 +94,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 	
 	
-	/**Method to get all the information of a hospital by the hospitalID
+	/**Method to show all the information of a hospital by the hospitalID
 	 * @param ID of the hospital
 	 * @return Obj hospital who's information you want
 	 */
@@ -125,6 +125,10 @@ public class JDBCHospitalManager implements HospitalManager {
 		return obtained;
 	}
 	
+	/**Method to get the information of a hospital by its username
+	 * @param Username of the hospital
+	 * @return Obj hospital who's information you want
+	 */
 	@Override
 	public Hospital getHospitalbyUsername(String username01) {
 		Hospital obtained = null;

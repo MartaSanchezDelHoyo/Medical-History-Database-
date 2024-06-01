@@ -117,8 +117,8 @@ public class JDBCTreatmentManager implements TreatmentManager {
 	}
 
 	
-	/**Method to get all the information of a treatment by the treatmentID
-	 * @param ID of the treatment
+	/**Method to get all the information of a treatment by the treatment name
+	 * @param Name of the treatment
 	 * @return Obj treatment who's information you want
 	 */
 	@Override

@@ -42,6 +42,12 @@ public class Hospital implements Serializable{
 		this.Hospital_visits = new ArrayList<>();
 	}
     
+    /** 
+     * @param hospitalID identification of the hospital
+     * @param hospitalName name of the hospital
+     * @param hospitalAddress address of the hospital
+     * @param hospital_doctors list of doctors of the hospital
+     */
     public Hospital(String hospitalName, String hospitalAddress, String username,List<Doctor> hospital_doctors) {
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
@@ -54,6 +60,7 @@ public class Hospital implements Serializable{
      * @param hospitalID identification of the hospital
      * @param hospitalName name of the hospital
      * @param hospitalAddress address of the hospital
+     * @param username of the hospital manager
      */
     public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username) {
 		this.hospitalID = hospitalID;

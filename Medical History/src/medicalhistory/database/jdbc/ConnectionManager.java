@@ -93,7 +93,7 @@ public class ConnectionManager {
 					+ " observations TEXT,"
 					+ " patient_id INTEGER NOT NULL,"
 					+ " doctor_id INTEGER NOT NULL ,"
-					+ " test_id INTEGER NOT NULL,"
+					+ " test_id INTEGER,"
 					+ " hospital_id INTEGER NOT NULL,"
 					+ " FOREIGN KEY (patient_id) references patients (patient_id),"
 					+ " FOREIGN KEY (doctor_id) references doctors(doctor_id),"

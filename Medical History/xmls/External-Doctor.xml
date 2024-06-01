@@ -10,7 +10,8 @@
     <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT hospitals (Hospital+)> 
     <!ELEMENT Hospital (hospitalName)>
-    <!ATTLIST Hospital hospitalAddress CDATA #REQUIRED>
+    <!ATTLIST Hospital hospitalID CDATA #REQUIRED
+                       hospitalAddress CDATA #REQUIRED>
     <!ELEMENT hospitalName (#PCDATA)>
 
 
@@ -21,10 +22,10 @@
     <surname>Doe</surname>
     <specialty>Cardiology</specialty>
     <hospitals>
-        <Hospital hospitalAddress="123 Main St">
+        <Hospital hospitalID="001" hospitalAddress="123 Main St">
 			<hospitalName>City Hospital</hospitalName>
         </Hospital>
-        <Hospital hospitalAddress="456 Elm St">
+        <Hospital hospitalID="002" hospitalAddress="456 Elm St">
 			<hospitalName>Country Hospital</hospitalName>
         </Hospital>
     </hospitals>

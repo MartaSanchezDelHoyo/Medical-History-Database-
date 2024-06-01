@@ -20,4 +20,10 @@
             <surname>Johnson</surname>
         </Doctor>
     </Doctors>
+    <visits>
+        <Visit visit_id="121" visit_date="01/01/2001" visit_observation="Nice health">
+        </Visit>
+        <Visit visit_id="122" visit_date="02/01/2001" visit_observation="Not so nice health">
+        </Visit>
+    </visits>
 </Patient>

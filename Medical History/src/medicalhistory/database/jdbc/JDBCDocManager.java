@@ -84,7 +84,7 @@ public class JDBCDocManager implements DoctorManager {
 
 
 	/**
-	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
+	 *Returns an object doctor that has all the information of a doctor from the database (except all list) with an specified id
 	 *@param id is the id from the doctor we want to get from the database
 	 *@return Doctor object with all the actualized information from the database
 	  */
@@ -106,7 +106,11 @@ public class JDBCDocManager implements DoctorManager {
 		return null;
 	
 	}
-	
+	/**
+	 *Returns an object doctor that has all the information of a doctor from the database with an specified id
+	 *@param id is the id from the doctor we want to get from the database
+	 *@return Doctor object with all the actualized information from the database
+	  */
 	@Override
 	public Doctor getDoctorCI(int id) {
 		try {
@@ -130,9 +134,9 @@ public class JDBCDocManager implements DoctorManager {
 	}
 	
 	/**
-	 *Adds all the doctors to list that have as specialty the same as the parameter
-	 *@param specialty is the specialty we want to group the doctors by 
-	 *@return List of doctors that fulfill  this condition 
+	 *Adds the doctors that have the username the same as the parameter
+	 *@param usern is the username of the doctor we are searching
+	 *@return the doctor that fulfill this condition 
 	 */
 	@Override
 	public Doctor getDoctorsbyUsername(String usern) {
@@ -205,6 +209,11 @@ public class JDBCDocManager implements DoctorManager {
 		return doctors;
 	}
 	
+	/**
+	 *Adds all the doctors to list that attends an specific patient 
+	 *@param patientId is the patient we want to group the doctors by 
+	 *@return List of doctors that fulfill  this condition 
+	 */
 	@Override
 	public List<Doctor> getDoctorsByPatient(int patientId) {
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -239,7 +248,7 @@ public class JDBCDocManager implements DoctorManager {
 
 	/**
 	 *Adds all the doctors to list that work in the hospital that the parameter indicates
-	 *@param hospitalName is the hospital we want to group the doctors by 
+	 *@param hospitalID is the hospital we want to group the doctors by 
 	 *@return List of doctors that fulfill  this condition 
 	 */
 	@Override
@@ -312,9 +321,7 @@ public class JDBCDocManager implements DoctorManager {
 	}
 
 	/**
-	 *Adds all the doctors to a list that has the same name and surname that the parameter indicates
-	 *@param name_ is the name we want to group the doctors by 
-	 *@param surname_ is the surname we want to group the doctors by 
+	 *Adds all the doctors to a list that has the same name and surname that the parameter indicates 
 	 *@return List of doctors that fulfill  this condition 
 	 */
 	@Override

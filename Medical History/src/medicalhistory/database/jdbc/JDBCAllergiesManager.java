@@ -17,13 +17,19 @@ public class JDBCAllergiesManager implements AllergiesManager{
 	private ConnectionManager conMan;
 	
 	
-	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCAllergiesManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
 	}
 	
-	
+	/**
+	 * To add an allergy into the program
+	 * @param Obj allergies we want to add
+	 */
 	@Override
 	 public void addAllergy(Allergies allergies) {
 	        try {
@@ -39,7 +45,7 @@ public class JDBCAllergiesManager implements AllergiesManager{
 	    }
 	
 	 /** Update of a allergy
-		 * @param the allergy that will get updated
+		 * @param Obj the allergy that will get updated
 		 */
 		@Override
 		public void changeAllergy (Allergies allergies) {
@@ -57,6 +63,10 @@ public class JDBCAllergiesManager implements AllergiesManager{
 			}
 		}
 		
+		/**Method to get all the information of an allergy by the allergy_id
+		 * @param ID of the allergy
+		 * @return Obj allergy who's information you want
+		 */
 		@Override
 	    public Allergies getAllergy(int allergy_id ) {
 		 Allergies allergy = null;
@@ -80,6 +90,10 @@ public class JDBCAllergiesManager implements AllergiesManager{
 			return allergy;
 		}
 		
+		/** To show the allergies related with the patient we have selected
+		 * @param ID of the patient
+		 * @return Obj the list of allergies that have the patient selected
+		 */
 		@Override
 	    public List<Allergies> getAllergies(int patient_id) {
 			List<Allergies> listOfAllergies =  new ArrayList<>();
@@ -105,8 +119,9 @@ public class JDBCAllergiesManager implements AllergiesManager{
 			return listOfAllergies;
 		}
 	
-		
-		
+		/**
+		 * Getters and setters of the attribute conMan
+		 */
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

@@ -22,7 +22,10 @@ public class JDBCVisitManager implements VisitManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
-	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCVisitManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
@@ -58,8 +61,9 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	
-	/**
-	 * To link a medication to a visit into the database
+	/**To link a medication to a visit into the database
+	 * @param Obj (visit) we want to link with the medication
+	 * @param Obj (medi) we want to link with the visit
 	 */
 	@Override
 	public void linkMedicationToVisit(Visit visit, Medication medi) {
@@ -77,8 +81,9 @@ public class JDBCVisitManager implements VisitManager {
 		}			
 	}
 	
-	/**
-	 * To link a treatment to a visit into the database
+	/**To link a treatment to a visit into the database
+	 * @param Obj (visit) we want to link with the treatment
+	 * @param Obj (treat) we want to link with the visit
 	 */
 	@Override
 	public void linkTreatmentToVisit(Visit visit, Treatment treat) {
@@ -96,8 +101,8 @@ public class JDBCVisitManager implements VisitManager {
 		}			
 	}
 	
-	/**
-	 * To change the visit selected, introducing the new visit changed
+	/** Update of a visit
+	 * @param Obj visit that will get updated
 	 */
 	
 	@Override
@@ -121,10 +126,10 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	
-		/**
-		 * To show the visits related with the doctor we have selected (By the object)
-		 */
-		
+	/**Method to show all the information of a visit  
+	 * @param ID of the visit
+	 * @return Obj visit complete
+	 */
 		@Override
 	    public Visit getVisit (int visitID) {
 			
@@ -158,8 +163,9 @@ public class JDBCVisitManager implements VisitManager {
 		}
 		
 	
-	/**
-	 * To show visits that are in the hospital we have selected
+	/** To show visits that are in the hospital we have selected
+	 * @param ID of the hospital
+	 * @return Obj the list of visits in the hospital selected
 	 */
 	@Override
     public List<Visit> getVisitByHospital (int hospital_id) { 
@@ -194,8 +200,9 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
-	/**
-	 * To show the visits related on the test we have selected
+	/** To show the visits related on the test we have selected
+	 * @param ID of the test
+	 * @return Obj the list of visits that have the test selected
 	 */
 	@Override
     public List<Visit> getVisitByTest (int test_id) { 
@@ -230,9 +237,10 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	
-	//No se si meterle tambien el resto de los otros tratamientos( si tiene, el list<Treatments>)
-	/**
-	 * To show visits related with the treatment we have selected
+	
+	/** To show visits related with the treatment we have selected
+	 * @param ID of the treatment
+	 * @return Obj the list of visits that have the treatment selected
 	 */
 	@Override
     public List<Visit> getVisitByTreatment (int treatment_id) { 
@@ -267,8 +275,9 @@ public class JDBCVisitManager implements VisitManager {
 	}
 	
 	
-	/**
-	 * To show the visits related with the doctor we have selected
+	/** To show the visits related with the doctor we have selected
+	 * @param ID of the doctor
+	 * @return Obj the list of visits that have the doctor selected
 	 */
 	@Override
     public List<Visit> getVisitByDoctor (int doctor_id) {
@@ -302,8 +311,9 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
-	/**
-	 * To show the visits related with the patient  we have selected
+	/** To show the visits related with the patient we have selected
+	 * @param ID of the patient
+	 * @return Obj the list of visits that have the patient selected
 	 */
 	
 	@Override
@@ -338,6 +348,9 @@ public class JDBCVisitManager implements VisitManager {
 		return listVisit;
 	}
 	
+	/** To delete a visit
+	 * @param Obj (temporal) is the visit we want to delete
+	 */
 	@Override
     public void deleteVisit(Visit temporal) {
 		try {
@@ -353,7 +366,10 @@ public class JDBCVisitManager implements VisitManager {
 		}
 	}
 	
-	
+	/**
+	 * Getters and setters of the attribute conMan
+	 */
+
 	
 	public ConnectionManager getConMan() {
 		return conMan;

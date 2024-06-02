@@ -17,13 +17,17 @@ public class JDBCMedicationManager implements MedicationManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCMedicationManager(ConnectionManager connectionManager) {
 		this.setConMan(connectionManager);
 		this.c = connectionManager.getConnection();
 	}
 	
-	/**
-	 * To add a medication into the database
+	/** To add a medication into the database
+	 * @param Obj (entry) we want to add (Medication)
 	 */
 	@Override
 	public void addMedication(Medication entry) {
@@ -41,8 +45,9 @@ public class JDBCMedicationManager implements MedicationManager {
 	}
 	
 	
-	/**
-	 * To link a medication to a manufacturer into the database
+	/** To link a medication to a manufacturer into the database
+	  * @param Obj (entry) we want to link with the manufacturer
+	 * @param Obj (manu) we want to link with the medication
 	 */
 	@Override
 	public void linkMedicationToManufacturer(Medication entry, Manufacturer manu) {
@@ -60,8 +65,8 @@ public class JDBCMedicationManager implements MedicationManager {
 		}			
 	}
 	
-	/**
-	 * To add a manufacturer into the database
+	/** To add a manufacturer into the database
+	 * @param Obj (entry) we want to add (Manufacturer) 
 	 */
 	@Override
 	public void addManufacturer( Manufacturer entry ) {
@@ -78,8 +83,8 @@ public class JDBCMedicationManager implements MedicationManager {
 		}		
 	}
 	
-	/**
-	 * To modify a medication into the database, selecting the medication we want to change by the id, and introducing the new medication already modified
+	/** To modify a medication into the database, selecting the medication we want to change 
+	 * @param Obj the medication that will get updated
 	 */
 	@Override
 	public void modifyMedication(Medication entry) {
@@ -97,7 +102,10 @@ public class JDBCMedicationManager implements MedicationManager {
 		}		
 	}
 	
-	//metodos (este y el siguiente) no añadidos al menu (pipe tonto no lo capta)
+	/**Method to show all the information of a medication  
+	 * @param Obj the visit that we want to see the medication
+	 * @return Obj the medicatin complete
+	 */
 	@Override
 	public Medication showMedication(Visit toSearch) {
 		Medication obtained = null;
@@ -122,7 +130,10 @@ public class JDBCMedicationManager implements MedicationManager {
 		return obtained;
 	}
 	
-	
+	/**Method to show all the information of a medication 
+	 * @param name of the medication
+	 * @return Obj medication with all the information
+	 */
 		@Override
 		public Medication showMedication(String name) {
 			Medication obtained = null;
@@ -145,8 +156,10 @@ public class JDBCMedicationManager implements MedicationManager {
 			}
 			return obtained;
 		}
-	/**
-	 * To show the medications related with a visit, by introducing the id
+		
+	/** To show the medications related with a visit, by introducing the id
+	 * @param ID of the visit of which we want to see the medication
+	 * @return List of the medications related with that visit 
 	 */
 	@Override
 	public List<Medication> showMedications(int visit_id) {
@@ -175,8 +188,9 @@ public class JDBCMedicationManager implements MedicationManager {
 	}
 	
 	
-	/**
-	 * To show the medications related with a manufacturer, the ones that produces
+	/** To show the medications related with a manufacturer, the ones that produces
+	 * @param ID of the manufacturer of which we want to see the medications it produces
+	 * @return List of the medications related with that manufacturer  
 	 */
 	@Override
 	public List<Medication> showMedicationsByManufacturer(int manufacturer_id) {
@@ -203,8 +217,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		return listOfMedications;
 	}
 	
-	/**
-	 * to show all the manufacturers that are in the database
+	/** To show the manufacturers related with a medication, the ones that manufacture that medication
+	 * @param ID of the medication of which we want to see the manufacturers
+	 * @return List of the manufacturers related with that medication  
 	 */
 	@Override
 	public List<Manufacturer> showManufacturers(int medication_id) {
@@ -231,22 +246,23 @@ public class JDBCMedicationManager implements MedicationManager {
 		return listOfManufacturers;
 	}
 	
-	/**
-	 * To show the manufcturer we have selected with all the medications that produces
+	/** To show the manufacturers related with a medication, the ones that manufacture that medication with their medications too
+	 * @param ID of the medication of which we want to see the manufacturers
+	 * @return List of the manufacturers related with that medication  
 	 */
 	@Override
-	public List<Manufacturer> showManufacturerWithMedications(int manufacturerId) {
+	public List<Manufacturer> showManufacturerWithMedications(int medication_id) {
 		List<Manufacturer> listOfManufacturers= new ArrayList<Manufacturer>();
 
 		try {
 			String sql = "SELECT m.manufacturer_id, m.manufacturer_name FROM manufacturer_medication AS mm JOIN manufacturers AS m ON mm.manufacturer_id=m.manufacturer_id WHERE mm.medication_id= ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, manufacturerId);
+			search.setInt(1, medication_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer manufacturer_id = rs.getInt("manufacturer_id");
 				String manufacturer_name = rs.getString("manufacturer_name");
-				List<Medication> listOfMedications=conMan.getMedicationMan().showMedicationsByManufacturer(manufacturerId);
+				List<Medication> listOfMedications=conMan.getMedicationMan().showMedicationsByManufacturer(medication_id);
 				Manufacturer obtained = new Manufacturer(manufacturer_id,manufacturer_name, listOfMedications);
 				listOfManufacturers.add(obtained);
 			}
@@ -260,6 +276,9 @@ public class JDBCMedicationManager implements MedicationManager {
 		return listOfManufacturers;
 	}
 	
+	/**
+	 * Getters and setters of the attribute conMan
+	 */
 	
 	public ConnectionManager getConMan() {
 		return conMan;

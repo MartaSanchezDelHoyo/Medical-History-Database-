@@ -9,6 +9,10 @@ public class JDBCPatientManager implements PatientManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCPatientManager(ConnectionManager connectionManager) {
 		this.c = connectionManager.getConnection();
 		this.setConMan(connectionManager);

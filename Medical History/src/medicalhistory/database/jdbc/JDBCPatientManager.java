@@ -9,13 +9,18 @@ public class JDBCPatientManager implements PatientManager {
 	private Connection c;
 	private ConnectionManager conMan;
 	
+	/**
+	 * Constructor of the object that receives as a parameter a connection manager to connect with the database
+	 * @param connectionManager
+	 */
 	public JDBCPatientManager(ConnectionManager connectionManager) {
 		this.c = connectionManager.getConnection();
 		this.setConMan(connectionManager);
 	}
 	
-	
-	
+	/**This method allows to add a patient in the database
+     * @param Obj patient to add the information
+     */
 	@Override
 	public void addPatient(Patient a) {
 	    try {
@@ -35,7 +40,9 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error adding patient: " + e.getMessage());
 	    }
 	}
-	
+	/**This method allows to link a patient to an allergy
+     * @param Obj patient to link to Obj allergy
+     */
 	@Override
 	public void linkAllergiesToPatient (Patient a, Allergies s){
 	    try {
@@ -51,7 +58,9 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error adding allergy: " + e.getMessage());
 	    }
 	}
-	
+	/** Update of a patient
+	 * @param the patient that will get updated 
+	 */
 	@Override
 	public void changePatient(Patient a) {
 	    try {
@@ -77,7 +86,10 @@ public class JDBCPatientManager implements PatientManager {
 	        System.err.println("Error updating patient information: " + e.getMessage());
 	    }
 	}
-
+	/**Method to show all the information of a patient except for the lists by the patient_ID
+	 * @param ID of the patient
+	 * @return Obj patient who's information you want
+	 */
 	@Override
 	public Patient getPatient(int patient_ID ) {
 	    Patient patient= null;
@@ -107,7 +119,10 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patient;
 	}
-	
+	/**Method to show all the information of a patient by the patient_ID
+	 * @param ID of the patient
+	 * @return Obj patient who's information you want
+	 */
 	@Override
 	public Patient getPatientCI(int patient_ID ) {
 	    Patient patient= null;
@@ -140,7 +155,10 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patient;
 	}
-	
+	/**Method to get all the information of a patient by the name
+	 * @param name of the patient
+	 * @return Obj patient who's information you want
+	 */
 	@Override
 	public Patient getPatient(String name ) {
 	    Patient patient= null;
@@ -211,7 +229,10 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return patient;
 	}
-	
+	/**Method to get all the information of a patient by the name
+	 * @param name of the patient
+	 * @return Obj patient who's information you want
+	 */
 	@Override
 	public List<Patient> getPatientByName(String name) {
 	    List<Patient> patients = new ArrayList<>();
@@ -244,7 +265,10 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
-	
+	/**Method to get a list with the information of patients by a hospital_id
+	 * @param ID of the hospital
+	 * @return List of Obj patient who's information you want
+	 */
 	@Override
 	public List<Patient> getPatientsByHospital(int hospital_id) {
 	    List<Patient> patients = new ArrayList<>();
@@ -276,7 +300,10 @@ public class JDBCPatientManager implements PatientManager {
 	    }
 	    return patients;
 	}
-	
+	/**Method to get a list with the information of patients by a doctor_id
+	 * @param ID of the doctor
+	 * @return List of Obj patient who's information you want
+	 */
 	@Override
 	public List<Patient> getPatientsByDoctor(int doctor_id) {
 	    List<Patient> patients = new ArrayList<>();
@@ -309,7 +336,9 @@ public class JDBCPatientManager implements PatientManager {
 	    return patients;
 	}
 	
-	
+	/**Method to get a list with the information of all patient
+	 * @return List of Obj patient
+	 */
 	@Override
 	public List<Patient> getAllPatients() {
 	    List<Patient> patients = new ArrayList<>();

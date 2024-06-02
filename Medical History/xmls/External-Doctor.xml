@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!DOCTYPE Doctor [
-    <!ELEMENT Doctor (name, surname, specialty, hospitals)>
+    <!ELEMENT Doctor (name, surname, specialty, hospitals, visits)>
     <!ATTLIST Doctor doctor_id CDATA #REQUIRED
                      contact CDATA #REQUIRED
                      username CDATA #REQUIRED>                      
@@ -9,10 +9,15 @@
     <!ELEMENT surname (#PCDATA)>
     <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT hospitals (Hospital+)> 
+    <!ELEMENT visits (Visit+)> 
     <!ELEMENT Hospital (hospitalName)>
     <!ATTLIST Hospital hospitalID CDATA #REQUIRED
                        hospitalAddress CDATA #REQUIRED>
     <!ELEMENT hospitalName (#PCDATA)>
+    <!ELEMENT Visit (#PCDATA)>
+    <!ATTLIST Visit visit_id CDATA #REQUIRED
+                    visit_date CDATA #REQUIRED
+                    visit_observation CDATA #REQUIRED>
 
 
 ]>
@@ -29,4 +34,10 @@
 			<hospitalName>Country Hospital</hospitalName>
         </Hospital>
     </hospitals>
+    <visits>
+        <Visit visit_id="345" visit_date="01/12/2001" visit_observation="A bit rude">
+        </Visit>
+        <Visit visit_id="789" visit_date="02/11/2001" visit_observation="Not so nice">
+        </Visit>
+    </visits>
 </Doctor>

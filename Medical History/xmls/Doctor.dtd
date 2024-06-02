@@ -1,5 +1,5 @@
 <!DOCTYPE Doctor [
-    <!ELEMENT Doctor (name, surname, specialty, hospitals)>
+    <!ELEMENT Doctor (name, surname, specialty, hospitals, visits)>
     <!ATTLIST Doctor doctor_id CDATA #REQUIRED
                      contact CDATA #REQUIRED
                      username CDATA #REQUIRED>                      
@@ -7,10 +7,15 @@
     <!ELEMENT surname (#PCDATA)>
     <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT hospitals (Hospital+)> 
+    <!ELEMENT visits (Visit+)> 
     <!ELEMENT Hospital (hospitalName)>
     <!ATTLIST Hospital hospitalID CDATA #REQUIRED
                        hospitalAddress CDATA #REQUIRED>
     <!ELEMENT hospitalName (#PCDATA)>
+    <!ELEMENT Visit (#PCDATA)>
+    <!ATTLIST Visit visit_id CDATA #REQUIRED
+                    visit_date CDATA #REQUIRED
+                    visit_observation CDATA #REQUIRED>
 
 
 ]>

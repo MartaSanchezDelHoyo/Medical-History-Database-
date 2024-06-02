@@ -12,4 +12,10 @@
 			<hospitalName>Country Hospital</hospitalName>
         </Hospital>
     </hospitals>
+    <visits>
+        <Visit visit_id="345" visit_date="01/12/2001" visit_observation="A bit rude">
+        </Visit>
+        <Visit visit_id="789" visit_date="02/11/2001" visit_observation="Not so nice">
+        </Visit>
+    </visits>
 </Doctor>

@@ -124,11 +124,13 @@ import medicalhistory.database.pojos.User;
 		    	em.getTransaction().begin();
 		    	em.merge(a);
 		        em.getTransaction().commit();
-		        em.close();
+		        
+		      
 		    } catch (Exception e) {
 		        em.getTransaction().rollback();
 		        throw e; // Re-throw the exception after rolling back the transaction
-		    }
+		    }  
+		    
 		}
 
 		@Override
@@ -136,26 +138,24 @@ import medicalhistory.database.pojos.User;
 			User u = null;
 			Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? ", User.class);
 			q.setParameter(1, username);
-
 			try {
 				u = (User) q.getSingleResult();
-				em.close();
+				
 			} catch (NoResultException e) {
 				em.getTransaction().rollback();
 				return null;
-			}return u;
+			}return u;	
 		}
 		@Override
 		public void deleteUser(String username) {
 			try {
-	           
 	            Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? ", User.class);
 	            q.setParameter(1, username);
 	            User user = (User) q.getSingleResult();
 	            em.getTransaction().begin();
 	            em.remove(user);
 	            em.getTransaction().commit();
-	            em.close();
+	            
 	        } catch (NoResultException e) {
 	        	em.getTransaction().rollback();
 	            // Manejar el caso donde no se encuentra el usuario

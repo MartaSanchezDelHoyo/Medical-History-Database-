@@ -1,0 +1,13 @@
+Title	Assignees	Status	Comments
+Access patient's visit	MartaSanchezDelHoyo	Done	
+Modify patient's visit	CEULuisFelipeRiera	Done	(We didnt include the creation of patient´s historial because is the responsability to the goverment)
+Add patient's visit	PabloMorales04	Done	(Just lab personnel can do this)
+Add a doctor	MariaMM04	Done	(Just the doctor can do this)
+Add patient's allergies	MartaSanchezDelHoyo	Done	
+Access Doctor information	CEULuisFelipeRiera	Done	
+Make an appointment (doctor)	MariaMM04	Done	
+See hospital information	MartaSanchezDelHoyo	Done	
+Export to xml	CEULuisFelipeRiera	Done	
+Generate online prescription	PabloMorales04	Done	
+Ask for tests for a patient	MariaMM04	Done	(Just the doctor can ask for a test)
+Make an appointment (patient)	MariaMM04	Done	

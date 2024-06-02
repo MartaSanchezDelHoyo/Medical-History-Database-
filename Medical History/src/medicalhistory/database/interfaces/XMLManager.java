@@ -13,5 +13,5 @@ public interface XMLManager {
 	public File doctor2Xml (Doctor d) throws JAXBException;
 	public Patient xml2Patient (File file) throws JAXBException;
 	public Doctor xml2Doctor (File file) throws JAXBException;
-	public void xml2html(String sourcePath, String xsltPath,String resultDir);
+	public  File xml2html(File xmlFile, String xsltPath, String resultDir);
 }

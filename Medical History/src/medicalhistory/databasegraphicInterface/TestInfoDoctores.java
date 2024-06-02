@@ -58,31 +58,31 @@ public TestInfoDoctores(Test a, User u) {
    
         JLabel lblTestId = new JLabel("Test ID:");
         lblTestId.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        lblTestId.setBounds(464, 46, 103, 26);
+        lblTestId.setBounds(454, 119, 103, 26);
         panel.add(lblTestId);
        
         
         JLabel lblType = new JLabel("Type:");
         lblType.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        lblType.setBounds(464, 110, 72, 26);
+        lblType.setBounds(464, 206, 72, 26);
         panel.add(lblType);
         
         JLabel lblTexttype = new JLabel(a.getType());
         lblTexttype.setBackground(new Color(255, 255, 224));
         lblTexttype.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblTexttype.setBounds(579, 46, 221, 26);
+        lblTexttype.setBounds(564, 187, 452, 64);
         panel.add(lblTexttype);
         
         JLabel lblTextcontact = new JLabel(String.valueOf(a.getTest_id()));
         lblTextcontact.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblTextcontact.setBackground(new Color(255, 255, 224));
-        lblTextcontact.setBounds(579, 110, 107, 26);
+        lblTextcontact.setBounds(567, 100, 380, 64);
         panel.add(lblTextcontact);
 
         // Crear un botón de retorno
         JButton botonRetorno = new JButton("Return");
         botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
-        botonRetorno.setBounds(10, 888, 161, 64);
+        botonRetorno.setBounds(10, 875, 307, 77);
         panel.add(botonRetorno);
          a.setVisits(visitMan.getVisitByTest(a.getTest_id()));
          if (u.getRole().toString() =="Doctor") {  
@@ -109,42 +109,33 @@ public TestInfoDoctores(Test a, User u) {
         scrollPane.setPreferredSize(new Dimension(700, 300)); 
        panel.add(scrollPane);
          }
-         
+
        if(a.getArchivoPDF()!=null) {
-    	  
+    	   
+           JButton openButton = new JButton("Open Document");
+           openButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+           openButton.setSize(682, 102);
+           openButton.setLocation(867, 717);
+          
+           openButton.addActionListener(new ActionListener() {
+               public void actionPerformed(ActionEvent e) {
                    try {
                 	   
                 	   File tempFile = File.createTempFile("tempfile", ".txt");
-                       FileOutputStream fos = new FileOutputStream(tempFile);
-                       fos.write(a.getArchivoPDF());
-                       fos.close();
-
-                       JTextArea textArea = new JTextArea();
-                       textArea.setEditable(false);
-                       
-                    // Leer el contenido del archivo temporal y mostrarlo en un JTextArea
-                       try (BufferedReader reader = new BufferedReader(new FileReader(tempFile))) {
-                           StringBuilder content = new StringBuilder();
-                           String line;
-                           while ((line = reader.readLine()) != null) {
-                               content.append(line).append("\n");
-                           }
-                           textArea.setText(content.toString());
-                       } catch (IOException ex) {
-                           ex.printStackTrace();
-                       }
-
-                       JScrollPane scrollPane = new JScrollPane(textArea);
-                       scrollPane.setSize(1543, 316);
-                       scrollPane.setLocation(20, 546);
                       
-                       panel.add(scrollPane);
-                       panel.revalidate();
-                       panel.repaint();
+
+                       try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                           fos.write(a.getArchivoPDF());
+                       }
+                      
+                       Desktop.getDesktop().open(tempFile);
                    } catch (IOException ex) {
                        ex.printStackTrace();
                        JOptionPane.showMessageDialog(TestInfoDoctores.this, "Error opening file.", "Error", JOptionPane.ERROR_MESSAGE);
                    }
+               }
+           });
+           panel.add(openButton);     
              
 	       JButton downloadButton = new JButton("Download test");
 	       downloadButton.setFont(new Font("Tw Cen MT", Font.BOLD, 23));

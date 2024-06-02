@@ -13,12 +13,18 @@
             <surname>Sanchez</surname>
             <specialty>Traumatology</specialty>
             <hospitals/>
+            <visits/>
         </Doctor>
         <Doctor doctorId="3" username="doctor3" contact="Doctor3@gmail.com">
             <name>Pedro</name>
             <surname>Almodóvar</surname>
             <specialty>Surgeon</specialty>
             <hospitals/>
+            <visits/>
         </Doctor>
     </Doctors>
+    <visits>
+        <Visit visitId="1" visitDate="1970-01-02" visitObservation="Very very unhealthy"/>
+        <Visit visitId="8" visitDate="1970-01-02" visitObservation="Very good"/>
+    </visits>
 </Patient>

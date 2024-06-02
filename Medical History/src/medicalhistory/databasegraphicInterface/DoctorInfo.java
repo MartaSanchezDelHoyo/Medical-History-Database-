@@ -45,6 +45,7 @@ public class DoctorInfo extends JFrame {
     private static HospitalManager hospitalMan;
     private static VisitManager visitMan;
     private static ConnectionManager conMan;
+    
 	public DoctorInfo(Doctor a, User u) {
 		conMan = new ConnectionManager();
 		 patientMan=conMan.getPatientMan();
@@ -113,7 +114,10 @@ public class DoctorInfo extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new PatientInfo(a.getPatients().get(l),u);
+                	if (u.getRole().toString()=="Doctor") {
+                        new PatientInfo(a.getPatients().get(l),u);}
+                    	if (u.getRole().toString()=="Administrator") {
+                            new PatientInfoHospital(a.getPatients().get(l),u);}
                 }
             });
         }
@@ -249,7 +253,31 @@ public class DoctorInfo extends JFrame {
         lblPhoto.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(lblPhoto);
         
+        JButton botonXML = new JButton("Obtain Xml with this doctor´s information ");
+        botonXML.setBounds(274, 135, 650, 90);
+        botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonXML);
        
+         botonXML.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+             	new XmDoctor(a);
+             }
+             
+         }); 
+        
+        JButton botonHTML = new JButton("Obtain HTML with this information until date");
+        botonHTML.setBounds(955, 135, 596, 90);
+        botonHTML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonHTML);
+       
+         botonHTML.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+             	new HTMLDoctor(a);
+             }
+             
+         });
+         panel.add(botonHTML); 
+         
         botonChange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual

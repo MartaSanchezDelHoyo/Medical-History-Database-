@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import medicalhistory.database.pojos.Medication;
+import medicalhistory.database.pojos.Treatment;
 import medicalhistory.database.pojos.User;
 import medicalhistory.database.pojos.Visit;
 import javax.swing.JTextField;
@@ -128,16 +130,19 @@ public  VisitInfoChange (Visit a) {
     panel.add(lblMedications);
     
     a.setMedications(medicationMan.showMedications(a.getVisit_id()));
+    JPanel botonPanelMaications = new JPanel();
+    botonPanelMaications.setLayout(new GridLayout(0, 1)); 
     
     JButton addTMedications = new JButton("Add  new Medication ");
     addTMedications.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
     addTMedications.setBounds(595, 221, 430, 55);
-    panel.add(addTMedications);
+    panel.add(addTMedications);  
     addTMedications.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	 try {
 				input = JOptionPane.showInputDialog(null, "Enter the name of the new medication for the visit:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
-
+				Medication med=medicationMan.showMedication(input);
+				a.getMedications().add(med);
 				if (input != null) {
 				    JOptionPane.showMessageDialog(null, "Medication added!", input, JOptionPane.INFORMATION_MESSAGE);
 				} else {
@@ -149,8 +154,7 @@ public  VisitInfoChange (Visit a) {
 			}
         }
     });
-    JPanel botonPanelMaications = new JPanel();
-    botonPanelMaications.setLayout(new GridLayout(0, 1)); // Establecer un diseño de cuadrícula de una sola columna
+  
 
     if(a.getMedications()!=null) {
     // Añadir botones al panel
@@ -198,7 +202,8 @@ public  VisitInfoChange (Visit a) {
         public void actionPerformed(ActionEvent e) {
         	try {
         	 input = JOptionPane.showInputDialog(null, "Enter the name of the new tratment for the visit:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
-
+        	Treatment treat= treatmentMan.getTreatment(input);
+        	a.getTreatments().add(treat);
             if (input != null) {
                 JOptionPane.showMessageDialog(null, "Visit added!", input, JOptionPane.INFORMATION_MESSAGE);
             } else {

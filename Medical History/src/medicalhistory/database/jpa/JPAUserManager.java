@@ -42,7 +42,7 @@ import medicalhistory.database.pojos.User;
 		        em.getTransaction().rollback();
 		        // Log or handle the exception appropriately
 		        e.printStackTrace();
-		    }
+		    } 
 		}
 		
 		@Override
@@ -50,6 +50,7 @@ import medicalhistory.database.pojos.User;
 			em.getTransaction().begin();
 			em.persist(u);
 			em.getTransaction().commit();
+			
 		}
 
 		@Override
@@ -67,6 +68,7 @@ import medicalhistory.database.pojos.User;
 		        }
 		    } else {
 		        System.out.println("Role '" + r.getName() + "' already exists.");
+		       
 		    }
 		}
 		
@@ -77,6 +79,7 @@ import medicalhistory.database.pojos.User;
 			q.setParameter(1, name);
 			System.out.println(name+" "+q.getResultList().toString());
 			Role r = (Role) q.getSingleResult();
+			
 			return r;
 		}
 		
@@ -84,6 +87,7 @@ import medicalhistory.database.pojos.User;
 		public List<Role> getAllRoles() {
 			Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
 			List<Role> roles = (List<Role>) q.getResultList();
+
 			return roles;
 		}
 
@@ -93,6 +97,8 @@ import medicalhistory.database.pojos.User;
 			u.setRole(r);
 			r.addUser(u);
 			em.getTransaction().commit();
+			
+			
 		}
 
 		@Override
@@ -106,6 +112,7 @@ import medicalhistory.database.pojos.User;
 			} catch (NoResultException e) {
 				return null;
 			}
+			
 			return u;
 		}
 		
@@ -124,7 +131,7 @@ import medicalhistory.database.pojos.User;
 		    }
 		}
 
-
+		@Override
 		public User getUserByUsername(String username) {
 			User u = null;
 			Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? ", User.class);
@@ -133,9 +140,30 @@ import medicalhistory.database.pojos.User;
 			try {
 				u = (User) q.getSingleResult();
 			} catch (NoResultException e) {
+				em.getTransaction().rollback();
 				return null;
-			}
-			return u;
+			}return u;
+		}
+		@Override
+		public void deleteUser(String username) {
+			try {
+	           
+	            Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? ", User.class);
+	            q.setParameter(1, username);
+	            User user = (User) q.getSingleResult();
+	            
+	            em.getTransaction().begin();
+	           
+	            em.remove(user);
+	            
+	            em.getTransaction().commit();
+	            
+	        } catch (NoResultException e) {
+	        	em.getTransaction().rollback();
+	            // Manejar el caso donde no se encuentra el usuario
+	            System.out.println("No user found with the given username.");
+	        } 
+	        
 		}
 
 }

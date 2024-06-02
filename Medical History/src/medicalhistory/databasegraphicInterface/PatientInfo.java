@@ -1,10 +1,12 @@
 package medicalhistory.databasegraphicInterface;
 
 import javax.swing.*;
+import javax.xml.bind.JAXBException;
 
 import medicalhistory.database.interfaces.AllergiesManager;
 import medicalhistory.database.interfaces.DoctorManager;
 import medicalhistory.database.interfaces.VisitManager;
+import medicalhistory.database.interfaces.XMLManager;
 import medicalhistory.database.jdbc.ConnectionManager;
 import medicalhistory.database.pojos.Doctor;
 import medicalhistory.database.pojos.Patient;
@@ -13,6 +15,7 @@ import medicalhistory.database.pojos.Visit;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class PatientInfo extends JFrame {
     private JPanel botonPanel;
@@ -23,6 +26,7 @@ public class PatientInfo extends JFrame {
 	private AbstractButton botonRetorno;
 	private static VisitManager visitMan;
     private static DoctorManager docMan;
+    private static XMLManager xmlManager;
     
 	private static ConnectionManager conMan;
 	
@@ -32,6 +36,8 @@ public class PatientInfo extends JFrame {
 		visitMan= conMan.getVisitMan();
 		docMan= conMan.getDocMan();
 		allergyMan=conMan.getAllergiesMan();
+		xmlManager= conMan.getXMLMan();
+	
 		
 		a.setAlergies(allergyMan.getAllergies(a.getPatientID()));
         a.setVisits(visitMan.getVisitByPatient(a.getPatientID()));
@@ -76,11 +82,6 @@ public class PatientInfo extends JFrame {
         lblBirthDate.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
         lblBirthDate.setBounds(383, 131, 137, 33);
         panel.add(lblBirthDate);
-        
-        JLabel lblSex = new JLabel("Sex:");
-        lblSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-        lblSex.setBounds(899, 84, 137, 33);
-        panel.add(lblSex);
         
         JLabel lblPatientId = new JLabel("Patient ID:");
         lblPatientId.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
@@ -196,15 +197,9 @@ public class PatientInfo extends JFrame {
        lblTextBloodType.setBackground(new Color(255, 255, 224));
        lblTextBloodType.setBounds(1027, 34, 312, 33);
        panel.add(lblTextBloodType);
-       
-       JLabel lblTextSex = new JLabel("sex");
-       lblTextSex.setFont(new Font("Tw Cen MT", Font.PLAIN, 23));
-       lblTextSex.setBackground(new Color(255, 255, 224));
-       lblTextSex.setBounds(1014, 84, 312, 33);
-       panel.add(lblTextSex);
         
-       JButton botonXML = new JButton("Obtain Xml with your information until date");
-       botonXML.setBounds(893, 873, 644, 90);
+       JButton botonXML = new JButton("Obtain Xml with this information until date");
+       botonXML.setBounds(241, 873, 644, 90);
        botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
        panel.add(botonXML);
       
@@ -214,6 +209,19 @@ public class PatientInfo extends JFrame {
             }
             
         });
+        
+        JButton botonHTML = new JButton("Obtain HTML with this information until date");
+        botonHTML.setBounds(893, 873, 644, 90);
+        botonHTML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+        panel.add(botonHTML);
+       
+         botonHTML.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+             	new HTMLPatient(a);
+             }
+             
+         });
+         panel.add(botonHTML);
        JButton botonRetorno = new JButton("Return");
        botonRetorno.setBounds(10, 917, 114, 35);
        botonRetorno.setFont(new Font("Tw Cen MT", Font.BOLD, 23));

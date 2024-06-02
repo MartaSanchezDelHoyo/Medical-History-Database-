@@ -149,7 +149,7 @@ public class DoctorInfoChange extends JFrame {
         panel.add(lblPhoto);
         
         JButton changeImage=new JButton("Change photo");
-        changeImage.setBounds(463, 854, 439, 77);
+        changeImage.setBounds(504, 838, 439, 77);
         changeImage.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(changeImage);
         
@@ -216,8 +216,9 @@ public class DoctorInfoChange extends JFrame {
 
     				if (input != null) {
     					input2 = JOptionPane.showInputDialog(null, "Confirm the new Username:", "Entrada de Datos", JOptionPane.QUESTION_MESSAGE);
-    					userMan.ChangeUser(userMan.getUserByUsername(a.getUsername()),input2,  userMan.getUserByUsername(a.getUsername()).getPassword());
-    					if(input.toString().equals(input2.toString())) {
+    				
+    					if(input.toString().equals(input2.toString())) {	
+    						userMan.ChangeUser(userMan.getUserByUsername(a.getUsername()),input2,  userMan.getUserByUsername(a.getUsername()).getPassword());
     						JOptionPane.showMessageDialog(null, "Username changed successfully.", "Message", JOptionPane.OK_CANCEL_OPTION);
     					}else {
     						JOptionPane.showMessageDialog(null, "The username confirmation failed", "Warning", JOptionPane.WARNING_MESSAGE);

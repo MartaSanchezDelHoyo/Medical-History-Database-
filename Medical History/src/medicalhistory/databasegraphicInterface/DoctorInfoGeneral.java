@@ -113,7 +113,10 @@ public class DoctorInfoGeneral extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new PatientInfo(a.getPatients().get(l),u);
+                	if (u.getRole().toString()=="Doctor") {
+                        new PatientInfo(a.getPatients().get(l),u);}
+                    	if (u.getRole().toString()=="Administrator") {
+                            new PatientInfoHospital(a.getPatients().get(l),u);}
                 }
             });
         }

@@ -111,7 +111,10 @@ public class DoctorInfoHospial extends JFrame {
             int l = i;
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new PatientInfo(a.getPatients().get(l),c);
+                	if (c.getRole().toString()=="Doctor") {
+                    new PatientInfo(a.getPatients().get(l),c);}
+                	if (c.getRole().toString()=="Administrator") {
+                        new PatientInfoHospital(a.getPatients().get(l),c);}
                 }
             });
         }
@@ -244,7 +247,7 @@ public class DoctorInfoHospial extends JFrame {
              }
         });
         JButton botonXML = new JButton("Obtain Xml with this doctor´s information ");
-        botonXML.setBounds(527, 862, 644, 90);
+        botonXML.setBounds(315, 162, 561, 90);
         botonXML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
         panel.add(botonXML);
        
@@ -254,6 +257,34 @@ public class DoctorInfoHospial extends JFrame {
              }
              
          }); 
+         
+         JButton botonHTML = new JButton("Obtain HTML with this information until date");
+         botonHTML.setBounds(946, 162, 592, 90);
+         botonHTML.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+         panel.add(botonHTML);
+        
+          botonHTML.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+              	new HTMLDoctor(a);
+              }
+              
+          });
+          panel.add(botonHTML);
+          
+          JButton btnDelete = new JButton("Delete this user from the database");
+          btnDelete.setFont(new Font("Tw Cen MT", Font.BOLD, 23));
+          btnDelete.setBounds(530, 882, 538, 79);
+          panel.add(btnDelete);
+          btnDelete.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+            	    try {
+        				userMan.deleteUser(a.getUsername());
+        			} catch (Exception e1) {
+        				 JOptionPane.showMessageDialog(null, "There was an error deleting this user.", "Warning", JOptionPane.WARNING_MESSAGE);
+        				e1.printStackTrace();
+        			}
+              }
+          });
         
         botonRetorno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

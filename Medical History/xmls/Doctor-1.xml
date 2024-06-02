@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctor doctorId="1" username="doctor1" contact="Doctor1@gmail.com">
+    <name>Marta</name>
+    <surname>Sanchez</surname>
+    <specialty>Traumatology</specialty>
+    <hospitals>
+        <Hospital hospitalID="1" hospitalName="Hospital Viamed Santa Elena" hospitalAddress="Calle de la Granja 8, 28003"/>
+        <Hospital hospitalID="2" hospitalName="Hospital Universitario HM Montepríncipe" hospitalAddress="Av. De Montepríncipe 25, 28660"/>
+    </hospitals>
+    <visits>
+        <Visit visitId="1" visitDate="1970-01-02" visitObservation="Very very unhealthy"/>
+        <Visit visitId="6" visitDate="1970-01-02" visitObservation="In need of a transplant"/>
+    </visits>
+</Doctor>

@@ -1,0 +1,247 @@
+<html>
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="cs">
+        <meta name="robots" content="all,follow">
+        <meta name="author" content="All: ... [Nazev webu - www.url.cz]; e-mail: info@url.cz">
+        <meta name="copyright" content="Design/Code: Vit Dlouhy [Nuvio - www.nuvio.cz]; e-mail: vit.dlouhy@nuvio.cz">
+        <title>Your Health Journey</title>
+        <meta name="description" content="...">
+        <meta name="keywords" content="...">
+        <link rel="index" href="./" title="Home">
+        <link rel="stylesheet" media="screen,projection" type="text/css" href="./css/main.css">
+        <link rel="stylesheet" media="print" type="text/css" href="./css/print.css">
+        <link rel="stylesheet" media="aural" type="text/css" href="./css/aural.css">
+    </head>
+    <body id="www-url-cz">
+        <div id="main" class="box">
+            <div id="header">
+                <h1 id="logo">
+                    <a href="./" title="CrystalX [Go to homepage]">Your <strong>Health Journey</strong><span></span></a>
+                </h1>
+                <hr class="noscreen">
+                <div class="noscreen noprint">
+                    <p>
+                        <em>Quick links: <a href="#content">content</a>, <a href="#tabs">navigation</a>, <a href="#search">search</a>.</em>
+                    </p>
+                    <hr>
+                </div>
+                <div id="search" class="noprint">
+                    <form action="" method="get">
+                        <fieldset>
+                            <legend>Search</legend><label><span class="noscreen">Find:</span><span id="search-input-out"><input type="text" name="" id="search-input" size="30"></span></label><input type="image" src="design/search_submit.gif" id="search-submit" value="OK">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div id="tabs" class="noprint">
+                <h3 class="noscreen">Navigation</h3>
+                <ul class="box">
+                    <li id="active">
+                        <a href="#">Weblog<span class="tab-l"></span><span class="tab-r"></span></a>
+                    </li>
+                </ul>
+                <hr class="noscreen">
+            </div>
+            <div id="page" class="box">
+                <div id="strip" class="box noprint">
+                    <p id="breadcrumbs">
+                        You are here: <a href="#">Home</a> &gt; <a href="#">Category</a> &gt;  <strong>Page</strong>
+                    </p>
+                    <hr class="noscreen">
+                </div>
+                <div id="content">
+                    <div class="article">
+                        <h2>
+                            <span><a href="#">Patient 1 Info</a></span>
+                        </h2>
+                        <p>
+                            <strong>Patient ID:</strong>1
+                        </p>
+                        <p>
+                            <strong>Date of Birth:</strong>2004-02-25
+                        </p>
+                        <p>
+                            <strong>Blood Type:</strong>B-
+                        </p>
+                        <p>
+                            <strong>Email:</strong>patient1@gmail.com
+                        </p>
+                        <p>
+                            <strong>Username:</strong>patient1
+                        </p>
+                        <p>
+                            <strong>Patient Name:</strong>Marta Ramirez
+                        </p>
+                        <h2>Allergies</h2>
+                        <p>
+                            <strong>Allergy ID:</strong>
+                    - <strong>Allergy Name:</strong>Fruit
+                        </p>
+                        <h2>Doctors</h2>
+                        <p>
+                            <strong>Contact:</strong>Doctor1@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>MartaSanchez
+                        </p>
+                        <p>
+                            <strong>Contact:</strong>Doctor3@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>PedroAlmod&oacute;var
+                        </p>
+                        <p class="btn-more box noprint">
+                            <strong><a href="#">Continue</a></strong>
+                        </p>
+                    </div>
+                    <hr class="noscreen">
+                    <div class="article">
+                        <h2>
+                            <span><a href="#">Patient 2 Info</a></span>
+                        </h2>
+                        <p>
+                            <strong>Patient ID:</strong>1
+                        </p>
+                        <p>
+                            <strong>Date of Birth:</strong>2004-02-25
+                        </p>
+                        <p>
+                            <strong>Blood Type:</strong>B-
+                        </p>
+                        <p>
+                            <strong>Email:</strong>patient1@gmail.com
+                        </p>
+                        <p>
+                            <strong>Username:</strong>patient1
+                        </p>
+                        <p>
+                            <strong>Patient Name:</strong>Marta Ramirez
+                        </p>
+                        <h2>Allergies</h2>
+                        <p>
+                            <strong>Allergy ID:</strong>
+                    - <strong>Allergy Name:</strong>Fruit
+                        </p>
+                        <h2>Doctors</h2>
+                        <p>
+                            <strong>Contact:</strong>Doctor1@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>MartaSanchez
+                        </p>
+                        <p>
+                            <strong>Contact:</strong>Doctor3@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>PedroAlmod&oacute;var
+                        </p>
+                        <p class="btn-more box noprint">
+                            <strong><a href="#">Continue</a></strong>
+                        </p>
+                    </div>
+                    <hr class="noscreen">
+                    <div class="article">
+                        <h2>
+                            <span><a href="#">Patient 3 Info</a></span>
+                        </h2>
+                        <p>
+                            <strong>Patient ID:</strong>1
+                        </p>
+                        <p>
+                            <strong>Date of Birth:</strong>2004-02-25
+                        </p>
+                        <p>
+                            <strong>Blood Type:</strong>B-
+                        </p>
+                        <p>
+                            <strong>Email:</strong>patient1@gmail.com
+                        </p>
+                        <p>
+                            <strong>Username:</strong>patient1
+                        </p>
+                        <p>
+                            <strong>Patient Name:</strong>Marta Ramirez
+                        </p>
+                        <h2>Allergies</h2>
+                        <p>
+                            <strong>Allergy ID:</strong>
+                    - <strong>Allergy Name:</strong>Fruit
+                        </p>
+                        <h2>Doctors</h2>
+                        <p>
+                            <strong>Contact:</strong>Doctor1@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>MartaSanchez
+                        </p>
+                        <p>
+                            <strong>Contact:</strong>Doctor3@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>PedroAlmod&oacute;var
+                        </p>
+                        <p class="btn-more box noprint">
+                            <strong><a href="#">Continue</a></strong>
+                        </p>
+                    </div>
+                    <hr class="noscreen">
+                    <div class="article">
+                        <h2>
+                            <span><a href="#">Patient 4 Info</a></span>
+                        </h2>
+                        <p>
+                            <strong>Patient ID:</strong>1
+                        </p>
+                        <p>
+                            <strong>Date of Birth:</strong>2004-02-25
+                        </p>
+                        <p>
+                            <strong>Blood Type:</strong>B-
+                        </p>
+                        <p>
+                            <strong>Email:</strong>patient1@gmail.com
+                        </p>
+                        <p>
+                            <strong>Username:</strong>patient1
+                        </p>
+                        <p>
+                            <strong>Patient Name:</strong>Marta Ramirez
+                        </p>
+                        <h2>Allergies</h2>
+                        <p>
+                            <strong>Allergy ID:</strong>
+                    - <strong>Allergy Name:</strong>Fruit
+                        </p>
+                        <h2>Doctors</h2>
+                        <p>
+                            <strong>Contact:</strong>Doctor1@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>MartaSanchez
+                        </p>
+                        <p>
+                            <strong>Contact:</strong>Doctor3@gmail.com
+                    - <strong>Specialty:</strong>
+                        </p>
+                        <p>
+                            <strong>Name:</strong>PedroAlmod&oacute;var
+                        </p>
+                        <p class="btn-more box noprint">
+                            <strong><a href="#">Continue</a></strong>
+                        </p>
+                    </div>
+                    <hr class="noscreen">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

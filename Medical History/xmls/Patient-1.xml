@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Patient patientID="1" dateofbirth="2004-02-25" bloodtype="B-" email="patient1@gmail.com" username="patient1">
+    <patientName>Marta Ramirez</patientName>
+    <allergies>
+        <Allergies>
+            <allergiesID>3</allergiesID>
+            <allergiesName>Fruit</allergiesName>
+        </Allergies>
+    </allergies>
+    <Doctors>
+        <Doctor doctorId="1" username="doctor1" contact="Doctor1@gmail.com">
+            <name>Marta</name>
+            <surname>Sanchez</surname>
+            <specialty>Traumatology</specialty>
+            <hospitals/>
+        </Doctor>
+        <Doctor doctorId="3" username="doctor3" contact="Doctor3@gmail.com">
+            <name>Pedro</name>
+            <surname>Almodóvar</surname>
+            <specialty>Surgeon</specialty>
+            <hospitals/>
+        </Doctor>
+    </Doctors>
+</Patient>

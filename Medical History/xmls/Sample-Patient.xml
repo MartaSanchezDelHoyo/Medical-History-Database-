@@ -11,13 +11,15 @@
         </Allergies>
     </allergies>
     <Doctors>
-        <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
+        <Doctor contact="johndoe@gmail.com">
 			<name>Jane</name>
             <surname>Smith</surname>
+            <specialty>Dermatology</specialty>
         </Doctor>
-        <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
+        <Doctor contact="mark.johnson@gmail.com">
 			 <name>Mark</name>
             <surname>Johnson</surname>
+            <specialty>Pediatrics</specialty>
         </Doctor>
     </Doctors>
     <visits>

@@ -15,11 +15,11 @@
     <!ELEMENT Allergies (allergiesName)>
     <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
     <!ELEMENT allergiesName (#PCDATA)>   
-    <!ELEMENT Doctor (name, surname )>
-    <!ATTLIST Doctor contact CDATA #REQUIRED
-                     specialty CDATA #REQUIRED>
+    <!ELEMENT Doctor (name, surname,specialty )>
+    <!ATTLIST Doctor contact CDATA #REQUIRED>
     <!ELEMENT name (#PCDATA)>
     <!ELEMENT surname (#PCDATA)>
+    <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT Visit (#PCDATA)>
     <!ATTLIST Visit visit_id CDATA #REQUIRED
                     visit_date CDATA #REQUIRED
@@ -39,13 +39,15 @@
         </Allergies>
     </allergies>
     <Doctors>
-        <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
+        <Doctor contact="johndoe@gmail.com">
 			<name>Jane</name>
             <surname>Smith</surname>
+            <specialty>Dermatology</specialty>
         </Doctor>
-        <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
+        <Doctor contact="mark.johnson@gmail.com">
 			 <name>Mark</name>
             <surname>Johnson</surname>
+            <specialty>Pediatrics</specialty>
         </Doctor>
     </Doctors>
     <visits>

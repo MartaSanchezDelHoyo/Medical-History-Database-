@@ -15,11 +15,11 @@
     <!ELEMENT Allergies (allergiesName)>
     <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
     <!ELEMENT allergiesName (#PCDATA)>   
-    <!ELEMENT Doctor (name, surname )>
-    <!ATTLIST Doctor contact CDATA #REQUIRED
-                     specialty CDATA #REQUIRED>
+    <!ELEMENT Doctor (name, surname,specialty )>
+    <!ATTLIST Doctor contact CDATA #REQUIRED>
     <!ELEMENT name (#PCDATA)>
     <!ELEMENT surname (#PCDATA)>
+    <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT Visit (#PCDATA)>
     <!ATTLIST Visit visit_id CDATA #REQUIRED
                     visit_date CDATA #REQUIRED

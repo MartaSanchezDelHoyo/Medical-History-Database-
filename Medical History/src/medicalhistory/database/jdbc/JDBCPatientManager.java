@@ -193,9 +193,9 @@ public class JDBCPatientManager implements PatientManager {
 	}
 	
 	/**
-	 *Adds all the doctors to list that have as specialty the same as the parameter
-	 *@param specialty is the specialty we want to group the doctors by 
-	 *@return List of doctors that fulfill  this condition 
+	 *Method to get the patient by its username
+	 *@param the patients username 
+	 *@return Obj patient the fulfills the username
 	 */
 	@Override
 	public Patient getPatientssbyUsername(String usern) {

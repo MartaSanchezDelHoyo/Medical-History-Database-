@@ -14,7 +14,7 @@ import medicalhistory.database.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name= "Patient")
-@XmlType (propOrder = { "patientName", "allergies", "doctors"})
+@XmlType (propOrder = { "patientName", "allergies", "doctors", "vistis"})
 public class Patient implements Serializable{
 	/**
 	 * 
@@ -38,7 +38,8 @@ public class Patient implements Serializable{
 	@XmlElement(name= "Allergies")
 	@XmlElementWrapper(name = "allergies")
 	private List <Allergies> allergies;
-	@XmlTransient
+	@XmlElement(name= "Visit")
+	@XmlElementWrapper(name = "visits")
 	private List <Visit> visits ;
 	@XmlElement(name= "Doctor")
 	@XmlElementWrapper(name = "Doctors")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!DOCTYPE Patient [
-    <!ELEMENT Patient (patientName, allergies, Doctors)>
+    <!ELEMENT Patient (patientName, allergies, Doctors,visits )>
     <!ATTLIST Patient patientID CDATA #REQUIRED
                       dateofbirth CDATA #REQUIRED
                       bloodtype CDATA #REQUIRED
@@ -11,6 +11,7 @@
     <!ELEMENT patientName (#PCDATA)>
     <!ELEMENT allergies (Allergies+)>
     <!ELEMENT Doctors (Doctor+)> 
+    <!ELEMENT visits (Visit+)>
     <!ELEMENT Allergies (allergiesName)>
     <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
     <!ELEMENT allergiesName (#PCDATA)>   
@@ -19,6 +20,11 @@
                      specialty CDATA #REQUIRED>
     <!ELEMENT name (#PCDATA)>
     <!ELEMENT surname (#PCDATA)>
+    <!ELEMENT Visit (#PCDATA)>
+    <!ATTLIST Visit visit_id CDATA #REQUIRED
+                    visit_date CDATA #REQUIRED
+                    visit_observation CDATA #REQUIRED>
+
     
                     
 ]>                  
@@ -42,4 +48,10 @@
             <surname>Johnson</surname>
         </Doctor>
     </Doctors>
+    <visits>
+        <Visit visit_id="121" visit_date="01/01/2001" visit_observation="Nice health">
+        </Visit>
+        <Visit visit_id="122" visit_date="02/01/2001" visit_observation="Not so nice health">
+        </Visit>
+    </visits>
 </Patient>

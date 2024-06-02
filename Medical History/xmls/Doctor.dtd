@@ -8,7 +8,8 @@
     <!ELEMENT specialty (#PCDATA)>
     <!ELEMENT hospitals (Hospital+)> 
     <!ELEMENT Hospital (hospitalName)>
-    <!ATTLIST Hospital hospitalAddress CDATA #REQUIRED>
+    <!ATTLIST Hospital hospitalID CDATA #REQUIRED
+                       hospitalAddress CDATA #REQUIRED>
     <!ELEMENT hospitalName (#PCDATA)>
 
 

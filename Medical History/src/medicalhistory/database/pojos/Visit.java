@@ -6,19 +6,35 @@ import java.util.*;
 import java.sql.Date;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import medicalhistory.database.xml.utils.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Visit implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4922111399657589755L;
-	private Integer visit_id; 
+	@XmlAttribute
+	private Integer visit_id;
+	@XmlAttribute
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date visit_date;
+	@XmlAttribute
 	private String visit_observation;
+	@XmlTransient
 	private Hospital hospital;
+	@XmlTransient
 	private Patient visit_patient;
+	@XmlTransient
 	private Doctor visit_doctor;
+	@XmlTransient
 	private Test visit_test;
+	@XmlTransient
 	private List <Medication> medications;
+	@XmlTransient
 	private List <Treatment> treatments;
 	
 	public Visit() {

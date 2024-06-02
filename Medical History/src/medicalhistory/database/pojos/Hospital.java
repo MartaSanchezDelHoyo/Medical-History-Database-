@@ -12,7 +12,7 @@ public class Hospital implements Serializable{
 
 	
 	private static final long serialVersionUID = -1457717917835220464L;
-	@XmlTransient
+	@XmlAttribute
 	private Integer hospitalID;
 	@XmlAttribute
     private String hospitalName;

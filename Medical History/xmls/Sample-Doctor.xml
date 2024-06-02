@@ -4,12 +4,12 @@
     <name>John</name>
     <surname>Doe</surname>
     <specialty>Cardiology</specialty>
-    <Hospitals>
-        <Hospital hospitalAddress="123 Main St">
+    <hospitals>
+        <Hospital hospitalID="001" hospitalAddress="123 Main St">
 			<hospitalName>City Hospital</hospitalName>
         </Hospital>
-        <Hospital hospitalAddress="456 Elm St">
-			<hospitalName>County Hospital</hospitalName>
+        <Hospital hospitalID="002" hospitalAddress="456 Elm St">
+			<hospitalName>Country Hospital</hospitalName>
         </Hospital>
-    </Hospitals>
+    </hospitals>
 </Doctor>

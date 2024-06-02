@@ -1,7 +1,7 @@
 <!-- DTD of the patient-->
 
 <!DOCTYPE Patient [
-    <!ELEMENT Patient (patientName, allergies, Doctors)>
+    <!ELEMENT Patient (patientName, allergies, Doctors,visits )>
     <!ATTLIST Patient patientID CDATA #REQUIRED
                       dateofbirth CDATA #REQUIRED
                       bloodtype CDATA #REQUIRED
@@ -11,6 +11,7 @@
     <!ELEMENT patientName (#PCDATA)>
     <!ELEMENT allergies (Allergies+)>
     <!ELEMENT Doctors (Doctor+)> 
+    <!ELEMENT visits (Visit+)>
     <!ELEMENT Allergies (allergiesName)>
     <!ATTLIST Allergies allergiesID CDATA #REQUIRED>
     <!ELEMENT allergiesName (#PCDATA)>   
@@ -19,6 +20,11 @@
                      specialty CDATA #REQUIRED>
     <!ELEMENT name (#PCDATA)>
     <!ELEMENT surname (#PCDATA)>
+    <!ELEMENT Visit (#PCDATA)>
+    <!ATTLIST Visit visit_id CDATA #REQUIRED
+                    visit_date CDATA #REQUIRED
+                    visit_observation CDATA #REQUIRED>
+
     
                     
-]>
+]> 

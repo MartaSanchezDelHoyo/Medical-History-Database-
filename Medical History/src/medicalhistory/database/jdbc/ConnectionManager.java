@@ -70,7 +70,7 @@ public class ConnectionManager {
 					+ "specialty TEXT NOT NULL,"
 					+ "contact TEXT NOT NULL,"
 					+ "photo  BLOB,"
-					+ "username TEXT NOT NULL UNIQUE"
+					+ "username TEXT UNIQUE"
 					+ ")";
 			createTables1.executeUpdate(create1);
 			createTables1.close();
@@ -82,7 +82,7 @@ public class ConnectionManager {
 					+ " contact  TEXT NOT NULL,"
 					+ " blood_type TEXT NOT NULL,"
 					+ " photo  BLOB,"
-					+ " username TEXT NOT NULL UNIQUE"
+					+ " username TEXT UNIQUE"
 					+ ")";
 			createTables2.executeUpdate(create2);
 			createTables2.close();

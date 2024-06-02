@@ -142,7 +142,7 @@ import medicalhistory.database.pojos.User;
 				u = (User) q.getSingleResult();
 				
 			} catch (NoResultException e) {
-				em.getTransaction().rollback();
+				
 				return null;
 			}return u;	
 		}

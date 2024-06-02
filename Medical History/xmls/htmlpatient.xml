@@ -1,22 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Patient patientID="456" dateofbirth="1992-06-15" bloodtype="O+" email="james.bond@gmail.com" username="patient456">
-    <patientName>John Doe</patientName>
-    <allergies>
-        <Allergies allergiesID="001">
-            <allergiesName>Peanuts</allergiesName>
-        </Allergies>
-        <Allergies allergiesID="002">
-            <allergiesName>Shellfish</allergiesName>
-        </Allergies>
-    </allergies>
-    <Doctors>
-        <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
-            <name>Jane</name>
-            <surname>Smith</surname>
-        </Doctor>
-        <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
-            <name>Mark</name>
-            <surname>Johnson</surname>
-        </Doctor>
-    </Doctors>
-</Patient>
+<Patients>
+    <Patient patientID="456" dateofbirth="1992-06-15" bloodtype="O+" email="james.bond@gmail.com" username="patient456">
+        <patientName>John Doe</patientName>
+        <allergies>
+            <Allergies allergiesID="001">
+                <allergiesName>Peanuts</allergiesName>
+            </Allergies>
+            <Allergies allergiesID="002">
+                <allergiesName>Shellfish</allergiesName>
+            </Allergies>
+        </allergies>
+        <Doctors>
+            <Doctor contact="johndoe@gmail.com" specialty="Dermatology">
+                <name>Jane</name>
+                <surname>Smith</surname>
+            </Doctor>
+            <Doctor contact="mark.johnson@gmail.com" specialty="Pediatrics">
+                <name>Mark</name>
+                <surname>Johnson</surname>
+            </Doctor>
+        </Doctors>
+    </Patient>
+    
+    <Patient patientID="457" dateofbirth="1985-03-22" bloodtype="A+" email="emily.davis@gmail.com" username="patient457">
+        <patientName>Emily Davis</patientName>
+        <allergies>
+            <Allergies allergiesID="003">
+                <allergiesName>Penicillin</allergiesName>
+            </Allergies>
+        </allergies>
+        <Doctors>
+            <Doctor contact="jane.smith@gmail.com" specialty="Cardiology">
+                <name>Jane</name>
+                <surname>Smith</surname>
+            </Doctor>
+        </Doctors>
+    </Patient>
+    
+    <Patient patientID="458" dateofbirth="1970-11-05" bloodtype="B-" email="michael.brown@gmail.com" username="patient458">
+        <patientName>Michael Brown</patientName>
+        <allergies>
+            <Allergies allergiesID="004">
+                <allergiesName>Latex</allergiesName>
+            </Allergies>
+        </allergies>
+        <Doctors>
+            <Doctor contact="james.wilson@gmail.com" specialty="Orthopedics">
+                <name>James</name>
+                <surname>Wilson</surname>
+            </Doctor>
+        </Doctors>
+    </Patient>
+    
+    <Patient patientID="459" dateofbirth="1990-01-12" bloodtype="AB-" email="sarah.jones@gmail.com" username="patient459">
+        <patientName>Sarah Jones</patientName>
+        <allergies>
+            <Allergies allergiesID="005">
+                <allergiesName>Eggs</allergiesName>
+            </Allergies>
+            <Allergies allergiesID="006">
+                <allergiesName>Dairy</allergiesName>
+            </Allergies>
+        </allergies>
+        <Doctors>
+            <Doctor contact="emma.green@gmail.com" specialty="Neurology">
+                <name>Emma</name>
+                <surname>Green</surname>
+            </Doctor>
+        </Doctors>
+    </Patient>
+    
+    <Patient patientID="460" dateofbirth="2000-07-25" bloodtype="O-" email="daniel.miller@gmail.com" username="patient460">
+        <patientName>Daniel Miller</patientName>
+        <allergies>
+            <Allergies allergiesID="007">
+                <allergiesName>Dust</allergiesName>
+            </Allergies>
+        </allergies>
+        <Doctors>
+            <Doctor contact="olivia.thomas@gmail.com" specialty="Gastroenterology">
+                <name>Olivia</name>
+                <surname>Thomas</surname>
+            </Doctor>
+        </Doctors>
+    </Patient>
+</Patients>

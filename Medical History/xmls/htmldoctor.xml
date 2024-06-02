@@ -1,15 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctors>
+    <Doctor doctor_id="123" contact="johndoe@gmail.com" username="drjohndoe">
+        <name>John</name>
+        <surname>Doe</surname>
+        <specialty>Cardiology</specialty>
+        <hospitals>
+            <Hospital hospitalID="001" hospitalAddress="Pº de la Castellana, 261 - 28046 Madrid">
+                <hospitalName>La Paz</hospitalName>
+            </Hospital>
+            <Hospital hospitalID="002" hospitalAddress=" C/ O´Donnell 48-50 - 28009 Madrid">
+                <hospitalName>Gregorio Marañon</hospitalName>
+            </Hospital>
+        </hospitals>
+        <visits>
+            <Visit visit_id="345" visit_date="01/12/2001" visit_observation="A bit rude"/>
+            <Visit visit_id="789" visit_date="02/11/2001" visit_observation="Not so nice"/>
+        </visits>
+    </Doctor>
 
-<Doctor doctor_id="123" contact="johndoe@gmail.com" username="drjohndoe">
-    <name>John</name>
-    <surname>Doe</surname>
-    <specialty>Cardiology</specialty>
-    <Hospitals>
-        <Hospital hospitalAddress="123 Main St">
-			<hospitalName>City Hospital</hospitalName>
-        </Hospital>
-        <Hospital hospitalAddress="456 Elm St">
-			<hospitalName>County Hospital</hospitalName>
-        </Hospital>
-    </Hospitals>
-</Doctor>
+    <Doctor doctor_id="124" contact="janedoe@gmail.com" username="drjanedoe">
+        <name>Jane</name>
+        <surname>Doe</surname>
+        <specialty>Neurology</specialty>
+        <hospitals>
+            <Hospital hospitalID="003" hospitalAddress="Pº de la Castellana, 261 - 28046 Madrid">
+                <hospitalName>La Paz</hospitalName>
+            </Hospital>
+        </hospitals>
+        <visits>
+            <Visit visit_id="346" visit_date="03/15/2002" visit_observation="Very professional"/>
+            <Visit visit_id="790" visit_date="04/20/2002" visit_observation="Excellent care"/>
+        </visits>
+    </Doctor>
+
+    <Doctor doctor_id="125" contact="jacksmith@gmail.com" username="drjacksmith">
+        <name>Jack</name>
+        <surname>Smith</surname>
+        <specialty>Pediatrics</specialty>
+        <hospitals>
+            <Hospital hospitalID="004" hospitalAddress="Pº de la Castellana, 261 - 28046 Madrid">
+                <hospitalName>La Paz</hospitalName>
+            </Hospital>
+        </hospitals>
+        <visits>
+            <Visit visit_id="347" visit_date="05/10/2003" visit_observation="Great with kids"/>
+            <Visit visit_id="791" visit_date="06/14/2003" visit_observation="Highly recommended"/>
+        </visits>
+    </Doctor>
+
+    <Doctor doctor_id="126" contact="emilybrown@gmail.com" username="dremilybrown">
+        <name>Emily</name>
+        <surname>Brown</surname>
+        <specialty>Dermatology</specialty>
+        <hospitals>
+            <Hospital hospitalID="005" hospitalAddress="Pº de la Castellana, 261 - 28046 Madrid">
+                <hospitalName>La paz</hospitalName>
+            </Hospital>
+        </hospitals>
+        <visits>
+            <Visit visit_id="348" visit_date="07/22/2004" visit_observation="Very knowledgeable"/>
+            <Visit visit_id="792" visit_date="08/18/2004" visit_observation="Excellent treatment"/>
+        </visits>
+    </Doctor>
+</Doctors>

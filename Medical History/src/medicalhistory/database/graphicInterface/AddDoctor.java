@@ -1,4 +1,4 @@
-package medicalhistory.databasegraphicInterface;
+package medicalhistory.database.graphicInterface;
 
 import java.awt.Font;
 import java.awt.Image;

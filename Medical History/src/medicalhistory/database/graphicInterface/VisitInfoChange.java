@@ -1,4 +1,4 @@
-package medicalhistory.databasegraphicInterface;
+package medicalhistory.database.graphicInterface;
 import com.toedter.calendar.JCalendar;
 import medicalhistory.database.interfaces.MedicationManager;
 import medicalhistory.database.interfaces.TreatmentManager;

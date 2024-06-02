@@ -11,8 +11,10 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Allergies implements Serializable{
 	/**
-	 * 
-	 */
+     * @param allergiesID: identification of an allergy
+     * @param allergiesName: name of the allergy
+     * @param patients: list of patient that has an specific allergy
+     */
 	private static final long serialVersionUID = 309157577865656134L;
 	@XmlElement
 	private Integer allergiesID;
@@ -21,48 +23,39 @@ public class Allergies implements Serializable{
 	@XmlTransient
 	private List <Patient> patients;
 	
-	public Allergies() {
-		super();
-	}
-	
+	/**Constructor with only the name of the allergy
+     * @param allergiesName is the name of the allergy
+     */
 	public Allergies( String allergiesName) {
 		this.allergiesName= allergiesName;
 		this.patients= new ArrayList<>();
 	}
 	
+	/**Constructor with  the name of the allergy and the id
+	 * @param allergiesID is the identification of an allergy
+     * @param allergiesName 
+     */
 	public Allergies(Integer allergiesID, String allergiesName) {
 		this.allergiesID= allergiesID;
 		this.allergiesName= allergiesName;
 		this.patients= new ArrayList<>();
 	}
 	
+	/**Constructor with every attribute
+     * @param allergiesID
+     * @param allergiesName
+     * @param patients is the list of patient that has an specific allergy
+     */
 	public Allergies(Integer allergiesID, String allergiesName,List <Patient> patients) {
 		this.allergiesID= allergiesID;
 		this.allergiesName= allergiesName;
 		this.patients= patients;
 	}
 	
-    public Integer getAllergiesID() {
-        return allergiesID;
-    }
-
-    public void setAllergiesID(Integer allergiesID) {
-        this.allergiesID = allergiesID;
-    }
-
-    public String getAllergiesName() {
-        return allergiesName;
-    }
-
-    public void setAllergiesName(String allergiesName) {
-        this.allergiesName = allergiesName;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(allergiesID, allergiesName);
-    }
-
+	/** Equals method to compare two allergiesID
+	 * @param Object 
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,6 +73,40 @@ public class Allergies implements Serializable{
 		return true;
 	}
 	
+	 @Override
+	    public int hashCode() {
+	        return Objects.hash(allergiesID, allergiesName);
+	    }
+
+	 /**
+	     * Getter and setters of the attributes
+	     */
+	
+    public Integer getAllergiesID() {
+        return allergiesID;
+    }
+
+    public void setAllergiesID(Integer allergiesID) {
+        this.allergiesID = allergiesID;
+    }
+
+    public String getAllergiesName() {
+        return allergiesName;
+    }
+
+    public void setAllergiesName(String allergiesName) {
+        this.allergiesName = allergiesName;
+    }
+
+    public List <Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List <Patient> patients) {
+		this.patients = patients;
+	}
+	
+	
     @Override
     public String toString() {
         return "AllergiesPOJO{" +
@@ -87,12 +114,4 @@ public class Allergies implements Serializable{
                 ", allergiesName='" + allergiesName + '\'' +
                 '}';
     }
-
-	public List <Patient> getPatients() {
-		return patients;
-	}
-
-	public void setPatients(List <Patient> patients) {
-		this.patients = patients;
-	}
 }

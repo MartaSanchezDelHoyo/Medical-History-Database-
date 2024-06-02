@@ -10,7 +10,14 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital implements Serializable{
 
-	
+	/**
+	 * @param hospitalID: identification of the hospital
+	 * @param hospitalName: name of the hospital
+	 * @param hospitalAddress: address of the hospital
+	 * @param username: the username of the hospital in the program
+	 * @param hospital_doctors: list of doctors of the hospital
+	 * @param hospital_visits: list of visits of the hospitals
+	 */
 	private static final long serialVersionUID = -1457717917835220464L;
 	@XmlAttribute
 	private Integer hospitalID;
@@ -29,10 +36,10 @@ public class Hospital implements Serializable{
 		super();
 	}
 	
-    /** 
-     * @param hospitalID identification of the hospital
+    /**
      * @param hospitalName name of the hospital
      * @param hospitalAddress address of the hospital
+     * @param username: the username of the hospital in the program
      */
     public Hospital(String hospitalName, String hospitalAddress, String username) {
 		this.hospitalName = hospitalName;
@@ -42,10 +49,10 @@ public class Hospital implements Serializable{
 		this.Hospital_visits = new ArrayList<>();
 	}
     
-    /** 
-     * @param hospitalID identification of the hospital
-     * @param hospitalName name of the hospital
-     * @param hospitalAddress address of the hospital
+    /**
+     * @param hospitalName 
+     * @param hospitalAddress 
+     * @param username
      * @param hospital_doctors list of doctors of the hospital
      */
     public Hospital(String hospitalName, String hospitalAddress, String username,List<Doctor> hospital_doctors) {
@@ -58,9 +65,9 @@ public class Hospital implements Serializable{
     
     /** 
      * @param hospitalID identification of the hospital
-     * @param hospitalName name of the hospital
-     * @param hospitalAddress address of the hospital
-     * @param username of the hospital manager
+     * @param hospitalName 
+     * @param hospitalAddress 
+     * @param username 
      */
     public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username) {
 		this.hospitalID = hospitalID;
@@ -75,6 +82,7 @@ public class Hospital implements Serializable{
 	 * @param hospitalID
 	 * @param hospitalName
 	 * @param hospitalAddress
+	 * @param username 
 	 * @param hospital_doctors list of doctors of the hospital
 	 */
 	public Hospital(Integer hospitalID, String hospitalName, String hospitalAddress, String username, List<Doctor> hospital_doctors) {
@@ -90,6 +98,7 @@ public class Hospital implements Serializable{
 	 * @param hospitalID
 	 * @param hospitalName
 	 * @param hospitalAddress
+	 * @param username 
 	 * @param hospital_doctors
 	 * @param hospital_visits list of visits of the hospitals
 	 */
@@ -101,22 +110,11 @@ public class Hospital implements Serializable{
 	    this.Hospital_doctors =hospital_doctors;
 	    this.Hospital_visits= hospital_visits;
 	}
-	
-	
-	
-	
-    @Override
-	public String toString() {
-		return "Hospital [hospitalID=" + hospitalID + ", hospitalName=" + hospitalName + ", hospitalAddress="
-				+ hospitalAddress + ", username=" + username + ", Hospital_doctors=" + Hospital_doctors
-				+ ", Hospital_visits=" + Hospital_visits + "]";
-	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(Hospital_doctors, Hospital_visits, hospitalAddress, hospitalID, hospitalName, username);
-	}
-
+	/** Equals method to compare two hospitals
+	 * @param Object 
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -133,6 +131,14 @@ public class Hospital implements Serializable{
 				&& Objects.equals(username, other.username);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(Hospital_doctors, Hospital_visits, hospitalAddress, hospitalID, hospitalName, username);
+	}
+	
+	/**
+     * Getter and setters of the attributes
+     */
 	public String getUsername() {
 		return username;
 	}
@@ -179,5 +185,12 @@ public class Hospital implements Serializable{
 
 	public void setHospital_visits(List <Visit> hospital_visits) {
 		Hospital_visits = hospital_visits;
+	}
+	
+	@Override
+	public String toString() {
+		return "Hospital [hospitalID=" + hospitalID + ", hospitalName=" + hospitalName + ", hospitalAddress="
+				+ hospitalAddress + ", username=" + username + ", Hospital_doctors=" + Hospital_doctors
+				+ ", Hospital_visits=" + Hospital_visits + "]";
 	}
 }

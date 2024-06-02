@@ -21,8 +21,7 @@ public class Treatment implements Serializable{
 	}
 	
     
-    /** Constructor without the visits as a parameter
-     * @param treatmentID identification of a treatment
+    /** Constructor without the visits and the id as a parameter
      * @param treatmentType type of treatment
      */
       public Treatment( String treatmentType) {
@@ -32,7 +31,7 @@ public class Treatment implements Serializable{
     
    /** Constructor without the visits as a parameter
    * @param treatmentID identification of a treatment
-   * @param treatmentType type of treatment
+   * @param treatmentType
    */
     public Treatment(Integer treatmentID, String treatmentType) {
         this.treatmentID = treatmentID;
@@ -44,7 +43,7 @@ public class Treatment implements Serializable{
     /** Constructor with every attribute
      * @param treatmentID
      * @param treatmentType
-     * @param visits
+     * @param visits list of visits that took to do that treatment
      */
     public Treatment(Integer treatmentID, String treatmentType, List <Visit> visits) {
         this.treatmentID = treatmentID;
@@ -78,13 +77,7 @@ public class Treatment implements Serializable{
         return Objects.hash(treatmentID, treatmentType);
     }
     
-    @Override
-    public String toString() {
-        return "TreatmentPOJO{" +
-                "treatmentID=" + treatmentID +
-                ", treatmentType='" + treatmentType + '\'' +
-                '}';
-    }
+    
     /**
      * Getter and setters of the attributes
      */
@@ -112,4 +105,12 @@ public class Treatment implements Serializable{
 	public void setVisits(List <Visit> visits) {
 		this.visits = visits;
 	}
+	
+	@Override
+    public String toString() {
+        return "TreatmentPOJO{" +
+                "treatmentID=" + treatmentID +
+                ", treatmentType='" + treatmentType + '\'' +
+                '}';
+    }
 }

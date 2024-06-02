@@ -13,9 +13,17 @@ import medicalhistory.database.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Visit implements Serializable {
-	/**
-	 * 
-	 */
+	/** 
+	 * @param visit_id is the identification of the visit
+     * @param visit_date is the date of the visit
+     * @param visit_observation is the extra information of the visit
+     * @param hospital depending on which medical center the visit took place
+     * @param visit_patient is the person who was treated in the visit
+     * @param visit_doctor  is the doctor who attended to the patient
+     * @param visit_test is the medical test to perform
+     * @param medications are the medicines needed to solve the problem of the patient
+     * @param treatments are the procedures needed to cure the patient
+     */
 	private static final long serialVersionUID = -4922111399657589755L;
 	@XmlAttribute
 	private Integer visit_id;
@@ -41,6 +49,14 @@ public class Visit implements Serializable {
 		super();
 	}
 	
+	 /** 
+     * @param visitDate is the date of the visit
+     * @param observations is the extra information of the visit
+     * @param patient is the person who was treated in the visit
+     * @param doctor  is the doctor who attended to the patient
+     * @param test is the medical test to perform
+     * @param hospital depending on which medical center the visit took place
+     */
 	public Visit(Date visitDate, String observations, Patient patient, Doctor doctor , Test test, Hospital hospital) {
 		this.visit_date = visitDate;
 		this.visit_observation = observations;
@@ -50,7 +66,16 @@ public class Visit implements Serializable {
 		this.visit_test=test;
 	}
 	
-	public Visit(int visitId, Date visitDate, String observations, Patient patient, Doctor doctor, Test test, Hospital hospital) {
+	/** Constructor with the visit ID
+	 * @param visitId is the identification of the visit
+     * @param visitDate 
+     * @param observations 
+     * @param patient 
+     * @param doctor  
+     * @param test 
+     * @param hospital 
+     */
+	public Visit(Integer visitId, Date visitDate, String observations, Patient patient, Doctor doctor, Test test, Hospital hospital) {
 		this.visit_id = visitId;
 		this.visit_date = visitDate;
 		this.visit_observation = observations;
@@ -60,37 +85,56 @@ public class Visit implements Serializable {
 		this.visit_test=test;
 	}
 	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test, List<Medication> medications) {
-		this.visit_id = visit_id;
-		this.visit_date = visit_date;
-		this.visit_observation = visit_observation;
+	/** Constructor with the medications required
+	 * @param visitId 
+     * @param visitDate 
+     * @param observations 
+     * @param patient 
+     * @param doctor  
+     * @param test 
+     * @param hospital 
+     * @param medications are the medicines needed to solve the problem of the patient
+     */
+	public Visit(Integer visitId, Date visitDate, String observations, Hospital hospital, Patient patient, Doctor doctor, Test test, List<Medication> medications) {
+		this.visit_id = visitId;
+		this.visit_date = visitDate;
+		this.visit_observation = observations;
 		this.hospital = hospital;
-		this.visit_patient = visit_patient;
-		this.visit_doctor = visit_doctor;
-		this.visit_test=visit_test;
+		this.visit_patient = patient;
+		this.visit_doctor = doctor;
+		this.visit_test=test;
 		this.medications = medications;
 		
 	}
 	
-	
-	public Visit(Integer visit_id, Date visit_date, String visit_observation, Hospital hospital, Patient visit_patient, Doctor visit_doctor, Test visit_test,
+	/** Constructor with the medications and treatments required
+	 * @param visitId 
+     * @param visitDate 
+     * @param observations 
+     * @param patient 
+     * @param doctor  
+     * @param test 
+     * @param hospital 
+     * @param medications 
+     * @param treatments are the procedures needed to cure the patient
+     */
+	public Visit(Integer visitId, Date visitDate, String observations, Hospital hospital, Patient patient, Doctor doctor, Test test,
 			 List<Medication> medications, List<Treatment> treatments) {
-		this.visit_id = visit_id;
-		this.visit_date = visit_date;
-		this.visit_observation = visit_observation;
+		this.visit_id = visitId;
+		this.visit_date = visitDate;
+		this.visit_observation = observations;
 		this.hospital = hospital;
-		this.visit_patient = visit_patient;
-		this.visit_doctor = visit_doctor;
-		this.visit_test=visit_test; 
+		this.visit_patient = patient;
+		this.visit_doctor = doctor;
+		this.visit_test=test; 
 		this.medications = medications;
 		this.treatments = treatments;
 	}
 	
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(visit_id);
-	}
+	/** Equals method to compare two visit_id
+	 * @param Object 
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -102,6 +146,15 @@ public class Visit implements Serializable {
 		Visit other = (Visit) obj;
 		return Objects.equals(visit_id, other.visit_id);
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(visit_id);
+	}
+	
+	/**
+     * Getter and setters of the attributes
+     */
 	public Integer getVisit_id() {
 		return visit_id;
 	}
@@ -161,6 +214,7 @@ public class Visit implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	@Override
 	public String toString() {
 		return "Visit [visit_id=" + visit_id + ", visit_date=" + visit_date + ", visit_observation=" + visit_observation
@@ -168,8 +222,4 @@ public class Visit implements Serializable {
 				+ ", visit_doctor=" + visit_doctor + ", visit_test=" + visit_test +
 				", medications=" + medications + ", treatments=" + treatments + "]";
 	}
-	
-	
-	
-
 }

@@ -22,6 +22,10 @@ public class JDBCTestManager implements TestManager{
 		this.c = connectionManager.getConnection();
 	}
 	
+	/**This method allows to add a test in the database
+     * @param Obj test to add the information
+	 * @throws SQLException 
+     */
 	@Override
 	public void addTest(Test entry) {
 		try {
@@ -142,7 +146,10 @@ public class JDBCTestManager implements TestManager{
 	    return tests;
 	}
 	
-	
+	/**
+	 * Getters and setters of the attribute conMan
+	 */
+
 	public ConnectionManager getConMan() {
 		return conMan;
 	}

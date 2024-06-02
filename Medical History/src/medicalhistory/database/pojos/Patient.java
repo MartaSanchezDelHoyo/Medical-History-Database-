@@ -14,7 +14,7 @@ import medicalhistory.database.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name= "Patient")
-@XmlType (propOrder = { "patientName", "allergies", "doctors", "vistis"})
+@XmlType (propOrder = { "patientName", "allergies", "doctors", "visits"})
 public class Patient implements Serializable{
 	/**
 	 * 
